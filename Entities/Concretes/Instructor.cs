@@ -7,7 +7,7 @@ using Core.Entities;
 
 namespace Entities.Concretes
 {
-    public class Instructor : User
+    public class Instructor : Entity<Guid>
     {
 
     }
