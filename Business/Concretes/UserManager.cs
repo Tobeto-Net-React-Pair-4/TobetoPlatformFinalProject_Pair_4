@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Abstracts;
+using Business.Dtos.User.Requests;
+using Business.Dtos.User.Responses;
 using Core.DataAccess.Paging;
 using Entities.Concretes;
 

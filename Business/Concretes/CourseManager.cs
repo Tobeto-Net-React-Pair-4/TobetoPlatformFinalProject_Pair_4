@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstracts;
+using Business.Dtos.Course.Requests;
+using Business.Dtos.Course.Responses;
 using Core.DataAccess.Paging;
 
 namespace Business.Concretes
