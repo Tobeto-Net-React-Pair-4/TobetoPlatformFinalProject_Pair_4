@@ -9,6 +9,9 @@ namespace Entities.Concretes
 {
     public class Course : Entity<Guid>
     {
+        public Guid CategoryId { get; set; }
         public string Name { get; set; }
+        public string ImageUrl { get; set; }
+        public Category category { get; set; }
     }
 }
