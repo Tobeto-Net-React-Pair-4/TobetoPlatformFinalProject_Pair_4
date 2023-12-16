@@ -4,6 +4,7 @@
     {
         public Guid InstructorId { get; set; }
         public Guid CategoryId { get; set; }
+        public Guid UserId { get; set; }
         public string Name { get; set; }
         public string Producer { get; set; }
         public string Description { get; set; }

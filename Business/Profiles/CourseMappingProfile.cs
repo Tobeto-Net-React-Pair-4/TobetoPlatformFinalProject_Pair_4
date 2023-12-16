@@ -26,6 +26,8 @@ namespace Business.Profiles
                 .ForMember(destinationMember: p => p.CategoryName, memberOptions: opt => opt.MapFrom(p => p.Category.Name)).ReverseMap();
             CreateMap<Course, GetListCourseResponse>()
                 .ForMember(destinationMember: c => c.InstructorName, memberOptions: opt => opt.MapFrom(c => c.Instructor.Name)).ReverseMap();
+            CreateMap<Course, GetListCourseResponse>()
+                .ForMember(destinationMember: c => c.Users, memberOptions: opt => opt.MapFrom(u => u.Users)).ReverseMap();
             CreateMap<Paginate<Course>, Paginate<GetListCourseResponse>>().ReverseMap();
         }
     }

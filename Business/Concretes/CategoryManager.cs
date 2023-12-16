@@ -7,6 +7,7 @@ using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Category.Requests;
 using Business.Dtos.Category.Response;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -17,16 +18,16 @@ namespace Business.Concretes
     {
         private ICategoryDal _categoryDal;
         private IMapper _mapper;
-        //private CategoryBusinessRules _categoryBusinessRules;
-        public CategoryManager(ICategoryDal categoryDal, IMapper mapper)
+        private CategoryBusinessRules _categoryBusinessRules;
+        public CategoryManager(ICategoryDal categoryDal, IMapper mapper, CategoryBusinessRules categoryBusinessRules)
         {
             _categoryDal = categoryDal;
             _mapper = mapper;
-            //_categoryBusinessRules = categoryBusinessRules;
+            _categoryBusinessRules = categoryBusinessRules;
         }
         public async Task<CreatedCategoryResponse> Add(CreateCategoryRequest createCategoryRequest)
         {
-            //await _categoryBusinessRules.MaximumCountIsTen();
+            await _categoryBusinessRules.MaximumCountIsTen();
 
             Category category = _mapper.Map<Category>(createCategoryRequest);
             category.Id = Guid.NewGuid();
