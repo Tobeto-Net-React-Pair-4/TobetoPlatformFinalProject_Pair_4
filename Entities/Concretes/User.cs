@@ -4,8 +4,6 @@ namespace Entities.Concretes
 {
     public class User : Entity<Guid>
     {
-        public Guid CourseId { get; set; }
-        public Course Course { get; set; }
         public List<Course> Courses { get; set; }
         public string NationalityId { get; set; }
         public string FirstName { get; set; }
