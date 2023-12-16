@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concretes
 {
-    public class EfInstructorDal : EfRepositoryBase<Instructor, Guid, TobetoContext>, IInstructorDal
+    public class EfUserDal : EfRepositoryBase<User, Guid, TobetoContext>, IUserDal
     {
-        public EfInstructorDal(TobetoContext context) : base(context)
+        public EfUserDal(TobetoContext context) : base(context)
         {
         }
     }
