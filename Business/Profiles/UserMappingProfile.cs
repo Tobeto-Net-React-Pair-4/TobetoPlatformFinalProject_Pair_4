@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Business.Dtos.User.Requests;
+using Business.Dtos.User.Responses;
 using Core.DataAccess.Paging;
 using Entities.Concretes;
 
