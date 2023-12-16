@@ -28,10 +28,12 @@ namespace DataAccess.EntityConfigurations
             builder.Property(b => b.ContentCount).HasColumnName("ContentCount");
             builder.Property(b => b.Description).HasColumnName("Description");
 
-            //builder.HasIndex(indexExpression: b => b.Name, name: "UK_Courses_Name").IsUnique();
+            builder.HasIndex(indexExpression: b => b.Name, name: "UK_Courses_Name").IsUnique();
 
             builder.HasOne(c => c.Category).WithMany(i => i.Courses).HasForeignKey(c => c.CategoryId);
             builder.HasOne(b => b.Instructor).WithMany(i => i.Courses).HasForeignKey(c => c.InstructorId);
+
+            builder.HasMany(b => b.Users);
 
             builder.HasQueryFilter(b => !b.DeletedDate.HasValue); //  categorydeki tüm dataya default olarak bu where koşulunu uygula. where deletedDate is null. Data silinmemişse getir.
         }
