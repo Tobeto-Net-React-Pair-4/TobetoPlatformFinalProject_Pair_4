@@ -1,17 +1,29 @@
 ﻿using Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities.Concretes
 {
     public class Course : Entity<Guid>
     {
         public Guid CategoryId { get; set; }
+        public Guid UserId { get; set; }
+
+        public User User { get; set; }
+        public Category Category { get; set; }
+        public List<User> Users { get; set; }
+
         public string Name { get; set; }
         public string ImageUrl { get; set; }
-        public Category category { get; set; }
+        public DateTime StartOfDate { get; set; }
+        public DateTime EndOfDate { get; set; }
+        public DateTime TimeOfSpent { get; set; }
+        public DateTime EstimatedTime { get; set; }
+        public string Producer { get; set; }
+        public int ContentCount { get; set; }
+
+
+
+
+
+
     }
 }
