@@ -8,6 +8,7 @@ using Business.Abstracts;
 using Business.Dtos.User.Requests;
 using Business.Dtos.User.Responses;
 using Core.DataAccess.Paging;
+using DataAccess.Abstracts;
 using Entities.Concretes;
 
 namespace Business.Concretes
@@ -31,25 +32,25 @@ namespace Business.Concretes
             return _mapper.Map<CreatedUserResponse>(createdUser);
         }
 
-        public async Task<Paginate<GetListedUserResponse>> GetListAsync()
+        public async Task<Paginate<GetListUserResponse>> GetListAsync()
         {
             var data = await _userDal.GetListAsync();
-            return _mapper.Map<Paginate<GetListedUserResponse>>(data);
+            return _mapper.Map<Paginate<GetListUserResponse>>(data);
         }
         public async Task<DeletedUserResponse> Delete(DeleteUserRequest deleteUserRequest)
         {
-            User user = await _userDal.GetAsync(p => p.Id == deleteUserRequest.UserId);
+            User user = await _userDal.GetAsync(p => p.Id == deleteUserRequest.Id);
             await _userDal.DeleteAsync(user);
             return _mapper.Map<DeletedUserResponse>(user);
         }
 
         public async Task<UpdatedUserResponse> Update(UpdateUserRequest updateUserRequest)
         {
-            User user = await _userDal.GetAsync(p => p.Id == updateUserRequest.UserId);
+            User user = await _userDal.GetAsync(p => p.Id == updateUserRequest.Id);
             _mapper.Map(updateUserRequest, user);
             await _userDal.UpdateAsync(user);
             return _mapper.Map<UpdatedUserResponse>(user);
         }
     }
 }
-}
+

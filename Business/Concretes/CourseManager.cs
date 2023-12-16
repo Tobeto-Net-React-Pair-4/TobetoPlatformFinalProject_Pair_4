@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Course.Requests;
 using Business.Dtos.Course.Responses;
 using Core.DataAccess.Paging;
+using DataAccess.Abstracts;
+using Entities.Concretes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes
 {
@@ -15,11 +19,11 @@ namespace Business.Concretes
         //private CourseBusinessRules _courseBusinessRules;
         private ICourseDal _courseDal;
         private IMapper _mapper;
-        public CourseManager(ICourseDal courseDal, IMapper mapper, CourseBusinessRules courseBusinessRules)
+        public CourseManager(ICourseDal courseDal, IMapper mapper)
         {
             _courseDal = courseDal;
             _mapper = mapper;
-            _courseBusinessRules = courseBusinessRules;
+            //_courseBusinessRules = courseBusinessRules;
         }
         public async Task<CreatedCourseResponse> Add(CreateCourseRequest createCourseRequest)
         {
@@ -31,23 +35,23 @@ namespace Business.Concretes
 
             return _mapper.Map<CreatedCourseResponse>(createdCourse);
         }
-        public async Task<Paginate<GetListedCourseResponse>> GetListAsync()
+        public async Task<Paginate<GetListCourseResponse>> GetListAsync()
         {
             var data = await _courseDal.GetListAsync(
                 include: p => p.Include(p => p.Category).Include(b => b.Instructor));
 
-            return _mapper.Map<Paginate<GetListedCourseResponse>>(data);
+            return _mapper.Map<Paginate<GetListCourseResponse>>(data);
         }
         public async Task<DeletedCourseResponse> Delete(DeleteCourseRequest deleteCourseRequest)
         {
-            Course course = await _courseDal.GetAsync(p => p.Id == deleteCourseRequest.CourseId);
+            Course course = await _courseDal.GetAsync(p => p.Id == deleteCourseRequest.Id);
             await _courseDal.DeleteAsync(course);
             return _mapper.Map<DeletedCourseResponse>(course);
         }
 
         public async Task<UpdatedCourseResponse> Update(UpdateCourseRequest updateCourseRequest)
         {
-            Course course = await _courseDal.GetAsync(p => p.Id == updateCourseRequest.CourseId);
+            Course course = await _courseDal.GetAsync(p => p.Id == updateCourseRequest.Id);
             _mapper.Map(updateCourseRequest, course);
             course = await _courseDal.UpdateAsync(course);
             return _mapper.Map<UpdatedCourseResponse>(course);

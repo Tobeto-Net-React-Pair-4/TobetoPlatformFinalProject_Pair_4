@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Category.Requests;
 using Business.Dtos.Category.Response;
 using Core.DataAccess.Paging;
+using DataAccess.Abstracts;
+using Entities.Concretes;
 
 namespace Business.Concretes
 {
@@ -15,7 +18,7 @@ namespace Business.Concretes
         private ICategoryDal _categoryDal;
         private IMapper _mapper;
         //private CategoryBusinessRules _categoryBusinessRules;
-        public CategoryManager(ICategoryDal categoryDal, IMapper mapper, CategoryBusinessRules categoryBusinessRules)
+        public CategoryManager(ICategoryDal categoryDal, IMapper mapper)
         {
             _categoryDal = categoryDal;
             _mapper = mapper;
@@ -33,22 +36,22 @@ namespace Business.Concretes
             CreatedCategoryResponse createdCategoryResponse = _mapper.Map<CreatedCategoryResponse>(createdCategory);
             return createdCategoryResponse;
         }
-        public async Task<Paginate<GetListedCategoryResponse>> GetListAsync()
+        public async Task<Paginate<GetListCategoryResponse>> GetListAsync()
         {
             var data = await _categoryDal.GetListAsync();
 
-            return _mapper.Map<Paginate<GetListedCategoryResponse>>(data);
+            return _mapper.Map<Paginate<GetListCategoryResponse>>(data);
         }
         public async Task<DeletedCategoryResponse> Delete(DeleteCategoryRequest deleteCategoryRequest)
         {
-            Category category = await _categoryDal.GetAsync(p => p.Id == deleteCategoryRequest.CategoryId);
+            Category category = await _categoryDal.GetAsync(p => p.Id == deleteCategoryRequest.Id);
             await _categoryDal.DeleteAsync(category);
             return _mapper.Map<DeletedCategoryResponse>(category);
         }
 
         public async Task<UpdatedCategoryResponse> Update(UpdateCategoryRequest updateCategoryRequest)
         {
-            Category category = await _categoryDal.GetAsync(p => p.Id == updateCategoryRequest.CategoryId);
+            Category category = await _categoryDal.GetAsync(p => p.Id == updateCategoryRequest.Id);
             _mapper.Map(updateCategoryRequest, category);
             category = await _categoryDal.UpdateAsync(category);
             return _mapper.Map<UpdatedCategoryResponse>(category);

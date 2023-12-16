@@ -22,8 +22,8 @@ namespace Business.Profiles
             CreateMap<Instructor, UpdatedInstructorResponse>().ReverseMap();
             CreateMap<Instructor, DeletedInstructorResponse>().ReverseMap();
 
-            CreateMap<Instructor, GetListedInstructorResponse>().ReverseMap();
-            CreateMap<Paginate<Instructor>, Paginate<GetListedInstructorResponse>>().ReverseMap();
+            CreateMap<Instructor, GetListInstructorResponse>().ReverseMap();
+            CreateMap<Paginate<Instructor>, Paginate<GetListInstructorResponse>>().ReverseMap();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Business.Abstracts
 {
     public interface IInstructorService
     {
-        Task<Paginate<GetListedInstructorResponse>> GetListAsync();
+        Task<Paginate<GetListInstructorResponse>> GetListAsync();
         Task<CreatedInstructorResponse> Add(CreateInstructorRequest createInstructorRequest);
         Task<UpdatedInstructorResponse> Update(UpdateInstructorRequest updateInstructorRequest);
         Task<DeletedInstructorResponse> Delete(DeleteInstructorRequest deleteInstructorRequest);

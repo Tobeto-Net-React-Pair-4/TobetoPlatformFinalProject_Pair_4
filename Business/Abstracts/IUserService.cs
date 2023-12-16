@@ -11,7 +11,7 @@ namespace Business.Abstracts
 {
     public interface IUserService
     {
-        Task<Paginate<GetListedUserResponse>> GetListAsync();
+        Task<Paginate<GetListUserResponse>> GetListAsync();
         Task<CreatedUserResponse> Add(CreateUserRequest createUserRequest);
         Task<UpdatedUserResponse> Update(UpdateUserRequest updateUserRequest);
         Task<DeletedUserResponse> Delete(DeleteUserRequest deleteUserRequest);
