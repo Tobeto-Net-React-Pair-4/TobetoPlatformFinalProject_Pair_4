@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concretes
 {
-    internal class EfCourseDal
+    public class EfCourseDal
     {
     }
 }
