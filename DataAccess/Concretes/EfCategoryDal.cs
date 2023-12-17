@@ -1,11 +1,14 @@
-﻿namespace DataAccess.Concretes
+﻿using Core.DataAccess.Repositories;
+using DataAccess.Abstracts;
+using DataAccess.Contexts;
+using Entities.Concretes;
+
+namespace DataAccess.Concretes
 {
-    public class EfCategoryDal
+    public class EfCategoryDal : EfRepositoryBase<Category, Guid, TobetoContext>, ICategoryDal
     {
-
-        public EfCategoryDal()
+        public EfCategoryDal(TobetoContext context) : base(context)
         {
-
         }
     }
 }

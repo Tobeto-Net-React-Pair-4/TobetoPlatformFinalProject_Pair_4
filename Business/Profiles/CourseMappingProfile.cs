@@ -22,11 +22,11 @@ namespace Business.Profiles
             CreateMap<Course, UpdatedCourseResponse>().ReverseMap();
             CreateMap<Course, DeletedCourseResponse>().ReverseMap();
 
-            CreateMap<Course, GetListedCourseResponse>()
+            CreateMap<Course, GetListCourseResponse>()
                 .ForMember(destinationMember: p => p.CategoryName, memberOptions: opt => opt.MapFrom(p => p.Category.Name)).ReverseMap();
-            CreateMap<Course, GetListedCourseResponse>()
-                .ForMember(destinationMember: c => c.InstructorName, memberOptions: opt => opt.MapFrom(c => c.Instructor.InstructorName)).ReverseMap();
-            CreateMap<Paginate<Course>, Paginate<GetListedCourseResponse>>().ReverseMap();
+            CreateMap<Course, GetListCourseResponse>()
+                .ForMember(destinationMember: c => c.InstructorName, memberOptions: opt => opt.MapFrom(c => c.Instructor.Name)).ReverseMap();
+            CreateMap<Paginate<Course>, Paginate<GetListCourseResponse>>().ReverseMap();
         }
     }
 }

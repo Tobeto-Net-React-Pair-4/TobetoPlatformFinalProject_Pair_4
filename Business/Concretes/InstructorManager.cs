@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Instructor.Requests;
 using Business.Dtos.Instructor.Responses;
 using Core.DataAccess.Paging;
+using DataAccess.Abstracts;
+using Entities.Concretes;
 
 namespace Business.Concretes
 {
@@ -29,21 +32,21 @@ namespace Business.Concretes
             return _mapper.Map<CreatedInstructorResponse>(createdInstructor);
         }
 
-        public async Task<Paginate<GetListedInstructorResponse>> GetListAsync()
+        public async Task<Paginate<GetListInstructorResponse>> GetListAsync()
         {
             var data = await _instructorDal.GetListAsync();
-            return _mapper.Map<Paginate<GetListedInstructorResponse>>(data);
+            return _mapper.Map<Paginate<GetListInstructorResponse>>(data);
         }
         public async Task<DeletedInstructorResponse> Delete(DeleteInstructorRequest deleteInstructorRequest)
         {
-            Instructor instructor = await _instructorDal.GetAsync(p => p.Id == deleteInstructorRequest.InstructorId);
+            Instructor instructor = await _instructorDal.GetAsync(p => p.Id == deleteInstructorRequest.Id);
             await _instructorDal.DeleteAsync(instructor);
             return _mapper.Map<DeletedInstructorResponse>(instructor);
         }
 
         public async Task<UpdatedInstructorResponse> Update(UpdateInstructorRequest updateInstructorRequest)
         {
-            Instructor instructor = await _instructorDal.GetAsync(p => p.Id == updateInstructorRequest.InstructorId);
+            Instructor instructor = await _instructorDal.GetAsync(p => p.Id == updateInstructorRequest.Id);
             _mapper.Map(updateInstructorRequest, instructor);
             await _instructorDal.UpdateAsync(instructor);
             return _mapper.Map<UpdatedInstructorResponse>(instructor);

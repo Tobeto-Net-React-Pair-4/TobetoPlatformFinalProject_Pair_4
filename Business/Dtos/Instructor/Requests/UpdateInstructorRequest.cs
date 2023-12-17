@@ -2,5 +2,6 @@
 {
     public class UpdateInstructorRequest
     {
+        public Guid Id { get; set; }
     }
 }

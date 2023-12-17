@@ -2,5 +2,6 @@
 {
     public class CreateInstructorRequest
     {
+        public string Name { get; set; }
     }
 }
