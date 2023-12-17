@@ -1,4 +1,5 @@
 using Business;
+using Core.CrossCuttingConcerns.Exceptions.Extension;
 using DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.ConfigureCustomExceptionMiddleware();
 app.UseAuthorization();
 
 app.MapControllers();

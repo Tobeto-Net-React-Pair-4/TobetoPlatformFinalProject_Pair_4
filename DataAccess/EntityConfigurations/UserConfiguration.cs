@@ -32,7 +32,7 @@ namespace DataAccess.EntityConfigurations
 
 
 
-            //builder.HasIndex(indexExpression: b => b.Name, name: "UK_Categories_Name").IsUnique();
+            builder.HasIndex(indexExpression: b => b.NationalityId, name: "UK_Users_NationalityId").IsUnique();
 
             builder.HasMany(b => b.Courses);
 

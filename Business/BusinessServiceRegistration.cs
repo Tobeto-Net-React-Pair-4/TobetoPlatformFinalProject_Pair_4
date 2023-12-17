@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Abstracts;
 using Business.Concretes;
+using Core.Business.Rules;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Business
@@ -14,7 +15,7 @@ namespace Business
     {
         public static IServiceCollection AddBusinessServices(this IServiceCollection services)
         {
-            //services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
+            services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
