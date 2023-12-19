@@ -1,11 +1,14 @@
-﻿namespace Business.Dtos.Course.Responses
+﻿using Business.Dtos.User.Responses;
+
+namespace Business.Dtos.Course.Responses
 {
     public class CreatedCourseResponse
     {
         public Guid Id { get; set; }
         public Guid InstructorId { get; set; }
         public Guid CategoryId { get; set; }
-        public Guid UserId { get; set; }
+
+        public ICollection<GetListUserResponse>? Users { get; set; }
         public string Name { get; set; }
         public string Producer { get; set; }
         public string Description { get; set; }

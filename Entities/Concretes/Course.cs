@@ -4,12 +4,17 @@ namespace Entities.Concretes
 {
     public class Course : Entity<Guid>
     {
+        public Course()
+        {
+            Users = new HashSet<User>();
+        }
+
         public Guid CategoryId { get; set; }
         public Guid InstructorId { get; set; }
         public Guid UserId { get; set; }
         public Category Category { get; set; }
         public Instructor Instructor { get; set; }
-        public List<User> Users { get; set; }
+        public ICollection<User> Users { get; set; }
 
         public string Name { get; set; }
         public string? ImageUrl { get; set; }
