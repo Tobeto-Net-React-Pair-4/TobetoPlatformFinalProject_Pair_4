@@ -57,5 +57,13 @@ namespace Business.Concretes
             course = await _courseDal.UpdateAsync(course);
             return _mapper.Map<UpdatedCourseResponse>(course);
         }
+
+        public async Task<GetByIdCourseResponse> GetById(GetByIdCourseRequest getByIdCourseRequest)
+        {
+            Course course = await _courseDal.GetAsync(p => p.Id == getByIdCourseRequest.Id,
+                include: i => i.Include(i => i.Instructor).Include(ca => ca.Category).Include(u => u.UserCourses));
+
+            return _mapper.Map<GetByIdCourseResponse>(course);
+        }
     }
 }

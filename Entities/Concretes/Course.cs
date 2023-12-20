@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using System.Text.Json.Serialization;
+using Core.Entities;
 
 namespace Entities.Concretes
 {
@@ -6,8 +7,6 @@ namespace Entities.Concretes
     {
         public Guid CategoryId { get; set; }
         public Guid InstructorId { get; set; }
-        public Guid UserId { get; set; }
-        public ICollection<UserCourse> UserCourses { get; set; }   /* = new List<UserCourse>();*/
         
         public string Name { get; set; }
         public string? ImageUrl { get; set; }
@@ -21,6 +20,7 @@ namespace Entities.Concretes
 
         public Category Category { get; set; }
         public Instructor Instructor { get; set; }
+        public ICollection<UserCourse> UserCourses { get; set; }
 
         //content kısmı????!!!!???
     }

@@ -30,12 +30,7 @@ namespace DataAccess.EntityConfigurations
             builder.Property(b => b.AboutMe).HasColumnName("AboutMe");
             builder.Property(b => b.Phone).HasColumnName("Phone");
 
-
-
             builder.HasIndex(indexExpression: b => b.NationalityId, name: "UK_Users_NationalityId").IsUnique();
-
-            //builder.HasMany(b => b.Courses);
-            //builder.HasMany(u => u.UserCourses);
 
             builder.HasQueryFilter(b => !b.DeletedDate.HasValue); //  categorydeki tüm dataya default olarak bu where koşulunu uygula. where deletedDate is null. Data silinmemişse getir.
         }

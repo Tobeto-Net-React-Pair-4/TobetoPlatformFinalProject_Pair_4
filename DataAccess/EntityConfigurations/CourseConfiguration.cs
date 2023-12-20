@@ -30,7 +30,8 @@ namespace DataAccess.EntityConfigurations
 
             builder.HasIndex(indexExpression: b => b.Name, name: "UK_Courses_Name").IsUnique();
 
-            builder.HasOne(c => c.Category).WithMany(i => i.Courses).HasForeignKey(c => c.CategoryId);
+            builder.HasOne(c => c.Category).WithMany(cat => cat.Courses).HasForeignKey(c => c.CategoryId).IsRequired();
+
             builder.HasOne(b => b.Instructor).WithMany(i => i.Courses).HasForeignKey(c => c.InstructorId);
             //builder.HasMany(b => b.d);
             //builder.HasMany(u => u.UserCourses);

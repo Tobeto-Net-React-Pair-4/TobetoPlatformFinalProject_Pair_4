@@ -14,8 +14,5 @@ namespace Entities.Concretes
         public User User { get; set; }
         public Course Course { get; set; }
 
-        //public string UserInfo { get; set; }
-        //public ICollection<string> UsersCourseList { get; set; }
-
     }
 }
