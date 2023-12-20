@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Business.Dtos.Course.Requests;
 using Business.Dtos.Course.Responses;
 using Core.DataAccess.Paging;
+using Entities.Concretes;
 
 namespace Business.Abstracts
 {
@@ -15,5 +16,6 @@ namespace Business.Abstracts
         Task<CreatedCourseResponse> Add(CreateCourseRequest createCourseRequest);
         Task<UpdatedCourseResponse> Update(UpdateCourseRequest updateCourseRequest);
         Task<DeletedCourseResponse> Delete(DeleteCourseRequest deleteCourseRequest);
+        Task<GetByIdCourseResponse> GetById(GetByIdCourseRequest getByIdCourseRequest);
     }
 }

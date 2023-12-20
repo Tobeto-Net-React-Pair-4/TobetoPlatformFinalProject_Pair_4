@@ -5,11 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Abstracts;
+using Business.Dtos.Category.Responses;
 using Business.Dtos.Instructor.Requests;
 using Business.Dtos.Instructor.Responses;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
+using DataAccess.Concretes;
 using Entities.Concretes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes
 {
@@ -50,6 +53,13 @@ namespace Business.Concretes
             _mapper.Map(updateInstructorRequest, instructor);
             await _instructorDal.UpdateAsync(instructor);
             return _mapper.Map<UpdatedInstructorResponse>(instructor);
+        }
+
+        public async Task<GetByIdInstructorResponse> GetById(GetByIdInstructorRequest getByIdInstructorRequest)
+        {
+            Instructor instructor = await _instructorDal.GetAsync(p => p.Id == getByIdInstructorRequest.Id, include: c => c.Include(c => c.Courses));
+
+            return _mapper.Map<GetByIdInstructorResponse>(instructor);
         }
     }
 }

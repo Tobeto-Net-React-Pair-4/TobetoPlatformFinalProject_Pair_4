@@ -1,4 +1,5 @@
 ﻿using Business.Abstracts;
+using Business.Dtos.Category.Requests;
 using Business.Dtos.Course.Requests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +41,13 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetList()
         {
             var result = await _courseService.GetListAsync();
+            return Ok(result);
+        }
+
+        [HttpPost("GetById")]
+        public async Task<IActionResult> GetById([FromBody] GetByIdCourseRequest getByIdCourseRequest)
+        {
+            var result = await _courseService.GetById(getByIdCourseRequest);
             return Ok(result);
         }
     }
