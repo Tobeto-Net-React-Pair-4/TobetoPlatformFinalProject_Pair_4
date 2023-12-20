@@ -39,7 +39,7 @@ namespace Business.Concretes
         public async Task<Paginate<GetListCourseResponse>> GetListAsync()
         {
             var data = await _courseDal.GetListAsync(
-                include: p => p.Include(p => p.Category).Include(b => b.Instructor).Include(u => u.Users));
+                include: p => p.Include(p => p.Category).Include(b => b.Instructor));
 
             return _mapper.Map<Paginate<GetListCourseResponse>>(data);
         }

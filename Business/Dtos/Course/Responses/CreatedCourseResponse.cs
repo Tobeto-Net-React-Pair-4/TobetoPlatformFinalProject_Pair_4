@@ -1,4 +1,6 @@
-﻿namespace Business.Dtos.Course.Responses
+﻿using Business.Dtos.User.Responses;
+
+namespace Business.Dtos.Course.Responses
 {
     public class CreatedCourseResponse
     {
@@ -10,5 +12,7 @@
         public string Producer { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
+
+
     }
 }

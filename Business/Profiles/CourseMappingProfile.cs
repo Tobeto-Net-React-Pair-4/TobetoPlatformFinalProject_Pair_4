@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Business.Dtos.Course.Requests;
 using Business.Dtos.Course.Responses;
+using Business.Dtos.User.Responses;
 using Core.DataAccess.Paging;
 using Entities.Concretes;
 
@@ -23,12 +24,11 @@ namespace Business.Profiles
             CreateMap<Course, DeletedCourseResponse>().ReverseMap();
 
             CreateMap<Course, GetListCourseResponse>()
-                .ForMember(destinationMember: p => p.CategoryName, memberOptions: opt => opt.MapFrom(p => p.Category.Name)).ReverseMap();
-            CreateMap<Course, GetListCourseResponse>()
-                .ForMember(destinationMember: c => c.InstructorName, memberOptions: opt => opt.MapFrom(c => c.Instructor.Name)).ReverseMap();
-            CreateMap<Course, GetListCourseResponse>()
-                .ForMember(destinationMember: c => c.Users, memberOptions: opt => opt.MapFrom(u => u.Users)).ReverseMap();
+               .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
+               .ForMember(dest => dest.InstructorName, opt => opt.MapFrom(src => src.Instructor.Name)).ReverseMap();
+
             CreateMap<Paginate<Course>, Paginate<GetListCourseResponse>>().ReverseMap();
         }
+
     }
 }

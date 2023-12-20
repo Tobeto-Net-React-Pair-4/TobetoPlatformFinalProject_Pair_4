@@ -23,6 +23,8 @@ namespace Business
             services.AddScoped<ICourseService, CourseManager>();
             services.AddScoped<IInstructorService, InstructorManager>();
             services.AddScoped<IUserService, UserManager>();
+            services.AddScoped<IUserCourseService, UserCourseManager>();
+
             return services;
         }
         public static IServiceCollection AddSubClassesOfType(

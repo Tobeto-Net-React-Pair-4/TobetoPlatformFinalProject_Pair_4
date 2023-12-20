@@ -32,8 +32,8 @@ namespace DataAccess.EntityConfigurations
 
             builder.HasOne(c => c.Category).WithMany(i => i.Courses).HasForeignKey(c => c.CategoryId);
             builder.HasOne(b => b.Instructor).WithMany(i => i.Courses).HasForeignKey(c => c.InstructorId);
-
-            builder.HasMany(b => b.Users);
+            //builder.HasMany(b => b.d);
+            //builder.HasMany(u => u.UserCourses);
 
             builder.HasQueryFilter(b => !b.DeletedDate.HasValue); //  categorydeki tüm dataya default olarak bu where koşulunu uygula. where deletedDate is null. Data silinmemişse getir.
         }

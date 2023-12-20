@@ -1,4 +1,5 @@
-﻿using Business.Dtos.User.Responses;
+﻿using Business.Dtos.Course.Responses;
+using Business.Dtos.User.Responses;
 
 namespace Business.Dtos.Course.Responses
 {
@@ -11,6 +12,6 @@ namespace Business.Dtos.Course.Responses
         public string CategoryName { get; set; }
         public string InstructorName { get; set; }
         public string Name { get; set; }
-        public List<GetListUserResponse> Users { get; set; }
     }
-    }
+
+}

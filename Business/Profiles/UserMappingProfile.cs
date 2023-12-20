@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Business.Dtos.User.Requests;
 using Business.Dtos.User.Responses;
+using Business.Dtos.UserCourse.Responses;
 using Core.DataAccess.Paging;
 using Entities.Concretes;
 
@@ -21,8 +22,12 @@ namespace Business.Profiles
             CreateMap<User, CreatedUserResponse>().ReverseMap();
             CreateMap<User, UpdatedUserResponse>().ReverseMap();
             CreateMap<User, DeletedUserResponse>().ReverseMap();
+            CreateMap<User, GetUserResponse>().ReverseMap();
 
-            CreateMap<User, GetListUserResponse>().ReverseMap();
+
+            CreateMap<User, GetListUserResponse>() .ReverseMap();
+            
+
             CreateMap<Paginate<User>, Paginate<GetListUserResponse>>().ReverseMap();
         }
     }
