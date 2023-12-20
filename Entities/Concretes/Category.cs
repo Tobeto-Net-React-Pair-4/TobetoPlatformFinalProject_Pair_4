@@ -8,4 +8,5 @@ namespace Entities.Concretes
         public List<Course> Courses { get; set; }
 
     }
+
 }

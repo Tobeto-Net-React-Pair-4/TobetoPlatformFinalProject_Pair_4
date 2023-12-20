@@ -20,10 +20,13 @@ namespace DataAccess
             services.AddDbContext<TobetoContext>(options => options.UseSqlServer(configuration.GetConnectionString("Tobeto")));
 
 
+            services.AddScoped<IUserDal, EfUserDal>();
             services.AddScoped<ICourseDal, EfCourseDal>();
             services.AddScoped<ICategoryDal, EfCategoryDal>();
             services.AddScoped<IInstructorDal, EfInstructorDal>();
-            services.AddScoped<IUserDal, EfUserDal>();
+            services.AddScoped<ICalendarEventDal, EfCalendarEventDal>();
+
+
             return services;
         }
     }

@@ -11,6 +11,6 @@ namespace Business.Dtos.Course.Responses
         public string CategoryName { get; set; }
         public string InstructorName { get; set; }
         public string Name { get; set; }
-        public List<GetListUserResponse> Users { get; set; }
+        public List<string> Users { get; set; }
     }
-    }
+}

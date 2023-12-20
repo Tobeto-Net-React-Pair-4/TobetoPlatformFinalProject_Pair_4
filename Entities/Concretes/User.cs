@@ -17,9 +17,5 @@ namespace Entities.Concretes
         public string? AddressDetails { get; set; }
         public string? AboutMe { get; set; }
         public string? Phone { get; set; }
-
-
-
-
     }
 }

@@ -20,11 +20,6 @@ namespace Entities.Concretes
         public string Producer { get; set; }
         public int? ContentCount { get; set; }
         public string Description { get; set; }
-
-
-
-
-
-
+        public string Status { get; set; } // Eğitim durumu (bitmiş, devam eden, satın alınmış, başlamamış)
     }
 }

@@ -17,6 +17,7 @@ namespace DataAccess.Contexts
         public DbSet<Category> Categories { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<CalendarEvent> CalendarEvents { get; set; }
         public TobetoContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
             Configuration = configuration;
