@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using System.Text.Json.Serialization;
+using Core.Entities;
 
 namespace Entities.Concretes
 {
@@ -6,10 +7,6 @@ namespace Entities.Concretes
     {
         public Guid CategoryId { get; set; }
         public Guid InstructorId { get; set; }
-        public Guid UserId { get; set; }
-        public Category Category { get; set; }
-        public Instructor Instructor { get; set; }
-        public List<User> Users { get; set; }
 
         public string Name { get; set; }
         public string? ImageUrl { get; set; }
@@ -21,8 +18,10 @@ namespace Entities.Concretes
         public int? ContentCount { get; set; }
         public string Description { get; set; }
 
-
-
+        
+        public Category Category { get; set; }
+        public Instructor Instructor { get; set; }
+        public ICollection<User> Users { get; set; }
 
 
 

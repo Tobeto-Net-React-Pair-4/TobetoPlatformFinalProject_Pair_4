@@ -18,11 +18,16 @@ namespace Business.Profiles
             CreateMap<Instructor, CreateInstructorRequest>().ReverseMap();
             CreateMap<Instructor, DeleteInstructorRequest>().ReverseMap();
             CreateMap<Instructor, UpdateInstructorRequest>().ReverseMap();
+            CreateMap<Instructor, GetByIdInstructorRequest>().ReverseMap();
             CreateMap<Instructor, CreatedInstructorResponse>().ReverseMap();
             CreateMap<Instructor, UpdatedInstructorResponse>().ReverseMap();
             CreateMap<Instructor, DeletedInstructorResponse>().ReverseMap();
 
             CreateMap<Instructor, GetListInstructorResponse>().ReverseMap();
+            CreateMap<Instructor, GetByIdInstructorResponse>()
+                .ForMember(destinationMember: c => c.Courses, memberOptions: opt => opt.MapFrom(c => c.Courses))
+                .ReverseMap();
+
             CreateMap<Paginate<Instructor>, Paginate<GetListInstructorResponse>>().ReverseMap();
         }
     }
