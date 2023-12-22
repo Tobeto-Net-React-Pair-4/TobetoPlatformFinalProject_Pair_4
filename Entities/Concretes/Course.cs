@@ -7,7 +7,7 @@ namespace Entities.Concretes
     {
         public Guid CategoryId { get; set; }
         public Guid InstructorId { get; set; }
-
+        
         public string Name { get; set; }
         public string? ImageUrl { get; set; }
         public DateTime? StartOfDate { get; set; }
@@ -18,12 +18,10 @@ namespace Entities.Concretes
         public int? ContentCount { get; set; }
         public string Description { get; set; }
 
-        
         public Category Category { get; set; }
         public Instructor Instructor { get; set; }
-        public ICollection<User> Users { get; set; }
+        public ICollection<UserCourse> UserCourses { get; set; }
 
-
-
+        //content kısmı????!!!!???
     }
 }

@@ -1,4 +1,5 @@
-﻿using Business.Dtos.User.Responses;
+﻿using Business.Dtos.Course.Responses;
+using Business.Dtos.User.Responses;
 
 namespace Business.Dtos.Course.Responses
 {
