@@ -9,4 +9,5 @@ namespace Entities.Concretes
         public ICollection<Course> Courses { get; set; }
 
     }
+
 }
