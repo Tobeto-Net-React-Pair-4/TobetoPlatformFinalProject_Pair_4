@@ -18,7 +18,7 @@ namespace DataAccess.EntityConfigurations
             builder.Property(b => b.Id).HasColumnName("Id").IsRequired();
             builder.Property(b => b.Name).HasColumnName("Name").IsRequired();
 
-            builder.HasQueryFilter(b => !b.DeletedDate.HasValue); //  categorydeki tüm dataya default olarak bu where koşulunu uygula. where deletedDate is null. Data silinmemişse getir.
+            builder.HasQueryFilter(b => !b.DeletedDate.HasValue); // categorydeki tüm dataya default olarak bu where koşulunu uygula. where deletedDate is null. Data silinmemişse getir.
         }
     }
 }
