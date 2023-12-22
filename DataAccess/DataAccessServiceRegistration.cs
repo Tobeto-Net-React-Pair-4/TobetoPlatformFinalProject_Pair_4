@@ -24,8 +24,9 @@ namespace DataAccess
             services.AddScoped<ICourseDal, EfCourseDal>();
             services.AddScoped<ICategoryDal, EfCategoryDal>();
             services.AddScoped<IInstructorDal, EfInstructorDal>();
-            services.AddScoped<ICalendarEventDal, EfCalendarEventDal>();
 
+            services.AddScoped<ICalendarEventDal, EfCalendarEventDal>();
+            services.AddScoped<IUserCourseDal, EfUserCourseDal>();
 
             return services;
         }

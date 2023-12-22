@@ -15,5 +15,6 @@ namespace Business.Abstracts
         Task<CreatedInstructorResponse> Add(CreateInstructorRequest createInstructorRequest);
         Task<UpdatedInstructorResponse> Update(UpdateInstructorRequest updateInstructorRequest);
         Task<DeletedInstructorResponse> Delete(DeleteInstructorRequest deleteInstructorRequest);
+        Task<GetByIdInstructorResponse> GetById(GetByIdInstructorRequest getByIdInstructorRequest);
     }
 }

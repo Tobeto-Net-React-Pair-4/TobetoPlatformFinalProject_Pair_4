@@ -15,15 +15,10 @@ namespace DataAccess.EntityConfigurations
         {
             builder.ToTable("Instructors").HasKey(b => b.Id);
 
-
             builder.Property(b => b.Id).HasColumnName("Id").IsRequired();
             builder.Property(b => b.Name).HasColumnName("Name").IsRequired();
 
-            //builder.HasIndex(indexExpression: b => b.Name, name: "UK_Categories_Name").IsUnique();
-
-            builder.HasMany(b => b.Courses);
-
-            builder.HasQueryFilter(b => !b.DeletedDate.HasValue); //  categorydeki tüm dataya default olarak bu where koşulunu uygula. where deletedDate is null. Data silinmemişse getir.
+            builder.HasQueryFilter(b => !b.DeletedDate.HasValue); // categorydeki tüm dataya default olarak bu where koşulunu uygula. where deletedDate is null. Data silinmemişse getir.
         }
     }
 }

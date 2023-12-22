@@ -39,7 +39,7 @@ namespace Business.Concretes
         public async Task<Paginate<GetListCourseResponse>> GetListAsync()
         {
             var data = await _courseDal.GetListAsync(
-                include: p => p.Include(p => p.Category).Include(b => b.Instructor).Include(u => u.Users));
+                include: p => p.Include(p => p.Category).Include(b => b.Instructor));
 
             return _mapper.Map<Paginate<GetListCourseResponse>>(data);
         }
@@ -56,6 +56,14 @@ namespace Business.Concretes
             _mapper.Map(updateCourseRequest, course);
             course = await _courseDal.UpdateAsync(course);
             return _mapper.Map<UpdatedCourseResponse>(course);
+        }
+
+        public async Task<GetByIdCourseResponse> GetById(GetByIdCourseRequest getByIdCourseRequest)
+        {
+            Course course = await _courseDal.GetAsync(p => p.Id == getByIdCourseRequest.Id,
+                include: i => i.Include(i => i.Instructor).Include(ca => ca.Category).Include(u => u.UserCourses));
+
+            return _mapper.Map<GetByIdCourseResponse>(course);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Business.Dtos.Category.Response
+﻿namespace Business.Dtos.Category.Responses
 {
     public class GetListCategoryResponse
     {
