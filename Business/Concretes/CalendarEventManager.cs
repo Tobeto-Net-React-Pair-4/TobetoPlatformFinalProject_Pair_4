@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Category.Requests;
-using Business.Dtos.Category.Response;
 using Business.Dtos.Course.Requests;
 using Business.Dtos.Course.Responses;
 using Business.Dtos.Instructor.Requests;

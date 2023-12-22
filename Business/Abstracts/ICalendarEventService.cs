@@ -1,6 +1,4 @@
-﻿using Business.Dtos.Category.Requests;
-using Business.Dtos.Category.Response;
-using Business.Dtos.Course.Requests;
+﻿using Business.Dtos.Course.Requests;
 using Business.Dtos.Course.Responses;
 using Core.DataAccess.Paging;
 using System;
