@@ -2,6 +2,6 @@
 {
     public class DeleteCalendarEventRequest
     {
-
+        public Guid Id { get; set; }
     }
 }

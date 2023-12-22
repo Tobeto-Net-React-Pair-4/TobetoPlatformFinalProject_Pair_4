@@ -1,7 +1,18 @@
-﻿using Business.Abstracts;
+﻿using AutoMapper;
+using Business.Abstracts;
+using Business.Dtos.Category.Requests;
+using Business.Dtos.Category.Response;
 using Business.Dtos.Course.Requests;
 using Business.Dtos.Course.Responses;
+using Business.Dtos.Instructor.Requests;
+using Business.Dtos.Instructor.Responses;
+using Business.Dtos.User.Requests;
+using Business.Dtos.User.Responses;
+using Business.Rules;
 using Core.DataAccess.Paging;
+using DataAccess.Abstracts;
+using DataAccess.Concretes;
+using Entities.Concretes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,24 +23,43 @@ namespace Business.Concretes
 {
     public class CalendarEventManager : ICalendarEventService
     {
-        public Task<CreatedCalendarEventResponse> Add(CreateCalendarEventRequest createCalendarEventRequest)
+        private ICalendarEventDal _calendarEventDal;
+        private IMapper _mapper;
+        public CalendarEventManager(ICalendarEventDal calendarEventDal, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _calendarEventDal = calendarEventDal;
+            _mapper = mapper;
         }
 
-        public Task<DeletedCalendarEventResponse> Delete(DeleteCalendarEventRequest deleteCalendarEventRequest)
+        public async Task<CreatedCalendarEventResponse> Add(CreateCalendarEventRequest createCalendarEventRequest)
         {
-            throw new NotImplementedException();
+            CalendarEvent calendarEvent = _mapper.Map<CalendarEvent>(createCalendarEventRequest);
+            calendarEvent.Id = Guid.NewGuid();
+
+            CalendarEvent createdCalendarEvent = await _calendarEventDal.AddAsync(calendarEvent);
+
+            return _mapper.Map<CreatedCalendarEventResponse>(createdCalendarEvent);
         }
 
-        public Task<Paginate<GetListCalendarEventResponse>> GetListAsync()
+        public async Task<DeletedCalendarEventResponse> Delete(DeleteCalendarEventRequest deleteCalendarEventRequest)
         {
-            throw new NotImplementedException();
+            CalendarEvent calendarEvent = await _calendarEventDal.GetAsync(p => p.Id == deleteCalendarEventRequest.Id);
+            await _calendarEventDal.DeleteAsync(calendarEvent);
+            return _mapper.Map<DeletedCalendarEventResponse>(calendarEvent);
         }
 
-        public Task<UpdatedCalendarEventResponse> Update(UpdateCalendarEventRequest updateCalendarEventRequest)
+        public async Task<Paginate<GetListCalendarEventResponse>> GetListAsync()
         {
-            throw new NotImplementedException();
+            var data = await _calendarEventDal.GetListAsync();
+            return _mapper.Map<Paginate<GetListCalendarEventResponse>>(data);
+        }
+
+        public async Task<UpdatedCalendarEventResponse> Update(UpdateCalendarEventRequest updateCalendarEventRequest)
+        {
+            CalendarEvent calendarEvent = await _calendarEventDal.GetAsync(p => p.Id == updateCalendarEventRequest.Id);
+            _mapper.Map(updateCalendarEventRequest, calendarEvent);
+            calendarEvent = await _calendarEventDal.UpdateAsync(calendarEvent);
+            return _mapper.Map<UpdatedCalendarEventResponse>(calendarEvent);
         }
     }
 }
