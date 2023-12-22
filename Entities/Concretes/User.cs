@@ -4,8 +4,6 @@ namespace Entities.Concretes
 {
     public class User : Entity<Guid>
     {
-        public List<Course> Courses { get; set; }
-        public Appeal Appeal { get; set; }
         public Guid AppealId { get; set; } 
         public string? NationalityId { get; set; }
         public string FirstName { get; set; }
@@ -19,6 +17,10 @@ namespace Entities.Concretes
         public string? AddressDetails { get; set; }
         public string? AboutMe { get; set; }
         public string? Phone { get; set; }
+
+        public ICollection<UserAnnouncement> UserAnnouncements { get; set; }
+        public Appeal Appeal { get; set; }
+
 
 
 

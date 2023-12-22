@@ -12,10 +12,10 @@ namespace Entities.Concretes
         public string Title { get; set; }
         public string Form { get; set; }
         public string File { get; set; }
-        public string AppealStatus { get; set; }
-        public string FormStatus { get; set; }
-        public string FileStatus { get; set; }
-        public List<User> Users { get; set; }
+        public string? AppealStatus { get; set; }
+        public string? FormStatus { get; set; }
+        public string? FileStatus { get; set; }
+        public List<User>? Users { get; set; }
 
 
     }
