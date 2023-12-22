@@ -18,6 +18,12 @@ namespace DataAccess.Contexts
         public DbSet<Instructor> Instructors { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserCourse> UserCourses { get; set; }
+
+
+        public DbSet<Announcement> Announcements { get; set; }
+        public DbSet<UserAnnouncement> UserAnnouncements { get; set; }
+        public DbSet<Appeal> Appeals { get; set; }
+
         public TobetoContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
             Configuration = configuration;

@@ -10,6 +10,7 @@ using Business.Dtos.User.Responses;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes
 {
@@ -34,7 +35,7 @@ namespace Business.Concretes
 
         public async Task<Paginate<GetListUserResponse>> GetListAsync()
         {
-            var data = await _userDal.GetListAsync();
+            var data = await _userDal.GetListAsync(include: p => p.Include(p => p.Appeal));
             return _mapper.Map<Paginate<GetListUserResponse>>(data);
         }
         public async Task<DeletedUserResponse> Delete(DeleteUserRequest deleteUserRequest)

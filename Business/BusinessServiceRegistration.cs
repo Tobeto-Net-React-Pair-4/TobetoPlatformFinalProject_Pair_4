@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Business.Abstracts;
 using Business.Concretes;
 using Core.Business.Rules;
+using DataAccess.Abstracts;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Business
@@ -25,6 +26,9 @@ namespace Business
             services.AddScoped<IUserService, UserManager>();
             services.AddScoped<IUserCourseService, UserCourseManager>();
 
+            services.AddScoped<IAnnouncementService, AnnouncementManager>();
+            services.AddScoped<IUserAnnouncementService, UserAnnouncementManager>();
+            services.AddScoped<IAppealService, AppealManager>();
             return services;
         }
         public static IServiceCollection AddSubClassesOfType(

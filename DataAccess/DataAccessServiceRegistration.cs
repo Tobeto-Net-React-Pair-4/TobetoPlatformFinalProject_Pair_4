@@ -26,6 +26,9 @@ namespace DataAccess
             services.AddScoped<IUserDal, EfUserDal>();
             services.AddScoped<IUserCourseDal, EfUserCourseDal>();
 
+            services.AddScoped<IAnnouncementDal, EfAnnouncementDal>();
+            services.AddScoped<IUserAnnouncementDal, EfUserAnnouncementDal>();
+            services.AddScoped<IAppealDal, EfAppealDal>();
             return services;
         }
     }
