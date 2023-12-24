@@ -47,12 +47,13 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListSurveyResponse>>(data);
         }
 
-        public async Task<UpdatedUserResponse> Update(UpdateSurveyRequest updateSurveyRequest)
+        public async Task<UpdatedSurveyResponse> Update(UpdateSurveyRequest updateSurveyRequest)
         {
             Survey survey = await _surveyDal.GetAsync(p => p.Id == updateSurveyRequest.Id);
             _mapper.Map(updateSurveyRequest, survey);
             await _surveyDal.UpdateAsync(survey);
-            return _mapper.Map<UpdatedUserResponse>(survey);
+            return _mapper.Map<UpdatedSurveyResponse>(survey);
         }
+       
     }
 }
