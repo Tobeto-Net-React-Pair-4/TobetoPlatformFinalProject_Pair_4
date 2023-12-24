@@ -16,13 +16,11 @@ namespace Business.Profiles
         public UserSurveyMappingProfile()
         {
             CreateMap<UserSurvey, CreateUserSurveyRequest>().ReverseMap();
-            CreateMap<UserSurvey, DeleteUserSurveyRequest>().ReverseMap();
-            
             CreateMap<UserSurvey, CreatedUserSurveyResponse>().ReverseMap();
-          
+            CreateMap<UserSurvey, DeleteUserSurveyRequest>().ReverseMap();
             CreateMap<UserSurvey, DeletedUserSurveyResponse>().ReverseMap();
-
-            CreateMap<UserSurvey, GetListUserSurveyResponse>().ReverseMap();
+            CreateMap<UserSurvey, GetListUserSurveyResponse>().ReverseMap()
+                .ForMember(destinationMember: x => x.User, memberOptions: opt => opt.MapFrom(us => us.User)).ReverseMap();
             CreateMap<Paginate<UserSurvey>, Paginate<GetListUserSurveyResponse>>().ReverseMap();
         }
     }

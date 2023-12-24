@@ -17,9 +17,9 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Add([FromBody] CreateUserSurveyRequest createUserSurveyRequest)
+        public async Task<IActionResult> AddAsync([FromBody] CreateUserSurveyRequest createUserSurveyRequest)
         {
-            var result = await _userSurveyService.Add(createUserSurveyRequest);
+            var result = await _userSurveyService.AddAsync(createUserSurveyRequest);
             return Ok(result);
         }
         

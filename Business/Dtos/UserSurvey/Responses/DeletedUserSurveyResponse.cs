@@ -8,7 +8,6 @@ namespace Business.Dtos.UserSurvey.Responses
 {
     public class DeletedUserSurveyResponse
     {
-        public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public Guid SurveyId { get; set; }
     }

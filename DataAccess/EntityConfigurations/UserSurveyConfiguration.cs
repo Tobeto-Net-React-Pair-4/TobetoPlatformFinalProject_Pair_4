@@ -20,10 +20,10 @@ namespace DataAccess.EntityConfigurations
             builder.Property(s => s.UserId).HasColumnName("UserId").IsRequired();
             builder.Property(s => s.SurveyId).HasColumnName("SurveyId").IsRequired();
 
-            builder.HasQueryFilter(s => !s.DeletedDate.HasValue);
 
             builder.HasOne(s => s.Survey).WithMany(c => c.UserSurveys).HasForeignKey(c => c.SurveyId);
             builder.HasOne(s => s.User).WithMany(c => c.UserSurveys).HasForeignKey(c => c.UserId);
+            builder.HasQueryFilter(s => !s.DeletedDate.HasValue);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Business.Dtos.User.Responses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,6 @@ namespace Business.Dtos.UserSurvey.Responses
     {
         public Guid UserId { get; set; }
         public Guid SurveyId { get; set; }
+        public GetUserResponse User { get; set; }
     }
 }

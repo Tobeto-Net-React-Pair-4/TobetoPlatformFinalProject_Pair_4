@@ -12,6 +12,7 @@ namespace Entities.Concretes
         public string Title { get; set; }//Anket basligi
         public string Description { get; set; }//Anket aciklamasi
         public string Url { get; set; } // Anket url
+
         public ICollection<UserSurvey> UserSurveys { get; set; }
 
         

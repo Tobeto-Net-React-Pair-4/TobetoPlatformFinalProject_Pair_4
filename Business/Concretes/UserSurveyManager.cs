@@ -5,6 +5,7 @@ using Business.Dtos.Survey.Responses;
 using Business.Dtos.User.Responses;
 using Business.Dtos.UserSurvey.Requests;
 using Business.Dtos.UserSurvey.Responses;
+using Microsoft.EntityFrameworkCore;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -13,13 +14,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Business.Concretes
 {
     public class UserSurveyManager:IUserSurveyService
     {
-        private IUserSurveyDal _userSurveyDal;
-        private IMapper _mapper;
+         IUserSurveyDal _userSurveyDal;
+         IMapper _mapper;
+
         public UserSurveyManager(IUserSurveyDal userSurveyDal, IMapper mapper)
         {
             _userSurveyDal = userSurveyDal;
@@ -35,7 +38,7 @@ namespace Business.Concretes
 
         public async Task<DeletedUserSurveyResponse> Delete(DeleteUserSurveyRequest deleteUserSurveyRequest)
         {
-            UserSurvey userSurvey = await _userSurveyDal.GetAsync(p => p.SurveyId == deleteUserSurveyRequest.SurveyId);
+            UserSurvey userSurvey = await _userSurveyDal.GetAsync(predicate: p => p.SurveyId == deleteUserSurveyRequest.SurveyId);
             await _userSurveyDal.DeleteAsync(userSurvey);
             return _mapper.Map<DeletedUserSurveyResponse>(userSurvey);
 
@@ -44,10 +47,9 @@ namespace Business.Concretes
         public async Task<Paginate<GetListUserSurveyResponse>> GetListAsync()
         {
 
-            var data = await _userSurveyDal.GetListAsync();
+            var data = await _userSurveyDal.GetListAsync(include: u => u.Include(u => u.User));
             return _mapper.Map<Paginate<GetListUserSurveyResponse>>(data);
         }
 
-        
     }
 }
