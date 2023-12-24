@@ -23,6 +23,8 @@ namespace Business
             services.AddScoped<ICourseService, CourseManager>();
             services.AddScoped<IInstructorService, InstructorManager>();
             services.AddScoped<IUserService, UserManager>();
+            services.AddScoped<ISurveyService, SurveyManager>();
+            services.AddScoped<IUserSurveyService, UserSurveyManager>();
             services.AddScoped<ICalendarEventService, CalendarEventManager>();
             services.AddScoped<IUserCourseService, UserCourseManager>();
 
