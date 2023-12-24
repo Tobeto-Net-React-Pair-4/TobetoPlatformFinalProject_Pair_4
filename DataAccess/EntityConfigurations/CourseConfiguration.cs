@@ -27,16 +27,17 @@ namespace DataAccess.EntityConfigurations
             builder.Property(b => b.EstimatedTime).HasColumnName("EstimatedTime");
             builder.Property(b => b.ContentCount).HasColumnName("ContentCount");
             builder.Property(b => b.Description).HasColumnName("Description");
+            builder.Property(b => b.Status).HasColumnName("Status");
+
 
             builder.HasIndex(indexExpression: b => b.Name, name: "UK_Courses_Name").IsUnique();
 
             builder.HasOne(c => c.Category).WithMany(cat => cat.Courses).HasForeignKey(c => c.CategoryId).IsRequired();
-
             builder.HasOne(b => b.Instructor).WithMany(i => i.Courses).HasForeignKey(c => c.InstructorId);
-            //builder.HasMany(b => b.d);
-            //builder.HasMany(u => u.UserCourses);
 
-            builder.HasQueryFilter(b => !b.DeletedDate.HasValue); //  categorydeki tüm dataya default olarak bu where koşulunu uygula. where deletedDate is null. Data silinmemişse getir.
+            builder.HasMany(b => b.CalendarEvents);
+
+            builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
         }
     }
 }
