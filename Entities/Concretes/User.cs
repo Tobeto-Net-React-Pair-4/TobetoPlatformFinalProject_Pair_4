@@ -20,14 +20,11 @@ namespace Entities.Concretes
         public string? AboutMe { get; set; }
         public string? Phone { get; set; }
 
+        public ICollection<SocialMediaAccount> MyProperty { get; set; }
         public ICollection<UserSurvey> UserSurveys { get; set; }
         public ICollection<UserCourse> UserCourses { get; set; }
         public ICollection<UserAnnouncement> UserAnnouncements { get; set; }
         public Appeal Appeal { get; set; }
-
-
-
-
-
+        public PersonalInfo PersonalInfo { get; set; }
     }
 }
