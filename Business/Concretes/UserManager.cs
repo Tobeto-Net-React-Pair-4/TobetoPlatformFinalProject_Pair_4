@@ -52,6 +52,19 @@ namespace Business.Concretes
             await _userDal.UpdateAsync(user);
             return _mapper.Map<UpdatedUserResponse>(user);
         }
+
+        public User Authenticate(string username, string password)
+        {
+            // Kullanıcı adı ve şifreyle kullanıcıyı doğrula
+            User user = _userDal.GetByUsernameAndPassword(username, password);
+            // Kullanıcı bulunamazsa null döndür
+            if (user == null)
+                return null;
+
+            // Kullanıcıyı doğrula ve geri döndür
+            return user;
+        }
+
     }
 }
 

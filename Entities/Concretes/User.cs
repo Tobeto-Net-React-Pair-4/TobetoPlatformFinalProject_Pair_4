@@ -20,6 +20,11 @@ namespace Entities.Concretes
         public string? AboutMe { get; set; }
         public string? Phone { get; set; }
 
+        public byte[] PasswordSalt { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public bool Status { get; set; }
+
+
         public ICollection<UserCourse> UserCourses { get; set; }
         public ICollection<UserAnnouncement> UserAnnouncements { get; set; }
         public Appeal Appeal { get; set; }
