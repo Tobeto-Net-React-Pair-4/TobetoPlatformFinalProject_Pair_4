@@ -12,12 +12,12 @@ namespace Entities.Concretes
 {
     public class Education : Entity<Guid>
     {
-        public SelectList EducationalStatus { get; set; }
+        public string EducationalDegree { get; set; }
         public string University { get; set; }
         public string Department { get; set; }
         public DateTime StartOfYear { get; set; }
         public DateTime GraduationYear { get; set; }
-
-        //public InputCheckbox Continuing { get; set; }?
+        public bool Status { get; set; }
+        public User User { get; set; }
     }
 }

@@ -9,6 +9,9 @@ namespace Entities.Concretes
 {
     public class Certificate : Entity<Guid>
     {
-        //public File Certificates {get; set; }?
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public DateTime Date { get; set; }
+        public User User { get; set; }
     }
 }

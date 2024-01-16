@@ -10,6 +10,6 @@ namespace Entities.Concretes
 {
     public class Skill : Entity<Guid>
     {
-        public SelectList Skils { get; set; }
+        public string Name { get; set; }
     }
 }

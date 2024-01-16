@@ -16,8 +16,9 @@ namespace Entities.Concretes
         public string City { get; set; }
         public DateTime BusinessStartDate { get; set; }
         public DateTime BusinessQuittinghDate { get; set; }
-
-        //public InputCheckbox ContinuingWork { get; set; }?
+        public bool Status { get; set; }
         public string BusinessDescription { get; set; }
+
+        public User User { get; set; }
     }
 }

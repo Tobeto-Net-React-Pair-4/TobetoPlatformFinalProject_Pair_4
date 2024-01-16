@@ -11,7 +11,8 @@ namespace Entities.Concretes
 {
     public class SocialMediaAccount : Entity<Guid>
     {
-        public SelectList SocialMedia { get; set; }
-        public InputText LinkText{ get; set; }
+        public string Name { get; set; }
+        public string Url { get; set; }
+
     }
 }

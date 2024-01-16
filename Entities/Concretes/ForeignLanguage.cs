@@ -11,7 +11,8 @@ namespace Entities.Concretes
 {
     public class ForeignLanguage : Entity<Guid>
     {
-        public SelectList LanguageList { get; set; }
-        public SelectList LanguageLevel { get; set; }
+        public string LanguageList { get; set; }
+        public string LanguageLevel { get; set; }
+        public User User { get; set; }
     }
 }
