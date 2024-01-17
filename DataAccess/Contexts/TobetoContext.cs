@@ -1,12 +1,7 @@
 ﻿using Entities.Concretes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Contexts
 {
@@ -23,6 +18,7 @@ namespace DataAccess.Contexts
         public DbSet<UserCourse> UserCourses { get; set; }
         public DbSet<UserAppeal> UserAppeals { get; set; }
         public DbSet<Appeal> Appeals { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
 
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<UserAnnouncement> UserAnnouncements { get; set; }
