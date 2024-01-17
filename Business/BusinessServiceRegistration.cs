@@ -19,7 +19,6 @@ namespace Business
             services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<ICourseService, CourseManager>();
             services.AddScoped<IInstructorService, InstructorManager>();
@@ -32,6 +31,8 @@ namespace Business
             services.AddScoped<IAnnouncementService, AnnouncementManager>();
             services.AddScoped<IUserAnnouncementService, UserAnnouncementManager>();
             services.AddScoped<IAppealService, AppealManager>();
+            services.AddScoped<IEducationService, EducationManager>();
+
             return services;
         }
         public static IServiceCollection AddSubClassesOfType(
