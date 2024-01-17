@@ -61,6 +61,5 @@ namespace Core.DataAccess.Repositories
 		Task<TEntity> DeleteAsync(TEntity entity, bool permanent = false);
 
 		Task<ICollection<TEntity>> DeleteRangeAsync(ICollection<TEntity> entities, bool permanent = false);
-        TEntity GetByUsernameAndPassword(string username, string password);
     }
 }

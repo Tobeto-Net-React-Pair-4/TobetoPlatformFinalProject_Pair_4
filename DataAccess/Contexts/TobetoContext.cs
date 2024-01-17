@@ -19,9 +19,9 @@ namespace DataAccess.Contexts
         public DbSet<User> Users { get; set; }
         public DbSet<CalendarEvent> CalendarEvents { get; set; }
         public DbSet<UserCourse> UserCourses { get; set; }
+
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
-
 
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<UserAnnouncement> UserAnnouncements { get; set; }

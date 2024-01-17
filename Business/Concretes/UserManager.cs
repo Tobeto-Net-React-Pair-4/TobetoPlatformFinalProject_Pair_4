@@ -53,18 +53,15 @@ namespace Business.Concretes
             return _mapper.Map<UpdatedUserResponse>(user);
         }
 
-        public User Authenticate(string username, string password)
+        public List<OperationClaim> GetClaims(User user)
         {
-            // Kullanıcı adı ve şifreyle kullanıcıyı doğrula
-            User user = _userDal.GetByUsernameAndPassword(username, password);
-            // Kullanıcı bulunamazsa null döndür
-            if (user == null)
-                return null;
-
-            // Kullanıcıyı doğrula ve geri döndür
-            return user;
+            return _userDal.GetClaims(user);
         }
 
+        public async Task<User> GetByMail(string email)
+        {
+            return await _userDal.GetAsync(u => u.Email == email);
+        }
     }
 }
 

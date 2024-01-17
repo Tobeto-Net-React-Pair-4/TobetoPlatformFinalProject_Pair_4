@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspect.Autofac;
 using Business.Dtos.Course.Requests;
 using Business.Dtos.Course.Responses;
 using Business.Rules;
@@ -26,6 +27,7 @@ namespace Business.Concretes
             _mapper = mapper;
             _courseBusinessRules = courseBusinessRules;
         }
+        [SecuredOperation("admin")]
         public async Task<CreatedCourseResponse> Add(CreateCourseRequest createCourseRequest)
         {
             await _courseBusinessRules.EachCategoryMustContainMax20Products(createCourseRequest.CategoryId);

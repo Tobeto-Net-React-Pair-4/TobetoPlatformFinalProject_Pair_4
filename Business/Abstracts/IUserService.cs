@@ -16,6 +16,7 @@ namespace Business.Abstracts
         Task<CreatedUserResponse> Add(CreateUserRequest createUserRequest);
         Task<UpdatedUserResponse> Update(UpdateUserRequest updateUserRequest);
         Task<DeletedUserResponse> Delete(DeleteUserRequest deleteUserRequest);
-        User Authenticate(string username, string password);
+        List<OperationClaim> GetClaims(User user);
+        Task<User> GetByMail(string email);
     }
 }

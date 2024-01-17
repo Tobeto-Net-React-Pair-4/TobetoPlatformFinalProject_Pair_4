@@ -3,14 +3,13 @@ using System.Text.Json.Serialization;
 
 namespace Entities.Concretes
 {
-    public class User : Entity<Guid>
+    public class User : Entity<Guid>, IUser
     {
         public Guid AppealId { get; set; } 
         public string? NationalityId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
         public DateTime? BirthDate { get; set; }
 
         public string? Country { get; set; }
@@ -24,7 +23,7 @@ namespace Entities.Concretes
         public byte[] PasswordHash { get; set; }
         public bool Status { get; set; }
 
-
+        public ICollection<UserOperationClaim> OperationClaims { get; set; }
         public ICollection<UserCourse> UserCourses { get; set; }
         public ICollection<UserAnnouncement> UserAnnouncements { get; set; }
         public Appeal Appeal { get; set; }

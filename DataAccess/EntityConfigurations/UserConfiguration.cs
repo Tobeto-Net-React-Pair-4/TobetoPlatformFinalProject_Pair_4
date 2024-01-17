@@ -21,7 +21,6 @@ namespace DataAccess.EntityConfigurations
             builder.Property(b => b.FirstName).HasColumnName("FirstName").IsRequired();
             builder.Property(b => b.LastName).HasColumnName("LastName").IsRequired();
             builder.Property(b => b.Email).HasColumnName("Email").IsRequired();
-            builder.Property(b => b.Password).HasColumnName("Password").IsRequired();
             builder.Property(b => b.BirthDate).HasColumnName("BirthDate");
             builder.Property(b => b.Country).HasColumnName("Country");
             builder.Property(b => b.City).HasColumnName("City");
@@ -30,11 +29,17 @@ namespace DataAccess.EntityConfigurations
             builder.Property(b => b.AboutMe).HasColumnName("AboutMe");
             builder.Property(b => b.Phone).HasColumnName("Phone");
 
+            builder.Property(b => b.Status).HasColumnName("Status");
+            builder.Property(b => b.PasswordHash).HasColumnName("PasswordHash");
+            builder.Property(b => b.PasswordSalt).HasColumnName("PasswordSalt");
+
             builder.HasIndex(indexExpression: b => b.NationalityId, name: "UK_Users_NationalityId").IsUnique();
+            builder.HasIndex(indexExpression: b => b.Email, name: "UK_Users_Email").IsUnique();
+
 
             builder.HasOne(c => c.Appeal).WithMany(cat => cat.Users).HasForeignKey(c => c.AppealId).IsRequired();
 
-            builder.HasQueryFilter(b => !b.DeletedDate.HasValue); //  categorydeki tüm dataya default olarak bu where koşulunu uygula. where deletedDate is null. Data silinmemişse getir.
+            builder.HasQueryFilter(b => !b.DeletedDate.HasValue); // categorydeki tüm dataya default olarak bu where koşulunu uygula. where deletedDate is null. Data silinmemişse getir.
         }
     }
 }
