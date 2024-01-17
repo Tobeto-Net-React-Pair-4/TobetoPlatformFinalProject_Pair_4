@@ -12,5 +12,7 @@ namespace Business.Dtos.User.Requests
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public byte[] PasswordHash;
+        public byte[] PasswordSalt;
     }
 }
