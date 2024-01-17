@@ -3,14 +3,13 @@ using System.Text.Json.Serialization;
 
 namespace Entities.Concretes
 {
-    public class User : Entity<Guid>
+    public class User : Entity<Guid>, IUser
     {
         public Guid AppealId { get; set; } 
         public string? NationalityId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
         public DateTime? BirthDate { get; set; }
 
         public string? Country { get; set; }

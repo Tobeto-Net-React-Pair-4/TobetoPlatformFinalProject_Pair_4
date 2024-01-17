@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Business.Dtos.User.Requests;
 using Business.Dtos.User.Responses;
 using Core.DataAccess.Paging;
+using Entities.Concretes;
 
 namespace Business.Abstracts
 {
@@ -15,5 +16,7 @@ namespace Business.Abstracts
         Task<CreatedUserResponse> Add(CreateUserRequest createUserRequest);
         Task<UpdatedUserResponse> Update(UpdateUserRequest updateUserRequest);
         Task<DeletedUserResponse> Delete(DeleteUserRequest deleteUserRequest);
+        List<OperationClaim> GetClaims(User user);
+        Task<User> GetByMail(string email);
     }
 }

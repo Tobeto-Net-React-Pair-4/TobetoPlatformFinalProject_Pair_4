@@ -52,6 +52,16 @@ namespace Business.Concretes
             await _userDal.UpdateAsync(user);
             return _mapper.Map<UpdatedUserResponse>(user);
         }
+
+        public List<OperationClaim> GetClaims(User user)
+        {
+            return _userDal.GetClaims(user);
+        }
+
+        public async Task<User> GetByMail(string email)
+        {
+            return await _userDal.GetAsync(u => u.Email == email);
+        }
     }
 }
 
