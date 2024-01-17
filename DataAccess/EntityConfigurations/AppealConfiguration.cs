@@ -15,7 +15,6 @@ namespace DataAccess.EntityConfigurations
         {
             builder.ToTable("Appeals").HasKey(b => b.Id);
 
-
             builder.Property(b => b.Id).HasColumnName("Id").IsRequired();
             builder.Property(b => b.Title).HasColumnName("Title").IsRequired();
             builder.Property(b => b.Form).HasColumnName("Form").IsRequired();
@@ -24,7 +23,6 @@ namespace DataAccess.EntityConfigurations
             builder.Property(b => b.FormStatus).HasColumnName("FormStatus");
             builder.Property(b => b.FileStatus).HasColumnName("FileStatus");
 
-            builder.HasMany(b => b.Users);
             builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
         }
     }

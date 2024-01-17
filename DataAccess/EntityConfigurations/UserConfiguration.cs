@@ -32,7 +32,6 @@ namespace DataAccess.EntityConfigurations
 
             builder.HasIndex(indexExpression: b => b.NationalityId, name: "UK_Users_NationalityId").IsUnique();
 
-            builder.HasOne(c => c.Appeal).WithMany(cat => cat.Users).HasForeignKey(c => c.AppealId).IsRequired();
 
             builder.HasQueryFilter(b => !b.DeletedDate.HasValue); //  categorydeki tüm dataya default olarak bu where koşulunu uygula. where deletedDate is null. Data silinmemişse getir.
         }

@@ -17,16 +17,16 @@ namespace Business.Concretes
 {
     public class CategoryManager : ICategoryService
     {
-        private ICourseDal _courseDal;
+        private ICourseService _courseService;
         private ICategoryDal _categoryDal;
         private IMapper _mapper;
         private CategoryBusinessRules _categoryBusinessRules;
-        public CategoryManager(ICategoryDal categoryDal, IMapper mapper, CategoryBusinessRules categoryBusinessRules, ICourseDal courseDal)
+        public CategoryManager(ICategoryDal categoryDal, IMapper mapper, CategoryBusinessRules categoryBusinessRules, ICourseService courseService, IInstructorService instructorService)
         {
             _categoryDal = categoryDal;
             _mapper = mapper;
             _categoryBusinessRules = categoryBusinessRules;
-            _courseDal = courseDal;
+            _courseService = courseService;
         }
         public async Task<CreatedCategoryResponse> Add(CreateCategoryRequest createCategoryRequest)
         {

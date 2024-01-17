@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Dtos.UserCourse.Responses
+namespace Business.Dtos.UserAppeal.Responses
 {
-    public class DeletedUserCourseResponse
+    public class DeletedUserAppealResponse
     {
         public Guid UserId { get; set; }
-        public Guid CourseId { get; set; }
+        public Guid AppealId { get; set; }
     }
 }
