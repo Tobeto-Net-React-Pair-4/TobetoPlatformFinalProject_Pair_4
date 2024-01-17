@@ -5,7 +5,6 @@ namespace Entities.Concretes
 {
     public class User : Entity<Guid>
     {
-        public Guid AppealId { get; set; } 
         public string? NationalityId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -20,14 +19,16 @@ namespace Entities.Concretes
         public string? AboutMe { get; set; }
         public string? Phone { get; set; }
 
+        public ICollection<SocialMediaAccount> SocialMediaAccounts { get; set; }
         public ICollection<UserSurvey> UserSurveys { get; set; }
         public ICollection<UserCourse> UserCourses { get; set; }
+        public ICollection<UserAppeal> UserAppeals { get; set; }
         public ICollection<UserAnnouncement> UserAnnouncements { get; set; }
-        public Appeal Appeal { get; set; }
-
-
-
-
+        public ICollection<Experience> Experiences { get; set; }
+        public ICollection<Education> Educations { get; set; }
+        public ICollection<Certificate> Certificates { get; set; }
+        public ICollection<ForeignLanguage> ForeignLanguages { get; set; }
+        public PersonalInfo PersonalInfo { get; set; }
 
     }
 }

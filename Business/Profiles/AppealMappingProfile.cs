@@ -23,6 +23,7 @@ namespace Business.Profiles
             CreateMap<Appeal, CreatedAppealResponse>().ReverseMap();
             CreateMap<Appeal, UpdatedAppealResponse>().ReverseMap();
             CreateMap<Appeal, DeletedAppealResponse>().ReverseMap();
+            CreateMap<Appeal, GetAppealResponse>().ReverseMap();
 
             CreateMap<Appeal, GetListAppealResponse>().ReverseMap();
             CreateMap<Paginate<Appeal>, Paginate<GetListAppealResponse>>().ReverseMap();

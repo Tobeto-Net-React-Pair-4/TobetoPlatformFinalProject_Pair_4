@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Entities.Concretes
 {
-    public class UserSurvey : Entity<Guid>
+    public class Certificate : Entity<Guid>
     {
-        public Guid SurveyId { get; set; }
-        public Guid UserId { get; set; }
-        public Survey Survey { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public DateTime Date { get; set; }
         public User User { get; set; }
     }
 }

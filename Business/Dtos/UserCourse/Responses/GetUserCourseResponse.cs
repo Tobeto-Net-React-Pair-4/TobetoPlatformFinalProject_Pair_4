@@ -9,11 +9,8 @@ namespace Business.Dtos.UserCourse.Responses
 {
     public class GetUserCourseResponse
     {
-        //public Guid Id { get; set; }
-        public Guid UserId { get; set; }  // GEREK VAR MI?
+        public Guid UserId { get; set; }
         public Guid CourseId { get; set; }
-
-        //public ICollection<GetListUserResponse> Users { get; set; }
-
+        public ICollection<GetListUserResponse> Users { get; set; }
     }
 }

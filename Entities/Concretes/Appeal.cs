@@ -15,7 +15,7 @@ namespace Entities.Concretes
         public string? AppealStatus { get; set; }
         public string? FormStatus { get; set; }
         public string? FileStatus { get; set; }
-        public List<User>? Users { get; set; }
+        public ICollection<UserAppeal> UserAppeals { get; set; }
 
 
     }

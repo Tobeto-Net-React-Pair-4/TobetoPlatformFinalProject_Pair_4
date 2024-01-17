@@ -1,7 +1,5 @@
 ﻿using Business.Abstracts;
-using Business.Dtos.Instructor.Requests;
 using Business.Dtos.UserCourse.Requests;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
