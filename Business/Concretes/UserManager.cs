@@ -35,7 +35,7 @@ namespace Business.Concretes
 
         public async Task<Paginate<GetListUserResponse>> GetListAsync()
         {
-            var data = await _userDal.GetListAsync(include: p => p.Include(p => p.Appeal));
+            var data = await _userDal.GetListAsync(include: p => p.Include(p => p.UserAppeals));
             return _mapper.Map<Paginate<GetListUserResponse>>(data);
         }
         public async Task<DeletedUserResponse> Delete(DeleteUserRequest deleteUserRequest)
