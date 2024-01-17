@@ -19,6 +19,9 @@ namespace Entities.Concretes
         public string? AddressDetails { get; set; }
         public string? AboutMe { get; set; }
         public string? Phone { get; set; }
+        public byte[] PasswordSalt { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public bool Status { get; set; }
 
         public ICollection<SocialMediaAccount> SocialMediaAccounts { get; set; }
         public ICollection<UserSurvey> UserSurveys { get; set; }
