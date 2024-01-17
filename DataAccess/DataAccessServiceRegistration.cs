@@ -24,10 +24,11 @@ namespace DataAccess
             services.AddScoped<ICourseDal, EfCourseDal>();
             services.AddScoped<ICategoryDal, EfCategoryDal>();
             services.AddScoped<IInstructorDal, EfInstructorDal>();
-
+            services.AddScoped<IUserDal, EfUserDal>();
+            services.AddScoped<ISurveyDal, EfSurveyDal>();
+            services.AddScoped<IUserSurveyDal, EfUserSurveyDal>();
             services.AddScoped<ICalendarEventDal, EfCalendarEventDal>();
             services.AddScoped<IUserCourseDal, EfUserCourseDal>();
-
             services.AddScoped<IAnnouncementDal, EfAnnouncementDal>();
             services.AddScoped<IUserAnnouncementDal, EfUserAnnouncementDal>();
             services.AddScoped<IAppealDal, EfAppealDal>();
