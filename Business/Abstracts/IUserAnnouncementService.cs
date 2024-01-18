@@ -14,9 +14,9 @@ namespace Business.Abstracts
     public interface IUserAnnouncementService
     {
         Task<Paginate<GetListUserAnnouncementResponse>> GetListAsync();
-        Task<CreatedUserAnnouncementResponse> Add(CreateUserAnnouncementRequest createUserAnnouncementRequest);
-        Task<UpdatedUserAnnouncementResponse> Update(UpdateUserAnnouncementRequest updateUserAnnouncementRequest);
-        Task<DeletedUserAnnouncementResponse> Delete(DeleteUserAnnouncementRequest deleteUserAnnouncementRequest);
+        Task<CreatedUserAnnouncementResponse> AddAsync(CreateUserAnnouncementRequest createUserAnnouncementRequest);
+        Task<UpdatedUserAnnouncementResponse> UpdateAsync(UpdateUserAnnouncementRequest updateUserAnnouncementRequest);
+        Task<DeletedUserAnnouncementResponse> DeleteAsync(DeleteUserAnnouncementRequest deleteUserAnnouncementRequest);
 
     }
 }

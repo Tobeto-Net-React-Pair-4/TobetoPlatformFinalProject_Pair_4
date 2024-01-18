@@ -33,6 +33,7 @@ namespace DataAccess
             services.AddScoped<IUserAnnouncementDal, EfUserAnnouncementDal>();
             services.AddScoped<IAppealDal, EfAppealDal>();
             services.AddScoped<IUserAppealDal, EfUserAppealDal>();
+            services.AddScoped<ISocialMediaDal, EfSocialMediaDal>();
 
             return services;
         }

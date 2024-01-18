@@ -15,7 +15,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Add([FromBody] CreateUserAppealRequest createUserAppealRequest)
+        public async Task<IActionResult> AddAsync([FromBody] CreateUserAppealRequest createUserAppealRequest)
         {
             var result = await _userAppealService.AddAsync(createUserAppealRequest);
             return Ok(result);

@@ -17,23 +17,23 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Add([FromBody]CreateCalendarEventRequest createCalendarEventRequest)
+        public async Task<IActionResult> AddAsync([FromBody]CreateCalendarEventRequest createCalendarEventRequest)
         {
-            var result = await _calendarEventService.Add(createCalendarEventRequest);
+            var result = await _calendarEventService.AddAsync(createCalendarEventRequest);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> Update([FromBody]UpdateCalendarEventRequest updateCalendarEventRequest)
+        public async Task<IActionResult> UpdateAsync([FromBody]UpdateCalendarEventRequest updateCalendarEventRequest)
         {
-            var result = await _calendarEventService.Update(updateCalendarEventRequest);
+            var result = await _calendarEventService.UpdateAsync(updateCalendarEventRequest);
             return Ok(result);
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete([FromBody]DeleteCalendarEventRequest deleteCalendarEventRequest)
+        public async Task<IActionResult> DeleteAsync([FromBody]DeleteCalendarEventRequest deleteCalendarEventRequest)
         {
-            var result = await _calendarEventService.Delete(deleteCalendarEventRequest);
+            var result = await _calendarEventService.DeleteAsync(deleteCalendarEventRequest);
             return Ok(result);
         }
 

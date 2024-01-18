@@ -14,8 +14,8 @@ namespace Business.Abstracts
     public interface IAppealService
     {
         Task<Paginate<GetListAppealResponse>> GetListAsync();
-        Task<CreatedAppealResponse> Add(CreateAppealRequest createAppealRequest);
-        Task<UpdatedAppealResponse> Update(UpdateAppealRequest updateAppealRequest);
-        Task<DeletedAppealResponse> Delete(DeleteAppealRequest deleteAppealRequest);
+        Task<CreatedAppealResponse> AddAsync(CreateAppealRequest createAppealRequest);
+        Task<UpdatedAppealResponse> UpdateAsync(UpdateAppealRequest updateAppealRequest);
+        Task<DeletedAppealResponse> DeleteAsync(DeleteAppealRequest deleteAppealRequest);
     }
 }

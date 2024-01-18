@@ -17,23 +17,23 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Add([FromBody] CreateCourseRequest createCourseRequest)
+        public async Task<IActionResult> AddAsync([FromBody] CreateCourseRequest createCourseRequest)
         {
-            var result = await _courseService.Add(createCourseRequest);
+            var result = await _courseService.AddAsync(createCourseRequest);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> Update([FromBody] UpdateCourseRequest updateCourseRequest)
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdateCourseRequest updateCourseRequest)
         {
-            var result = await _courseService.Update(updateCourseRequest);
+            var result = await _courseService.UpdateAsync(updateCourseRequest);
             return Ok(result);
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete([FromBody] DeleteCourseRequest deleteCourseRequest)
+        public async Task<IActionResult> DeleteAsync([FromBody] DeleteCourseRequest deleteCourseRequest)
         {
-            var result = await _courseService.Delete(deleteCourseRequest);
+            var result = await _courseService.DeleteAsync(deleteCourseRequest);
             return Ok(result);
         }
 
@@ -45,9 +45,9 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("GetById")]
-        public async Task<IActionResult> GetById([FromBody] GetByIdCourseRequest getByIdCourseRequest)
+        public async Task<IActionResult> GetByIdAsync([FromBody] GetByIdCourseRequest getByIdCourseRequest)
         {
-            var result = await _courseService.GetById(getByIdCourseRequest);
+            var result = await _courseService.GetByIdAsync(getByIdCourseRequest);
             return Ok(result);
         }
     }

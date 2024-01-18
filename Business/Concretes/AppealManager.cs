@@ -27,7 +27,7 @@ namespace Business.Concretes
             _appealDal = appealDal;
             _mapper = mapper;
         }
-        public async Task<CreatedAppealResponse> Add(CreateAppealRequest createAppealRequest)
+        public async Task<CreatedAppealResponse> AddAsync(CreateAppealRequest createAppealRequest)
         {
 
             Appeal appeal = _mapper.Map<Appeal>(createAppealRequest);
@@ -37,7 +37,7 @@ namespace Business.Concretes
             return _mapper.Map<CreatedAppealResponse>(createdAppeal);
         }
 
-        public async Task<DeletedAppealResponse> Delete(DeleteAppealRequest deleteAppealRequest)
+        public async Task<DeletedAppealResponse> DeleteAsync(DeleteAppealRequest deleteAppealRequest)
         {
 
             Appeal appeal = await _appealDal.GetAsync(p => p.Id == deleteAppealRequest.Id);
@@ -51,7 +51,7 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListAppealResponse>>(data);
         }
 
-        public async Task<UpdatedAppealResponse> Update(UpdateAppealRequest updateAppealRequest)
+        public async Task<UpdatedAppealResponse> UpdateAsync(UpdateAppealRequest updateAppealRequest)
         {
             Appeal appeal = await _appealDal.GetAsync(p => p.Id == updateAppealRequest.Id);
             _mapper.Map(updateAppealRequest, appeal);
