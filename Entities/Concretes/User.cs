@@ -28,6 +28,8 @@ namespace Entities.Concretes
         public ICollection<Education> Educations { get; set; }
         public ICollection<Certificate> Certificates { get; set; }
         public ICollection<ForeignLanguage> ForeignLanguages { get; set; }
+        public ICollection<UserSkill> UserSkills { get; set; }
+
         public PersonalInfo PersonalInfo { get; set; }
 
     }

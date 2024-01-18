@@ -33,6 +33,8 @@ namespace Business
             services.AddScoped<IUserAnnouncementService, UserAnnouncementManager>();
             services.AddScoped<IAppealService, AppealManager>();
             services.AddScoped<IUserAppealService, UserAppealManager>();
+            services.AddScoped<ISkillService, SkillManager>();
+            services.AddScoped<IUserSkillService, UserSkillManager>();
 
             return services;
         }

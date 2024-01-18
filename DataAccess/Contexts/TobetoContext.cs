@@ -23,6 +23,8 @@ namespace DataAccess.Contexts
         public DbSet<UserCourse> UserCourses { get; set; }
         public DbSet<UserAppeal> UserAppeals { get; set; }
         public DbSet<Appeal> Appeals { get; set; }
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<UserSkill> UserSkills { get; set; }
 
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<UserAnnouncement> UserAnnouncements { get; set; }
