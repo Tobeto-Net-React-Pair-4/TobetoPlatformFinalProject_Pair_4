@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Dtos.UserCourse.Requests
+namespace Business.Dtos.UserExam.Requests
 {
-    public class GetUserCourseRequest
+    public class CreateUserExamRequest
     {
         public Guid UserId { get; set; }
-        public Guid CourseId { get; set; }
+        public Guid ExamId { get; set; }
     }
 }
