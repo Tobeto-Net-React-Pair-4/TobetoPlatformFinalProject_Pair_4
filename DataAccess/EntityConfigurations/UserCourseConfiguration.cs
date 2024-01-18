@@ -13,15 +13,15 @@ namespace DataAccess.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<UserCourse> builder)
         {
-            builder.Ignore(i => i.Id);
-            builder.ToTable("UserCourses").HasKey(s => new {s.CourseId,s.UserId});
+            builder.Ignore(uc => uc.Id);
+            builder.ToTable("UserCourses").HasKey(uc => new {uc.CourseId, uc.UserId});
 
-            builder.Property(s => s.UserId).HasColumnName("UserId").IsRequired();
-            builder.Property(s => s.CourseId).HasColumnName("CourseId").IsRequired();
+            builder.Property(uc => uc.UserId).HasColumnName("UserId").IsRequired();
+            builder.Property(uc => uc.CourseId).HasColumnName("CourseId").IsRequired();
 
 
-            builder.HasOne(s => s.Course).WithMany(c => c.UserCourses).HasForeignKey(c => c.CourseId);
-            builder.HasOne(s => s.User).WithMany(c => c.UserCourses).HasForeignKey(c => c.UserId);
+            builder.HasOne(uc => uc.Course).WithMany(c => c.UserCourses).HasForeignKey(uc => uc.CourseId);
+            builder.HasOne(uc => uc.User).WithMany(c => c.UserCourses).HasForeignKey(uc => uc.UserId);
 
             builder.HasQueryFilter(s => !s.DeletedDate.HasValue);
         }
