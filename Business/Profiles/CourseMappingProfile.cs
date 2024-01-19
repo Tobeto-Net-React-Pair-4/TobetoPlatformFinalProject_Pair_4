@@ -25,18 +25,40 @@ namespace Business.Profiles
             CreateMap<Course, CreatedCourseResponse>().ReverseMap();
             CreateMap<Course, UpdatedCourseResponse>().ReverseMap();
             CreateMap<Course, DeletedCourseResponse>().ReverseMap();
-            CreateMap<Course, GetCourseResponse>().ReverseMap();
-
+            CreateMap<Course, GetCourseResponse>().ForMember(
+                destinationMember: p => p.CategoryName,
+                memberOptions: opt => opt.MapFrom(p => p.Category.Name)
+                )
+                .ForMember(
+                destinationMember: c => c.InstructorName,
+                memberOptions: opt => opt.MapFrom(c => c.Instructor.Name)
+                )
+                .ReverseMap();
 
             CreateMap<Course, GetListCourseResponse>()
-                .ForMember(destinationMember: p => p.CategoryName, memberOptions: opt => opt.MapFrom(p => p.Category.Name))
-                .ForMember(destinationMember: c => c.InstructorName, memberOptions: opt => opt.MapFrom(c => c.Instructor.Name))
+                .ForMember(
+                destinationMember: p => p.CategoryName, 
+                memberOptions: opt => opt.MapFrom(p => p.Category.Name)
+                )
+                .ForMember(
+                destinationMember: c => c.InstructorName,
+                memberOptions: opt => opt.MapFrom(c => c.Instructor.Name)
+                )
                 .ReverseMap();
 
             CreateMap<Course, GetByIdCourseResponse>()
-                .ForMember(destinationMember: u => u.Users, memberOptions: opt => opt.MapFrom(u => u.UserCourses))
-                .ForMember(destinationMember: p => p.InstructorName, memberOptions: opt => opt.MapFrom(p => p.Instructor.Name))
-                .ForMember(destinationMember: c => c.CategoryName, memberOptions: opt => opt.MapFrom(c => c.Category.Name))
+                .ForMember(
+                destinationMember: u => u.Users, 
+                memberOptions: opt => opt.MapFrom(uc => uc.UserCourses)
+                )
+                .ForMember(
+                destinationMember: p => p.InstructorName, 
+                memberOptions: opt => opt.MapFrom(p => p.Instructor.Name)
+                )
+                .ForMember(
+                destinationMember: c => c.CategoryName, 
+                memberOptions: opt => opt.MapFrom(c => c.Category.Name)
+                )
                 .ReverseMap();
 
             CreateMap<Paginate<Course>, Paginate<GetListCourseResponse>>().ReverseMap();

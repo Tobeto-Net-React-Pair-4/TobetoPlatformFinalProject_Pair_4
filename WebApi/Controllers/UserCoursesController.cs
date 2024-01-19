@@ -6,10 +6,10 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserCourseController : ControllerBase
+    public class UserCoursesController : ControllerBase
     {
         IUserCourseService _userCourseService;
-        public UserCourseController(IUserCourseService userCourseService)
+        public UserCoursesController(IUserCourseService userCourseService)
         {
             _userCourseService = userCourseService;
         }

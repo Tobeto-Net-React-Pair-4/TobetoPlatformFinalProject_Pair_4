@@ -23,8 +23,19 @@ namespace Business.Profiles
             CreateMap<QuestionAnswer, CreatedQuestionAnswerResponse>().ReverseMap();
             CreateMap<QuestionAnswer, DeletedQuestionAnswerResponse>().ReverseMap();
             CreateMap<QuestionAnswer, UpdatedQuestionAnswerResponse>().ReverseMap();
-            CreateMap<QuestionAnswer, GetByIdQuestionAnswerResponse>().ReverseMap();
-            CreateMap<QuestionAnswer, GetListQuestionAnswerResponse>().ReverseMap();
+            CreateMap<QuestionAnswer, GetByIdQuestionAnswerResponse>()
+                .ForMember(
+                destinationMember: qa => qa.QuestionDescription,
+                memberOptions: opt => opt.MapFrom(qa => qa.ExamQuestion.Description)
+                )
+                .ReverseMap();
+
+            CreateMap<QuestionAnswer, GetListQuestionAnswerResponse>().ForMember(
+                destinationMember: qa => qa.QuestionDescription,
+                memberOptions: opt => opt.MapFrom(qa => qa.ExamQuestion.Description)
+                )
+                .ReverseMap();
+
             CreateMap<Paginate<QuestionAnswer>, Paginate<GetListQuestionAnswerResponse>>().ReverseMap();
         }
     }

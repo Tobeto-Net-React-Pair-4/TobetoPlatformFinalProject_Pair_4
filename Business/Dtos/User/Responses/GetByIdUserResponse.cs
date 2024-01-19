@@ -11,6 +11,6 @@ namespace Business.Dtos.User.Responses
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public ICollection<GetByIdCourseResponse> Courses { get; set; }
+        public ICollection<GetCourseResponse> Courses { get; set; }
     }
 }

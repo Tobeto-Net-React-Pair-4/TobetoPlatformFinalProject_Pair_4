@@ -26,12 +26,12 @@ namespace Business.Profiles
             CreateMap<ExamQuestion, GetByIdExamQuestionResponse>()
                 .ForMember(
                 destinationMember: eq => eq.ExamTitle,
-                memberOptions: opt => opt.MapFrom(eq => eq.Exam))
+                memberOptions: opt => opt.MapFrom(eq => eq.Exam.Title))
                 .ReverseMap();
             CreateMap<ExamQuestion, GetListExamQuestionResponse>()
                 .ForMember(
                 destinationMember: eq => eq.ExamTitle,
-                memberOptions: opt => opt.MapFrom(eq => eq.Exam))
+                memberOptions: opt => opt.MapFrom(eq => eq.Exam.Title))
                 .ReverseMap();
             CreateMap<Paginate<ExamQuestion>, Paginate<GetListExamQuestionResponse>>().ReverseMap();
         }

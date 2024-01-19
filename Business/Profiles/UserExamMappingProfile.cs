@@ -24,18 +24,18 @@ namespace Business.Profiles
             CreateMap<UserExam, GetUserExamResponse>()
                 .ForMember(
                 destinationMember: ue => ue.ExamTitle,
-                memberOptions: opt => opt.MapFrom(ue => ue.Exam))
+                memberOptions: opt => opt.MapFrom(ue => ue.Exam.Title))
                 .ForMember(
                 destinationMember: ue => ue.UserEmail,
-                memberOptions: opt => opt.MapFrom(ue => ue.User))
+                memberOptions: opt => opt.MapFrom(ue => ue.User.Email))
                 .ReverseMap();
             CreateMap<UserExam, GetListUserExamResponse>()
                 .ForMember(
                 destinationMember: ue => ue.ExamTitle,
-                memberOptions: opt => opt.MapFrom(ue => ue.Exam))
+                memberOptions: opt => opt.MapFrom(ue => ue.Exam.Title))
                 .ForMember(
                 destinationMember: ue => ue.UserEmail,
-                memberOptions: opt => opt.MapFrom(ue => ue.User))
+                memberOptions: opt => opt.MapFrom(ue => ue.User.Email))
                 .ReverseMap();
             CreateMap<Paginate<UserExam>, Paginate<GetListUserExamResponse>>().ReverseMap();
         }

@@ -52,6 +52,12 @@ namespace Business.Concretes
             await _userDal.UpdateAsync(user);
             return _mapper.Map<UpdatedUserResponse>(user);
         }
+
+        public async Task<GetByIdUserResponse> GetByIdAsync(GetByIdUserRequest getByIdUserRequest)
+        {
+            User user = await _userDal.GetAsync(u => u.Id == getByIdUserRequest.Id, include: p => p.Include(uc => uc.UserCourses));
+            return _mapper.Map<GetByIdUserResponse>(user);
+        }
     }
 }
 
