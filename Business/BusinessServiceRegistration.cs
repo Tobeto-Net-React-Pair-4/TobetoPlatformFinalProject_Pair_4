@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Business.Abstracts;
 using Business.Concretes;
 using Core.Business.Rules;
+using Core.Utilities.Security.JWT;
 using DataAccess.Abstracts;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -32,6 +33,8 @@ namespace Business
             services.AddScoped<IUserAnnouncementService, UserAnnouncementManager>();
             services.AddScoped<IAppealService, AppealManager>();
             services.AddScoped<IEducationService, EducationManager>();
+            services.AddScoped<IAuthService, AuthManager>();
+            services.AddScoped<ITokenHelper, JwtHelper>();
 
             return services;
         }

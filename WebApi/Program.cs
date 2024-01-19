@@ -1,4 +1,7 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Business;
+using Business.DependencyResolvers.Autofac;
 using Core.CrossCuttingConcerns.Exceptions.Extension;
 using DataAccess;
 
@@ -13,6 +16,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new AutofacBusinessModule()));
+builder.Services.AddCors(option =>
+{
+    option.AddDefaultPolicy(configure =>
+    {
+        configure.AllowAnyOrigin();
+        configure.AllowAnyHeader();
+    });
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
