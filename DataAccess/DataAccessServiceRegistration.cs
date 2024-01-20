@@ -5,11 +5,6 @@ using Entities.Concretes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess
 {
@@ -33,6 +28,7 @@ namespace DataAccess
             services.AddScoped<IUserAnnouncementDal, EfUserAnnouncementDal>();
             services.AddScoped<IAppealDal, EfAppealDal>();
             services.AddScoped<IUserAppealDal, EfUserAppealDal>();
+            services.AddScoped<ICertificateDal, EfCertificateDal>();
             services.AddScoped<ISocialMediaDal, EfSocialMediaDal>();
             services.AddScoped<IExperienceDal, EfExperinceDal>();
             services.AddScoped<IForeignLanguageDal, EfForeignLanguageDal>();

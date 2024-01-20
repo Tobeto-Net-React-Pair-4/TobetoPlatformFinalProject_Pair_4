@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Business.Abstracts;
+﻿using Business.Abstracts;
 using Business.Concretes;
 using Core.Business.Rules;
-using DataAccess.Abstracts;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Business
 {
@@ -28,6 +22,8 @@ namespace Business
             services.AddScoped<IUserSurveyService, UserSurveyManager>();
             services.AddScoped<ICalendarEventService, CalendarEventManager>();
             services.AddScoped<IUserCourseService, UserCourseManager>();
+            services.AddScoped<ICertificateService, CertificateManager>();
+
 
             services.AddScoped<IAnnouncementService, AnnouncementManager>();
             services.AddScoped<IUserAnnouncementService, UserAnnouncementManager>();
