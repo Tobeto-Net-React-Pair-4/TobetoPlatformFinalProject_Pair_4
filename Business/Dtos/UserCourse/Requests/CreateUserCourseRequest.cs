@@ -11,11 +11,5 @@ namespace Business.Dtos.UserCourse.Requests
     {
         public Guid UserId { get; set; }
         public Guid CourseId { get; set; }
-
-        //userlist verilmeli ?
-        //public ICollection<GetListUserResponse> Users { get; set; }
-        //public ICollection<GetListUserResponse> Users { get; set; }
-
-
     }
 }

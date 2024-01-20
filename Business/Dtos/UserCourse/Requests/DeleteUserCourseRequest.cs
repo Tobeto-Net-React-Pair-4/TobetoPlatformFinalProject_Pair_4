@@ -8,6 +8,7 @@ namespace Business.Dtos.UserCourse.Requests
 {
     public class DeleteUserCourseRequest
     {
-        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
+        public Guid CourseId { get; set; }
     }
 }

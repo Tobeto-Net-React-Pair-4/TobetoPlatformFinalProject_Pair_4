@@ -26,7 +26,7 @@ namespace Business.Profiles
             CreateMap<User, GetUserResponse>().ReverseMap();
 
 
-            CreateMap<User, GetListUserResponse>() .ReverseMap();
+            CreateMap<User, GetListUserResponse>().ReverseMap();
             
 
             CreateMap<User, GetListUserResponse>().ReverseMap();

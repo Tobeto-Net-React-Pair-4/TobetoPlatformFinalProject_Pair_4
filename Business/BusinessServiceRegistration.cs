@@ -32,6 +32,8 @@ namespace Business
             services.AddScoped<IAnnouncementService, AnnouncementManager>();
             services.AddScoped<IUserAnnouncementService, UserAnnouncementManager>();
             services.AddScoped<IAppealService, AppealManager>();
+            services.AddScoped<IUserAppealService, UserAppealManager>();
+
             return services;
         }
         public static IServiceCollection AddSubClassesOfType(
