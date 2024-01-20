@@ -33,6 +33,10 @@ namespace Business
             services.AddScoped<IUserAnnouncementService, UserAnnouncementManager>();
             services.AddScoped<IAppealService, AppealManager>();
             services.AddScoped<IUserAppealService, UserAppealManager>();
+            services.AddScoped<IUserExamService, UserExamManager>();
+            services.AddScoped<IExamService, ExamManager>();
+            services.AddScoped<IExamQuestionService, ExamQuestionManager>();
+            services.AddScoped<IQuestionAnswerService, QuestionAnswerManager>();
 
             return services;
         }

@@ -45,7 +45,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("GetById")]
-        public async Task<IActionResult> GetById([FromBody] GetByIdCourseRequest getByIdCourseRequest)
+        public async Task<IActionResult> GetById([FromQuery] GetByIdCourseRequest getByIdCourseRequest)
         {
             var result = await _courseService.GetById(getByIdCourseRequest);
             return Ok(result);

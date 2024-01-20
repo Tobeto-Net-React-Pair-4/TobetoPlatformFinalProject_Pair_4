@@ -5,7 +5,6 @@ namespace Entities.Concretes
 {
     public class Course : Entity<Guid>
     {
-        
         public Guid CategoryId { get; set; }
         public Guid InstructorId { get; set; }
 

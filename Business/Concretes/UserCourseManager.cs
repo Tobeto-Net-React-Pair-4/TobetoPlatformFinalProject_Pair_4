@@ -22,9 +22,9 @@ namespace Business.Concretes
     {
         IUserCourseDal _userCourseDal;
         IMapper _mapper;
-        public UserCourseManager(IUserCourseDal departmentDal, IMapper mapper)
+        public UserCourseManager(IUserCourseDal userCourseDal, IMapper mapper)
         {
-            _userCourseDal = departmentDal;
+            _userCourseDal = userCourseDal;
             _mapper = mapper;
         }
         public async Task<Paginate<GetListUserCourseResponse>> GetListAsync()

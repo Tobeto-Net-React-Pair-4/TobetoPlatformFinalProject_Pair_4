@@ -6,10 +6,10 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserAppealController : ControllerBase
+    public class UserAppealsController : ControllerBase
     {
         IUserAppealService _userAppealService;
-        public UserAppealController(IUserAppealService userAppealService)
+        public UserAppealsController(IUserAppealService userAppealService)
         {
             _userAppealService = userAppealService;
         }

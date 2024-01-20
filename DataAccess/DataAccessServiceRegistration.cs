@@ -24,7 +24,6 @@ namespace DataAccess
             services.AddScoped<ICourseDal, EfCourseDal>();
             services.AddScoped<ICategoryDal, EfCategoryDal>();
             services.AddScoped<IInstructorDal, EfInstructorDal>();
-            services.AddScoped<IUserDal, EfUserDal>();
             services.AddScoped<ISurveyDal, EfSurveyDal>();
             services.AddScoped<IUserSurveyDal, EfUserSurveyDal>();
             services.AddScoped<ICalendarEventDal, EfCalendarEventDal>();
@@ -33,6 +32,10 @@ namespace DataAccess
             services.AddScoped<IUserAnnouncementDal, EfUserAnnouncementDal>();
             services.AddScoped<IAppealDal, EfAppealDal>();
             services.AddScoped<IUserAppealDal, EfUserAppealDal>();
+            services.AddScoped<IExamDal, EfExamDal>();
+            services.AddScoped<IUserExamDal, EfUserExamDal>();
+            services.AddScoped<IExamQuestionDal, EfExamQuestionDal>();
+            services.AddScoped<IQuestionAnswerDal, EfQuestionAnswerDal>();
 
             return services;
         }
