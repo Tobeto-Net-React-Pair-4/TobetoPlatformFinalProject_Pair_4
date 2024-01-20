@@ -14,8 +14,8 @@ namespace Business.Abstracts
     public interface ISurveyService
     {
         Task<Paginate<GetListSurveyResponse>> GetListAsync();
-        Task<CreatedSurveyResponse> Add(CreateSurveyRequest createSurveyRequest);
-        Task<UpdatedSurveyResponse> Update(UpdateSurveyRequest updateSurveyRequest);
-        Task<DeletedSurveyResponse> Delete(DeleteSurveyRequest deleteSurveyRequest);
+        Task<CreatedSurveyResponse> AddAsync(CreateSurveyRequest createSurveyRequest);
+        Task<UpdatedSurveyResponse> UpdateAsync(UpdateSurveyRequest updateSurveyRequest);
+        Task<DeletedSurveyResponse> DeleteAsync(DeleteSurveyRequest deleteSurveyRequest);
     }
 }

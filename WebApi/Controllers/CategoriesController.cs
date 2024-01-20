@@ -16,23 +16,23 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Add([FromBody] CreateCategoryRequest createCategoryRequest)
+        public async Task<IActionResult> AddAsync([FromBody] CreateCategoryRequest createCategoryRequest)
         {
-            var result = await _categoryService.Add(createCategoryRequest);
+            var result = await _categoryService.AddAsync(createCategoryRequest);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> Update([FromBody] UpdateCategoryRequest updateCategoryRequest)
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdateCategoryRequest updateCategoryRequest)
         {
-            var result = await _categoryService.Update(updateCategoryRequest);
+            var result = await _categoryService.UpdateAsync(updateCategoryRequest);
             return Ok(result);
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete([FromBody] DeleteCategoryRequest deleteCategoryRequest)
+        public async Task<IActionResult> DeleteAsync([FromBody] DeleteCategoryRequest deleteCategoryRequest)
         {
-            var result = await _categoryService.Delete(deleteCategoryRequest);
+            var result = await _categoryService.DeleteAsync(deleteCategoryRequest);
             return Ok(result);
         }
 
@@ -44,9 +44,9 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("GetById")]
-        public async Task<IActionResult> GetById([FromBody] GetByIdCategoryRequest getByIdCategoryRequest)
+        public async Task<IActionResult> GetByIdAsync([FromBody] GetByIdCategoryRequest getByIdCategoryRequest)
         {
-            var result = await _categoryService.GetById(getByIdCategoryRequest);
+            var result = await _categoryService.GetByIdAsync(getByIdCategoryRequest);
             return Ok(result);
         }
     }

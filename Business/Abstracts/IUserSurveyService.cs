@@ -15,6 +15,6 @@ namespace Business.Abstracts
     {
         Task<Paginate<GetListUserSurveyResponse>> GetListAsync();
         Task<CreatedUserSurveyResponse> AddAsync(CreateUserSurveyRequest createUserSurveyRequest);
-        Task<DeletedUserSurveyResponse> Delete(DeleteUserSurveyRequest deleteUserSurveyRequest);
+        Task<DeletedUserSurveyResponse> DeleteAsync(DeleteUserSurveyRequest deleteUserSurveyRequest);
     }
 }

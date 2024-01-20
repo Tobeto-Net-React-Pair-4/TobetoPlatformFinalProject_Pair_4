@@ -12,8 +12,8 @@ namespace Business.Abstracts
     public interface ICalendarEventService
     {
         Task<Paginate<GetListCalendarEventResponse>> GetListAsync();
-        Task<CreatedCalendarEventResponse> Add(CreateCalendarEventRequest createCalendarEventRequest);
-        Task<UpdatedCalendarEventResponse> Update(UpdateCalendarEventRequest updateCalendarEventRequest);
-        Task<DeletedCalendarEventResponse> Delete(DeleteCalendarEventRequest deleteCalendarEventRequest);
+        Task<CreatedCalendarEventResponse> AddAsync(CreateCalendarEventRequest createCalendarEventRequest);
+        Task<UpdatedCalendarEventResponse> UpdateAsync(UpdateCalendarEventRequest updateCalendarEventRequest);
+        Task<DeletedCalendarEventResponse> DeleteAsync(DeleteCalendarEventRequest deleteCalendarEventRequest);
     }
 }

@@ -6,16 +6,16 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserAppealController : ControllerBase
+    public class UserAppealsController : ControllerBase
     {
         IUserAppealService _userAppealService;
-        public UserAppealController(IUserAppealService userAppealService)
+        public UserAppealsController(IUserAppealService userAppealService)
         {
             _userAppealService = userAppealService;
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Add([FromBody] CreateUserAppealRequest createUserAppealRequest)
+        public async Task<IActionResult> AddAsync([FromBody] CreateUserAppealRequest createUserAppealRequest)
         {
             var result = await _userAppealService.AddAsync(createUserAppealRequest);
             return Ok(result);
