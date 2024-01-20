@@ -14,6 +14,8 @@ namespace DataAccess.EntityConfigurations
             builder.Property(b => b.Type).HasColumnName("Type");
             builder.Property(b => b.Date).HasColumnName("Date");
 
+            builder.HasOne(c => c.User).WithMany(u => u.Certificates).HasForeignKey(c => c.UserId);
+
         }
     }
 }

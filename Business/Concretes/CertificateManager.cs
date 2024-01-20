@@ -22,6 +22,7 @@ namespace Business.Concretes
         {
             Certificate certificate = _mapper.Map<Certificate>(createCertificateRequest);
             certificate.Id = Guid.NewGuid();
+
             Certificate createdCertificate = await _certificateDal.AddAsync(certificate);
 
             return _mapper.Map<CreatedCertificateResponse>(createdCertificate);
