@@ -27,10 +27,10 @@ namespace Business.Profiles
             CreateMap<User, GetUserResponse>().ReverseMap();
             CreateMap<User, GetListUserResponse>().ReverseMap();
             CreateMap<User, GetByIdUserResponse>()
-                .ForMember(
-                destinationMember: b => b.Courses, 
-                memberOptions: opt => opt.MapFrom(uc => uc.UserCourses)
-                )
+                //.ForMember(
+                //destinationMember: b => b.Courses, 
+                //memberOptions: opt => opt.MapFrom(uc => uc.UserCourses)
+                //)
                 .ReverseMap();
 
             CreateMap<Paginate<User>, Paginate<GetListUserResponse>>().ReverseMap();
