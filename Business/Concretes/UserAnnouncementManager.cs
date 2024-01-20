@@ -27,7 +27,7 @@ namespace Business.Concretes
             _userAnnouncementDal = userAnnouncementDal;
             _mapper = mapper;
         }
-        public async Task<CreatedUserAnnouncementResponse> Add(CreateUserAnnouncementRequest createUserAnnouncementRequest)
+        public async Task<CreatedUserAnnouncementResponse> AddAsync(CreateUserAnnouncementRequest createUserAnnouncementRequest)
         {
             UserAnnouncement userAnnouncement = _mapper.Map<UserAnnouncement>(createUserAnnouncementRequest);
             userAnnouncement.Id = Guid.NewGuid();
@@ -37,7 +37,7 @@ namespace Business.Concretes
             return _mapper.Map<CreatedUserAnnouncementResponse>(createdUserAnnouncement);
         }
 
-        public async Task<DeletedUserAnnouncementResponse> Delete(DeleteUserAnnouncementRequest deleteUserAnnouncementRequest)
+        public async Task<DeletedUserAnnouncementResponse> DeleteAsync(DeleteUserAnnouncementRequest deleteUserAnnouncementRequest)
         {
             UserAnnouncement userAnnouncement = await _userAnnouncementDal.GetAsync(p => p.Id == deleteUserAnnouncementRequest.Id);
             await _userAnnouncementDal.DeleteAsync(userAnnouncement);
@@ -50,7 +50,7 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListUserAnnouncementResponse>>(data);
         }
 
-        public async Task<UpdatedUserAnnouncementResponse> Update(UpdateUserAnnouncementRequest updateUserAnnouncementRequest)
+        public async Task<UpdatedUserAnnouncementResponse> UpdateAsync(UpdateUserAnnouncementRequest updateUserAnnouncementRequest)
         {
 
             UserAnnouncement userAnnouncement = await _userAnnouncementDal.GetAsync(p => p.Id == updateUserAnnouncementRequest.Id);

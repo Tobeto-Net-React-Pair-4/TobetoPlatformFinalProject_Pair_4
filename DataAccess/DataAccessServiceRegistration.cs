@@ -1,6 +1,7 @@
 ﻿using DataAccess.Abstracts;
 using DataAccess.Concretes;
 using DataAccess.Contexts;
+using Entities.Concretes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,6 +33,9 @@ namespace DataAccess
             services.AddScoped<IUserAnnouncementDal, EfUserAnnouncementDal>();
             services.AddScoped<IAppealDal, EfAppealDal>();
             services.AddScoped<IUserAppealDal, EfUserAppealDal>();
+            services.AddScoped<ISocialMediaDal, EfSocialMediaDal>();
+            services.AddScoped<IExperienceDal, EfExperinceDal>();
+            services.AddScoped<IForeignLanguageDal, EfForeignLanguageDal>();
             services.AddScoped<IExamDal, EfExamDal>();
             services.AddScoped<IUserExamDal, EfUserExamDal>();
             services.AddScoped<IExamQuestionDal, EfExamQuestionDal>();

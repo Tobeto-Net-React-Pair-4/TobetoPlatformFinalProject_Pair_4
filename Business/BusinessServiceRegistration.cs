@@ -37,6 +37,9 @@ namespace Business
             services.AddScoped<IExamService, ExamManager>();
             services.AddScoped<IExamQuestionService, ExamQuestionManager>();
             services.AddScoped<IQuestionAnswerService, QuestionAnswerManager>();
+            services.AddScoped<ISocialMediaService, SocialMediaManager>();
+            services.AddScoped<IExperinceService, ExperinceManager>();
+            services.AddScoped<IForeignLanguageService, ForeignLanguageManager>();
 
             return services;
         }

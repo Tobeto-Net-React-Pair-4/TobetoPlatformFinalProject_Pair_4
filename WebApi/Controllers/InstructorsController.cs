@@ -17,23 +17,23 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Add([FromBody] CreateInstructorRequest createInstructorRequest)
+        public async Task<IActionResult> AddAsync([FromBody] CreateInstructorRequest createInstructorRequest)
         {
-            var result = await _instructorService.Add(createInstructorRequest);
+            var result = await _instructorService.AddAsync(createInstructorRequest);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> Update([FromBody] UpdateInstructorRequest updateInstructorRequest)
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdateInstructorRequest updateInstructorRequest)
         {
-            var result = await _instructorService.Update(updateInstructorRequest);
+            var result = await _instructorService.UpdateAsync(updateInstructorRequest);
             return Ok(result);
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete([FromBody] DeleteInstructorRequest deleteInstructorRequest)
+        public async Task<IActionResult> DeleteAsync([FromBody] DeleteInstructorRequest deleteInstructorRequest)
         {
-            var result = await _instructorService.Delete(deleteInstructorRequest);
+            var result = await _instructorService.DeleteAsync(deleteInstructorRequest);
             return Ok(result);
         }
 
@@ -44,9 +44,9 @@ namespace WebApi.Controllers
             return Ok(result);
         }
         [HttpPost("GetById")]
-        public async Task<IActionResult> GetById([FromBody] GetByIdInstructorRequest getByIdInstructorRequest)
+        public async Task<IActionResult> GetByIdAsync([FromBody] GetByIdInstructorRequest getByIdInstructorRequest)
         {
-            var result = await _instructorService.GetById(getByIdInstructorRequest);
+            var result = await _instructorService.GetByIdAsync(getByIdInstructorRequest);
             return Ok(result);
         }
     }

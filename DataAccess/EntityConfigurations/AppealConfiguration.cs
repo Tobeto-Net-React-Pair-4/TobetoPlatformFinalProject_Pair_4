@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.EntityConfigurations
 {
-    internal class AppealConfiguration : IEntityTypeConfiguration<Appeal>
+    public class AppealConfiguration : IEntityTypeConfiguration<Appeal>
     {
         public void Configure(EntityTypeBuilder<Appeal> builder)
         {
