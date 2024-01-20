@@ -1,19 +1,16 @@
-﻿using Core.Entities;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Concretes
+namespace Business.Dtos.ForeignLanguage.Responses
 {
-    public class ForeignLanguage : Entity<Guid>
+    public class CreatedForeignLanguageResponse
     {
+        public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public string LanguageList { get; set; }
         public string LanguageLevel { get; set; }
-        public User User { get; set; }
     }
 }

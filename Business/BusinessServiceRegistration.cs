@@ -34,8 +34,8 @@ namespace Business
             services.AddScoped<IAppealService, AppealManager>();
             services.AddScoped<IUserAppealService, UserAppealManager>();
             services.AddScoped<ISocialMediaService, SocialMediaManager>();
-
-
+            services.AddScoped<IExperinceService, ExperinceManager>();
+            services.AddScoped<IForeignLanguageService, ForeignLanguageManager>();
 
             return services;
         }
