@@ -1,12 +1,7 @@
 ﻿using Entities.Concretes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Contexts
 {
@@ -22,6 +17,8 @@ namespace DataAccess.Contexts
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<UserSurvey> UserSurveys { get; set; }
         public DbSet<Appeal> Appeals { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
+
         public DbSet<SocialMediaAccount> SocialMediaAccounts { get; set; }
         public DbSet<Experience> Experiences { get; set; }
         public DbSet<ForeignLanguage> ForeignLanguages{ get; set; }
@@ -34,11 +31,9 @@ namespace DataAccess.Contexts
         public DbSet<QuestionAnswer> QuestionAnswers { get; set; }
         public DbSet<CalendarEvent> CalendarEvents { get; set; }
 
-
-
-
-
-
+        public DbSet<Education> Educations { get; set; }   
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationsClaims { get; set; }
         public TobetoContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
             Configuration = configuration;

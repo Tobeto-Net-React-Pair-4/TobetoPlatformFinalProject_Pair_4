@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿using Core.Entities.Concrete;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;

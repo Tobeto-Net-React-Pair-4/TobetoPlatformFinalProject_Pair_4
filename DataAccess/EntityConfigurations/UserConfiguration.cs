@@ -1,11 +1,6 @@
 ﻿using Entities.Concretes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.EntityConfigurations
 {
@@ -21,7 +16,6 @@ namespace DataAccess.EntityConfigurations
             builder.Property(b => b.FirstName).HasColumnName("FirstName").IsRequired();
             builder.Property(b => b.LastName).HasColumnName("LastName").IsRequired();
             builder.Property(b => b.Email).HasColumnName("Email").IsRequired();
-            builder.Property(b => b.Password).HasColumnName("Password").IsRequired();
             builder.Property(b => b.BirthDate).HasColumnName("BirthDate");
             builder.Property(b => b.Country).HasColumnName("Country");
             builder.Property(b => b.City).HasColumnName("City");
@@ -32,7 +26,7 @@ namespace DataAccess.EntityConfigurations
 
             builder.HasIndex(indexExpression: b => b.NationalityId, name: "UK_Users_NationalityId").IsUnique();
 
-
+            // builder.HasMany(b => b.Certificates);
             builder.HasQueryFilter(b => !b.DeletedDate.HasValue); //  categorydeki tüm dataya default olarak bu where koşulunu uygula. where deletedDate is null. Data silinmemişse getir.
         }
     }

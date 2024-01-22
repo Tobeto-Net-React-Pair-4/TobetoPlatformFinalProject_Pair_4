@@ -8,6 +8,7 @@ using Business.Abstracts;
 using Business.Dtos.User.Requests;
 using Business.Dtos.User.Responses;
 using Core.DataAccess.Paging;
+using Core.Entities.Abstract;
 using DataAccess.Abstracts;
 using Entities.Concretes;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace Business.Concretes
     {
         private IUserDal _userDal;
         private IMapper _mapper;
+
         public UserManager(IUserDal userDal, IMapper mapper)
         {
             _userDal = userDal;
@@ -53,11 +55,23 @@ namespace Business.Concretes
             return _mapper.Map<UpdatedUserResponse>(user);
         }
 
+        public List<IOperationClaim> GetClaims(IUser user)
+        {
+            return _userDal.GetClaims(user);
+        }
+
+        public async Task<User> GetByMail(string mail)
+        {
+            var result = await _userDal.GetAsync(m => m.Email == mail);
+            return result;
+
+        }
         public async Task<GetByIdUserResponse> GetByIdAsync(GetByIdUserRequest getByIdUserRequest)
         {
             User user = await _userDal.GetAsync(u => u.Id == getByIdUserRequest.Id, include: p => p.Include(uc => uc.UserCourses));
             return _mapper.Map<GetByIdUserResponse>(user);
         }
-    }
-}
 
+    }
+
+}

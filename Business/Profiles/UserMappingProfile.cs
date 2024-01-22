@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Business.Dtos.Auth.Requests;
+using Business.Dtos.Auth.Responses;
 using Business.Dtos.User.Requests;
 using Business.Dtos.User.Responses;
 using Business.Dtos.UserCourse.Responses;
@@ -32,6 +34,11 @@ namespace Business.Profiles
                 //memberOptions: opt => opt.MapFrom(uc => uc.UserCourses)
                 //)
                 .ReverseMap();
+            CreateMap<GetUserResponse, UserLoginResponse>().ReverseMap();
+            CreateMap<CreatedUserResponse, UserRegisterResponse>().ReverseMap();
+
+            CreateMap<User, UserRegisterRequest>().ReverseMap().ForMember(u => u.PasswordHash, opt => opt.MapFrom(r => r.passwordHash))
+                .ForMember(u => u.PasswordSalt, opt => opt.MapFrom(r => r.passwordSalt));
 
             CreateMap<Paginate<User>, Paginate<GetListUserResponse>>().ReverseMap();
         }

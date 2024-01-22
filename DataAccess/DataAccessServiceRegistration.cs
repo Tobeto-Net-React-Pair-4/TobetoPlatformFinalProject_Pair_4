@@ -1,15 +1,11 @@
-﻿using DataAccess.Abstracts;
+﻿using Core.Utilities.Security.JWT;
+using DataAccess.Abstracts;
 using DataAccess.Concretes;
 using DataAccess.Contexts;
 using Entities.Concretes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess
 {
@@ -32,7 +28,12 @@ namespace DataAccess
             services.AddScoped<IAnnouncementDal, EfAnnouncementDal>();
             services.AddScoped<IUserAnnouncementDal, EfUserAnnouncementDal>();
             services.AddScoped<IAppealDal, EfAppealDal>();
+            services.AddScoped<IEducationDal, EfEducationDal>();
+            services.AddScoped<IUserOperationClaimDal, EfUserOperationClaimDal>();
+            services.AddScoped<IOperationClaimDal, EfOperationClaimDal>();
+            services.AddScoped<IUserOperationClaimDal, EfUserOperationClaimDal>();
             services.AddScoped<IUserAppealDal, EfUserAppealDal>();
+            services.AddScoped<ICertificateDal, EfCertificateDal>();
             services.AddScoped<ISocialMediaDal, EfSocialMediaDal>();
             services.AddScoped<IExperienceDal, EfExperinceDal>();
             services.AddScoped<IForeignLanguageDal, EfForeignLanguageDal>();
