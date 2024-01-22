@@ -19,23 +19,18 @@ namespace Business.Profiles
             CreateMap<User, CreateUserRequest>().ReverseMap();
             CreateMap<User, DeleteUserRequest>().ReverseMap();
             CreateMap<User, UpdateUserRequest>().ReverseMap();
-            //CreateMap<User, GetByIdUserRequest>().ReverseMap();
+            CreateMap<User, GetByIdUserRequest>().ReverseMap();
+
             CreateMap<User, CreatedUserResponse>().ReverseMap();
             CreateMap<User, UpdatedUserResponse>().ReverseMap();
             CreateMap<User, DeletedUserResponse>().ReverseMap();
             CreateMap<User, GetUserResponse>().ReverseMap();
-
-
-            CreateMap<User, GetListUserResponse>() .ReverseMap();
-            
-
             CreateMap<User, GetListUserResponse>().ReverseMap();
-
-            CreateMap<User, GetByIdUserResponse>().ReverseMap();
             CreateMap<User, GetByIdUserResponse>()
-                .ForMember(destinationMember: b => b.Courses, memberOptions: opt => opt.MapFrom(b => b.UserCourses))
-                .ForMember(destinationMember: p => p.Name, memberOptions: opt => opt.MapFrom(p => p.FirstName))
-                .ForMember(destinationMember: c => c.Id, memberOptions: opt => opt.MapFrom(c => c.Id))
+                //.ForMember(
+                //destinationMember: b => b.Courses, 
+                //memberOptions: opt => opt.MapFrom(uc => uc.UserCourses)
+                //)
                 .ReverseMap();
 
             CreateMap<Paginate<User>, Paginate<GetListUserResponse>>().ReverseMap();

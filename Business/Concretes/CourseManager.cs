@@ -27,8 +27,7 @@ namespace Business.Concretes
             _mapper = mapper;
             _courseBusinessRules = courseBusinessRules;
         }
-        [SecuredOperation("course.add,admin")]
-        public async Task<CreatedCourseResponse> Add(CreateCourseRequest createCourseRequest)
+        public async Task<CreatedCourseResponse> AddAsync(CreateCourseRequest createCourseRequest)
         {
             await _courseBusinessRules.EachCategoryMustContainMax20Products(createCourseRequest.CategoryId);
             Course course = _mapper.Map<Course>(createCourseRequest);
@@ -45,14 +44,14 @@ namespace Business.Concretes
 
             return _mapper.Map<Paginate<GetListCourseResponse>>(data);
         }
-        public async Task<DeletedCourseResponse> Delete(DeleteCourseRequest deleteCourseRequest)
+        public async Task<DeletedCourseResponse> DeleteAsync(DeleteCourseRequest deleteCourseRequest)
         {
             Course course = await _courseDal.GetAsync(p => p.Id == deleteCourseRequest.Id);
             await _courseDal.DeleteAsync(course);
             return _mapper.Map<DeletedCourseResponse>(course);
         }
 
-        public async Task<UpdatedCourseResponse> Update(UpdateCourseRequest updateCourseRequest)
+        public async Task<UpdatedCourseResponse> UpdateAsync(UpdateCourseRequest updateCourseRequest)
         {
             Course course = await _courseDal.GetAsync(p => p.Id == updateCourseRequest.Id);
             _mapper.Map(updateCourseRequest, course);
@@ -60,7 +59,7 @@ namespace Business.Concretes
             return _mapper.Map<UpdatedCourseResponse>(course);
         }
 
-        public async Task<GetByIdCourseResponse> GetById(GetByIdCourseRequest getByIdCourseRequest)
+        public async Task<GetByIdCourseResponse> GetByIdAsync(GetByIdCourseRequest getByIdCourseRequest)
         {
             Course course = await _courseDal.GetAsync(p => p.Id == getByIdCourseRequest.Id,
                 include: i => i.Include(i => i.Instructor).Include(ca => ca.Category).Include(u => u.UserCourses));

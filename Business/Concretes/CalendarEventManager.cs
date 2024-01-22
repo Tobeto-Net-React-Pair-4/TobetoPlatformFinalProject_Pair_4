@@ -30,7 +30,7 @@ namespace Business.Concretes
             _mapper = mapper;
         }
 
-        public async Task<CreatedCalendarEventResponse> Add(CreateCalendarEventRequest createCalendarEventRequest)
+        public async Task<CreatedCalendarEventResponse> AddAsync(CreateCalendarEventRequest createCalendarEventRequest)
         {
             CalendarEvent calendarEvent = _mapper.Map<CalendarEvent>(createCalendarEventRequest);
             calendarEvent.Id = Guid.NewGuid();
@@ -40,7 +40,7 @@ namespace Business.Concretes
             return _mapper.Map<CreatedCalendarEventResponse>(createdCalendarEvent);
         }
 
-        public async Task<DeletedCalendarEventResponse> Delete(DeleteCalendarEventRequest deleteCalendarEventRequest)
+        public async Task<DeletedCalendarEventResponse> DeleteAsync(DeleteCalendarEventRequest deleteCalendarEventRequest)
         {
             CalendarEvent calendarEvent = await _calendarEventDal.GetAsync(p => p.Id == deleteCalendarEventRequest.Id);
             await _calendarEventDal.DeleteAsync(calendarEvent);
@@ -53,7 +53,7 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListCalendarEventResponse>>(data);
         }
 
-        public async Task<UpdatedCalendarEventResponse> Update(UpdateCalendarEventRequest updateCalendarEventRequest)
+        public async Task<UpdatedCalendarEventResponse> UpdateAsync(UpdateCalendarEventRequest updateCalendarEventRequest)
         {
             CalendarEvent calendarEvent = await _calendarEventDal.GetAsync(p => p.Id == updateCalendarEventRequest.Id);
             _mapper.Map(updateCalendarEventRequest, calendarEvent);

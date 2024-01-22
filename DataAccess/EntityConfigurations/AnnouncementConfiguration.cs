@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.EntityConfigurations
 {
-    internal class AnnouncementConfiguration : IEntityTypeConfiguration<Announcement>
+    public class AnnouncementConfiguration : IEntityTypeConfiguration<Announcement>
     {
         public void Configure(EntityTypeBuilder<Announcement> builder)
         {

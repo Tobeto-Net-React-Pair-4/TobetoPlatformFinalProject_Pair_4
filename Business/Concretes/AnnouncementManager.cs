@@ -26,7 +26,7 @@ namespace Business.Concretes
             _mapper = mapper;
         }
 
-        public async Task<CreatedAnnouncementResponse> Add(CreateAnnouncementRequest createAnnouncementRequest)
+        public async Task<CreatedAnnouncementResponse> AddAsync(CreateAnnouncementRequest createAnnouncementRequest)
         {
 
             Announcement announcement = _mapper.Map<Announcement>(createAnnouncementRequest);
@@ -37,7 +37,7 @@ namespace Business.Concretes
             return _mapper.Map<CreatedAnnouncementResponse>(createdAnnouncement);
         }
 
-        public async Task<DeletedAnnouncementResponse> Delete(DeleteAnnouncementRequest deleteAnnouncementRequest)
+        public async Task<DeletedAnnouncementResponse> DeleteAsync(DeleteAnnouncementRequest deleteAnnouncementRequest)
         {
 
             Announcement announcement = await _announcementDal.GetAsync(p => p.Id == deleteAnnouncementRequest.Id);
@@ -51,7 +51,7 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListAnnouncementResponse>>(data);
         }
 
-        public async Task<UpdatedAnnouncementResponse> Update(UpdateAnnouncementRequest updateAnnouncementRequest)
+        public async Task<UpdatedAnnouncementResponse> UpdateAsync(UpdateAnnouncementRequest updateAnnouncementRequest)
         {
 
             Announcement announcement = await _announcementDal.GetAsync(p => p.Id == updateAnnouncementRequest.Id);

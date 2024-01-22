@@ -22,15 +22,15 @@ namespace Business.Concretes
     {
         IUserCourseDal _userCourseDal;
         IMapper _mapper;
-        public UserCourseManager(IUserCourseDal departmentDal, IMapper mapper)
+        public UserCourseManager(IUserCourseDal userCourseDal, IMapper mapper)
         {
-            _userCourseDal = departmentDal;
+            _userCourseDal = userCourseDal;
             _mapper = mapper;
         }
         public async Task<Paginate<GetListUserCourseResponse>> GetListAsync()
         {
-            //var data = await _userCourseDal.GetListAsync();
             var data = await _userCourseDal.GetListAsync(include: u => u.Include(u => u.User).Include(c => c.Course));
+
             return _mapper.Map<Paginate<GetListUserCourseResponse>>(data);
         }
         public async Task<CreatedUserCourseResponse> AddAsync(CreateUserCourseRequest createUserCourseRequest)

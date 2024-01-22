@@ -1,23 +1,21 @@
 ﻿using Business.Abstracts;
-using Business.Dtos.Instructor.Requests;
 using Business.Dtos.UserCourse.Requests;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserCourseController : ControllerBase
+    public class UserCoursesController : ControllerBase
     {
         IUserCourseService _userCourseService;
-        public UserCourseController(IUserCourseService userCourseService)
+        public UserCoursesController(IUserCourseService userCourseService)
         {
             _userCourseService = userCourseService;
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Add([FromBody] CreateUserCourseRequest createUserCourseRequest)
+        public async Task<IActionResult> AddAsync([FromBody] CreateUserCourseRequest createUserCourseRequest)
         {
             var result = await _userCourseService.AddAsync(createUserCourseRequest);
             return Ok(result);

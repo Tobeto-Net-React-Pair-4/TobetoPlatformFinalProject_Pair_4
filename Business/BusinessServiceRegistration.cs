@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Business.Abstracts;
+﻿using Business.Abstracts;
 using Business.Concretes;
 using Core.Business.Rules;
 using Core.Utilities.Security.JWT;
 using DataAccess.Abstracts;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Business
 {
@@ -28,14 +23,22 @@ namespace Business
             services.AddScoped<IUserSurveyService, UserSurveyManager>();
             services.AddScoped<ICalendarEventService, CalendarEventManager>();
             services.AddScoped<IUserCourseService, UserCourseManager>();
+            services.AddScoped<ICertificateService, CertificateManager>();
             services.AddScoped<IAnnouncementService, AnnouncementManager>();
             services.AddScoped<IUserAnnouncementService, UserAnnouncementManager>();
             services.AddScoped<IAppealService, AppealManager>();
+            services.AddScoped<IUserAppealService, UserAppealManager>();
+            services.AddScoped<IUserExamService, UserExamManager>();
+            services.AddScoped<IExamService, ExamManager>();
+            services.AddScoped<IExamQuestionService, ExamQuestionManager>();
+            services.AddScoped<IQuestionAnswerService, QuestionAnswerManager>();
+            services.AddScoped<ISocialMediaService, SocialMediaManager>();
+            services.AddScoped<IExperinceService, ExperinceManager>();
+            services.AddScoped<IForeignLanguageService, ForeignLanguageManager>();
             services.AddScoped<IEducationService, EducationManager>();
             services.AddScoped<IAuthService, AuthManager>();
             services.AddScoped<ITokenHelper, JwtHelper>();
             services.AddScoped<IOperationClaimService, OperationClaimManager>();
-
 
             return services;
         }

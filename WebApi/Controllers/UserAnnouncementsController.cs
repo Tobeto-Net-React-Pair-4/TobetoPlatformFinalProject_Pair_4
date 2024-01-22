@@ -17,23 +17,23 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Add([FromBody] CreateUserAnnouncementRequest createUserAnnouncementRequest)
+        public async Task<IActionResult> AddAsync([FromBody] CreateUserAnnouncementRequest createUserAnnouncementRequest)
         {
-            var result = await _userAnnouncementService.Add(createUserAnnouncementRequest);
+            var result = await _userAnnouncementService.AddAsync(createUserAnnouncementRequest);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> Update([FromBody] UpdateUserAnnouncementRequest updateUserAnnouncementRequest)
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdateUserAnnouncementRequest updateUserAnnouncementRequest)
         {
-            var result = await _userAnnouncementService.Update(updateUserAnnouncementRequest);
+            var result = await _userAnnouncementService.UpdateAsync(updateUserAnnouncementRequest);
             return Ok(result);
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete([FromBody] DeleteUserAnnouncementRequest deleteUserAnnouncementRequest)
+        public async Task<IActionResult> DeleteAsync([FromBody] DeleteUserAnnouncementRequest deleteUserAnnouncementRequest)
         {
-            var result = await _userAnnouncementService.Delete(deleteUserAnnouncementRequest);
+            var result = await _userAnnouncementService.DeleteAsync(deleteUserAnnouncementRequest);
             return Ok(result);
         }
 

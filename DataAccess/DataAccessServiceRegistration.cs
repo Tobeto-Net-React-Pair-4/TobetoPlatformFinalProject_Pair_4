@@ -2,14 +2,10 @@
 using DataAccess.Abstracts;
 using DataAccess.Concretes;
 using DataAccess.Contexts;
+using Entities.Concretes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess
 {
@@ -25,7 +21,6 @@ namespace DataAccess
             services.AddScoped<ICourseDal, EfCourseDal>();
             services.AddScoped<ICategoryDal, EfCategoryDal>();
             services.AddScoped<IInstructorDal, EfInstructorDal>();
-            services.AddScoped<IUserDal, EfUserDal>();
             services.AddScoped<ISurveyDal, EfSurveyDal>();
             services.AddScoped<IUserSurveyDal, EfUserSurveyDal>();
             services.AddScoped<ICalendarEventDal, EfCalendarEventDal>();
@@ -37,8 +32,15 @@ namespace DataAccess
             services.AddScoped<IUserOperationClaimDal, EfUserOperationClaimDal>();
             services.AddScoped<IOperationClaimDal, EfOperationClaimDal>();
             services.AddScoped<IUserOperationClaimDal, EfUserOperationClaimDal>();
-
-
+            services.AddScoped<IUserAppealDal, EfUserAppealDal>();
+            services.AddScoped<ICertificateDal, EfCertificateDal>();
+            services.AddScoped<ISocialMediaDal, EfSocialMediaDal>();
+            services.AddScoped<IExperienceDal, EfExperinceDal>();
+            services.AddScoped<IForeignLanguageDal, EfForeignLanguageDal>();
+            services.AddScoped<IExamDal, EfExamDal>();
+            services.AddScoped<IUserExamDal, EfUserExamDal>();
+            services.AddScoped<IExamQuestionDal, EfExamQuestionDal>();
+            services.AddScoped<IQuestionAnswerDal, EfQuestionAnswerDal>();
 
             return services;
         }

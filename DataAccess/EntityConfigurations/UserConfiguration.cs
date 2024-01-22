@@ -1,11 +1,6 @@
 ﻿using Entities.Concretes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.EntityConfigurations
 {
@@ -32,8 +27,7 @@ namespace DataAccess.EntityConfigurations
 
             builder.HasIndex(indexExpression: b => b.NationalityId, name: "UK_Users_NationalityId").IsUnique();
 
-            builder.HasOne(c => c.Appeal).WithMany(cat => cat.Users).HasForeignKey(c => c.AppealId).IsRequired();
-
+            // builder.HasMany(b => b.Certificates);
             builder.HasQueryFilter(b => !b.DeletedDate.HasValue); //  categorydeki tüm dataya default olarak bu where koşulunu uygula. where deletedDate is null. Data silinmemişse getir.
         }
     }

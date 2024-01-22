@@ -25,7 +25,7 @@ namespace Business.Concretes
             _instructorDal = instructorDal;
             _mapper = mapper;
         }
-        public async Task<CreatedInstructorResponse> Add(CreateInstructorRequest createInstructorRequest)
+        public async Task<CreatedInstructorResponse> AddAsync(CreateInstructorRequest createInstructorRequest)
         {
             Instructor instructor = _mapper.Map<Instructor>(createInstructorRequest);
             instructor.Id = Guid.NewGuid();
@@ -40,14 +40,14 @@ namespace Business.Concretes
             var data = await _instructorDal.GetListAsync();
             return _mapper.Map<Paginate<GetListInstructorResponse>>(data);
         }
-        public async Task<DeletedInstructorResponse> Delete(DeleteInstructorRequest deleteInstructorRequest)
+        public async Task<DeletedInstructorResponse> DeleteAsync(DeleteInstructorRequest deleteInstructorRequest)
         {
             Instructor instructor = await _instructorDal.GetAsync(p => p.Id == deleteInstructorRequest.Id);
             await _instructorDal.DeleteAsync(instructor);
             return _mapper.Map<DeletedInstructorResponse>(instructor);
         }
 
-        public async Task<UpdatedInstructorResponse> Update(UpdateInstructorRequest updateInstructorRequest)
+        public async Task<UpdatedInstructorResponse> UpdateAsync(UpdateInstructorRequest updateInstructorRequest)
         {
             Instructor instructor = await _instructorDal.GetAsync(p => p.Id == updateInstructorRequest.Id);
             _mapper.Map(updateInstructorRequest, instructor);
@@ -55,7 +55,7 @@ namespace Business.Concretes
             return _mapper.Map<UpdatedInstructorResponse>(instructor);
         }
 
-        public async Task<GetByIdInstructorResponse> GetById(GetByIdInstructorRequest getByIdInstructorRequest)
+        public async Task<GetByIdInstructorResponse> GetByIdAsync(GetByIdInstructorRequest getByIdInstructorRequest)
         {
             Instructor instructor = await _instructorDal.GetAsync(p => p.Id == getByIdInstructorRequest.Id, include: c => c.Include(c => c.Courses));
 

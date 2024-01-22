@@ -25,7 +25,7 @@ namespace Business.Concretes
             _userDal = userDal;
             _mapper = mapper;
         }
-        public async Task<CreatedUserResponse> Add(CreateUserRequest createUserRequest)
+        public async Task<CreatedUserResponse> AddAsync(CreateUserRequest createUserRequest)
         {
             User user = _mapper.Map<User>(createUserRequest);
             user.Id = Guid.NewGuid();
@@ -37,17 +37,17 @@ namespace Business.Concretes
 
         public async Task<Paginate<GetListUserResponse>> GetListAsync()
         {
-            var data = await _userDal.GetListAsync(include: p => p.Include(p => p.Appeal));
+            var data = await _userDal.GetListAsync(include: p => p.Include(p => p.UserAppeals));
             return _mapper.Map<Paginate<GetListUserResponse>>(data);
         }
-        public async Task<DeletedUserResponse> Delete(DeleteUserRequest deleteUserRequest)
+        public async Task<DeletedUserResponse> DeleteAsync(DeleteUserRequest deleteUserRequest)
         {
             User user = await _userDal.GetAsync(p => p.Id == deleteUserRequest.Id);
             await _userDal.DeleteAsync(user);
             return _mapper.Map<DeletedUserResponse>(user);
         }
 
-        public async Task<UpdatedUserResponse> Update(UpdateUserRequest updateUserRequest)
+        public async Task<UpdatedUserResponse> UpdateAsync(UpdateUserRequest updateUserRequest)
         {
             User user = await _userDal.GetAsync(p => p.Id == updateUserRequest.Id);
             _mapper.Map(updateUserRequest, user);
@@ -64,6 +64,10 @@ namespace Business.Concretes
         {
             var result = await _userDal.GetAsync(m => m.Email == mail);
             return result;
+        public async Task<GetByIdUserResponse> GetByIdAsync(GetByIdUserRequest getByIdUserRequest)
+        {
+            User user = await _userDal.GetAsync(u => u.Id == getByIdUserRequest.Id, include: p => p.Include(uc => uc.UserCourses));
+            return _mapper.Map<GetByIdUserResponse>(user);
         }
     }
 }
