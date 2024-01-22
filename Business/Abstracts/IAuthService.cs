@@ -15,6 +15,7 @@ namespace Business.Abstracts
     public interface IAuthService
     {
         AccessToken CreateAccesToken(IUser user);
-        Task<IUser> Login(LoginRequest loginRequest);
+        Task<IUser> Login(UserLoginRequest userLoginRequest);
+        Task<IUser> Register(UserRegisterRequest userRegisterRequest);
     }
 }

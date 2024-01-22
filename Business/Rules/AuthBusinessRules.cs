@@ -22,7 +22,7 @@ namespace Business.Rules
                 throw new BusinessException(BusinessMessages.UserExists);
         }
 
-        public async Task<User> UserToCheck(LoginRequest loginRequest)
+        public async Task<User> UserToCheck(UserLoginRequest loginRequest)
         {
             var userToCheck = await _userService.GetByMail(loginRequest.Email);
 
@@ -31,5 +31,6 @@ namespace Business.Rules
 
             return userToCheck;
         }
+
     }
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Entities;
+using Core.Entities.Concrete;
+
 
 namespace Entities.Concretes
 {

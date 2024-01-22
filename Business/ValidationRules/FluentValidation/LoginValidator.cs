@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public class LoginValidator : AbstractValidator<LoginRequest>
+    public class LoginValidator : AbstractValidator<UserLoginRequest>
     {
         public LoginValidator()
         {

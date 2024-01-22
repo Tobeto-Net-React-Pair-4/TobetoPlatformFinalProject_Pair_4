@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Constants;
 using Business.Dtos.Auth.Requests;
+using Business.Dtos.User.Requests;
 using Business.Rules;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -9,6 +10,7 @@ using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Entities.Abstract;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.JWT;
+using Entities.Concretes;
 
 namespace Business.Concretes
 {
@@ -36,13 +38,21 @@ namespace Business.Concretes
         }
 
         [ValidationAspect(typeof(LoginValidator))]
-        public async Task<IUser> Login(LoginRequest loginRequest)
+        public async Task<IUser> Login(UserLoginRequest userLoginRequest)
         {
-            return (IUser)await _authBusinessRules.UserToCheck(loginRequest);
+            return await _authBusinessRules.UserToCheck(userLoginRequest);
         }
 
-      
- 
+        [ValidationAspect(typeof(RegisterValidator))]
+        public async Task<IUser> Register(UserRegisterRequest userRegisterRequest)
+        {
+            await _authBusinessRules.UserExists(userRegisterRequest.Email);
+            HashingHelper.CreatePasswordHash(userRegisterRequest.Password, out userRegisterRequest.passwordHash, out userRegisterRequest.passwordSalt);
+            User user = _mapper.Map<User>(userRegisterRequest);
+            CreateUserRequest createUserRequest = _mapper.Map<CreateUserRequest>(user);
+            await _userService.AddAsync(createUserRequest);
+            return user;
+        }
     }
 
 

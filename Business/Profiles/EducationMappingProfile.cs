@@ -17,16 +17,17 @@ namespace Business.Profiles
         {
             CreateMap<Education, CreateEducationRequest>().ReverseMap();
             CreateMap<Education, CreatedEducationResponse>().ReverseMap();
+            CreateMap<Education, GetEducationRequest>().ReverseMap();
+            CreateMap<Education, GetEducationResponse>().ReverseMap();
             CreateMap<Education, GetByIdEducationRequest>().ReverseMap();
             CreateMap<Education, GetByIdEducationResponse>().ReverseMap();
             CreateMap<Education, UpdateEducationRequest>().ReverseMap();
             CreateMap<Education, UpdatedEducationResponse>().ReverseMap();
             CreateMap<Education, DeleteEducationRequest>().ReverseMap();
             CreateMap<Education, DeletedEducationResponse>().ReverseMap();
-            CreateMap<Paginate<Education>, Paginate<GetListEducationResponse>>();
+            CreateMap<Paginate<Education>, Paginate<GetListEducationResponse>>().ReverseMap();
             CreateMap<Education, GetListEducationResponse>().ReverseMap();
 
-            CreateMap<Education, GetEducationResponse>().ReverseMap();
         }
     }
 }

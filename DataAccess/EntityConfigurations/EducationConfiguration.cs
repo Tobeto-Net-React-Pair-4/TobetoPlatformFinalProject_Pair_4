@@ -23,9 +23,11 @@ namespace DataAccess.EntityConfigurations
             builder.Property(b => b.StartOfYear).HasColumnName("StartOfYear").IsRequired();
             builder.Property(b => b.GraduationYear).HasColumnName("GraduationYear").IsRequired();
             builder.Property(b => b.Status).HasColumnName("Status").IsRequired();
-            builder.Property(b => b.User).HasColumnName("User").IsRequired();
 
             builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
+
+            builder.HasOne(c => c.User).WithMany(u => u.Educations).HasForeignKey(c => c.UserId);
+
         }
     }
 }
