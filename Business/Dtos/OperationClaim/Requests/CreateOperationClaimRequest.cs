@@ -1,16 +1,14 @@
-﻿using Core.Entities.Concrete;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Concretes
+namespace Business.Dtos.OperationClaim.Requests
 {
-    public class Skill : Entity<Guid>
+    public class CreateOperationClaimRequest
     {
         public string Name { get; set; }
-
     }
 }

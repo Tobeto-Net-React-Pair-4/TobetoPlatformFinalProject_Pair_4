@@ -1,4 +1,5 @@
-﻿using DataAccess.Abstracts;
+﻿using Core.Utilities.Security.JWT;
+using DataAccess.Abstracts;
 using DataAccess.Concretes;
 using DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,11 @@ namespace DataAccess
             services.AddScoped<IUserAnnouncementDal, EfUserAnnouncementDal>();
             services.AddScoped<IAppealDal, EfAppealDal>();
             services.AddScoped<IEducationDal, EfEducationDal>();
+            services.AddScoped<IUserOperationClaimDal, EfUserOperationClaimDal>();
+            services.AddScoped<IOperationClaimDal, EfOperationClaimDal>();
+            services.AddScoped<IUserOperationClaimDal, EfUserOperationClaimDal>();
+
+
 
             return services;
         }

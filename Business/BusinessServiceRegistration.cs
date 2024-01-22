@@ -28,13 +28,14 @@ namespace Business
             services.AddScoped<IUserSurveyService, UserSurveyManager>();
             services.AddScoped<ICalendarEventService, CalendarEventManager>();
             services.AddScoped<IUserCourseService, UserCourseManager>();
-
             services.AddScoped<IAnnouncementService, AnnouncementManager>();
             services.AddScoped<IUserAnnouncementService, UserAnnouncementManager>();
             services.AddScoped<IAppealService, AppealManager>();
             services.AddScoped<IEducationService, EducationManager>();
             services.AddScoped<IAuthService, AuthManager>();
             services.AddScoped<ITokenHelper, JwtHelper>();
+            services.AddScoped<IOperationClaimService, OperationClaimManager>();
+
 
             return services;
         }

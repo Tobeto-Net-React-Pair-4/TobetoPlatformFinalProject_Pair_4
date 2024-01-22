@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿using Core.Entities.Concrete;
 using System.Text.Json.Serialization;
 
 namespace Entities.Concretes
@@ -31,6 +31,7 @@ namespace Entities.Concretes
         public ICollection<Education> Educations { get; set; }
         public ICollection<Certificate> Certificates { get; set; }
         public ICollection<ForeignLanguage> ForeignLanguages { get; set; }
+        public ICollection<UserOperationClaim> UserOperationsClaims { get; set; }
         public Appeal Appeal { get; set; }
         public PersonalInfo PersonalInfo { get; set; }
 

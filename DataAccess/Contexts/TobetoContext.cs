@@ -21,11 +21,12 @@ namespace DataAccess.Contexts
         public DbSet<UserSurvey> UserSurveys { get; set; }
         public DbSet<CalendarEvent> CalendarEvents { get; set; }
         public DbSet<UserCourse> UserCourses { get; set; }
-
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<UserAnnouncement> UserAnnouncements { get; set; }
         public DbSet<Appeal> Appeals { get; set; }
         public DbSet<Education> Educations { get; set; }   
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationsClaims { get; set; }
         public TobetoContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
             Configuration = configuration;

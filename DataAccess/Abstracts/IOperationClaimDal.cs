@@ -1,5 +1,5 @@
 ﻿using Core.DataAccess.Repositories;
-using Core.Entities.Abstract;
+using Core.Entities.Concrete;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-    public interface IUserDal : IRepository<User, Guid>, IAsyncRepository<User, Guid>
+    public interface IOperationClaimDal : IRepository<OperationClaim, Guid>, IAsyncRepository<OperationClaim, Guid>
     {
-        List<IOperationClaim> GetClaims(IUser user);
     }
 }

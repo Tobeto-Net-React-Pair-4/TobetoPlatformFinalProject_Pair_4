@@ -8,14 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.DataAccess.Dynamic;
 using Core.DataAccess.Paging;
-using Core.Entities;
+using Core.Entities.Abstract;
+using Core.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query;
 
 namespace Core.DataAccess.Repositories
 {
-	public class EfRepositoryBase<TEntity, TEntityId, TContext>
+    public class EfRepositoryBase<TEntity, TEntityId, TContext>
 	: IAsyncRepository<TEntity, TEntityId>, IRepository<TEntity, TEntityId>
 	where TEntity : Entity<TEntityId>
 	where TContext : DbContext

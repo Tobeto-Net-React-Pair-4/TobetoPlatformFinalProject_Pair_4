@@ -1,4 +1,5 @@
-﻿using Core.Entities.Concrete;
+﻿using Core.Entities.Abstract;
+using Core.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,8 @@ using System.Threading.Tasks;
 namespace Core.Utilities.Security.JWT
 {
     public interface ITokenHelper
-    {
-        AccessToken CreateToken(User user, List<OperationClaim> operationClaims);
+    {/*Kullanıcının yolladığı requestten sonra eğer doğruysa çalışacak
+        Doğruysa veritabanına gidip o kullanıcının claimlerini bulacak, jwt üretip clienta geri dönecek.*/
+        AccessToken CreateToken(IUser user, List<IOperationClaim> operationClaims);
     }
 }

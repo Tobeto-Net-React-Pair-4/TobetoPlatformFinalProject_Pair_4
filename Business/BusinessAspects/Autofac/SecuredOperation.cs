@@ -1,16 +1,10 @@
-﻿using Core.Utilities.Interceptors;
+﻿using Business.Constants;
+using Castle.DynamicProxy;
+using Core.Extensions;
+using Core.Utilities.Interceptors;
 using Core.Utilities.IoC;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Castle.DynamicProxy;
-using Core.Extensions;
-using Business.Constants;
-using System.Reflection.Metadata;
 
 namespace Business.BusinessAspects.Autofac
 {
@@ -19,6 +13,7 @@ namespace Business.BusinessAspects.Autofac
         private string[] _roles;
         private IHttpContextAccessor _httpContextAccessor;
 
+        //rolleri alıyoruz
         public SecuredOperation(string roles)
         {
             _roles = roles.Split(',');
@@ -28,6 +23,7 @@ namespace Business.BusinessAspects.Autofac
 
         protected override void OnBefore(IInvocation invocation)
         {
+            //kullanıcının yetkisi(claim) olup olmadığını kontrol ediyor
             var roleClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();
             foreach (var role in _roles)
             {

@@ -3,6 +3,7 @@ using Castle.DynamicProxy;
 using System.Reflection;
 using Core.Utilities.Interceptors;
 using Autofac;
+using Module = Autofac.Module;
 
 namespace Business.DependencyResolvers.Autofac
 {

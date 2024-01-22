@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿using Core.Entities.Concrete;
 using Microsoft.AspNetCore.Components.Forms;
 using System;
 using System.Collections.Generic;

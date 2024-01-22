@@ -1,5 +1,5 @@
 ﻿using Business.Dtos.Auth.Requests;
-using Core.Entities;
+using Core.Entities.Abstract;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using Core.Utilities.Security.JWT;
@@ -14,7 +14,7 @@ namespace Business.Abstracts
 {
     public interface IAuthService
     {
-        //IDataResult<User> Login(UserForLoginDto userForLoginDto);
+        AccessToken CreateAccesToken(IUser user);
         Task<IUser> Login(LoginRequest loginRequest);
     }
 }

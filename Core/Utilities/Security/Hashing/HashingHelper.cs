@@ -8,6 +8,7 @@ namespace Core.Utilities.Security.Hashing
 {
     public class HashingHelper
     {
+        //verilen passwordun hashing işlemini yapıyor
         public static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())
@@ -17,6 +18,7 @@ namespace Core.Utilities.Security.Hashing
             }
         }
 
+        //sisteme girmek isteyen kişinin verdiği password bilgisiyle veritabanındaki hash ve salta göre eşleşip eşleşmediğini kontrol ettiğimiz yer 
         public static bool VerifyPasswordHash(string password, byte[] passwordHash,  byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
