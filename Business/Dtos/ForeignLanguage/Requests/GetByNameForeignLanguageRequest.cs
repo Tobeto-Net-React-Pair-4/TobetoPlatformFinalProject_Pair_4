@@ -1,7 +1,8 @@
 ﻿namespace Business.Dtos.ForeignLanguage.Requests
 {
-    public class DeleteForeignLanguageRequest
+    public class GetByNameForeignLanguageRequest
     {
         public Guid Id { get; set; }
+        public string LanguageList { get; set; }
     }
 }

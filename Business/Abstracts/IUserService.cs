@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Business.Dtos.User.Requests;
+﻿using Business.Dtos.User.Requests;
 using Business.Dtos.User.Responses;
 using Core.DataAccess.Paging;
 using Core.Entities.Abstract;
-using Entities.Concretes;
 
 namespace Business.Abstracts
 {
@@ -19,6 +13,6 @@ namespace Business.Abstracts
         Task<DeletedUserResponse> DeleteAsync(DeleteUserRequest deleteUserRequest);
         Task<GetByIdUserResponse> GetByIdAsync(GetByIdUserRequest getByIdUserRequest);
         List<IOperationClaim> GetClaims(IUser user);
-        Task<User> GetByMail(string email);
+        Task<IUser> GetByMail(string email);
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.User.Requests;
 using Business.Dtos.User.Responses;
@@ -60,7 +55,7 @@ namespace Business.Concretes
             return _userDal.GetClaims(user);
         }
 
-        public async Task<User> GetByMail(string mail)
+        public async Task<IUser> GetByMail(string mail)
         {
             var result = await _userDal.GetAsync(m => m.Email == mail);
             return result;
