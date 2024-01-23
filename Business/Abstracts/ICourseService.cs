@@ -13,9 +13,9 @@ namespace Business.Abstracts
     public interface ICourseService
     {
         Task<Paginate<GetListCourseResponse>> GetListAsync();
-        Task<CreatedCourseResponse> Add(CreateCourseRequest createCourseRequest);
-        Task<UpdatedCourseResponse> Update(UpdateCourseRequest updateCourseRequest);
-        Task<DeletedCourseResponse> Delete(DeleteCourseRequest deleteCourseRequest);
-        Task<GetByIdCourseResponse> GetById(GetByIdCourseRequest getByIdCourseRequest);
+        Task<CreatedCourseResponse> AddAsync(CreateCourseRequest createCourseRequest);
+        Task<UpdatedCourseResponse> UpdateAsync(UpdateCourseRequest updateCourseRequest);
+        Task<DeletedCourseResponse> DeleteAsync(DeleteCourseRequest deleteCourseRequest);
+        Task<GetByIdCourseResponse> GetByIdAsync(GetByIdCourseRequest getByIdCourseRequest);
     }
 }

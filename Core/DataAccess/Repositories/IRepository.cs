@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.DataAccess.Dynamic;
 using Core.DataAccess.Paging;
-using Core.Entities;
+using Core.Entities.Concrete;
 using Microsoft.EntityFrameworkCore.Query;
 
 namespace Core.DataAccess.Repositories
 {
-	public interface IRepository<TEntity, TEntityId> : IQuery<TEntity>
+    public interface IRepository<TEntity, TEntityId> : IQuery<TEntity>
 	where TEntity : Entity<TEntityId>
 	{
 		TEntity? Get(

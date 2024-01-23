@@ -13,9 +13,9 @@ namespace Business.Abstracts
     public interface ICategoryService
     {
         Task<Paginate<GetListCategoryResponse>> GetListAsync();
-        Task<CreatedCategoryResponse> Add(CreateCategoryRequest createCategoryRequest);
-        Task<UpdatedCategoryResponse> Update(UpdateCategoryRequest updateCategoryRequest);
-        Task<DeletedCategoryResponse> Delete(DeleteCategoryRequest deleteCategoryRequest);
-        Task<GetByIdCategoryResponse> GetById(GetByIdCategoryRequest getByIdCategoryRequest);
+        Task<CreatedCategoryResponse> AddAsync(CreateCategoryRequest createCategoryRequest);
+        Task<UpdatedCategoryResponse> UpdateAsync(UpdateCategoryRequest updateCategoryRequest);
+        Task<DeletedCategoryResponse> DeleteAsync(DeleteCategoryRequest deleteCategoryRequest);
+        Task<GetByIdCategoryResponse> GetByIdAsync(GetByIdCategoryRequest getByIdCategoryRequest);
     }
 }

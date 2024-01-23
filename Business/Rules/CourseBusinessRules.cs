@@ -1,4 +1,4 @@
-﻿using Business.Messages;
+﻿using Business.Constants;
 using Core.Business.Rules;
 using DataAccess.Abstracts;
 using System;
@@ -16,7 +16,7 @@ namespace Business.Rules
         {
             _courseDal = courseDal;
         }
-        public async Task EachCategoryMustContainMax20Products(Guid categoryId)
+        public async Task EachCategoryMustContainMax20Course(Guid categoryId)
         {
             var result = await _courseDal.GetListAsync(
                 predicate: p => p.CategoryId == categoryId,
@@ -26,6 +26,16 @@ namespace Business.Rules
             if (result.Count >= 20)
             {
                 throw new Exception(BusinessMessages.CategoryCourseLimit);
+            }
+        }
+        public async Task CheckUniqueCourseName(string courseName)
+        {
+            var result = await _courseDal.GetListAsync(
+                predicate: p => p.Name == courseName
+                );
+            if (result.Items.Count > 0)
+            {
+                throw new Exception(BusinessMessages.CourseNameAlreadyExists);
             }
         }
     }

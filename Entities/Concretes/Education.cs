@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿using Core.Entities.Concrete;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +12,7 @@ namespace Entities.Concretes
 {
     public class Education : Entity<Guid>
     {
+        public Guid UserId { get; set; }
         public string EducationalDegree { get; set; }
         public string University { get; set; }
         public string Department { get; set; }

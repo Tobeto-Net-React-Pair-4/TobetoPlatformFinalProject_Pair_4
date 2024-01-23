@@ -36,7 +36,7 @@ namespace Business.Concretes
             return createdUserSurveyResponse;
         }
 
-        public async Task<DeletedUserSurveyResponse> Delete(DeleteUserSurveyRequest deleteUserSurveyRequest)
+        public async Task<DeletedUserSurveyResponse> DeleteAsync(DeleteUserSurveyRequest deleteUserSurveyRequest)
         {
             UserSurvey userSurvey = await _userSurveyDal.GetAsync(predicate: p => p.SurveyId == deleteUserSurveyRequest.SurveyId);
             await _userSurveyDal.DeleteAsync(userSurvey);

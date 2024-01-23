@@ -17,23 +17,23 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Add([FromBody] CreateSurveyRequest createSurveyRequest)
+        public async Task<IActionResult> AddAsync([FromBody] CreateSurveyRequest createSurveyRequest)
         {
-            var result = await _surveyService.Add(createSurveyRequest);
+            var result = await _surveyService.AddAsync(createSurveyRequest);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> Update([FromBody] UpdateSurveyRequest updateSurveyRequest)
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdateSurveyRequest updateSurveyRequest)
         {
-            var result = await _surveyService.Update(updateSurveyRequest);
+            var result = await _surveyService.UpdateAsync(updateSurveyRequest);
             return Ok(result);
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete([FromBody] DeleteSurveyRequest deleteSurveyRequest)
+        public async Task<IActionResult> DeleteAsync([FromBody] DeleteSurveyRequest deleteSurveyRequest)
         {
-            var result = await _surveyService.Delete(deleteSurveyRequest);
+            var result = await _surveyService.DeleteAsync(deleteSurveyRequest);
             return Ok(result);
         }
 

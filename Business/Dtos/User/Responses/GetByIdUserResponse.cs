@@ -10,7 +10,9 @@ namespace Business.Dtos.User.Responses
     public class GetByIdUserResponse
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
-        public ICollection<GetByIdCourseResponse> Courses { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        //public ICollection<GetCourseResponse> Courses { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace Business.Concretes
             _surveyDal = surveyDal;
             _mapper = mapper;
         }
-        public async Task<CreatedSurveyResponse> Add(CreateSurveyRequest createSurveyRequest)
+        public async Task<CreatedSurveyResponse> AddAsync(CreateSurveyRequest createSurveyRequest)
         {
             Survey survey = _mapper.Map<Survey>(createSurveyRequest);
             survey.Id = Guid.NewGuid();
@@ -34,7 +34,7 @@ namespace Business.Concretes
             return _mapper.Map<CreatedSurveyResponse>(createdSurvey);
         }
 
-        public async Task<DeletedSurveyResponse> Delete(DeleteSurveyRequest deleteSurveyRequest)
+        public async Task<DeletedSurveyResponse> DeleteAsync(DeleteSurveyRequest deleteSurveyRequest)
         {
             Survey survey = await _surveyDal.GetAsync(p => p.Id == deleteSurveyRequest.Id);
             await _surveyDal.DeleteAsync(survey);
@@ -47,7 +47,7 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListSurveyResponse>>(data);
         }
 
-        public async Task<UpdatedSurveyResponse> Update(UpdateSurveyRequest updateSurveyRequest)
+        public async Task<UpdatedSurveyResponse> UpdateAsync(UpdateSurveyRequest updateSurveyRequest)
         {
             Survey survey = await _surveyDal.GetAsync(p => p.Id == updateSurveyRequest.Id);
             _mapper.Map(updateSurveyRequest, survey);
