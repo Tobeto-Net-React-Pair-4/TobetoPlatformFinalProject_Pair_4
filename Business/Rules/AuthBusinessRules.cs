@@ -3,8 +3,8 @@ using Business.Constants;
 using Business.Dtos.Auth.Requests;
 using Core.Business.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
+using Core.Entities.Abstract;
 using Core.Utilities.Security.Hashing;
-using Entities.Concretes;
 
 namespace Business.Rules
 {
@@ -22,7 +22,7 @@ namespace Business.Rules
                 throw new BusinessException(BusinessMessages.UserExists);
         }
 
-        public async Task<User> UserToCheck(UserLoginRequest loginRequest)
+        public async Task<IUser> UserToCheck(UserLoginRequest loginRequest)
         {
             var userToCheck = await _userService.GetByMail(loginRequest.Email);
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Constants
+﻿namespace Business.Constants
 {
     public class BusinessMessages
     {
@@ -14,6 +8,10 @@ namespace Business.Constants
         public static string AuthorizationDenied = "Yetkiniz yok";
         public static string LoginError = "Giriş hatalı";
         public static string UserExists = "Kullanıcı kayıtlı";
+        public static string SocialMediaLimit = "En fazla 3 adet medya seçimi yapılabilir.";
+        public static string LanguageExists = "Dil kayıtlı";
+
+
 
     }
 }
