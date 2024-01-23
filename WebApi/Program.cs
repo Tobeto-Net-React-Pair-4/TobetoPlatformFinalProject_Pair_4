@@ -3,6 +3,9 @@ using Autofac.Extensions.DependencyInjection;
 using Business;
 using Business.DependencyResolvers.Autofac;
 using Core.CrossCuttingConcerns.Exceptions.Extension;
+using Core.DependencyResolvers;
+using Core.Extensions;
+using Core.Utilities.IoC;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
 using DataAccess;
@@ -46,6 +49,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
         };
     });
+builder.Services.AddDependencyResolvers(new ICoreModule[]
+{
+    new CoreModule()
+    // yeni eklenecek modülleri buraya ekleyebiliriz
+});
 
 var app = builder.Build();
 

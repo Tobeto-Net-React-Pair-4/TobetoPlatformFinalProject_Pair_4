@@ -1,7 +1,6 @@
 ﻿using Business.Dtos.Auth.Requests;
 using Core.Entities.Abstract;
 using Core.Entities.Concrete;
-using Core.Utilities.Results;
 using Core.Utilities.Security.JWT;
 using Microsoft.AspNetCore.Http;
 using System;

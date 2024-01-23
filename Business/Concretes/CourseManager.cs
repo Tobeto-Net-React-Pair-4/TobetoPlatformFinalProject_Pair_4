@@ -9,6 +9,8 @@ using Business.BusinessAspects.Autofac;
 using Business.Dtos.Course.Requests;
 using Business.Dtos.Course.Responses;
 using Business.Rules;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -27,6 +29,8 @@ namespace Business.Concretes
             _mapper = mapper;
             _courseBusinessRules = courseBusinessRules;
         }
+        [SecuredOperation("admin")]
+        [ValidationAspect(typeof(CourseValidator))]
         public async Task<CreatedCourseResponse> AddAsync(CreateCourseRequest createCourseRequest)
         {
             await _courseBusinessRules.EachCategoryMustContainMax20Course(createCourseRequest.CategoryId);
