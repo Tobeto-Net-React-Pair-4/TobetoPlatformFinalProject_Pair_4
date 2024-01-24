@@ -16,7 +16,7 @@ namespace Entities.Concretes
         public DateTime? EstimatedTime { get; set; }
         public string Producer { get; set; }
         public int? ContentCount { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public string Status { get; set; } 
 
         public Category Category { get; set; }

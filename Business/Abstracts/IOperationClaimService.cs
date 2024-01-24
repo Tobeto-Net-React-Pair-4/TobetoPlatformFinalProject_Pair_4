@@ -11,6 +11,6 @@ namespace Business.Abstracts
 {
     public interface IOperationClaimService
     {
-        Task<CreatedOperationClaimsResponse> AddAsync(CreateOperationClaimRequest createOperationClaimRequest);
+        Task<CreatedOperationClaimResponse> AddAsync(CreateOperationClaimRequest createOperationClaimRequest);
     }
 }

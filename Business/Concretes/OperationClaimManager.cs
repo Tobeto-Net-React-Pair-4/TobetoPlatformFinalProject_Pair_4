@@ -22,11 +22,11 @@ namespace Business.Concretes
             _mapper = mapper;
             _operationClaimDal = operationClaimDal;
         }
-        public async Task<CreatedOperationClaimsResponse> AddAsync(CreateOperationClaimRequest createOperationClaimRequest)
+        public async Task<CreatedOperationClaimResponse> AddAsync(CreateOperationClaimRequest createOperationClaimRequest)
         {
             OperationClaim operationClaim = _mapper.Map<OperationClaim>(createOperationClaimRequest);
             var createdOperationClaimResponse = await _operationClaimDal.AddAsync(operationClaim);
-            CreatedOperationClaimsResponse result = _mapper.Map<CreatedOperationClaimsResponse>(operationClaim);
+            CreatedOperationClaimResponse result = _mapper.Map<CreatedOperationClaimResponse>(operationClaim);
             return result;
         }
     }
