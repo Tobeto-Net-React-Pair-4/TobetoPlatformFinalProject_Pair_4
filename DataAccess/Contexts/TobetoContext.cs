@@ -18,6 +18,8 @@ namespace DataAccess.Contexts
         public DbSet<UserSurvey> UserSurveys { get; set; }
         public DbSet<Appeal> Appeals { get; set; }
         public DbSet<Certificate> Certificates { get; set; }
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<UserSkill> UserSkills { get; set; }
 
         public DbSet<SocialMediaAccount> SocialMediaAccounts { get; set; }
         public DbSet<Experience> Experiences { get; set; }

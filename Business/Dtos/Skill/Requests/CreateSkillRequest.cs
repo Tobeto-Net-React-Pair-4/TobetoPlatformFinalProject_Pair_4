@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Dtos.OperationClaim.Responses
+namespace Business.Dtos.Skill.Requests
 {
-    public class CreatedOperationClaimsResponse
+    public class CreateSkillRequest
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
     }
 }

@@ -33,6 +33,8 @@ namespace Entities.Concretes
         public ICollection<ForeignLanguage> ForeignLanguages { get; set; }
         public ICollection<UserOperationClaim> UserOperationsClaims { get; set; }
         public ICollection<UserExam> UserExams { get; set; }
+        public ICollection<UserSkill> UserSkills { get; set; }
+
         public PersonalInfo PersonalInfo { get; set; }
 
     }
