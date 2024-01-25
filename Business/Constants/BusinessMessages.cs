@@ -14,6 +14,8 @@ namespace Business.Constants
         public static string AuthorizationDenied = "Yetkiniz yok";
         public static string LoginError = "Giriş hatalı";
         public static string UserExists = "Kullanıcı kayıtlı";
+        public static string UserNotExists = "Kullanıcı kayıtlı değil";
+
 
     }
 }
