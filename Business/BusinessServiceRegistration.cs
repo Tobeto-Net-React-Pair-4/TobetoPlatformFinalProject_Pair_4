@@ -39,6 +39,8 @@ namespace Business
             services.AddScoped<IAuthService, AuthManager>();
             services.AddScoped<ITokenHelper, JwtHelper>();
             services.AddScoped<IOperationClaimService, OperationClaimManager>();
+            services.AddScoped<ISkillService, SkillManager>();
+            services.AddScoped<IUserSkillService, UserSkillManager>();
             services.AddScoped<IPersonalInfoService, PersonalInfoManager>();
 
             return services;

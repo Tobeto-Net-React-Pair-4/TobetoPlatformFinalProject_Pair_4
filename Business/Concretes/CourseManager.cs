@@ -10,6 +10,7 @@ using Business.Dtos.Course.Requests;
 using Business.Dtos.Course.Responses;
 using Business.Rules;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
@@ -31,6 +32,7 @@ namespace Business.Concretes
         }
         [SecuredOperation("admin")]
         [ValidationAspect(typeof(CourseValidator))]
+        [CacheRemoveAspect("ICourseService.Get")]
         public async Task<CreatedCourseResponse> AddAsync(CreateCourseRequest createCourseRequest)
         {
             await _courseBusinessRules.EachCategoryMustContainMax20Course(createCourseRequest.CategoryId);
@@ -42,6 +44,7 @@ namespace Business.Concretes
 
             return _mapper.Map<CreatedCourseResponse>(createdCourse);
         }
+        [CacheAspect]
         public async Task<Paginate<GetListCourseResponse>> GetListAsync()
         {
             var data = await _courseDal.GetListAsync(
@@ -55,6 +58,9 @@ namespace Business.Concretes
             await _courseDal.DeleteAsync(course);
             return _mapper.Map<DeletedCourseResponse>(course);
         }
+
+        [ValidationAspect(typeof(CourseValidator))]
+        [CacheRemoveAspect("ICourseService.Get")]
 
         public async Task<UpdatedCourseResponse> UpdateAsync(UpdateCourseRequest updateCourseRequest)
         {
