@@ -41,6 +41,7 @@ namespace DataAccess
             services.AddScoped<IUserExamDal, EfUserExamDal>();
             services.AddScoped<IExamQuestionDal, EfExamQuestionDal>();
             services.AddScoped<IQuestionAnswerDal, EfQuestionAnswerDal>();
+            services.AddScoped<IPersonalInfoDal, EfPersonalInfoDal>();
 
             return services;
         }
