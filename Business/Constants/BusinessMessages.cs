@@ -11,7 +11,7 @@ namespace Business.Constants
         public static string CategoryLimit = "Kategori sayısı 10 adetten fazla olamaz";
         public static string CategoryCourseLimit = "Bir kategoride 20 adetten fazla kurs olamaz";
         public static string CourseNameAlreadyExists = "Bu kurs adında zaten bir kurs bulunmaktadır";
-        public static string AuthorizationDenied = "Yetkiniz yok";
+        public static string AuthorizationDenied = "Gerekli yetkiye sahip değilsiniz";
         public static string LoginPasswordError = "Şifrenizi kontrol ediniz";
         public static string LoginSuccess = "Giriş başarılı";
         public static string PasswordNull = "Parola boş olmamalı";
