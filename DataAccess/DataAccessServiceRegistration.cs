@@ -43,6 +43,7 @@ namespace DataAccess
             services.AddScoped<IQuestionAnswerDal, EfQuestionAnswerDal>();
             services.AddScoped<ISkillDal, EfSkillDal>();
             services.AddScoped<IUserSkillDal, EfUserSkillDal>();
+            services.AddScoped<IPersonalInfoDal, EfPersonalInfoDal>();
 
             return services;
         }

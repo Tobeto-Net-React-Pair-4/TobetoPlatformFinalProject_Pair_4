@@ -22,14 +22,20 @@ namespace Business.Rules
                 throw new BusinessException(BusinessMessages.UserExists);
         }
 
-        public async Task<IUser> UserToCheck(UserLoginRequest loginRequest)
+        public async Task<IUser> UserToCheck(UserLoginRequest userLoginRequest)
         {
-            var userToCheck = await _userService.GetByMail(loginRequest.Email);
+            var userToCheck = await _userService.GetByMail(userLoginRequest.Email);
 
-            if (userToCheck == null || !HashingHelper.VerifyPasswordHash(loginRequest.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt))
-                throw new BusinessException(BusinessMessages.LoginError);
+            if (userToCheck == null)
+                throw new BusinessException(BusinessMessages.UserNotExists);
+
+
+
+            else if (!HashingHelper.VerifyPasswordHash(userLoginRequest.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt))
+                throw new BusinessException(BusinessMessages.LoginPasswordError);
 
             return userToCheck;
+
         }
 
     }

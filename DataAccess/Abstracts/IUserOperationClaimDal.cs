@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-    public interface IUserOperationClaimDal: IAsyncRepository<UserOperationClaim, Guid>, IRepository<UserOperationClaim, Guid>
+    public interface IUserOperationClaimDal : IRepository<UserOperationClaim, Guid>, IAsyncRepository<UserOperationClaim, Guid>
     {
+
     }
 }

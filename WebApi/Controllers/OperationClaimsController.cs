@@ -21,18 +21,13 @@ namespace WebApi.Controllers
             var result = await _operationClaimService.AddAsync(operationClaimRequest);
             return Ok(result);
         }
-        //[HttpGet("Get")]
-        //public async Task<IActionResult> Get([FromQuery] GetOperationClaimRequest getOperationClaimRequest)
-        //{
-        //    var result = await _operationClaimService.GetByIdAsync(getOperationClaimRequest);
-        //    return Ok(result);
-        //}
-        //
-        //[HttpDelete]
-        //public async Task<IActionResult> Delete([FromBody] DeleteOperationClaimRequest deleteOperationClaimRequest)
-        //{
-        //    var result = await _operationClaimService.DeleteAsync(deleteOperationClaimRequest);
-        //    return Ok(result);
-        //}
+
+        [HttpGet("GetList")]
+        public async Task<IActionResult> GetList()
+        {
+            var result = await _operationClaimService.GetListAsync();
+            return Ok(result);
+        }
+
     }
 }
