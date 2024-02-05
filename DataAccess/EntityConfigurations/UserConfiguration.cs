@@ -8,15 +8,23 @@ namespace DataAccess.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("Users").HasKey(u => u.Id);
+            builder.ToTable("Users").HasKey(b => b.Id);
 
 
-            builder.Property(u => u.Id).HasColumnName("Id").IsRequired();
-            builder.Property(u => u.FirstName).HasColumnName("FirstName").IsRequired();
-            builder.Property(u => u.LastName).HasColumnName("LastName").IsRequired();
-            builder.Property(u => u.Email).HasColumnName("Email").IsRequired();
+            builder.Property(b => b.Id).HasColumnName("Id").IsRequired();
+            builder.Property(b => b.NationalityId).HasColumnName("NationalityId");
+            builder.Property(b => b.FirstName).HasColumnName("FirstName").IsRequired();
+            builder.Property(b => b.LastName).HasColumnName("LastName").IsRequired();
+            builder.Property(b => b.Email).HasColumnName("Email").IsRequired();
+            builder.Property(b => b.BirthDate).HasColumnName("BirthDate");
+            builder.Property(b => b.Country).HasColumnName("Country");
+            builder.Property(b => b.City).HasColumnName("City");
+            builder.Property(b => b.District).HasColumnName("District");
+            builder.Property(b => b.AddressDetails).HasColumnName("AddressDetails");
+            builder.Property(b => b.AboutMe).HasColumnName("AboutMe");
+            builder.Property(b => b.Phone).HasColumnName("Phone");
 
-            builder.HasOne(u => u.PersonalInfo).WithOne(p => p.User).HasForeignKey<PersonalInfo>(p => p.UserId);
+            builder.HasIndex(indexExpression: b => b.NationalityId, name: "UK_Users_NationalityId").IsUnique();
 
             // builder.HasMany(b => b.Certificates);
             builder.HasQueryFilter(b => !b.DeletedDate.HasValue); //  categorydeki tüm dataya default olarak bu where koşulunu uygula. where deletedDate is null. Data silinmemişse getir.

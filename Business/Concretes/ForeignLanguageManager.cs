@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.ForeignLanguage.Requests;
 using Business.Dtos.ForeignLanguage.Responses;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -13,14 +14,19 @@ namespace Business.Concretes
     {
         private IForeignLanguageDal _foreignLanguageDal;
         private IMapper _mapper;
-        public ForeignLanguageManager(IForeignLanguageDal foreignLanguageDal, IMapper mapper)
+        private ForeignLanguageBusinessRules _foreignLanguageBusinessRules;
+
+        public ForeignLanguageManager(IForeignLanguageDal foreignLanguageDal, IMapper mapper, ForeignLanguageBusinessRules foreignLanguageBusinessRules)
         {
             _foreignLanguageDal = foreignLanguageDal;
             _mapper = mapper;
+            _foreignLanguageBusinessRules = foreignLanguageBusinessRules;
         }
 
         public async Task<CreatedForeignLanguageResponse> AddAsync(CreateForeignLanguageRequest createForeignLanguageRequest)
         {
+            await _foreignLanguageBusinessRules.LanguageExists(createForeignLanguageRequest);
+
             ForeignLanguage foreignLanguage = _mapper.Map<ForeignLanguage>(createForeignLanguageRequest);
             foreignLanguage.Id = Guid.NewGuid();
 

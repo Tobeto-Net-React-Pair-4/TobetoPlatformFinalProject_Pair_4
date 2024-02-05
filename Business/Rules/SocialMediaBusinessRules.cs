@@ -14,13 +14,13 @@ namespace Business.Rules
             _socialMediaDal = socialMediaDal;
         }
 
-        public async Task MaximumCountIsTen()
+        public async Task MaximumCountIsThree()
         {
             var result = await _socialMediaDal.GetListAsync();
 
             if (result.Count > 3)
             {
-                throw new Exception(BusinessMessages.CategoryLimit);
+                throw new Exception(BusinessMessages.SocialMediaLimit);
             }
         }
     }

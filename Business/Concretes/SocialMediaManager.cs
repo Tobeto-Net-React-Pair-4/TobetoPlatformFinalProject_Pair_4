@@ -1,20 +1,11 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
-using Business.Dtos.Announcement.Requests;
-using Business.Dtos.Announcement.Responses;
-using Business.Dtos.Appeal.Requests;
-using Business.Dtos.Appeal.Responses;
 using Business.Dtos.SocialMediaAccount.Requests;
 using Business.Dtos.SocialMediaAccount.Responses;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using DataAccess.Concretes;
 using Entities.Concretes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concretes
 {
@@ -22,14 +13,18 @@ namespace Business.Concretes
     {
         private ISocialMediaDal _socialMediaDal;
         private IMapper _mapper;
+        private SocialMediaBusinessRules _socialMediaBusinessRules;
 
-        public SocialMediaManager(ISocialMediaDal socialMediaDal, IMapper mapper)
+        public SocialMediaManager(ISocialMediaDal socialMediaDal, IMapper mapper, SocialMediaBusinessRules socialMediaBusinessRules)
         {
             _socialMediaDal = socialMediaDal;
             _mapper = mapper;
+            _socialMediaBusinessRules = socialMediaBusinessRules;
         }
         public async Task<CreatedSocialMediaResponse> AddAsync(CreateSocialMediaRequest createSocialMediaRequest)
         {
+            await _socialMediaBusinessRules.MaximumCountIsThree();
+
             SocialMediaAccount socialMediaAccount = _mapper.Map<SocialMediaAccount>(createSocialMediaRequest);
             socialMediaAccount.Id = Guid.NewGuid();
 

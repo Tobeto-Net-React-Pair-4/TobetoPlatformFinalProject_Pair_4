@@ -36,7 +36,7 @@ namespace Business.Concretes
         public async Task<CreatedCourseResponse> AddAsync(CreateCourseRequest createCourseRequest)
         {
             await _courseBusinessRules.EachCategoryMustContainMax20Course(createCourseRequest.CategoryId);
-            await _courseBusinessRules.CheckUniqueCourseName(createCourseRequest.Name);
+            //await _courseBusinessRules.CheckUniqueCourseName(createCourseRequest.Name);
             Course course = _mapper.Map<Course>(createCourseRequest);
             course.Id = Guid.NewGuid();
 

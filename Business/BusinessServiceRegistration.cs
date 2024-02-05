@@ -1,8 +1,8 @@
 ﻿using Business.Abstracts;
 using Business.Concretes;
+using Business.Rules;
 using Core.Business.Rules;
 using Core.Utilities.Security.JWT;
-using DataAccess.Abstracts;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -41,7 +41,18 @@ namespace Business
             services.AddScoped<IOperationClaimService, OperationClaimManager>();
             services.AddScoped<ISkillService, SkillManager>();
             services.AddScoped<IUserSkillService, UserSkillManager>();
-            services.AddScoped<IPersonalInfoService, PersonalInfoManager>();
+
+
+            //Business Rules
+
+            services.AddScoped<AuthBusinessRules>();
+            services.AddScoped<CategoryBusinessRules>();
+            services.AddScoped<CourseBusinessRules>();
+            services.AddScoped<SocialMediaBusinessRules>();
+            services.AddScoped<ForeignLanguageBusinessRules>();
+            services.AddScoped<UserBusinessRules>();
+
+
 
             return services;
         }

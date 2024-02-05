@@ -6,14 +6,22 @@ namespace Entities.Concretes
 {
     public class User : Entity<Guid>, IUser
     {
+        public string? NationalityId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public DateTime? BirthDate { get; set; }
+
+        public string? Country { get; set; }
+        public string? City { get; set; }
+        public string? District { get; set; }
+        public string? AddressDetails { get; set; }
+        public string? AboutMe { get; set; }
+        public string? Phone { get; set; }
         public byte[] PasswordSalt { get; set; }
         public byte[] PasswordHash { get; set; }
         public bool Status { get; set; }
 
-        public PersonalInfo PersonalInfo { get; set; }
         public ICollection<SocialMediaAccount> SocialMediaAccounts { get; set; }
         public ICollection<UserSurvey> UserSurveys { get; set; }
         public ICollection<UserCourse> UserCourses { get; set; }
@@ -26,6 +34,8 @@ namespace Entities.Concretes
         public ICollection<UserOperationClaim> UserOperationsClaims { get; set; }
         public ICollection<UserExam> UserExams { get; set; }
         public ICollection<UserSkill> UserSkills { get; set; }
+
+        public PersonalInfo PersonalInfo { get; set; }
 
     }
 }

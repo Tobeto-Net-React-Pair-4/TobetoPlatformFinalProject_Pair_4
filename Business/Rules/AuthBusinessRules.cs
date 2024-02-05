@@ -35,8 +35,8 @@ namespace Business.Rules
                 throw new BusinessException(BusinessMessages.LoginPasswordError);
 
             return userToCheck;
-
         }
+
 
     }
 }

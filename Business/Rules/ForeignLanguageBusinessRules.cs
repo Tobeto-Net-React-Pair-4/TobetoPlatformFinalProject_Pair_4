@@ -15,7 +15,7 @@ namespace Business.Rules
             _foreignLanguageService = foreignLanguageService;
         }
 
-        public async Task LanguageExists(GetByNameForeignLanguageRequest getByNameForeignLanguageRequest)
+        public async Task LanguageExists(CreateForeignLanguageRequest getByNameForeignLanguageRequest)
         {
             var result = await _foreignLanguageService.GetListAsync();
             foreach (var item in result.Items)
