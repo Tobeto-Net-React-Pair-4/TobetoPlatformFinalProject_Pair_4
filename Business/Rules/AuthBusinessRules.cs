@@ -3,8 +3,8 @@ using Business.Constants;
 using Business.Dtos.Auth.Requests;
 using Core.Business.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
+using Core.Entities.Abstract;
 using Core.Utilities.Security.Hashing;
-using Entities.Concretes;
 
 namespace Business.Rules
 {
@@ -37,6 +37,7 @@ namespace Business.Rules
             return userToCheck;
 
         }
+
 
     }
 }

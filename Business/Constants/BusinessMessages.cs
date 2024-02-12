@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Constants
+﻿namespace Business.Constants
 {
     public class BusinessMessages
     {
@@ -16,6 +10,11 @@ namespace Business.Constants
         public static string LoginSuccess = "Giriş başarılı";
         public static string PasswordNull = "Parola boş olmamalı";
         public static string UserExists = "Kullanıcı kayıtlı";
+        public static string SocialMediaLimit = "En fazla 3 adet medya seçimi yapılabilir.";
+        public static string LanguageExists = "Dil kayıtlı";
+        public static string OldPassword = "Yeni şifre , eski şifre ile aynı olamaz";
+
+
         public static string UserNotExists = "Kullanıcı kayıtlı değil";
 
 

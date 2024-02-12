@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.User.Requests;
 using Business.Dtos.User.Responses;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using Core.Entities.Abstract;
 using DataAccess.Abstracts;
@@ -19,12 +15,15 @@ namespace Business.Concretes
     {
         private IUserDal _userDal;
         private IMapper _mapper;
+        private UserBusinessRules _userBusinessRules;
 
-        public UserManager(IUserDal userDal, IMapper mapper)
+        public UserManager(IUserDal userDal, IMapper mapper, UserBusinessRules userBusinessRules)
         {
             _userDal = userDal;
             _mapper = mapper;
+            _userBusinessRules = userBusinessRules;
         }
+
         public async Task<CreatedUserResponse> AddAsync(CreateUserRequest createUserRequest)
         {
             User user = _mapper.Map<User>(createUserRequest);
@@ -49,6 +48,8 @@ namespace Business.Concretes
 
         public async Task<UpdatedUserResponse> UpdateAsync(UpdateUserRequest updateUserRequest)
         {
+            await _userBusinessRules.OldPassword(updateUserRequest);
+
             User user = await _userDal.GetAsync(p => p.Id == updateUserRequest.Id);
             _mapper.Map(updateUserRequest, user);
             await _userDal.UpdateAsync(user);
@@ -60,7 +61,7 @@ namespace Business.Concretes
             return _userDal.GetClaims(user);
         }
 
-        public async Task<User> GetByMail(string mail)
+        public async Task<IUser> GetByMail(string mail)
         {
             var result = await _userDal.GetAsync(m => m.Email == mail);
             return result;
