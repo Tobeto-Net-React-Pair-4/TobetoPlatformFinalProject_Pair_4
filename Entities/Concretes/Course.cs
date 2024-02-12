@@ -21,9 +21,10 @@ namespace Entities.Concretes
 
         public Category Category { get; set; }
         public Instructor Instructor { get; set; }
+        public Liked Liked { get; set; }
+        public Table Table { get; set; }
+        public ICollection<Content> Contents {  get; set; }        
         public ICollection<UserCourse> UserCourses { get; set; }
         public ICollection<CalendarEvent> CalendarEvents { get; set; }
-
-        //content kısmı????!!!!???
     }
 }
