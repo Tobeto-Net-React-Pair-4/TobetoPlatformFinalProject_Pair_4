@@ -44,6 +44,11 @@ namespace DataAccess
             services.AddScoped<ISkillDal, EfSkillDal>();
             services.AddScoped<IUserSkillDal, EfUserSkillDal>();
             services.AddScoped<IPersonalInfoDal, EfPersonalInfoDal>();
+            services.AddScoped<IContentDal, EfContentDal>();
+            services.AddScoped<ILikedDal, EfLikedDal>();
+            services.AddScoped<IFavouriteDal, EfFavouriteDal>();
+
+
 
             return services;
         }

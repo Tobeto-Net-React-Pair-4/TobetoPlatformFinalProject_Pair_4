@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 
 namespace DataAccess.EntityConfigurations
 {
-    public class InstructorConfiguration : IEntityTypeConfiguration<Instructor>
+    public class FavouriteConfiguration : IEntityTypeConfiguration<Favourite>
     {
-        public void Configure(EntityTypeBuilder<Instructor> builder)
+        public void Configure(EntityTypeBuilder<Favourite> builder)
         {
-            builder.ToTable("Instructors").HasKey(b => b.Id);
+            builder.ToTable("Favourites").HasKey(b => b.Id);
 
             builder.Property(b => b.Id).HasColumnName("Id").IsRequired();
-            builder.Property(b => b.Name).HasColumnName("Name").IsRequired();
+            builder.Property(b => b.Count).HasColumnName("Count").IsRequired();
 
-            builder.HasQueryFilter(b => !b.DeletedDate.HasValue); 
+
+            builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
         }
     }
 }
