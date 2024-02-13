@@ -42,10 +42,10 @@ namespace Business.Concretes
             return _mapper.Map<DeletedFavouriteResponse>(favourite);
         }
 
-        public async Task<Paginate<GetFavouriteResponse>> GetByIdAsync(GetFavouriteRequest getFavouriteRequest)
+        public async Task<GetFavouriteResponse> GetByIdAsync(GetFavouriteRequest getFavouriteRequest)
         {
             var result = await _favouriteDal.GetAsync(p => p.Id == getFavouriteRequest.Id);
-            return _mapper.Map<GetLikedResponse>(result);
+            return _mapper.Map<GetFavouriteResponse>(result);
         }
 
         public async Task<Paginate<GetListFavouriteResponse>> GetListAsync()

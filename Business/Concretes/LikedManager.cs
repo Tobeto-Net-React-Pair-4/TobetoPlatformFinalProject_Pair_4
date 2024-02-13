@@ -43,7 +43,7 @@ namespace Business.Concretes
             return _mapper.Map<DeletedLikedResponse>(liked);
         }
 
-        public async Task<Paginate<GetLikedResponse>> GetByIdAsync(GetLikedRequest getLikedRequest)
+        public async Task<GetLikedResponse> GetByIdAsync(GetLikedRequest getLikedRequest)
         {
             var result = await _likedDal.GetAsync(p => p.Id == getLikedRequest.Id);
             return _mapper.Map<GetLikedResponse>(result);

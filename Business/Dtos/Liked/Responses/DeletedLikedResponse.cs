@@ -8,5 +8,7 @@ namespace Business.Dtos.Liked.Responses
 {
     public class DeletedLikedResponse
     {
+        public Guid Id { get; set; }
+        public int Count { get; set; }
     }
 }

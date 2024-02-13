@@ -12,7 +12,7 @@ namespace Business.Abstracts
     public interface ILikedService
     {
         Task<Paginate<GetListLikedResponse>> GetListAsync();
-        Task<Paginate<GetLikedResponse>> GetByIdAsync(GetLikedRequest getLikedRequest);
+        Task<GetLikedResponse> GetByIdAsync(GetLikedRequest getLikedRequest);
         Task<CreatedLikedResponse> AddAsync(CreateLikedRequest createLikedRequest);
         Task<UpdatedLikedResponse> UpdateAsync(UpdateLikedRequest updateLikedRequest);
         Task<DeletedLikedResponse> DeleteAsync(DeleteLikedRequest deleteLikedRequest);
