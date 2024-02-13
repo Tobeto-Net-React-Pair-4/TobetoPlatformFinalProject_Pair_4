@@ -21,7 +21,7 @@ namespace Core.Aspects.Autofac.Performance
             _interval = interval;
             _stopwatch = ServiceTool.ServiceProvider.GetService<Stopwatch>();
         }
-
+        // metodun başında başla ve sonunda resetle, eğer verilen _interval değerini (örn: 5 saniye) geçerse console'a warning at
         protected override void OnBefore(IInvocation invocation)
         {
             _stopwatch.Start();

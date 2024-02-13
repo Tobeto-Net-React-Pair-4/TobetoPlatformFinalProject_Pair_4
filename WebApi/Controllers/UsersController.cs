@@ -50,6 +50,12 @@ namespace WebApi.Controllers
             var result = await _userService.GetByIdAsync(getByIdUserRequest);
             return Ok(result);
         }
+        [HttpGet("GetByMail")]
+        public async Task<IActionResult> GetByMail([FromQuery] string email)
+        {
+            var result = await _userService.GetByMail(email);
+            return Ok(result);
+        }
     }
 }
 
