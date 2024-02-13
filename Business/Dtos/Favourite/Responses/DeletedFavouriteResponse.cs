@@ -8,5 +8,7 @@ namespace Business.Dtos.Favourite.Responses
 {
     public class DeletedFavouriteResponse
     {
+        public Guid Id { get; set; }
+        public int Count { get; set; }
     }
 }

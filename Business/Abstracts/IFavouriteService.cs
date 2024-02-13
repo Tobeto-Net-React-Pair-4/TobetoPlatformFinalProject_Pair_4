@@ -12,7 +12,7 @@ namespace Business.Abstracts
     public interface IFavouriteService
     {
         Task<Paginate<GetListFavouriteResponse>> GetListAsync();
-        Task<Paginate<GetFavouriteResponse>> GetByIdAsync(GetFavouriteRequest getFavouriteRequest);
+        Task<GetFavouriteResponse> GetByIdAsync(GetFavouriteRequest getFavouriteRequest);
         Task<CreatedFavouriteResponse> AddAsync(CreateFavouriteRequest createFavouriteRequest);
         Task<UpdatedFavouriteResponse> UpdateAsync(UpdateFavouriteRequest updateFavouriteRequest);
         Task<DeletedFavouriteResponse> DeleteAsync(DeleteFavouriteRequest deleteFavouriteRequest);
