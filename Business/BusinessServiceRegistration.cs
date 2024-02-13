@@ -42,6 +42,10 @@ namespace Business
             services.AddScoped<ISkillService, SkillManager>();
             services.AddScoped<IUserSkillService, UserSkillManager>();
             services.AddScoped<IPersonalInfoService, PersonalInfoManager>();
+            services.AddScoped<IContentService, ContentManager>();
+            services.AddScoped<ILikedService, LikedManager>();
+            services.AddScoped<IFavouriteService, FavouriteManager>();
+
 
             return services;
         }

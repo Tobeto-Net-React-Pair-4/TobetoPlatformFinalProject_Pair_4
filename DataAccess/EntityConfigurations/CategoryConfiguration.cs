@@ -23,7 +23,7 @@ namespace DataAccess.EntityConfigurations
 
 
 
-            builder.HasQueryFilter(b => !b.DeletedDate.HasValue); //  categorydeki tüm dataya default olarak bu where koşulunu uygula. where deletedDate is null. Data silinmemişse getir.
+            builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
         }
     }
 }

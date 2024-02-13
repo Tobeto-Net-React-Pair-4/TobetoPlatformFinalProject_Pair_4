@@ -33,6 +33,9 @@ namespace DataAccess.Contexts
         public DbSet<ExamQuestion> ExamQuestions { get; set; }
         public DbSet<QuestionAnswer> QuestionAnswers { get; set; }
         public DbSet<CalendarEvent> CalendarEvents { get; set; }
+        public DbSet<Content> Contents { get; set; }
+        public DbSet<Liked> Likeds { get; set; }
+        public DbSet<Favourite> Favourites { get; set; }
 
         public DbSet<Education> Educations { get; set; }   
         public DbSet<OperationClaim> OperationClaims { get; set; }

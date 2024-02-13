@@ -9,5 +9,5 @@ This is a Tobeto project for Tobeto .Net & React Bootcamp
 - [Enes Samancıoğlu](https://github.com/enessamancioglu)
 - [M. İlyas Tuman](https://github.com/mxyast)
 - [Nisa Yavuz](https://github.com/nisayavuz)
-- [Tolga Kayış](https://github.com/happyknighttk)
+- [Tolga Kayış](https://github.com/tolgakayis)
   

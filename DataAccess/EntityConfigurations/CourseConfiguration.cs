@@ -34,8 +34,16 @@ namespace DataAccess.EntityConfigurations
 
             builder.HasOne(c => c.Category).WithMany(cat => cat.Courses).HasForeignKey(c => c.CategoryId).IsRequired();
             builder.HasOne(b => b.Instructor).WithMany(i => i.Courses).HasForeignKey(c => c.InstructorId);
+            builder.HasOne(b => b.Favourite).WithMany(i => i.Courses).HasForeignKey(c => c.FavouriteId);
+            builder.HasOne(b => b.Liked).WithMany(i => i.Courses).HasForeignKey(c => c.LikedId);
+
+
+
+
 
             builder.HasMany(b => b.CalendarEvents);
+            builder.HasMany(b => b.Contents);
+
 
             builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
         }
