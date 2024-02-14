@@ -8,5 +8,7 @@ namespace Business.Dtos.Liked.Requests
 {
     public class GetLikedRequest
     {
+        public Guid Id { get; set; }
+        public int Count { get; set; }
     }
 }

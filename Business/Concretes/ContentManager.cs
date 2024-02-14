@@ -43,7 +43,7 @@ namespace Business.Concretes
             return _mapper.Map<DeletedContentResponse>(content);
         }
 
-        public async Task<Paginate<GetContentResponse>> GetByIdAsync(GetContentRequest getContentRequest)
+        public async Task<GetContentResponse> GetByIdAsync(GetContentRequest getContentRequest)
         {
             var result = await _contentDal.GetAsync(p => p.Id == getContentRequest.Id);
             return _mapper.Map<GetContentResponse>(result);

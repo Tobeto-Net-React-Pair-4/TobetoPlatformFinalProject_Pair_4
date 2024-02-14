@@ -8,5 +8,7 @@ namespace Business.Dtos.Liked.Requests
 {
     public class CreateLikedRequest
     {
+        public int Count { get; set; }
+
     }
 }

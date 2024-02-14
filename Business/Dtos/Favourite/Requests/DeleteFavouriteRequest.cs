@@ -8,5 +8,8 @@ namespace Business.Dtos.Favourite.Requests
 {
     public class DeleteFavouriteRequest
     {
+        public Guid Id { get; set; }
+        public int Count { get; set; }
+
     }
 }

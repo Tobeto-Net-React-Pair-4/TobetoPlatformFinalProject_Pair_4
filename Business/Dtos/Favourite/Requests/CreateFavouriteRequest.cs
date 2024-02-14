@@ -8,5 +8,6 @@ namespace Business.Dtos.Favourite.Requests
 {
     public class CreateFavouriteRequest
     {
+        public int Count { get; set; }
     }
 }

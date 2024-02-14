@@ -8,5 +8,7 @@ namespace Business.Dtos.Content.Requests
 {
     public class GetContentRequest
     {
+        public Guid Id { get; set; }
+
     }
 }
