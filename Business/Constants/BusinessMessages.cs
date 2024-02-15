@@ -17,6 +17,7 @@ namespace Business.Constants
         public static string PasswordNull = "Parola boş olmamalı";
         public static string UserExists = "Kullanıcı kayıtlı";
         public static string UserNotExists = "Kullanıcı kayıtlı değil";
+        public static string SameCategoryName = "Aynı isimde bir kategori bulunamaz";
 
 
     }

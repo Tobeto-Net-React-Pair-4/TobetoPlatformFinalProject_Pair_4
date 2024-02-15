@@ -1,5 +1,6 @@
 ﻿using Business.Constants;
 using Core.Business.Rules;
+using Core.CrossCuttingConcerns.Exceptions.Types;
 using DataAccess.Abstracts;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,17 @@ namespace Business.Rules
 
             if (result.Count >= 10)
             {
-                throw new Exception(BusinessMessages.CategoryLimit);
+                throw new BusinessException(BusinessMessages.CategoryLimit);
+            }
+        }
+        
+        public async Task SameCategoryName(string name)
+        {
+            var result = await _categoryDal.GetAsync(c => c.Name == name);
+
+            if (result != null)
+            {
+                throw new BusinessException(BusinessMessages.SameCategoryName);
             }
         }
     }

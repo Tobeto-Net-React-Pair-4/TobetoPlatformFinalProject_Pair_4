@@ -7,6 +7,9 @@ namespace Entities.Concretes
     {
         public Guid CategoryId { get; set; }
         public Guid InstructorId { get; set; }
+        public Guid LikedId { get; set; }
+        public Guid FavouriteId { get; set; }
+
 
         public string Name { get; set; }
         public string? ImageUrl { get; set; }
@@ -21,9 +24,10 @@ namespace Entities.Concretes
 
         public Category Category { get; set; }
         public Instructor Instructor { get; set; }
+        public Liked Liked { get; set; }
+        public Favourite Favourite{ get; set; }
+        public ICollection<Content> Contents {  get; set; }        
         public ICollection<UserCourse> UserCourses { get; set; }
         public ICollection<CalendarEvent> CalendarEvents { get; set; }
-
-        //content kısmı????!!!!???
     }
 }
