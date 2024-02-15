@@ -31,6 +31,7 @@ namespace Business.Concretes
         public async Task<CreatedCategoryResponse> AddAsync(CreateCategoryRequest createCategoryRequest)
         {
             await _categoryBusinessRules.MaximumCountIsTen();
+            await _categoryBusinessRules.SameCategoryName(createCategoryRequest.Name);
 
             Category category = _mapper.Map<Category>(createCategoryRequest);
             category.Id = Guid.NewGuid();

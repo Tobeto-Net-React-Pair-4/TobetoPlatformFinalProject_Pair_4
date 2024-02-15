@@ -28,11 +28,10 @@ namespace DataAccess
             services.AddScoped<IAnnouncementDal, EfAnnouncementDal>();
             services.AddScoped<IUserAnnouncementDal, EfUserAnnouncementDal>();
             services.AddScoped<IAppealDal, EfAppealDal>();
+            services.AddScoped<IUserAppealDal, EfUserAppealDal>();
             services.AddScoped<IEducationDal, EfEducationDal>();
-            services.AddScoped<IUserOperationClaimDal, EfUserOperationClaimDal>();
             services.AddScoped<IOperationClaimDal, EfOperationClaimDal>();
             services.AddScoped<IUserOperationClaimDal, EfUserOperationClaimDal>();
-            services.AddScoped<IUserAppealDal, EfUserAppealDal>();
             services.AddScoped<ICertificateDal, EfCertificateDal>();
             services.AddScoped<ISocialMediaDal, EfSocialMediaDal>();
             services.AddScoped<IExperienceDal, EfExperinceDal>();
