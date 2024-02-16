@@ -6,7 +6,9 @@ namespace Entities.Concretes
     {
         public string Name { get; set; }
         public ICollection<Course> Courses { get; set; }
-        public ICollection<CalendarEvent> CalendarEvents { get; set; }
-        
+        public ICollection<Calendar> Calendars { get; set; }
+        public ICollection<InstructorSession> InstructorSessions { get; set; }
+
+
     }
 }
