@@ -38,7 +38,7 @@ namespace DataAccess.EntityConfigurations
             //builder.HasOne(b => b.Liked).WithMany(i => i.Courses).HasForeignKey(c => c.LikedId);
 
 
-            builder.HasMany(b => b.CalendarEvents);
+            builder.HasMany(b => b.Calendars);
             builder.HasMany(b => b.Contents);
 
 

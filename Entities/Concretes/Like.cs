@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Entities.Concretes
 {
-    public class Favourite : Entity<Guid>
+    public class Like : Entity<Guid>
     {
-        public Guid CourseId { get; set; }
         public int Count { get; set; }
         public Course Course { get; set; }
+        public LiveContent LiveContent { get; set; }
+        public AsyncContent AsyncContent { get; set; }
 
     }
 }

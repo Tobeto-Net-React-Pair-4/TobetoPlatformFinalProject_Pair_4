@@ -20,7 +20,7 @@ namespace Business
             services.AddScoped<IUserService, UserManager>();
             services.AddScoped<ISurveyService, SurveyManager>();
             services.AddScoped<IUserSurveyService, UserSurveyManager>();
-            services.AddScoped<ICalendarEventService, CalendarEventManager>();
+            services.AddScoped<ICalendarService, CalendarManager>();
             services.AddScoped<IUserCourseService, UserCourseManager>();
             services.AddScoped<ICertificateService, CertificateManager>();
             services.AddScoped<IAnnouncementService, AnnouncementManager>();
@@ -42,7 +42,7 @@ namespace Business
             services.AddScoped<IUserSkillService, UserSkillManager>();
             services.AddScoped<IPersonalInfoService, PersonalInfoManager>();
             services.AddScoped<IContentService, ContentManager>();
-            services.AddScoped<ILikedService, LikedManager>();
+            services.AddScoped<ILikeService, LikeManager>();
             services.AddScoped<IFavouriteService, FavouriteManager>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
