@@ -37,7 +37,7 @@ namespace Business.Concretes
 
         public async Task<Paginate<GetListUserResponse>> GetListAsync()
         {
-            var data = await _userDal.GetListAsync(include: p => p.Include(p => p.UserAppeals));
+            var data = await _userDal.GetListAsync();
             return _mapper.Map<Paginate<GetListUserResponse>>(data);
         }
         public async Task<DeletedUserResponse> DeleteAsync(DeleteUserRequest deleteUserRequest)
@@ -60,15 +60,21 @@ namespace Business.Concretes
             return _userDal.GetClaims(user);
         }
 
-        public async Task<User> GetByMail(string mail)
+        public async Task<User> GetByMailAsync(string mail)
         {
-            var result = await _userDal.GetAsync(m => m.Email == mail);
-            return result;
+            return await _userDal.GetAsync(u => u.Email == mail);
+
+        }
+        public async Task<GetUserResponse> GetUserByMailAsync(string mail)
+        {
+            User user = await _userDal.GetAsync(u => u.Email == mail);
+
+            return _mapper.Map<GetUserResponse>(user);
 
         }
         public async Task<GetByIdUserResponse> GetByIdAsync(GetByIdUserRequest getByIdUserRequest)
         {
-            User user = await _userDal.GetAsync(u => u.Id == getByIdUserRequest.Id, include: p => p.Include(uc => uc.UserCourses));
+            User user = await _userDal.GetAsync(u => u.Id == getByIdUserRequest.Id);
             return _mapper.Map<GetByIdUserResponse>(user);
         }
 

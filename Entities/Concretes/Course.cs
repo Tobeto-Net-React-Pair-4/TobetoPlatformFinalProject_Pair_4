@@ -7,8 +7,8 @@ namespace Entities.Concretes
     {
         public Guid CategoryId { get; set; }
         public Guid InstructorId { get; set; }
-        public Guid LikedId { get; set; }
-        public Guid FavouriteId { get; set; }
+        public Guid? LikedId { get; set; }
+        public Guid? FavouriteId { get; set; }
 
 
         public string Name { get; set; }

@@ -1,6 +1,12 @@
-﻿using Business.Constants;
+﻿using Business.Abstracts;
+using Business.Constants;
+using Business.Dtos.Category.Responses;
+using Business.Dtos.Instructor.Responses;
 using Core.Business.Rules;
+using Core.CrossCuttingConcerns.Exceptions.Types;
+using Core.Utilities.Messages;
 using DataAccess.Abstracts;
+using Entities.Concretes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +15,16 @@ using System.Threading.Tasks;
 
 namespace Business.Rules
 {
-    public class CourseBusinessRules : BaseBusinessRules
+    public class CourseBusinessRules : BaseBusinessRules<Course>
     {
         private readonly ICourseDal _courseDal;
-        public CourseBusinessRules(ICourseDal courseDal)
+        private readonly ICategoryService _categoryService;
+        private readonly IInstructorService _instructorService;
+        public CourseBusinessRules(ICourseDal courseDal, ICategoryService categoryService, IInstructorService instructorService) : base(courseDal)
         {
             _courseDal = courseDal;
+            _categoryService = categoryService;
+            _instructorService = instructorService;
         }
         public async Task EachCategoryMustContainMax20Course(Guid categoryId)
         {
@@ -36,6 +46,22 @@ namespace Business.Rules
             if (result.Items.Count > 0)
             {
                 throw new Exception(BusinessMessages.CourseNameAlreadyExists);
+            }
+        }
+        public async Task CheckIfCategoryExists(Guid categoryId)
+        {
+            GetByIdCategoryResponse category = await _categoryService.GetByIdAsync(categoryId);
+            if (category == null)
+            {
+                throw new BusinessException(BusinessCoreMessages.EntityNotFound);
+            }
+        }
+        public async Task CheckIfInstructorExists(Guid instructorId)
+        {
+            GetByIdInstructorResponse instructor = await _instructorService.GetByIdAsync(instructorId);
+            if (instructor == null)
+            {
+                throw new BusinessException(BusinessCoreMessages.EntityNotFound);
             }
         }
     }

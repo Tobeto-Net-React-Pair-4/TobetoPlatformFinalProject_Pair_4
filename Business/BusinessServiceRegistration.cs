@@ -1,6 +1,7 @@
 ﻿using Business.Abstracts;
 using Business.Concretes;
 using Core.Business.Rules;
+using Core.Entities.Concrete;
 using Core.Utilities.Security.JWT;
 using DataAccess.Abstracts;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,9 +13,7 @@ namespace Business
     {
         public static IServiceCollection AddBusinessServices(this IServiceCollection services)
         {
-            services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
 
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<ICourseService, CourseManager>();
             services.AddScoped<IInstructorService, InstructorManager>();
@@ -46,6 +45,9 @@ namespace Business
             services.AddScoped<ILikedService, LikedManager>();
             services.AddScoped<IFavouriteService, FavouriteManager>();
 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+            services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules<Entity<Guid>>));
 
             return services;
         }
@@ -56,7 +58,8 @@ namespace Business
             Func<IServiceCollection, Type, IServiceCollection>? addWithLifeCycle = null
             )
         {
-            var types = assembly.GetTypes().Where(t => t.IsSubclassOf(type) && type != t).ToList();
+            //var types = assembly.GetTypes().Where(t => t.IsSubclassOf(type) && type != t).ToList();
+            var types = assembly.GetTypes().Where(t => t.BaseType?.Name == type.Name && t != type).ToList();
             foreach (var item in types)
                 if (addWithLifeCycle == null)
                     services.AddScoped(item);

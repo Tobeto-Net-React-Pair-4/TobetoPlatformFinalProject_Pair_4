@@ -16,6 +16,6 @@ namespace Business.Abstracts
         Task<Paginate<GetListAnnouncementResponse>> GetListAsync();
         Task<CreatedAnnouncementResponse> AddAsync(CreateAnnouncementRequest createAnnouncementRequest);
         Task<UpdatedAnnouncementResponse> UpdateAsync(UpdateAnnouncementRequest updateAnnouncementRequest);
-        Task<DeletedAnnouncementResponse> DeleteAsync(DeleteAnnouncementRequest deleteAnnouncementRequest);
+        Task<DeletedAnnouncementResponse> DeleteAsync(Guid announcementId);
     }
 }

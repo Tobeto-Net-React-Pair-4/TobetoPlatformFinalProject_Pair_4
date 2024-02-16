@@ -15,6 +15,9 @@ namespace DataAccess.EntityConfigurations
             builder.Property(u => u.FirstName).HasColumnName("FirstName").IsRequired();
             builder.Property(u => u.LastName).HasColumnName("LastName").IsRequired();
             builder.Property(u => u.Email).HasColumnName("Email").IsRequired();
+            builder.Property(u => u.PasswordHash).HasColumnName("PasswordHash").IsRequired();
+            builder.Property(u => u.PasswordSalt).HasColumnName("PasswordSalt").IsRequired();
+            builder.Property(u => u.Status).HasColumnName("Status").IsRequired();
 
             builder.HasOne(u => u.PersonalInfo).WithOne(p => p.User).HasForeignKey<PersonalInfo>(p => p.UserId);
 

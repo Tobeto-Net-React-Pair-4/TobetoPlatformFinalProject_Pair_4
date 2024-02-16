@@ -55,9 +55,9 @@ namespace Business.Concretes
             return _mapper.Map<UpdatedInstructorResponse>(instructor);
         }
 
-        public async Task<GetByIdInstructorResponse> GetByIdAsync(GetByIdInstructorRequest getByIdInstructorRequest)
+        public async Task<GetByIdInstructorResponse> GetByIdAsync(Guid instructorId)
         {
-            Instructor instructor = await _instructorDal.GetAsync(p => p.Id == getByIdInstructorRequest.Id, include: c => c.Include(c => c.Courses));
+            Instructor instructor = await _instructorDal.GetAsync(p => p.Id == instructorId, include: c => c.Include(c => c.Courses));
 
             return _mapper.Map<GetByIdInstructorResponse>(instructor);
         }

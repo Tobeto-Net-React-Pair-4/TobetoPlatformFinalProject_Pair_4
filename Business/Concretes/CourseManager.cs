@@ -8,6 +8,8 @@ using Business.Abstracts;
 using Business.BusinessAspects.Autofac;
 using Business.Dtos.Course.Requests;
 using Business.Dtos.Course.Responses;
+using Business.Dtos.UserCourse.Requests;
+using Business.Dtos.UserCourse.Responses;
 using Business.Rules;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
@@ -24,12 +26,15 @@ namespace Business.Concretes
         private CourseBusinessRules _courseBusinessRules;
         private ICourseDal _courseDal;
         private IMapper _mapper;
-        public CourseManager(ICourseDal courseDal, IMapper mapper, CourseBusinessRules courseBusinessRules)
+        private IUserCourseService _userCourseService;
+        public CourseManager(ICourseDal courseDal, IMapper mapper, CourseBusinessRules courseBusinessRules, IUserCourseService userCourseService)
         {
             _courseDal = courseDal;
             _mapper = mapper;
             _courseBusinessRules = courseBusinessRules;
+            _userCourseService = userCourseService;
         }
+
         [SecuredOperation("admin")]
         [ValidationAspect(typeof(CourseValidator))]
         [CacheRemoveAspect("ICourseService.Get")]
@@ -37,6 +42,8 @@ namespace Business.Concretes
         {
             await _courseBusinessRules.EachCategoryMustContainMax20Course(createCourseRequest.CategoryId);
             await _courseBusinessRules.CheckUniqueCourseName(createCourseRequest.Name);
+            await _courseBusinessRules.CheckIfCategoryExists(createCourseRequest.CategoryId);
+            await _courseBusinessRules.CheckIfInstructorExists(createCourseRequest.InstructorId);
             Course course = _mapper.Map<Course>(createCourseRequest);
             course.Id = Guid.NewGuid();
 
@@ -61,9 +68,10 @@ namespace Business.Concretes
 
         [ValidationAspect(typeof(CourseValidator))]
         [CacheRemoveAspect("ICourseService.Get")]
-
         public async Task<UpdatedCourseResponse> UpdateAsync(UpdateCourseRequest updateCourseRequest)
         {
+            await _courseBusinessRules.CheckIfCategoryExists(updateCourseRequest.CategoryId);
+            await _courseBusinessRules.CheckIfInstructorExists(updateCourseRequest.InstructorId);
             Course course = await _courseDal.GetAsync(p => p.Id == updateCourseRequest.Id);
             _mapper.Map(updateCourseRequest, course);
             course = await _courseDal.UpdateAsync(course);
@@ -77,5 +85,16 @@ namespace Business.Concretes
 
             return _mapper.Map<GetByIdCourseResponse>(course);
         }
+
+        public async Task<Paginate<GetListCourseResponse>> GetListByUserIdAsync(Guid userId)
+        {
+            return await _userCourseService.GetListByUserIdAsync(userId);
+        }
+
+        public async Task<CreatedUserCourseResponse> AssignCourseToUserAsync(CreateUserCourseRequest createUserCourseRequest)
+        {
+            return await _userCourseService.AddAsync(createUserCourseRequest);
+        }
+
     }
 }
