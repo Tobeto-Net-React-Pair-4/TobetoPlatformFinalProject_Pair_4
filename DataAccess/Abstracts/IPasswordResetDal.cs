@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-    public interface ISocialMediaDal : IRepository<SocialMedia, Guid>, IAsyncRepository<SocialMedia, Guid>
+    public interface IPasswordResetDal : IRepository<PasswordReset, Guid>, IAsyncRepository<PasswordReset, Guid>
     {
     }
 }

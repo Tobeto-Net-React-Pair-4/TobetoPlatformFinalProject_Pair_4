@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-    public interface ISocialMediaDal : IRepository<SocialMedia, Guid>, IAsyncRepository<SocialMedia, Guid>
+    public interface ICourseLiveContentDal : IAsyncRepository<CourseLiveContent, Guid>, IRepository<CourseLiveContent, Guid>
     {
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
+using File = Entities.Concretes.File;
 
 namespace DataAccess.Contexts
 {
@@ -36,6 +37,38 @@ namespace DataAccess.Contexts
         public DbSet<Content> Contents { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Favourite> Favourites { get; set; }
+        public DbSet<AsyncContent> AsyncContents { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<ContentLikedByUser> ContentLikedByUsers { get; set; }
+        public DbSet<CourseAsyncContent> CourseAsyncContents { get; set; }
+        public DbSet<CourseFavouritedByUser> CourseFavouritedByUsers { get; set; }
+        public DbSet<CourseLikedByUser> CourseLikedByUsers { get; set; }
+        public DbSet<CourseLiveContent> CourseLiveContents { get; set; }
+        public DbSet<File> Files { get; set; }
+        public DbSet<Homework> Homeworks { get; set; }
+        public DbSet<HomeworkFile> HomeworkFiles { get; set; }
+        public DbSet<InstructorSession> InstructorSessions { get; set; }
+        public DbSet<LiveContent> LiveContents { get; set; }
+        public DbSet<PasswordReset> PasswordResets { get; set; }
+        public DbSet<Session> Sessions { get; set; }
+        public DbSet<UserCalendar> UserCalendars { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public DbSet<Education> Educations { get; set; }   
         public DbSet<OperationClaim> OperationClaims { get; set; }

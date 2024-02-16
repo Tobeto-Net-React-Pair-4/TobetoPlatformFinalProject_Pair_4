@@ -1,6 +1,7 @@
 ﻿using Core.DataAccess.Repositories;
 using DataAccess.Abstracts;
 using DataAccess.Contexts;
+using File = Entities.Concretes.File;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concretes
 {
-    public class EfSocialMediaDal : EfRepositoryBase<SocialMedia, Guid, TobetoContext>, ISocialMediaDal
+    public class EfFileDal : EfRepositoryBase<File, Guid, TobetoContext>, IFileDal
     {
-        public EfSocialMediaDal(TobetoContext context) : base(context)
+        public EfFileDal(TobetoContext context) : base(context)
         {
-            
+
         }
     }
 }

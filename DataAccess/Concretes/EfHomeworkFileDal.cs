@@ -10,11 +10,12 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concretes
 {
-    public class EfSocialMediaDal : EfRepositoryBase<SocialMedia, Guid, TobetoContext>, ISocialMediaDal
+    public class EfHomeworkFileDal : EfRepositoryBase<HomeworkFile, Guid, TobetoContext>, IHomeworkFileDal
     {
-        public EfSocialMediaDal(TobetoContext context) : base(context)
+        public EfHomeworkFileDal(TobetoContext context) : base(context)
         {
             
         }
+
     }
 }

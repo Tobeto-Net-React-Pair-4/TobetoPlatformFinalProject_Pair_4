@@ -10,11 +10,12 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concretes
 {
-    public class EfSocialMediaDal : EfRepositoryBase<SocialMedia, Guid, TobetoContext>, ISocialMediaDal
+    public class EfPasswordResetDal : EfRepositoryBase<PasswordReset, Guid, TobetoContext>, IPasswordResetDal
     {
-        public EfSocialMediaDal(TobetoContext context) : base(context)
+        public EfPasswordResetDal(TobetoContext context) : base(context)
         {
-            
+
         }
+    
     }
 }

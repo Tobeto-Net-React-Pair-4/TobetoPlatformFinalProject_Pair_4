@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concretes
 {
-    public class EfSocialMediaDal : EfRepositoryBase<SocialMedia, Guid, TobetoContext>, ISocialMediaDal
+    public class EfAssignmentDal : EfRepositoryBase<Assignment, Guid, TobetoContext>, IAssignmentDal
     {
-        public EfSocialMediaDal(TobetoContext context) : base(context)
+        public EfAssignmentDal(TobetoContext context) : base(context)
         {
-            
+
         }
     }
 }
