@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concretes
 {
-    public class EfLikedDal: EfRepositoryBase<Liked, Guid, TobetoContext> , ILikedDal
+    public class EfLikedDal: EfRepositoryBase<Like, Guid, TobetoContext> , ILikeDal
     {
         public EfLikedDal(TobetoContext context) : base(context) {
         }

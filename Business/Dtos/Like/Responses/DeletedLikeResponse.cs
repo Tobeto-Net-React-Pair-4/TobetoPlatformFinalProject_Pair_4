@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.Dtos.Liked.Responses
 {
-    public class DeletedLikedResponse
+    public class DeletedLikeResponse
     {
         public Guid Id { get; set; }
         public int Count { get; set; }

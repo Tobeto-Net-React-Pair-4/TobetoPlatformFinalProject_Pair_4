@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.EntityConfigurations
 {
-    public class LikedConfiguration : IEntityTypeConfiguration<Liked>
+    public class LikeConfiguration : IEntityTypeConfiguration<Like>
     {
-        public void Configure(EntityTypeBuilder<Liked> builder)
+        public void Configure(EntityTypeBuilder<Like> builder)
         {
-            builder.ToTable("Likeds").HasKey(b => b.Id);
+            builder.ToTable("Likes").HasKey(b => b.Id);
 
             builder.Property(b => b.Id).HasColumnName("Id").IsRequired();
             builder.Property(b => b.Count).HasColumnName("Count").IsRequired();

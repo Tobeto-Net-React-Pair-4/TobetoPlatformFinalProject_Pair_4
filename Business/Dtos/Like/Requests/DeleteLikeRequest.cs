@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Business.Dtos.Liked.Requests
 {
-    public class UpdateLikedRequest
+    public class DeleteLikeRequest
     {
         public Guid Id { get; set; }
         public int Count { get; set; }
+
     }
 }

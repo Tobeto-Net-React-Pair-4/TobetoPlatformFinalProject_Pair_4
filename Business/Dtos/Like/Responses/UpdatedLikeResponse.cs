@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Dtos.Liked.Requests
+namespace Business.Dtos.Liked.Responses
 {
-    public class DeleteLikedRequest
+    public class UpdatedLikeResponse
     {
         public Guid Id { get; set; }
         public int Count { get; set; }
-
     }
 }

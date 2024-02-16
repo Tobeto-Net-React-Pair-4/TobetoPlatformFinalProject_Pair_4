@@ -41,7 +41,7 @@ namespace DataAccess.EntityConfigurations
 
 
 
-            builder.HasMany(b => b.CalendarEvents);
+            builder.HasMany(b => b.Calendars);
             builder.HasMany(b => b.Contents);
 
 

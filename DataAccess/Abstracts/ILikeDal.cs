@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-    public interface ILikedDal : IAsyncRepository<Liked,Guid>,IRepository<Liked, Guid>
+    public interface ILikeDal : IAsyncRepository<Like,Guid>,IRepository<Like, Guid>
     {
     }
 }
