@@ -9,14 +9,18 @@ namespace Entities.Concretes
 {
     public class Content : Entity<Guid>
     {
-        public Guid CourseId { get; set; }
-        public string Type { get; set; }
-        public string VideoUrl { get; set; }
-        public string Title { get; set; }
+        public Guid CategoryId { get; set; }
+        public Guid LikeId { get; set; }
+
         public string Name { get; set; }
-        public int Score { get; set; }
-        public string Language { get; set; }
-        public string Detail {  get; set; }
-        public Course Course { get; set; }
+        public string Title { get; set; }
+        public string Status { get; set; }
+
+        //public int Score { get; set; }
+        public Category Category { get; set; }
+        public Like Like { get; set; }
+
+        public ICollection<ContentLikedByUser> ContentLikedByUsers { get; set; }
+
     }
 }

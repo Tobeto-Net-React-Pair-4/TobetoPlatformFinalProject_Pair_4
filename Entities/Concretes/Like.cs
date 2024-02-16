@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace Entities.Concretes
 {
-    public class Liked : Entity<Guid>
+    public class Like : Entity<Guid>
     {
         public int Count { get; set; }
-        public ICollection<Course> Courses { get; set; }
+        public Course Course { get; set; }
+        public LiveContent LiveContent { get; set; }
+        public AsyncContent AsyncContent { get; set; }
+
     }
 }

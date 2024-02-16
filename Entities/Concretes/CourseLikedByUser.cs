@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Entities.Concretes
 {
-    public class Favourite : Entity<Guid>
+    public class CourseLikedByUser : Entity<Guid>
     {
         public Guid CourseId { get; set; }
-        public int Count { get; set; }
+        public Guid UserId { get; set; }
         public Course Course { get; set; }
-
+        public User User { get; set; }
     }
 }
