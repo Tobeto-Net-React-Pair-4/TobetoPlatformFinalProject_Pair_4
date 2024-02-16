@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concretes
 {
-    public class EfCalendarEventDal : EfRepositoryBase<CalendarEvent, Guid, TobetoContext>, ICalendarEventDal
+    public class EfCalendarDal : EfRepositoryBase<Calendar, Guid, TobetoContext>, ICalendarDal
     {
-        public EfCalendarEventDal(TobetoContext context) : base(context)
+        public EfCalendarDal(TobetoContext context) : base(context)
         {
         }
     }

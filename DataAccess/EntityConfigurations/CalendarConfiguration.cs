@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.EntityConfigurations
 {
-    public class CalenderEventConfiguration : IEntityTypeConfiguration<CalendarEvent>
+    public class CalendarConfiguration : IEntityTypeConfiguration<Calendar>
     {
-        public void Configure(EntityTypeBuilder<CalendarEvent> builder)
+        public void Configure(EntityTypeBuilder<Calendar> builder)
         {
-            builder.ToTable("CalendarEvents").HasKey(b => b.Id);
+            builder.ToTable("Calendars").HasKey(b => b.Id);
             
             builder.Property(b => b.Id).HasColumnName("Id").IsRequired();
             builder.Property(b => b.CourseId).HasColumnName("CourseId").IsRequired();
@@ -21,7 +21,7 @@ namespace DataAccess.EntityConfigurations
             builder.Property(b => b.EventDetails).HasColumnName("EventDetails").IsRequired();
             
 
-            builder.HasIndex(indexExpression: b => b.EventDate, name: "IX_CalendarEvents_EventDate");
+            builder.HasIndex(indexExpression: b => b.EventDate, name: "IX_Calendars_EventDate");
 
             builder.HasOne(b => b.Course);
 

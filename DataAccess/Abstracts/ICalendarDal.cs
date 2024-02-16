@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-    public interface ICalendarEventDal : IRepository<CalendarEvent, Guid>, IAsyncRepository<CalendarEvent, Guid>
+    public interface ICalendarDal : IRepository<Calendar, Guid>, IAsyncRepository<Calendar, Guid>
     {
     }
 }

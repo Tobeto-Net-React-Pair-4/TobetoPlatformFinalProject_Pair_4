@@ -1,8 +1,7 @@
-﻿namespace Business.Dtos.Course.Responses
+﻿namespace Business.Dtos.Course.Requests
 {
-    public class UpdatedCalendarEventResponse
+    public class CreateCalendarRequest
     {
-        public Guid Id { get; set; }
         public Guid CourseId { get; set; }
         public string InstructorName { get; set; }
         public DateTime EventDate { get; set; } // Etkinlik tarihi

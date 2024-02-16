@@ -1,6 +1,6 @@
-﻿namespace Business.Dtos.Course.Requests
+﻿namespace Business.Dtos.Course.Responses
 {
-    public class UpdateCalendarEventRequest
+    public class CreatedCalendarResponse
     {
         public Guid Id { get; set; }
         public Guid CourseId { get; set; }

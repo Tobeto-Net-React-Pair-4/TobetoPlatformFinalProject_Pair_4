@@ -1,6 +1,9 @@
-﻿namespace Business.Dtos.Course.Responses
+﻿using Business.Dtos.User.Responses;
+using Entities.Concretes;
+
+namespace Business.Dtos.Course.Responses
 {
-    public class DeletedCalendarEventResponse
+    public class GetListCalendarResponse
     {
         public Guid Id { get; set; }
         public Guid CourseId { get; set; }

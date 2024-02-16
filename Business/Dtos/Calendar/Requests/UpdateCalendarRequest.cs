@@ -1,9 +1,6 @@
-﻿using Business.Dtos.User.Responses;
-using Entities.Concretes;
-
-namespace Business.Dtos.Course.Responses
+﻿namespace Business.Dtos.Course.Requests
 {
-    public class GetListCalendarEventResponse
+    public class UpdateCalendarRequest
     {
         public Guid Id { get; set; }
         public Guid CourseId { get; set; }
