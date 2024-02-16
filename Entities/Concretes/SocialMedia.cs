@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concretes
 {
-    public class SocialMediaAccount : Entity<Guid>
+    public class SocialMedia : Entity<Guid>
     {
         public string Name { get; set; }
         public string Url { get; set; }

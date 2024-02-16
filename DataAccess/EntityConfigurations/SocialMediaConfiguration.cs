@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.EntityConfigurations
 {
-    public class SocialMediaConfiguration : IEntityTypeConfiguration<SocialMediaAccount>
+    public class SocialMediaConfiguration : IEntityTypeConfiguration<SocialMedia>
     {
-        public void Configure(EntityTypeBuilder<SocialMediaAccount> builder)
+        public void Configure(EntityTypeBuilder<SocialMedia> builder)
         {
             builder.ToTable("SocialMediaAccounts").HasKey(b => b.Id);
 

@@ -20,7 +20,7 @@ namespace Entities.Concretes
         public ICollection<Education> Educations { get; set; }
         public ICollection<PasswordReset> PasswordResets { get; set; }
 
-        public ICollection<SocialMediaAccount> SocialMediaAccounts { get; set; }
+        public ICollection<SocialMedia> SocialMediaAccounts { get; set; }
         public ICollection<UserSurvey> UserSurveys { get; set; }
         public ICollection<UserCourse> UserCourses { get; set; }
         public ICollection<UserAppeal> UserAppeals { get; set; }
