@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Dtos.Favourite.Requests
+namespace Business.Dtos.Session.Responses
 {
-    public class GetFavouriteRequest
+    public class DeletedSessionResponse
     {
         public Guid Id { get; set; }
-
-        public int Count { get; set; }
-
+        public Guid UserId { get; set; }
+        public Guid SessionId { get; set; }
     }
 }

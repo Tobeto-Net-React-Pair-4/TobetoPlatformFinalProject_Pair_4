@@ -16,7 +16,6 @@ namespace DataAccess
             //services.AddDbContext<NorthwindContext>(options => options.UseInMemoryDatabase("nArchitecture"));
             services.AddDbContext<TobetoContext>(options => options.UseSqlServer(configuration.GetConnectionString("Tobeto")));
 
-
             services.AddScoped<IUserDal, EfUserDal>();
             services.AddScoped<ICourseDal, EfCourseDal>();
             services.AddScoped<ICategoryDal, EfCategoryDal>();
@@ -61,23 +60,6 @@ namespace DataAccess
             services.AddScoped<ISessionDal, EfSessionDal>();
             services.AddScoped<ISessionDal, EfSessionDal>();
             services.AddScoped<IUserCalendarDal, EfUserCalendarDal>();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             return services;
         }

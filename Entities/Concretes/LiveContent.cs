@@ -10,6 +10,7 @@ namespace Entities.Concretes
     {
         public ICollection<Session> Sessions {  get; set; }
         public ICollection<Homework> Homeworks { get; set; }
+        public ICollection<Assignment> Assignments { get; set; }
         public ICollection<CourseLiveContent> CourseLiveContents { get; set; }
 
     }

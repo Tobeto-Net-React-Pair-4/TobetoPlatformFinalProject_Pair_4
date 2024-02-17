@@ -45,7 +45,7 @@ namespace Business.Concretes
         public async Task<Paginate<GetListCourseResponse>> GetListByUserIdAsync(Guid userId)
         {
             var data = await _userCourseDal.GetListAsync(uc => uc.UserId == userId, 
-                include: uc => uc.Include(uc => uc.Course).Include(uc => uc.Course.Category).Include(uc => uc.Course.Liked));
+                include: uc => uc.Include(uc => uc.Course).Include(uc => uc.Course.Category).Include(uc => uc.Course.Like));
             return _mapper.Map<Paginate<GetListCourseResponse>>(data);
         }
     }
