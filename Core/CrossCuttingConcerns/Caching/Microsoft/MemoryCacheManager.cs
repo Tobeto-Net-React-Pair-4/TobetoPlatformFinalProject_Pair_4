@@ -48,6 +48,7 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
 
         public void RemoveByPattern(string pattern)
         {
+            // Önbellek girişleri koleksiyonunu al
             dynamic cacheEntriesCollection = null;
             var cacheEntriesFieldCollectionDefinition = typeof(MemoryCache).GetField("_coherentState", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 
@@ -58,12 +59,21 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
                 cacheEntriesCollection = entriesCollectionValueCollection.GetValue(coherentStateValueCollection);
             }
 
+            // Önbellek koleksiyonu değerlerini tutacak bir liste oluştur
             List<ICacheEntry> cacheCollectionValues = new List<ICacheEntry>();
 
+            // Populate cacheCollectionValues with actual cache entries // Önbellek koleksiyonu değerlerini gerçek önbellek girişleriyle doldur
+            foreach (var cacheEntry in cacheEntriesCollection)
+            {
+                var value = cacheEntry.GetType().GetProperty("Value").GetValue(cacheEntry, null);
+                cacheCollectionValues.Add(value);
+            }
 
+            // Verilen desene uyan anahtarları seç ve kaldır
             var regex = new Regex(pattern, RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            var keysToRemove = cacheCollectionValues.Where(d => regex.IsMatch(d.Key.ToString())).Select(d => d.Key).ToList();
+            var keysToRemove = cacheCollectionValues.Where(d => d != null && regex.IsMatch(d.Key.ToString())).Select(d => d.Key).ToList();
 
+            // Anahtarları önbellekten kaldır
             foreach (var key in keysToRemove)
             {
                 _memoryCache.Remove(key);

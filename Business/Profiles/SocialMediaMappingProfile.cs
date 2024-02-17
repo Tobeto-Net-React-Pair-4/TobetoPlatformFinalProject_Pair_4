@@ -17,15 +17,15 @@ namespace Business.Profiles
     {
         public SocialMediaMappingProfile()
         {
-            CreateMap<SocialMediaAccount, CreateSocialMediaRequest>().ReverseMap();
-            CreateMap<SocialMediaAccount, DeleteSocialMediaRequest>().ReverseMap();
-            CreateMap<SocialMediaAccount, UpdateSocialMediaRequest>().ReverseMap();
-            CreateMap<SocialMediaAccount, CreatedSocialMediaResponse>().ReverseMap();
-            CreateMap<SocialMediaAccount, UpdatedSocialMediaResponse>().ReverseMap();
-            CreateMap<SocialMediaAccount, DeletedSocialMediaResponse>().ReverseMap();
+            CreateMap<SocialMedia, CreateSocialMediaRequest>().ReverseMap();
+            CreateMap<SocialMedia, DeleteSocialMediaRequest>().ReverseMap();
+            CreateMap<SocialMedia, UpdateSocialMediaRequest>().ReverseMap();
+            CreateMap<SocialMedia, CreatedSocialMediaResponse>().ReverseMap();
+            CreateMap<SocialMedia, UpdatedSocialMediaResponse>().ReverseMap();
+            CreateMap<SocialMedia, DeletedSocialMediaResponse>().ReverseMap();
 
-            CreateMap<SocialMediaAccount, GetListSocialMediaResponse>().ReverseMap();
-            CreateMap<Paginate<SocialMediaAccount>, Paginate<GetListSocialMediaResponse>>().ReverseMap();
+            CreateMap<SocialMedia, GetListSocialMediaResponse>().ReverseMap();
+            CreateMap<Paginate<SocialMedia>, Paginate<GetListSocialMediaResponse>>().ReverseMap();
         }
     }
 }

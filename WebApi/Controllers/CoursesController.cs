@@ -1,6 +1,7 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.Category.Requests;
 using Business.Dtos.Course.Requests;
+using Business.Dtos.UserCourse.Requests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,10 +45,22 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpPost("GetById")]
+        [HttpGet("GetById")]
         public async Task<IActionResult> GetByIdAsync([FromQuery] GetByIdCourseRequest getByIdCourseRequest)
         {
             var result = await _courseService.GetByIdAsync(getByIdCourseRequest);
+            return Ok(result);
+        }
+        [HttpGet("GetListByUserId")]
+        public async Task<IActionResult> GetListByUserId([FromQuery] Guid userId)
+        {
+            var result = await _courseService.GetListByUserIdAsync(userId);
+            return Ok(result);
+        }
+        [HttpPost("AssignCourseToUser")]
+        public async Task<IActionResult> AssignCourseToUser([FromBody] CreateUserCourseRequest createUserCourseRequest)
+        {
+            var result = await _courseService.AssignCourseToUserAsync(createUserCourseRequest);
             return Ok(result);
         }
     }

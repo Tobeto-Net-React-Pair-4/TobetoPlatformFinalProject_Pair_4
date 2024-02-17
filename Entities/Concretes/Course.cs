@@ -7,8 +7,8 @@ namespace Entities.Concretes
     {
         public Guid CategoryId { get; set; }
         public Guid InstructorId { get; set; }
-        public Guid LikedId { get; set; }
-        public Guid FavouriteId { get; set; }
+        public Guid LikeId { get; set; }
+
 
 
         public string Name { get; set; }
@@ -20,14 +20,24 @@ namespace Entities.Concretes
         public string Producer { get; set; }
         public int? ContentCount { get; set; }
         public string? Description { get; set; }
-        public string Status { get; set; } 
 
         public Category Category { get; set; }
         public Instructor Instructor { get; set; }
-        public Liked Liked { get; set; }
-        public Favourite Favourite{ get; set; }
-        public ICollection<Content> Contents {  get; set; }        
+        public Like Like { get; set; }
+ 
         public ICollection<UserCourse> UserCourses { get; set; }
-        public ICollection<CalendarEvent> CalendarEvents { get; set; }
+        public ICollection<Calendar> Calendars { get; set; }
+        public ICollection<Assignment> Assignments { get; set; }
+        public ICollection<Homework> Homeworks { get; set; }
+        public ICollection<CourseLiveContent> CourseLiveContents { get; set; }
+        public ICollection<CourseAsyncContent> CourseAsyncContents { get; set; }
+        public ICollection<CourseFavouritedByUser> CourseFavouritedByUser { get; set; }
+        public ICollection<CourseLikedByUser> CourseLikedByUsers { get; set; }
+
+
+
+
+
+
     }
 }

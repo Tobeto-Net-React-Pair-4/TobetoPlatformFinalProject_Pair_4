@@ -23,16 +23,15 @@ namespace DataAccess
             services.AddScoped<IInstructorDal, EfInstructorDal>();
             services.AddScoped<ISurveyDal, EfSurveyDal>();
             services.AddScoped<IUserSurveyDal, EfUserSurveyDal>();
-            services.AddScoped<ICalendarEventDal, EfCalendarEventDal>();
+            services.AddScoped<ICalendarDal, EfCalendarDal>();
             services.AddScoped<IUserCourseDal, EfUserCourseDal>();
             services.AddScoped<IAnnouncementDal, EfAnnouncementDal>();
             services.AddScoped<IUserAnnouncementDal, EfUserAnnouncementDal>();
             services.AddScoped<IAppealDal, EfAppealDal>();
+            services.AddScoped<IUserAppealDal, EfUserAppealDal>();
             services.AddScoped<IEducationDal, EfEducationDal>();
-            services.AddScoped<IUserOperationClaimDal, EfUserOperationClaimDal>();
             services.AddScoped<IOperationClaimDal, EfOperationClaimDal>();
             services.AddScoped<IUserOperationClaimDal, EfUserOperationClaimDal>();
-            services.AddScoped<IUserAppealDal, EfUserAppealDal>();
             services.AddScoped<ICertificateDal, EfCertificateDal>();
             services.AddScoped<ISocialMediaDal, EfSocialMediaDal>();
             services.AddScoped<IExperienceDal, EfExperinceDal>();
@@ -45,8 +44,38 @@ namespace DataAccess
             services.AddScoped<IUserSkillDal, EfUserSkillDal>();
             services.AddScoped<IPersonalInfoDal, EfPersonalInfoDal>();
             services.AddScoped<IContentDal, EfContentDal>();
-            services.AddScoped<ILikedDal, EfLikedDal>();
+            services.AddScoped<ILikeDal, EfLikedDal>();
             services.AddScoped<IFavouriteDal, EfFavouriteDal>();
+            services.AddScoped<IAssignmentDal, EfAssignmentDal>();
+            services.AddScoped<IAsyncContentDal, EfAsyncContentDal>();
+            services.AddScoped<IContentLikedByUserDal, EfContentLikedByUserDal>();
+            services.AddScoped<ICourseAsyncContentDal, EfCourseAsyncContentDal>();
+            services.AddScoped<ICourseFavouritedByUserDal, EfCourseFavouritedByUserDal>();
+            services.AddScoped<ICourseLikedByUserDal, EfCourseLikedByUserDal>();
+            services.AddScoped<ICourseLiveContentDal, EfCourseLiveContentDal>();
+            services.AddScoped<IFileDal, EfFileDal>();
+            services.AddScoped<IHomeworkDal, EfHomeworkDal>();
+            services.AddScoped<IInstructorSessionDal, EfInsturctorSessionDal>();
+            services.AddScoped<ILiveContentDal, EfLiveContentDal>();
+            services.AddScoped<IPasswordResetDal, EfPasswordResetDal>();
+            services.AddScoped<ISessionDal, EfSessionDal>();
+            services.AddScoped<ISessionDal, EfSessionDal>();
+            services.AddScoped<IUserCalendarDal, EfUserCalendarDal>();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

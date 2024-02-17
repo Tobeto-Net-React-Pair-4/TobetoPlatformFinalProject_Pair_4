@@ -43,10 +43,10 @@ namespace WebApi.Controllers
             var result = await _instructorService.GetListAsync();
             return Ok(result);
         }
-        [HttpPost("GetById")]
-        public async Task<IActionResult> GetByIdAsync([FromBody] GetByIdInstructorRequest getByIdInstructorRequest)
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetByIdAsync([FromQuery] Guid instructorId)
         {
-            var result = await _instructorService.GetByIdAsync(getByIdInstructorRequest);
+            var result = await _instructorService.GetByIdAsync(instructorId);
             return Ok(result);
         }
     }

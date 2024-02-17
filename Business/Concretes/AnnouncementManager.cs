@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.Announcement.Requests;
 using Business.Dtos.Announcement.Responses;
 using Business.Dtos.Instructor.Requests;
 using Business.Dtos.Instructor.Responses;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using DataAccess.Concretes;
@@ -20,15 +22,18 @@ namespace Business.Concretes
     {
         private IAnnouncementDal _announcementDal;
         private IMapper _mapper;
-        public AnnouncementManager(IAnnouncementDal announcementDal, IMapper mapper)
+        private AnnouncementBusinessRules _announcementBusinessRules;
+        public AnnouncementManager
+            (IAnnouncementDal announcementDal, IMapper mapper, AnnouncementBusinessRules announcementBusinessRules)
         {
             _announcementDal = announcementDal;
             _mapper = mapper;
+            _announcementBusinessRules = announcementBusinessRules;
         }
 
+        [SecuredOperation("admin")]
         public async Task<CreatedAnnouncementResponse> AddAsync(CreateAnnouncementRequest createAnnouncementRequest)
         {
-
             Announcement announcement = _mapper.Map<Announcement>(createAnnouncementRequest);
             announcement.Id = Guid.NewGuid();
 
@@ -37,10 +42,12 @@ namespace Business.Concretes
             return _mapper.Map<CreatedAnnouncementResponse>(createdAnnouncement);
         }
 
-        public async Task<DeletedAnnouncementResponse> DeleteAsync(DeleteAnnouncementRequest deleteAnnouncementRequest)
+        [SecuredOperation("admin")]
+        public async Task<DeletedAnnouncementResponse> DeleteAsync(Guid announcementId)
         {
+            await _announcementBusinessRules.CheckIfAnnouncementExist(announcementId);
 
-            Announcement announcement = await _announcementDal.GetAsync(p => p.Id == deleteAnnouncementRequest.Id);
+            Announcement announcement = await _announcementDal.GetAsync(p => p.Id == announcementId);
             await _announcementDal.DeleteAsync(announcement);
             return _mapper.Map<DeletedAnnouncementResponse>(announcement);
         }
@@ -51,6 +58,7 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListAnnouncementResponse>>(data);
         }
 
+        [SecuredOperation("admin")]
         public async Task<UpdatedAnnouncementResponse> UpdateAsync(UpdateAnnouncementRequest updateAnnouncementRequest)
         {
 

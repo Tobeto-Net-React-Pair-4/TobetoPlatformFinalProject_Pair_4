@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Dtos.Course.Requests;
 using Business.Dtos.Course.Responses;
+using Business.Dtos.UserCourse.Requests;
+using Business.Dtos.UserCourse.Responses;
 using Core.DataAccess.Paging;
 using Entities.Concretes;
 
@@ -17,5 +19,7 @@ namespace Business.Abstracts
         Task<UpdatedCourseResponse> UpdateAsync(UpdateCourseRequest updateCourseRequest);
         Task<DeletedCourseResponse> DeleteAsync(DeleteCourseRequest deleteCourseRequest);
         Task<GetByIdCourseResponse> GetByIdAsync(GetByIdCourseRequest getByIdCourseRequest);
+        Task<Paginate<GetListCourseResponse>> GetListByUserIdAsync(Guid userId);
+        Task<CreatedUserCourseResponse> AssignCourseToUserAsync(CreateUserCourseRequest createUserCourseRequest);
     }
 }

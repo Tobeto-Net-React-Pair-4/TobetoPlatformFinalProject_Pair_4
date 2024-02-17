@@ -28,13 +28,13 @@ namespace Business.Concretes
             SocialMediaAccount socialMediaAccount = _mapper.Map<SocialMediaAccount>(createSocialMediaRequest);
             socialMediaAccount.Id = Guid.NewGuid();
 
-            SocialMediaAccount createdSocialMedia = await _socialMediaDal.AddAsync(socialMediaAccount);
+            SocialMedia createdSocialMedia = await _socialMediaDal.AddAsync(socialMediaAccount);
             return _mapper.Map<CreatedSocialMediaResponse>(createdSocialMedia);
         }
 
         public async Task<DeletedSocialMediaResponse> DeleteAsync(DeleteSocialMediaRequest deleteSocialMediaRequest)
         {
-            SocialMediaAccount socialMediaAccount = await _socialMediaDal.GetAsync(p => p.Id == deleteSocialMediaRequest.Id);
+            SocialMedia socialMediaAccount = await _socialMediaDal.GetAsync(p => p.Id == deleteSocialMediaRequest.Id);
             await _socialMediaDal.DeleteAsync(socialMediaAccount);
             return _mapper.Map<DeletedSocialMediaResponse>(socialMediaAccount);
         }
@@ -47,7 +47,7 @@ namespace Business.Concretes
 
         public async Task<UpdatedSocialMediaResponse> UpdateAsync(UpdateSocialMediaRequest updateSocialMediaRequest)
         {
-            SocialMediaAccount socialMediaAccount = await _socialMediaDal.GetAsync(p => p.Id == updateSocialMediaRequest.Id);
+            SocialMedia socialMediaAccount = await _socialMediaDal.GetAsync(p => p.Id == updateSocialMediaRequest.Id);
             _mapper.Map(updateSocialMediaRequest, socialMediaAccount);
             await _socialMediaDal.UpdateAsync(socialMediaAccount);
             return _mapper.Map<UpdatedSocialMediaResponse>(socialMediaAccount);

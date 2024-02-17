@@ -13,12 +13,15 @@ namespace DataAccess.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Instructor> builder)
         {
-            builder.ToTable("Instructors").HasKey(b => b.Id);
+            builder.ToTable("Instructors").HasKey(i => i.Id);
 
-            builder.Property(b => b.Id).HasColumnName("Id").IsRequired();
-            builder.Property(b => b.Name).HasColumnName("Name").IsRequired();
+            builder.Property(i => i.Id).HasColumnName("Id").IsRequired();
+            builder.Property(i => i.Name).HasColumnName("Name").IsRequired();
 
-            builder.HasQueryFilter(b => !b.DeletedDate.HasValue); 
+            builder.HasQueryFilter(i => !i.DeletedDate.HasValue);
+
+            builder.HasMany(i => i.InstructorSessions).WithOne(ins => ins.Instructor).HasForeignKey(ins => ins.InstructorId);
+            builder.HasMany(i => i.Calendars).WithOne(c => c.Instructor).HasForeignKey(c => c.InstructorId);
         }
     }
 }

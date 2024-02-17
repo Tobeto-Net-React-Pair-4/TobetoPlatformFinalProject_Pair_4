@@ -16,6 +16,7 @@
 
 
         public static string UserNotExists = "Kullanıcı kayıtlı değil";
+        public static string SameCategoryName = "Aynı isimde bir kategori bulunamaz";
 
 
     }

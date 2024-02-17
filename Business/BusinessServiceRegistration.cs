@@ -2,6 +2,7 @@
 using Business.Concretes;
 using Business.Rules;
 using Core.Business.Rules;
+using Core.Entities.Concrete;
 using Core.Utilities.Security.JWT;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -12,16 +13,14 @@ namespace Business
     {
         public static IServiceCollection AddBusinessServices(this IServiceCollection services)
         {
-            services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
 
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<ICourseService, CourseManager>();
             services.AddScoped<IInstructorService, InstructorManager>();
             services.AddScoped<IUserService, UserManager>();
             services.AddScoped<ISurveyService, SurveyManager>();
             services.AddScoped<IUserSurveyService, UserSurveyManager>();
-            services.AddScoped<ICalendarEventService, CalendarEventManager>();
+            services.AddScoped<ICalendarService, CalendarManager>();
             services.AddScoped<IUserCourseService, UserCourseManager>();
             services.AddScoped<ICertificateService, CertificateManager>();
             services.AddScoped<IAnnouncementService, AnnouncementManager>();
@@ -43,9 +42,12 @@ namespace Business
             services.AddScoped<IUserSkillService, UserSkillManager>();
             services.AddScoped<IPersonalInfoService, PersonalInfoManager>();
             services.AddScoped<IContentService, ContentManager>();
-            services.AddScoped<ILikedService, LikedManager>();
+            services.AddScoped<ILikeService, LikeManager>();
             services.AddScoped<IFavouriteService, FavouriteManager>();
 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+            services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules<Entity<Guid>>));
 
 
             //Business Rules
@@ -68,7 +70,8 @@ namespace Business
             Func<IServiceCollection, Type, IServiceCollection>? addWithLifeCycle = null
             )
         {
-            var types = assembly.GetTypes().Where(t => t.IsSubclassOf(type) && type != t).ToList();
+            //var types = assembly.GetTypes().Where(t => t.IsSubclassOf(type) && type != t).ToList();
+            var types = assembly.GetTypes().Where(t => t.BaseType?.Name == type.Name && t != type).ToList();
             foreach (var item in types)
                 if (addWithLifeCycle == null)
                     services.AddScoped(item);

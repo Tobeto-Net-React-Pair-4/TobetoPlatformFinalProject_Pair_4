@@ -14,5 +14,6 @@ namespace Business.Abstracts
         Task<GetByIdUserResponse> GetByIdAsync(GetByIdUserRequest getByIdUserRequest);
         List<IOperationClaim> GetClaims(IUser user);
         Task<IUser> GetByMail(string email);
+        Task<GetUserResponse> GetUserByMailAsync(string email);
     }
 }

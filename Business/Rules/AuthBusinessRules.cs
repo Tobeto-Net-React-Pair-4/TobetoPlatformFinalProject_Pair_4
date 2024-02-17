@@ -5,26 +5,28 @@ using Core.Business.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Entities.Abstract;
 using Core.Utilities.Security.Hashing;
+using DataAccess.Abstracts;
+using Entities.Concretes;
 
 namespace Business.Rules
 {
-    public class AuthBusinessRules : BaseBusinessRules
+    public class AuthBusinessRules : BaseBusinessRules<User>
     {
         IUserService _userService;
-        public AuthBusinessRules(IUserService userService)
+        public AuthBusinessRules(IUserService userService, IUserDal userDal) : base(userDal)
         {
             _userService = userService;
         }
 
         public async Task UserExists(string email)
         {
-            if (await _userService.GetByMail(email) != null)
+            if (await _userService.GetByMailAsync(email) != null)
                 throw new BusinessException(BusinessMessages.UserExists);
         }
 
         public async Task<User> UserToCheck(UserLoginRequest userLoginRequest)
         {
-            var userToCheck = await _userService.GetByMail(userLoginRequest.Email);
+            var userToCheck = await _userService.GetByMailAsync(userLoginRequest.Email);
 
             if (userToCheck == null)
                 throw new BusinessException(BusinessMessages.UserNotExists);

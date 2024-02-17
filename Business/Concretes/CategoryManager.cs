@@ -17,20 +17,19 @@ namespace Business.Concretes
 {
     public class CategoryManager : ICategoryService
     {
-        private ICourseService _courseService;
         private ICategoryDal _categoryDal;
         private IMapper _mapper;
         private CategoryBusinessRules _categoryBusinessRules;
-        public CategoryManager(ICategoryDal categoryDal, IMapper mapper, CategoryBusinessRules categoryBusinessRules, ICourseService courseService, IInstructorService instructorService)
+        public CategoryManager(ICategoryDal categoryDal, IMapper mapper, CategoryBusinessRules categoryBusinessRules)
         {
             _categoryDal = categoryDal;
             _mapper = mapper;
             _categoryBusinessRules = categoryBusinessRules;
-            _courseService = courseService;
         }
         public async Task<CreatedCategoryResponse> AddAsync(CreateCategoryRequest createCategoryRequest)
         {
             await _categoryBusinessRules.MaximumCountIsTen();
+            await _categoryBusinessRules.SameCategoryName(createCategoryRequest.Name);
 
             Category category = _mapper.Map<Category>(createCategoryRequest);
             category.Id = Guid.NewGuid();
@@ -61,9 +60,9 @@ namespace Business.Concretes
             return _mapper.Map<UpdatedCategoryResponse>(category);
         }
 
-        public async Task<GetByIdCategoryResponse> GetByIdAsync(GetByIdCategoryRequest getByIdCategoryRequest)
+        public async Task<GetByIdCategoryResponse> GetByIdAsync(Guid categoryId)
         {
-            Category category = await _categoryDal.GetAsync(p => p.Id == getByIdCategoryRequest.Id, include: c => c.Include(c => c.Courses));
+            Category category = await _categoryDal.GetAsync(p => p.Id == categoryId, include: c => c.Include(c => c.Courses));
 
             return _mapper.Map<GetByIdCategoryResponse>(category);
         }

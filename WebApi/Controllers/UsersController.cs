@@ -44,10 +44,22 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpPost("GetById")]
+        [HttpGet("GetById")]
         public async Task<IActionResult> GetById([FromQuery] GetByIdUserRequest getByIdUserRequest)
         {
             var result = await _userService.GetByIdAsync(getByIdUserRequest);
+            return Ok(result);
+        }
+        [HttpGet("GetByMail")]
+        public async Task<IActionResult> GetByMail([FromQuery] string email)
+        {
+            var result = await _userService.GetByMailAsync(email);
+            return Ok(result);
+        }
+        [HttpGet("GetUserByMail")]
+        public async Task<IActionResult> GetUserByMail([FromQuery] string email)
+        {
+            var result = await _userService.GetUserByMailAsync(email);
             return Ok(result);
         }
     }
