@@ -14,7 +14,7 @@ namespace Entities.Concretes
 
         public string Name { get; set; }
         public string Title { get; set; }
-        public string Status { get; set; }
+        public bool Status { get; set; }
 
         //public int Score { get; set; }
         public Category Category { get; set; }

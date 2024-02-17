@@ -24,7 +24,7 @@ namespace DataAccess.EntityConfigurations
             builder.Property(a => a.VideoUrl).HasColumnName("VideoUrl ").IsRequired();
 
             builder.HasQueryFilter(a => !a.DeletedDate.HasValue);
-            builder.HasMany(a => a.Files).WithOne(f => f.Assignment).HasForeignKey(f => f.AsseignmentId);
+            builder.HasMany(a => a.Files).WithOne(f => f.Assignment).HasForeignKey(f => f.AssignmentId);
 
 
 
