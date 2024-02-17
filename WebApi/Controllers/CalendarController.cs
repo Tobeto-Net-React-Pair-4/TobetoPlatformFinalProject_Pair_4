@@ -31,9 +31,9 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> DeleteAsync([FromBody]DeleteCalendarRequest deleteCalendarRequest)
+        public async Task<IActionResult> DeleteAsync([FromQuery] Guid calendarId)
         {
-            var result = await _calendarService.DeleteAsync(deleteCalendarRequest);
+            var result = await _calendarService.DeleteAsync(calendarId);
             return Ok(result);
         }
 

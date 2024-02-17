@@ -1,5 +1,6 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.Category.Requests;
+using Entities.Concretes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,9 +31,9 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> DeleteAsync([FromBody] DeleteCategoryRequest deleteCategoryRequest)
+        public async Task<IActionResult> DeleteAsync([FromQuery] Guid categoryId)
         {
-            var result = await _categoryService.DeleteAsync(deleteCategoryRequest);
+            var result = await _categoryService.DeleteAsync(categoryId);
             return Ok(result);
         }
 

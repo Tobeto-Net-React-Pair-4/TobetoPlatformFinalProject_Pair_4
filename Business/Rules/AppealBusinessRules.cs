@@ -2,6 +2,7 @@
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Utilities.Messages;
 using DataAccess.Abstracts;
+using DataAccess.Concretes;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace Business.Rules
 {
-    public class AnnouncementBusinessRules : BaseBusinessRules<Announcement>
+    public class AppealBusinessRules : BaseBusinessRules<Appeal>
     {
-        IAnnouncementDal _announcementDal;
-        public AnnouncementBusinessRules(IAnnouncementDal announcementDal) : base(announcementDal)
+        IAppealDal _appealDal;
+        public AppealBusinessRules(IAppealDal appealDal) : base(appealDal)
         {
-            _announcementDal = announcementDal;
+            _appealDal = appealDal;
         }
     }
 }

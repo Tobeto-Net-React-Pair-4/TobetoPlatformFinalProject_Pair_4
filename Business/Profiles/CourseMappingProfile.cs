@@ -18,9 +18,7 @@ namespace Business.Profiles
         public CourseMappingProfile()
         {
             CreateMap<Course, CreateCourseRequest>().ReverseMap();
-            CreateMap<Course, DeleteCourseRequest>().ReverseMap();
             CreateMap<Course, UpdateCourseRequest>().ReverseMap();
-            CreateMap<Course, GetByIdCourseRequest>().ReverseMap();
 
             CreateMap<Course, CreatedCourseResponse>().ReverseMap();
             CreateMap<Course, UpdatedCourseResponse>().ReverseMap();

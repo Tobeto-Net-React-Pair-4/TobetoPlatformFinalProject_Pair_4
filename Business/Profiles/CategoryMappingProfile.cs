@@ -16,9 +16,7 @@ namespace Business.Profiles
         public CategoryMappingProfile()
         {
             CreateMap<Category, CreateCategoryRequest>().ReverseMap();
-            CreateMap<Category, DeleteCategoryRequest>().ReverseMap();
             CreateMap<Category, UpdateCategoryRequest>().ReverseMap();
-            CreateMap<Category, GetByIdCategoryRequest>().ReverseMap();
             CreateMap<Category, CreatedCategoryResponse>().ReverseMap();
             CreateMap<Category, UpdatedCategoryResponse>().ReverseMap();
             CreateMap<Category, DeletedCategoryResponse>().ReverseMap();

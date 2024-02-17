@@ -29,9 +29,9 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete([FromBody] DeleteCertificateRequest deleteCertificateRequest)
+        public async Task<IActionResult> Delete([FromQuery] Guid certificateId)
         {
-            var result = await _certificateService.DeleteAsync(deleteCertificateRequest);
+            var result = await _certificateService.DeleteAsync(certificateId);
             return Ok(result);
         }
 
@@ -41,6 +41,5 @@ namespace WebApi.Controllers
             var result = await _certificateService.GetListAsync();
             return Ok(result);
         }
-
     }
 }

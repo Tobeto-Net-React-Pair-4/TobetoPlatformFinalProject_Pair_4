@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.Exam.Requests;
 using Business.Dtos.Exam.Responses;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -17,11 +19,15 @@ namespace Business.Concretes
     {
         private IExamDal _examDal;
         private IMapper _mapper;
-        public ExamManager(IExamDal examDal, IMapper mapper)
+        private ExamBusinessRules _examBusinessRules;
+        public ExamManager(IExamDal examDal, IMapper mapper, ExamBusinessRules examBusinessRules)
         {
             _examDal = examDal;
             _mapper = mapper;
+            _examBusinessRules = examBusinessRules;
         }
+
+        [SecuredOperation("admin")]
         public async Task<CreatedExamResponse> AddAsync(CreateExamRequest createExamRequest)
         {
             Exam exam = _mapper.Map<Exam>(createExamRequest);
@@ -31,21 +37,29 @@ namespace Business.Concretes
             return _mapper.Map<CreatedExamResponse>(createdExam);
         }
 
-        public async Task<DeletedExamResponse> DeleteAsync(DeleteExamRequest deleteExamRequest)
+        [SecuredOperation("admin")]
+        public async Task<DeletedExamResponse> DeleteAsync(Guid examId)
         {
-            Exam exam = await _examDal.GetAsync(e => e.Id == deleteExamRequest.Id);
+            await _examBusinessRules.CheckIfExistsById(examId);
+
+            Exam exam = await _examDal.GetAsync(e => e.Id == examId);
             await _examDal.DeleteAsync(exam);
             return _mapper.Map<DeletedExamResponse>(exam);
         }
 
-        public async Task<GetByIdExamResponse> GetByIdAsync(GetByIdExamRequest getByIdExamRequest)
+        public async Task<GetByIdExamResponse> GetByIdAsync(Guid examId)
         {
-            Exam exam = await _examDal.GetAsync(e => e.Id == getByIdExamRequest.Id);
+            await _examBusinessRules.CheckIfExistsById(examId);
+
+            Exam exam = await _examDal.GetAsync(e => e.Id == examId);
             return _mapper.Map<GetByIdExamResponse>(exam);
         }
 
+        [SecuredOperation("admin")]
         public async Task<UpdatedExamResponse> UpdateAsync(UpdateExamRequest updateExamRequest)
         {
+            await _examBusinessRules.CheckIfExistsById(updateExamRequest.Id);
+
             Exam exam = await _examDal.GetAsync(e => e.Id == updateExamRequest.Id);
             _mapper.Map(updateExamRequest, exam);
             exam = await _examDal.UpdateAsync(exam);

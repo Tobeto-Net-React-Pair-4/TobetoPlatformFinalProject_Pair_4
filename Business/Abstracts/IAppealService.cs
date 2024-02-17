@@ -16,6 +16,6 @@ namespace Business.Abstracts
         Task<Paginate<GetListAppealResponse>> GetListAsync();
         Task<CreatedAppealResponse> AddAsync(CreateAppealRequest createAppealRequest);
         Task<UpdatedAppealResponse> UpdateAsync(UpdateAppealRequest updateAppealRequest);
-        Task<DeletedAppealResponse> DeleteAsync(DeleteAppealRequest deleteAppealRequest);
+        Task<DeletedAppealResponse> DeleteAsync(Guid appealId);
     }
 }

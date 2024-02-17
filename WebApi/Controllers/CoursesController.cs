@@ -2,6 +2,7 @@
 using Business.Dtos.Category.Requests;
 using Business.Dtos.Course.Requests;
 using Business.Dtos.UserCourse.Requests;
+using Entities.Concretes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,9 +33,9 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> DeleteAsync([FromBody] DeleteCourseRequest deleteCourseRequest)
+        public async Task<IActionResult> DeleteAsync([FromQuery] Guid courseId)
         {
-            var result = await _courseService.DeleteAsync(deleteCourseRequest);
+            var result = await _courseService.DeleteAsync(courseId);
             return Ok(result);
         }
 
@@ -46,9 +47,9 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("GetById")]
-        public async Task<IActionResult> GetByIdAsync([FromQuery] GetByIdCourseRequest getByIdCourseRequest)
+        public async Task<IActionResult> GetByIdAsync([FromQuery] Guid courseId)
         {
-            var result = await _courseService.GetByIdAsync(getByIdCourseRequest);
+            var result = await _courseService.GetByIdAsync(courseId);
             return Ok(result);
         }
         [HttpGet("GetListByUserId")]

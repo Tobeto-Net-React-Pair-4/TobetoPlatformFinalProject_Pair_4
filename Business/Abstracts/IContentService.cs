@@ -14,9 +14,9 @@ namespace Business.Abstracts
     public interface IContentService
     {
         Task<Paginate<GetListContentResponse>> GetListAsync();
-        Task<GetContentResponse> GetByIdAsync(GetContentRequest getContentRequest);
+        Task<GetContentResponse> GetByIdAsync(Guid contentId);
         Task<CreatedContentResponse> AddAsync(CreateContentRequest createContentRequest);
         Task<UpdatedContentResponse> UpdateAsync(UpdateContentRequest updateContentRequest);
-        Task<DeletedContentResponse> DeleteAsync(DeleteContentRequest deleteContentRequest);
+        Task<DeletedContentResponse> DeleteAsync(Guid contentId);
     }
 }

@@ -72,9 +72,9 @@ namespace Business.Concretes
             return _mapper.Map<GetUserResponse>(user);
 
         }
-        public async Task<GetByIdUserResponse> GetByIdAsync(GetByIdUserRequest getByIdUserRequest)
+        public async Task<GetByIdUserResponse> GetByIdAsync(Guid userId)
         {
-            User user = await _userDal.GetAsync(u => u.Id == getByIdUserRequest.Id);
+            User user = await _userDal.GetAsync(u => u.Id == userId);
             return _mapper.Map<GetByIdUserResponse>(user);
         }
 

@@ -44,6 +44,7 @@ namespace Business.Concretes
             await _courseBusinessRules.CheckUniqueCourseName(createCourseRequest.Name);
             await _courseBusinessRules.CheckIfCategoryExists(createCourseRequest.CategoryId);
             await _courseBusinessRules.CheckIfInstructorExists(createCourseRequest.InstructorId);
+
             Course course = _mapper.Map<Course>(createCourseRequest);
             course.Id = Guid.NewGuid();
 
@@ -51,6 +52,7 @@ namespace Business.Concretes
 
             return _mapper.Map<CreatedCourseResponse>(createdCourse);
         }
+
         [CacheAspect]
         public async Task<Paginate<GetListCourseResponse>> GetListAsync()
         {
@@ -59,30 +61,38 @@ namespace Business.Concretes
 
             return _mapper.Map<Paginate<GetListCourseResponse>>(data);
         }
-        public async Task<DeletedCourseResponse> DeleteAsync(DeleteCourseRequest deleteCourseRequest)
+
+        [SecuredOperation("admin")]
+        public async Task<DeletedCourseResponse> DeleteAsync(Guid courseId)
         {
-            Course course = await _courseDal.GetAsync(p => p.Id == deleteCourseRequest.Id);
+            await _courseBusinessRules.CheckIfExistsById(courseId);
+
+            Course course = await _courseDal.GetAsync(p => p.Id == courseId);
             await _courseDal.DeleteAsync(course);
             return _mapper.Map<DeletedCourseResponse>(course);
         }
 
         [ValidationAspect(typeof(CourseValidator))]
         [CacheRemoveAspect("ICourseService.Get")]
+        [SecuredOperation("admin")]
         public async Task<UpdatedCourseResponse> UpdateAsync(UpdateCourseRequest updateCourseRequest)
         {
+            await _courseBusinessRules.CheckIfExistsById(updateCourseRequest.Id);
             await _courseBusinessRules.CheckIfCategoryExists(updateCourseRequest.CategoryId);
             await _courseBusinessRules.CheckIfInstructorExists(updateCourseRequest.InstructorId);
+
             Course course = await _courseDal.GetAsync(p => p.Id == updateCourseRequest.Id);
             _mapper.Map(updateCourseRequest, course);
             course = await _courseDal.UpdateAsync(course);
             return _mapper.Map<UpdatedCourseResponse>(course);
         }
 
-        public async Task<GetByIdCourseResponse> GetByIdAsync(GetByIdCourseRequest getByIdCourseRequest)
+        public async Task<GetByIdCourseResponse> GetByIdAsync(Guid courseId)
         {
-            Course course = await _courseDal.GetAsync(p => p.Id == getByIdCourseRequest.Id,
-                include: i => i.Include(i => i.Instructor).Include(ca => ca.Category).Include(u => u.UserCourses));
+            await _courseBusinessRules.CheckIfExistsById(courseId);
 
+            Course course = await _courseDal.GetAsync(p => p.Id == courseId,
+                include: i => i.Include(i => i.Instructor).Include(ca => ca.Category).Include(u => u.UserCourses));
             return _mapper.Map<GetByIdCourseResponse>(course);
         }
 
