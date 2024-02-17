@@ -18,14 +18,5 @@ namespace Business.Rules
         {
             _announcementDal = announcementDal;
         }
-        
-        public async Task CheckIfAnnouncementExist(Guid announcementId)
-        {
-            Announcement announcement = await _announcementDal.GetAsync(a => a.Id == announcementId);
-            if (announcement == null)
-            {
-                throw new BusinessException(BusinessCoreMessages.EntityNotFound);
-            }
-        }
     }
 }

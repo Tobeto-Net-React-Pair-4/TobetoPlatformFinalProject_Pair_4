@@ -12,7 +12,7 @@ namespace Business.Abstracts
         Task<CreatedUserResponse> AddAsync(CreateUserRequest createUserRequest);
         Task<UpdatedUserResponse> UpdateAsync(UpdateUserRequest updateUserRequest);
         Task<DeletedUserResponse> DeleteAsync(DeleteUserRequest deleteUserRequest);
-        Task<GetByIdUserResponse> GetByIdAsync(GetByIdUserRequest getByIdUserRequest);
+        Task<GetByIdUserResponse> GetByIdAsync(Guid userId);
         List<IOperationClaim> GetClaims(IUser user);
         Task<User> GetByMailAsync(string email);
         Task<GetUserResponse> GetUserByMailAsync(string email);

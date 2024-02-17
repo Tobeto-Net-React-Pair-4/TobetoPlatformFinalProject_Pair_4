@@ -8,8 +8,8 @@ namespace Business.Abstracts
     {
         Task<CreatedExamQuestionResponse> AddAsync(CreateExamQuestionRequest createExamQuestionRequest);
         Task<UpdatedExamQuestionResponse> UpdateAsync(UpdateExamQuestionRequest updateExamQuestionRequest);
-        Task<DeletedExamQuestionResponse> DeleteAsync(DeleteExamQuestionRequest deleteExamQuestionRequest);
-        Task<GetByIdExamQuestionResponse> GetByIdAsync(GetByIdExamQuestionRequest getByIdExamQuestionRequest);
+        Task<DeletedExamQuestionResponse> DeleteAsync(Guid examQuestionId);
+        Task<GetByIdExamQuestionResponse> GetByIdAsync(Guid examQuestionId);
         Task<Paginate<GetListExamQuestionResponse>> GetListAsync();
     }
 

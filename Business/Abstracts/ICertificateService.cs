@@ -9,7 +9,7 @@ namespace Business.Abstracts
         Task<Paginate<GetListCertificateResponse>> GetListAsync();
         Task<CreatedCertificateResponse> AddAsync(CreateCertificateRequest createCertificateRequest);
         Task<UpdatedCertificateResponse> UpdateAsync(UpdateCertificateRequest updateCertificateRequest);
-        Task<DeletedCertificateResponse> DeleteAsync(DeleteCertificateRequest deleteCertificateRequest);
+        Task<DeletedCertificateResponse> DeleteAsync(Guid certificateId);
 
     }
 }

@@ -16,9 +16,7 @@ namespace Business.Profiles
         public ExamQuestionMappingProfile()
         {
             CreateMap<ExamQuestion, CreateExamQuestionRequest>().ReverseMap();
-            CreateMap<ExamQuestion, DeleteExamQuestionRequest>().ReverseMap();
             CreateMap<ExamQuestion, UpdateExamQuestionRequest>().ReverseMap();
-            CreateMap<ExamQuestion, GetByIdExamQuestionRequest>().ReverseMap();
 
             CreateMap<ExamQuestion, CreatedExamQuestionResponse>().ReverseMap();
             CreateMap<ExamQuestion, DeletedExamQuestionResponse>().ReverseMap();

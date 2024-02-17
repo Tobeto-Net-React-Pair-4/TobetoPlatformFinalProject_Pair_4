@@ -2,17 +2,9 @@
 using Business.Abstracts;
 using Business.Dtos.Favourite.Requests;
 using Business.Dtos.Favourite.Responses;
-using Business.Dtos.Liked.Requests;
-using Business.Dtos.Liked.Responses;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using DataAccess.Concretes;
 using Entities.Concretes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concretes
 {
@@ -35,16 +27,16 @@ namespace Business.Concretes
             return _mapper.Map<CreatedFavouriteResponse>(createdFavourite);
         }
 
-        public async Task<DeletedFavouriteResponse> DeleteAsync(DeleteFavouriteRequest deleteFavouriteRequest)
+        public async Task<DeletedFavouriteResponse> DeleteAsync(Guid Id)
         {
-            Favourite favourite = await _favouriteDal.GetAsync(p => p.Id == deleteFavouriteRequest.Id);
+            Favourite favourite = await _favouriteDal.GetAsync(p => p.Id == Id);
             await _favouriteDal.DeleteAsync(favourite);
             return _mapper.Map<DeletedFavouriteResponse>(favourite);
         }
 
-        public async Task<GetFavouriteResponse> GetByIdAsync(GetFavouriteRequest getFavouriteRequest)
+        public async Task<GetFavouriteResponse> GetByIdAsync(Guid Id)
         {
-            var result = await _favouriteDal.GetAsync(p => p.Id == getFavouriteRequest.Id);
+            var result = await _favouriteDal.GetAsync(p => p.Id == Id);
             return _mapper.Map<GetFavouriteResponse>(result);
         }
 
@@ -61,5 +53,6 @@ namespace Business.Concretes
             favourite = await _favouriteDal.UpdateAsync(favourite);
             return _mapper.Map<UpdatedFavouriteResponse>(favourite);
         }
+
     }
 }

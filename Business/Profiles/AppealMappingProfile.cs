@@ -18,7 +18,6 @@ namespace Business.Profiles
         public AppealMappingProfile()
         {
             CreateMap<Appeal, CreateAppealRequest>().ReverseMap();
-            CreateMap<Appeal, DeleteAppealRequest>().ReverseMap();
             CreateMap<Appeal, UpdateAppealRequest>().ReverseMap();
             CreateMap<Appeal, CreatedAppealResponse>().ReverseMap();
             CreateMap<Appeal, UpdatedAppealResponse>().ReverseMap();

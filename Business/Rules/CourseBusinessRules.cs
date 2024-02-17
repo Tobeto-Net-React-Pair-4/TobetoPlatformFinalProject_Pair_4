@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.Dtos.Category.Responses;
 using Business.Dtos.Instructor.Responses;
+using Business.Dtos.User.Responses;
 using Core.Business.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Utilities.Messages;

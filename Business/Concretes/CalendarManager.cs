@@ -1,24 +1,13 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.Calendar.Responses;
-using Business.Dtos.Category.Requests;
 using Business.Dtos.Course.Requests;
 using Business.Dtos.Course.Responses;
-using Business.Dtos.Instructor.Requests;
-using Business.Dtos.Instructor.Responses;
-using Business.Dtos.User.Requests;
-using Business.Dtos.User.Responses;
 using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using DataAccess.Concretes;
-using Entities.Concretes;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Calendar = Entities.Concretes.Calendar;
 
 namespace Business.Concretes
 {
@@ -26,20 +15,34 @@ namespace Business.Concretes
     {
         private ICalendarDal _calendarDal;
         private IMapper _mapper;
-        public CalendarManager(ICalendarDal calendarDal, IMapper mapper)
+        private CalendarBusinessRules _calendarBusinessRules;
+        public CalendarManager(ICalendarDal calendarDal, IMapper mapper, CalendarBusinessRules calendarBusinessRules)
         {
             _calendarDal = calendarDal;
             _mapper = mapper;
+            _calendarBusinessRules = calendarBusinessRules;
         }
 
-        public Task<CreatedCalendarResponse> AddAsync(CreateCalendarRequest createCalendarRequest)
+        [SecuredOperation("admin")]
+        public async Task<CreatedCalendarResponse> AddAsync(CreateCalendarRequest createCalendarRequest)
         {
-            throw new NotImplementedException();
+            await _calendarBusinessRules.CheckIfCourseExists(createCalendarRequest.CourseId);
+
+            Calendar Calendar = _mapper.Map<Calendar>(createCalendarRequest);
+            Calendar.Id = Guid.NewGuid();
+
+            Calendar createdCalendar = await _calendarDal.AddAsync(Calendar);
+            return _mapper.Map<CreatedCalendarResponse>(createdCalendar);
         }
 
-        public Task<DeletedCalendarResponse> DeleteAsync(Guid calendarId)
+        [SecuredOperation("admin")]
+        public async Task<DeletedCalendarResponse> DeleteAsync(Guid calendarId)
         {
-            throw new NotImplementedException();
+            await _calendarBusinessRules.CheckIfExistsById(calendarId);
+
+            Calendar Calendar = await _calendarDal.GetAsync(p => p.Id == calendarId);
+            await _calendarDal.DeleteAsync(Calendar);
+            return _mapper.Map<DeletedCalendarResponse>(Calendar);
         }
 
         public Task<GetCalendarResponse> GetByIdAsync(Guid calendarId)
@@ -47,14 +50,24 @@ namespace Business.Concretes
             throw new NotImplementedException();
         }
 
-        public Task<Paginate<GetListCalendarResponse>> GetListAsync()
+        [SecuredOperation("admin")]
+        public async Task<UpdatedCalendarResponse> UpdateAsync(UpdateCalendarRequest updateCalendarRequest)
         {
-            throw new NotImplementedException();
+            await _calendarBusinessRules.CheckIfExistsById(updateCalendarRequest.Id);
+            await _calendarBusinessRules.CheckIfCourseExists(updateCalendarRequest.CourseId);
+
+            Calendar Calendar = await _calendarDal.GetAsync(p => p.Id == updateCalendarRequest.Id);
+            _mapper.Map(updateCalendarRequest, Calendar);
+            Calendar = await _calendarDal.UpdateAsync(Calendar);
+            return _mapper.Map<UpdatedCalendarResponse>(Calendar);
+        }
+        public async Task<GetCalendarResponse> GetByIdAsync(Guid Id)
+        {
+            Calendar calendar = await _calendarDal.GetAsync(p => p.Id == Id);
+
+            return _mapper.Map<GetCalendarResponse>(calendar);
         }
 
-        public Task<UpdatedCalendarResponse> UpdateAsync(UpdateCalendarRequest updateCalendarRequest)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
