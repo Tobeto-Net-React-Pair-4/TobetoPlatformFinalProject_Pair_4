@@ -39,16 +39,11 @@ namespace Business.Concretes
         public async Task<DeletedCalendarResponse> DeleteAsync(Guid calendarId)
         {
             await _calendarBusinessRules.CheckIfExistsById(calendarId);
-
             Calendar Calendar = await _calendarDal.GetAsync(p => p.Id == calendarId);
             await _calendarDal.DeleteAsync(Calendar);
             return _mapper.Map<DeletedCalendarResponse>(Calendar);
         }
 
-        public Task<GetCalendarResponse> GetByIdAsync(Guid calendarId)
-        {
-            throw new NotImplementedException();
-        }
 
         [SecuredOperation("admin")]
         public async Task<UpdatedCalendarResponse> UpdateAsync(UpdateCalendarRequest updateCalendarRequest)
@@ -64,10 +59,14 @@ namespace Business.Concretes
         public async Task<GetCalendarResponse> GetByIdAsync(Guid Id)
         {
             Calendar calendar = await _calendarDal.GetAsync(p => p.Id == Id);
-
             return _mapper.Map<GetCalendarResponse>(calendar);
         }
 
-
+        [SecuredOperation("admin")]
+        public async Task<Paginate<GetListCalendarResponse>> GetListAsync()
+        {
+            var calendars = await _calendarDal.GetListAsync();
+            return _mapper.Map<Paginate<GetListCalendarResponse>>(calendars);
+        }
     }
 }
