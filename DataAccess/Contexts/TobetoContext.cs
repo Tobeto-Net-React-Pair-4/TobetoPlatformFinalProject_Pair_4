@@ -12,7 +12,6 @@ namespace DataAccess.Contexts
         public DbSet<User> Users { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
-
         public DbSet<Course> Courses { get; set; }
         public DbSet<UserCourse> UserCourses { get; set; }
         public DbSet<Survey> Surveys { get; set; }
@@ -22,7 +21,6 @@ namespace DataAccess.Contexts
         public DbSet<Skill> Skills { get; set; }
         public DbSet<UserSkill> UserSkills { get; set; }
         public DbSet<PersonalInfo> PersonalInfos { get; set; }
-
         public DbSet<SocialMedia> SocialMediaAccounts { get; set; }
         public DbSet<Experience> Experiences { get; set; }
         public DbSet<ForeignLanguage> ForeignLanguages{ get; set; }
@@ -34,7 +32,6 @@ namespace DataAccess.Contexts
         public DbSet<ExamQuestion> ExamQuestions { get; set; }
         public DbSet<QuestionAnswer> QuestionAnswers { get; set; }
         public DbSet<Calendar> Calendars { get; set; }
-        public DbSet<Content> Contents { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Favourite> Favourites { get; set; }
         public DbSet<AsyncContent> AsyncContents { get; set; }
@@ -52,23 +49,6 @@ namespace DataAccess.Contexts
         public DbSet<PasswordReset> PasswordResets { get; set; }
         public DbSet<Session> Sessions { get; set; }
         public DbSet<UserCalendar> UserCalendars { get; set; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         public DbSet<Education> Educations { get; set; }   
         public DbSet<OperationClaim> OperationClaims { get; set; }
