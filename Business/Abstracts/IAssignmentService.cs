@@ -4,7 +4,7 @@ using Core.DataAccess.Paging;
 
 namespace Business.Abstracts
 {
-    public interface IAssignment
+    public interface IAssignmentService
     {
         Task<Paginate<GetListAssignmentResponse>> GetListAsync();
         Task<CreatedAssignmentResponse> AddAsync(CreateAssignmentRequest createAssignmentRequest);

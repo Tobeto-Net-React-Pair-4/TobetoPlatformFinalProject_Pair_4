@@ -1,11 +1,8 @@
-﻿using Business.Dtos.Course.Requests;
+﻿
+using Business.Dtos.Calendar.Responses;
+using Business.Dtos.Course.Requests;
 using Business.Dtos.Course.Responses;
 using Core.DataAccess.Paging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Abstracts
 {
@@ -14,6 +11,8 @@ namespace Business.Abstracts
         Task<Paginate<GetListCalendarResponse>> GetListAsync();
         Task<CreatedCalendarResponse> AddAsync(CreateCalendarRequest createCalendarRequest);
         Task<UpdatedCalendarResponse> UpdateAsync(UpdateCalendarRequest updateCalendarRequest);
-        Task<DeletedCalendarResponse> DeleteAsync(DeleteCalendarRequest deleteCalendarRequest);
+        Task<DeletedCalendarResponse> DeleteAsync(Guid Id);
+        Task<GetCalendarResponse> GetByIdAsync(Guid Id);
+
     }
 }
