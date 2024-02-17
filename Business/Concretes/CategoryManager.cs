@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.Category.Requests;
 using Business.Dtos.Category.Responses;
 using Business.Rules;
@@ -26,6 +27,8 @@ namespace Business.Concretes
             _mapper = mapper;
             _categoryBusinessRules = categoryBusinessRules;
         }
+
+        [SecuredOperation("admin")]
         public async Task<CreatedCategoryResponse> AddAsync(CreateCategoryRequest createCategoryRequest)
         {
             await _categoryBusinessRules.MaximumCountIsTen();
@@ -42,18 +45,24 @@ namespace Business.Concretes
         public async Task<Paginate<GetListCategoryResponse>> GetListAsync()
         {
             var data = await _categoryDal.GetListAsync();
-
             return _mapper.Map<Paginate<GetListCategoryResponse>>(data);
         }
-        public async Task<DeletedCategoryResponse> DeleteAsync(DeleteCategoryRequest deleteCategoryRequest)
+
+        [SecuredOperation("admin")]
+        public async Task<DeletedCategoryResponse> DeleteAsync(Guid categoryId)
         {
-            Category category = await _categoryDal.GetAsync(p => p.Id == deleteCategoryRequest.Id);
+            await _categoryBusinessRules.CheckIfExistsById(categoryId);
+
+            Category category = await _categoryDal.GetAsync(p => p.Id == categoryId);
             await _categoryDal.DeleteAsync(category);
             return _mapper.Map<DeletedCategoryResponse>(category);
         }
 
+        [SecuredOperation("admin")]
         public async Task<UpdatedCategoryResponse> UpdateAsync(UpdateCategoryRequest updateCategoryRequest)
         {
+            await _categoryBusinessRules.CheckIfExistsById(updateCategoryRequest.Id);
+
             Category category = await _categoryDal.GetAsync(p => p.Id == updateCategoryRequest.Id);
             _mapper.Map(updateCategoryRequest, category);
             category = await _categoryDal.UpdateAsync(category);
@@ -62,8 +71,9 @@ namespace Business.Concretes
 
         public async Task<GetByIdCategoryResponse> GetByIdAsync(Guid categoryId)
         {
-            Category category = await _categoryDal.GetAsync(p => p.Id == categoryId, include: c => c.Include(c => c.Courses));
+            await _categoryBusinessRules.CheckIfExistsById(categoryId);
 
+            Category category = await _categoryDal.GetAsync(p => p.Id == categoryId, include: c => c.Include(c => c.Courses));
             return _mapper.Map<GetByIdCategoryResponse>(category);
         }
     }

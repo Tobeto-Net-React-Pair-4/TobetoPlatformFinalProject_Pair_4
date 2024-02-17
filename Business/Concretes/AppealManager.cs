@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.Announcement.Requests;
 using Business.Dtos.Announcement.Responses;
 using Business.Dtos.Appeal.Requests;
 using Business.Dtos.Appeal.Responses;
 using Business.Dtos.Course.Requests;
 using Business.Dtos.Course.Responses;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using DataAccess.Concretes;
@@ -22,11 +24,15 @@ namespace Business.Concretes
     {
         private IAppealDal _appealDal;
         private IMapper _mapper;
-        public AppealManager(IAppealDal appealDal, IMapper mapper)
+        private AppealBusinessRules _appealBusinessRules;
+        public AppealManager(IAppealDal appealDal, IMapper mapper, AppealBusinessRules appealBusinessRules)
         {
             _appealDal = appealDal;
             _mapper = mapper;
+            _appealBusinessRules = appealBusinessRules;
         }
+
+        [SecuredOperation("admin")]
         public async Task<CreatedAppealResponse> AddAsync(CreateAppealRequest createAppealRequest)
         {
 
@@ -37,10 +43,12 @@ namespace Business.Concretes
             return _mapper.Map<CreatedAppealResponse>(createdAppeal);
         }
 
-        public async Task<DeletedAppealResponse> DeleteAsync(DeleteAppealRequest deleteAppealRequest)
+        [SecuredOperation("admin")]
+        public async Task<DeletedAppealResponse> DeleteAsync(Guid appealId)
         {
+            await _appealBusinessRules.CheckIfExistsById(appealId);
 
-            Appeal appeal = await _appealDal.GetAsync(p => p.Id == deleteAppealRequest.Id);
+            Appeal appeal = await _appealDal.GetAsync(p => p.Id == appealId);
             await _appealDal.DeleteAsync(appeal);
             return _mapper.Map<DeletedAppealResponse>(appeal);
         }
@@ -51,8 +59,11 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListAppealResponse>>(data);
         }
 
+        [SecuredOperation("admin")]
         public async Task<UpdatedAppealResponse> UpdateAsync(UpdateAppealRequest updateAppealRequest)
         {
+            await _appealBusinessRules.CheckIfExistsById(updateAppealRequest.Id);
+
             Appeal appeal = await _appealDal.GetAsync(p => p.Id == updateAppealRequest.Id);
             _mapper.Map(updateAppealRequest, appeal);
             await _appealDal.UpdateAsync(appeal);

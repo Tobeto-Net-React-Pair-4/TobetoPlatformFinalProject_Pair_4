@@ -15,7 +15,7 @@ namespace Business.Abstracts
         Task<Paginate<GetListCategoryResponse>> GetListAsync();
         Task<CreatedCategoryResponse> AddAsync(CreateCategoryRequest createCategoryRequest);
         Task<UpdatedCategoryResponse> UpdateAsync(UpdateCategoryRequest updateCategoryRequest);
-        Task<DeletedCategoryResponse> DeleteAsync(DeleteCategoryRequest deleteCategoryRequest);
+        Task<DeletedCategoryResponse> DeleteAsync(Guid categoryId);
         Task<GetByIdCategoryResponse> GetByIdAsync(Guid categoryId);
     }
 }

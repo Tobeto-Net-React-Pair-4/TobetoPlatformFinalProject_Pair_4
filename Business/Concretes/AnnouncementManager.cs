@@ -45,7 +45,7 @@ namespace Business.Concretes
         [SecuredOperation("admin")]
         public async Task<DeletedAnnouncementResponse> DeleteAsync(Guid announcementId)
         {
-            await _announcementBusinessRules.CheckIfAnnouncementExist(announcementId);
+            await _announcementBusinessRules.CheckIfExistsById(announcementId);
 
             Announcement announcement = await _announcementDal.GetAsync(p => p.Id == announcementId);
             await _announcementDal.DeleteAsync(announcement);
@@ -61,6 +61,7 @@ namespace Business.Concretes
         [SecuredOperation("admin")]
         public async Task<UpdatedAnnouncementResponse> UpdateAsync(UpdateAnnouncementRequest updateAnnouncementRequest)
         {
+            await _announcementBusinessRules.CheckIfExistsById(updateAnnouncementRequest.Id);
 
             Announcement announcement = await _announcementDal.GetAsync(p => p.Id == updateAnnouncementRequest.Id);
             _mapper.Map(updateAnnouncementRequest, announcement);

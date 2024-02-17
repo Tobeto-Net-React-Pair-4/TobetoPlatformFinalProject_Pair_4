@@ -2,6 +2,7 @@
 using Business.Dtos.Content.Requests;
 using Business.Dtos.Course.Requests;
 using Business.Dtos.ExamQuestion.Requests;
+using Entities.Concretes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,15 +32,15 @@ namespace WebApi.Controllers
             return Ok(result);
         }
         [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete([FromBody] DeleteContentRequest deleteContentRequest)
+        public async Task<IActionResult> Delete([FromQuery] Guid contentId)
         {
-            var result = await _contentService.DeleteAsync(deleteContentRequest);
+            var result = await _contentService.DeleteAsync(contentId);
             return Ok(result);
         }
-        [HttpPost("GetById")]
-        public async Task<IActionResult> GetById([FromQuery] GetContentRequest getContentRequest)
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetById([FromQuery] Guid contentId)
         {
-            var result = await _contentService.GetByIdAsync(getContentRequest);
+            var result = await _contentService.GetByIdAsync(contentId);
             return Ok(result);
         }
 

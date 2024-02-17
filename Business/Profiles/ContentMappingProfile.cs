@@ -18,12 +18,10 @@ namespace Business.Profiles
         public ContentMappingProfile()
         {
             CreateMap<Content, CreateContentRequest>().ReverseMap();
-            CreateMap<Content, DeleteContentRequest>().ReverseMap();
             CreateMap<Content, UpdateContentRequest>().ReverseMap();
             CreateMap<Content, CreatedContentResponse>().ReverseMap();
             CreateMap<Content, UpdatedContentResponse>().ReverseMap();
             CreateMap<Content, DeletedContentResponse>().ReverseMap();
-            CreateMap<Content, GetContentRequest>().ReverseMap();
             CreateMap<Content, GetContentResponse>().ReverseMap();
 
 

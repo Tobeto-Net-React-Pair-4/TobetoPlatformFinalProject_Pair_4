@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.ExamQuestion.Requests;
 using Business.Dtos.ExamQuestion.Responses;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -18,13 +20,19 @@ namespace Business.Concretes
     {
         private IExamQuestionDal _examQuestionDal;
         private IMapper _mapper;
-        public ExamQuestionManager(IExamQuestionDal examQuestionDal, IMapper mapper)
+        private ExamQuestionBusinessRules _examQuestionBusinessRules;
+        public ExamQuestionManager(IExamQuestionDal examQuestionDal, IMapper mapper, ExamQuestionBusinessRules examQuestionBusinessRules)
         {
             _examQuestionDal = examQuestionDal;
             _mapper = mapper;
+            _examQuestionBusinessRules = examQuestionBusinessRules;
         }
+
+        [SecuredOperation("admin")]
         public async Task<CreatedExamQuestionResponse> AddAsync(CreateExamQuestionRequest createExamQuestionRequest)
         {
+            await _examQuestionBusinessRules.CheckIfExamExists(createExamQuestionRequest.ExamId);
+
             ExamQuestion examQuestion = _mapper.Map<ExamQuestion>(createExamQuestionRequest);
             examQuestion.Id = Guid.NewGuid();
 
@@ -32,22 +40,32 @@ namespace Business.Concretes
             return _mapper.Map<CreatedExamQuestionResponse>(createdExamQuestion);
         }
 
-        public async Task<DeletedExamQuestionResponse> DeleteAsync(DeleteExamQuestionRequest deleteExamQuestionRequest)
+        [SecuredOperation("admin")]
+        public async Task<DeletedExamQuestionResponse> DeleteAsync(Guid examQuestionId)
         {
-            ExamQuestion examQuestion = await _examQuestionDal.GetAsync(eq => eq.Id == deleteExamQuestionRequest.Id);
+            await _examQuestionBusinessRules.CheckIfExistsById(examQuestionId);
+
+            ExamQuestion examQuestion = await _examQuestionDal.GetAsync(eq => eq.Id == examQuestionId);
             await _examQuestionDal.DeleteAsync(examQuestion);
             return _mapper.Map<DeletedExamQuestionResponse>(examQuestion);
         }
 
-        public async Task<GetByIdExamQuestionResponse> GetByIdAsync(GetByIdExamQuestionRequest getByIdExamQuestionRequest)
+        public async Task<GetByIdExamQuestionResponse> GetByIdAsync(Guid examQuestionId)
         {
-            ExamQuestion examQuestion = await _examQuestionDal.GetAsync(eq => eq.Id == getByIdExamQuestionRequest.Id,
+            await _examQuestionBusinessRules.CheckIfExistsById(examQuestionId);
+
+            ExamQuestion examQuestion = await _examQuestionDal.GetAsync(eq => eq.Id == examQuestionId,
                 include: eq => eq.Include(e => e.Exam));
             return _mapper.Map<GetByIdExamQuestionResponse>(examQuestion);
 
         }
+
+        [SecuredOperation("admin")]
         public async Task<UpdatedExamQuestionResponse> UpdateAsync(UpdateExamQuestionRequest updateExamQuestionRequest)
         {
+            await _examQuestionBusinessRules.CheckIfExistsById(updateExamQuestionRequest.Id);
+            await _examQuestionBusinessRules.CheckIfExamExists(updateExamQuestionRequest.ExamId);
+
             ExamQuestion examQuestion = await _examQuestionDal.GetAsync(eq => eq.Id == updateExamQuestionRequest.Id);
             _mapper.Map(updateExamQuestionRequest, examQuestion);
             examQuestion = await _examQuestionDal.UpdateAsync(examQuestion);

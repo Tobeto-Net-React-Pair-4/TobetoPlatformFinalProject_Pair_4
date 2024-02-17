@@ -14,6 +14,6 @@ namespace Business.Abstracts
         Task<Paginate<GetListCalendarResponse>> GetListAsync();
         Task<CreatedCalendarResponse> AddAsync(CreateCalendarRequest createCalendarRequest);
         Task<UpdatedCalendarResponse> UpdateAsync(UpdateCalendarRequest updateCalendarRequest);
-        Task<DeletedCalendarResponse> DeleteAsync(DeleteCalendarRequest deleteCalendarRequest);
+        Task<DeletedCalendarResponse> DeleteAsync(Guid calendarId);
     }
 }

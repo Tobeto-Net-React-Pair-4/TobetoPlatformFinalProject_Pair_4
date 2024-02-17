@@ -12,9 +12,7 @@ namespace Business.Profiles
         public CertificateMappingProfile()
         {
             CreateMap<Certificate, CreateCertificateRequest>().ReverseMap();
-            CreateMap<Certificate, DeleteCertificateRequest>().ReverseMap();
             CreateMap<Certificate, UpdateCertificateRequest>().ReverseMap();
-            CreateMap<Certificate, GetByIdCertificateRequest>().ReverseMap();
             CreateMap<Certificate, CreatedCertificateResponse>().ReverseMap();
             CreateMap<Certificate, UpdatedCertificateResponse>().ReverseMap();
             CreateMap<Certificate, DeletedCertificateResponse>().ReverseMap();

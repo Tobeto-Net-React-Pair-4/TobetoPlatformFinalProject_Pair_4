@@ -51,6 +51,7 @@ namespace Business.Concretes
         public async Task<IUser> Register(UserRegisterRequest userRegisterRequest)
         {
             await _authBusinessRules.UserExists(userRegisterRequest.Email);
+
             HashingHelper.CreatePasswordHash(userRegisterRequest.Password, out userRegisterRequest.passwordHash, out userRegisterRequest.passwordSalt);
             User user = _mapper.Map<User>(userRegisterRequest);
             CreateUserRequest createUserRequest = _mapper.Map<CreateUserRequest>(user);

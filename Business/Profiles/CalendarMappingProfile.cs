@@ -16,7 +16,6 @@ namespace Business.Profiles
         public CalendarMappingProfile()
         {
             CreateMap<Calendar, CreateCalendarRequest>().ReverseMap();
-            CreateMap<Calendar, DeleteCalendarRequest>().ReverseMap();
             CreateMap<Calendar, UpdateCalendarRequest>().ReverseMap();
             CreateMap<Calendar, CreatedCalendarResponse>().ReverseMap();
             CreateMap<Calendar, UpdatedCalendarResponse>().ReverseMap();
