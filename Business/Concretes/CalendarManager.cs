@@ -1,19 +1,12 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.BusinessAspects.Autofac;
-using Business.Dtos.Category.Requests;
 using Business.Dtos.Calendar.Responses;
 using Business.Dtos.Course.Requests;
 using Business.Dtos.Course.Responses;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using Entities.Concretes;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Calendar = Entities.Concretes.Calendar;
 
 namespace Business.Concretes

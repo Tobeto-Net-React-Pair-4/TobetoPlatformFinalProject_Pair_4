@@ -8,7 +8,7 @@ using Entities.Concretes;
 
 namespace Business.Concretes
 {
-    public class ContentLikedByUserManager : IContentLikedByUser
+    public class ContentLikedByUserManager : IContentLikedByUserService
     {
         private IContentLikedByUserDal _contentLikedByUserDal;
         private IMapper _mapper;

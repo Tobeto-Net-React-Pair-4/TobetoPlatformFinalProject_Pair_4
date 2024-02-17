@@ -4,7 +4,7 @@ using Core.DataAccess.Paging;
 
 namespace Business.Abstracts
 {
-    public interface IContentLikedByUser
+    public interface IContentLikedByUserService
     {
         Task<Paginate<GetListContentLikedByUserResponse>> GetListAsync();
         Task<CreatedContentLikedByUserResponse> AddAsync(CreateContentLikedByUserRequest createContentLikedByUserRequest);
