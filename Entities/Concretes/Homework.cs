@@ -15,6 +15,7 @@ namespace Entities.Concretes
         public DateTime EndOfDate { get; set; }
         public string InstructorDescription { get; set; }
         public string StudentDescription { get; set; }
+        public bool SendStatus { get; set; }
         public Course Course { get; set;}
         public LiveContent LiveContent { get; set; }
         public ICollection<HomeworkFile> HomeworkFiles { get; set; }
