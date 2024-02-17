@@ -19,13 +19,13 @@ namespace DataAccess.EntityConfigurations
             builder.Property(b => b.CourseId).HasColumnName("CourseId").IsRequired();
             builder.Property(b => b.EventDate).HasColumnName("EventDate").IsRequired();
             builder.Property(b => b.EventDetails).HasColumnName("EventDetails").IsRequired();
-            
-
-            builder.HasIndex(indexExpression: b => b.EventDate, name: "IX_Calendars_EventDate");
-
-            builder.HasOne(b => b.Course);
+            builder.Property(b => b.StatusOfCompleted).HasColumnName("StatusOfCompleted").IsRequired();
 
             builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
+
+
+            builder.HasMany(uc => uc.UserCalendars).WithOne(c=>c.Calendar).HasForeignKey(c=>c.CalendarId);
+
         }
 
    

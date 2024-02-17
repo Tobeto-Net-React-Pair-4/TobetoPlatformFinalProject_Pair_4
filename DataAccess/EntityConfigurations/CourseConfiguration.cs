@@ -15,7 +15,6 @@ namespace DataAccess.EntityConfigurations
         {
             builder.ToTable("Courses").HasKey(b => b.Id);
 
-
             builder.Property(b => b.Id).HasColumnName("Id").IsRequired();
             builder.Property(b => b.CategoryId).HasColumnName("CategoryID").IsRequired();
             builder.Property(b => b.Name).HasColumnName("Name").IsRequired();
@@ -27,25 +26,19 @@ namespace DataAccess.EntityConfigurations
             builder.Property(b => b.EstimatedTime).HasColumnName("EstimatedTime");
             builder.Property(b => b.ContentCount).HasColumnName("ContentCount");
             builder.Property(b => b.Description).HasColumnName("Description");
-            builder.Property(b => b.Status).HasColumnName("Status");
-
 
             builder.HasIndex(indexExpression: b => b.Name, name: "UK_Courses_Name").IsUnique();
 
-            builder.HasOne(c => c.Category).WithMany(cat => cat.Courses).HasForeignKey(c => c.CategoryId).IsRequired();
-            builder.HasOne(b => b.Instructor).WithMany(i => i.Courses).HasForeignKey(c => c.InstructorId);
-            builder.HasOne(b => b.Favourite).WithMany(i => i.Courses).HasForeignKey(c => c.FavouriteId);
-            builder.HasOne(b => b.Liked).WithMany(i => i.Courses).HasForeignKey(c => c.LikedId);
-
-
-
-
-
-            builder.HasMany(b => b.Calendars);
-            builder.HasMany(b => b.Contents);
-
+            builder.HasMany(c => c.Homeworks).WithOne(h => h.Course).HasForeignKey(h => h.CourseId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(c => c.Assignments).WithOne(a => a.Course).HasForeignKey(a => a.CourseId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(c => c.CourseLikedByUsers).WithOne(uc => uc.Course).HasForeignKey(uc => uc.CourseId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(c => c.CourseAsyncContents).WithOne(ca => ca.Course).HasForeignKey(ca => ca.CourseId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(c => c.CourseLiveContents).WithOne(cl => cl.Course).HasForeignKey(cl => cl.CourseId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(c => c.Calendars).WithOne(c => c.Course).HasForeignKey(c => c.CourseId);
+            builder.HasMany(c => c.CourseLikedByUsers).WithOne(clbu => clbu.Course).HasForeignKey(clbu => clbu.CourseId);
 
             builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
+
         }
     }
 }

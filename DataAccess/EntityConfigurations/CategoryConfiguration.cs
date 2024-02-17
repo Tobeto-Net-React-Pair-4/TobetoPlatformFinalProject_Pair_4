@@ -21,9 +21,11 @@ namespace DataAccess.EntityConfigurations
 
             builder.HasIndex(indexExpression: b => b.Name, name: "UK_Categories_Name").IsUnique();
 
-
-
             builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
+
+            builder.HasMany(c => c.Courses).WithOne(c => c.Category).HasForeignKey(c => c.CategoryId);
+            builder.HasMany(c => c.LiveContents).WithOne(lc => lc.Category).HasForeignKey(lc => lc.CategoryId);
+            builder.HasMany(c => c.AsyncContents).WithOne(ac => ac.Category).HasForeignKey(ac => ac.CategoryId);
         }
     }
 }

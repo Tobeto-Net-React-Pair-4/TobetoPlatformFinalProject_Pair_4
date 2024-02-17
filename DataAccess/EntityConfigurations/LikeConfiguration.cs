@@ -18,8 +18,13 @@ namespace DataAccess.EntityConfigurations
             builder.Property(b => b.Id).HasColumnName("Id").IsRequired();
             builder.Property(b => b.Count).HasColumnName("Count").IsRequired();
 
+            builder.HasOne(l => l.Course).WithOne(c => c.Like).HasForeignKey<Course>(c => c.LikeId);
+            builder.HasOne(l => l.AsyncContent).WithOne(ac => ac.Like).HasForeignKey<AsyncContent>(ac => ac.LikeId);
+            builder.HasOne(l => l.LiveContent).WithOne(lc => lc.Like).HasForeignKey<LiveContent>(lc => lc.LikeId);
 
             builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
+
+
         }
     }
 }

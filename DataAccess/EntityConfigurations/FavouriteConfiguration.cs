@@ -16,6 +16,7 @@ namespace DataAccess.EntityConfigurations
             builder.ToTable("Favourites").HasKey(b => b.Id);
 
             builder.Property(b => b.Id).HasColumnName("Id").IsRequired();
+            builder.Property(f => f.CourseId).HasColumnName("CourseId").IsRequired();
             builder.Property(b => b.Count).HasColumnName("Count").IsRequired();
 
 

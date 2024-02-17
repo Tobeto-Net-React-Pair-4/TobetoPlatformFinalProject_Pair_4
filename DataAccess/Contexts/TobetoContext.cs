@@ -23,7 +23,7 @@ namespace DataAccess.Contexts
         public DbSet<UserSkill> UserSkills { get; set; }
         public DbSet<PersonalInfo> PersonalInfos { get; set; }
 
-        public DbSet<SocialMediaAccount> SocialMediaAccounts { get; set; }
+        public DbSet<SocialMedia> SocialMediaAccounts { get; set; }
         public DbSet<Experience> Experiences { get; set; }
         public DbSet<ForeignLanguage> ForeignLanguages{ get; set; }
         public DbSet<UserAppeal> UserAppeals { get; set; }
