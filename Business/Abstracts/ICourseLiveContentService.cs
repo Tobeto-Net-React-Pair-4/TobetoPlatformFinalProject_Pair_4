@@ -8,7 +8,7 @@ namespace Business.Abstracts
     public interface ICourseLiveContentService
     {
         Task<CreatedCourseLiveContentResponse> AddAsync(CreateCourseLiveContentRequest createCourseLiveContentRequest);
-        Task<UpdatedCourseLiveContent> UpdateAsync(UpdateCourseLiveContentRequest updateCourseLiveContentRequest);
+        Task<UpdatedCourseLiveContentResponse> UpdateAsync(UpdateCourseLiveContentRequest updateCourseLiveContentRequest);
         Task<DeletedCourseLiveContentResponse> DeleteAsync(DeleteCourseLiveContentRequest deleteCourseLiveContentRequest);
         Task<GetCourseLiveContentResponse> GetAsync(GetCourseLiveContentRequest getCourseLiveContentRequest);
         Task<Paginate<GetListCourseLiveContentResponse>> GetListAsync();
