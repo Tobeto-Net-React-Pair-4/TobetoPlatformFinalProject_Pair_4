@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Profiles
+namespace Business.Abstracts
 {
-    internal class Class1
+    internal interface IAsyncContent
     {
     }
 }
