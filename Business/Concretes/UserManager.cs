@@ -7,7 +7,6 @@ using Core.DataAccess.Paging;
 using Core.Entities.Abstract;
 using DataAccess.Abstracts;
 using Entities.Concretes;
-using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes
 {
