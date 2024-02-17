@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Dtos.Course.Responses;
 using Business.Dtos.Instructor.Requests;
 using Business.Dtos.Instructor.Responses;
 using Business.Dtos.UserCourse.Requests;
@@ -29,7 +30,7 @@ namespace Business.Concretes
         }
         public async Task<Paginate<GetListUserCourseResponse>> GetListAsync()
         {
-            var data = await _userCourseDal.GetListAsync(include: u => u.Include(u => u.User).Include(c => c.Course));
+            var data = await _userCourseDal.GetListAsync(include: uc => uc.Include(uc => uc.User).Include(uc => uc.Course));
 
             return _mapper.Map<Paginate<GetListUserCourseResponse>>(data);
         }
@@ -39,6 +40,13 @@ namespace Business.Concretes
             var createdUserCourse = await _userCourseDal.AddAsync(userCourse);
             CreatedUserCourseResponse createdUserCourseResponse = _mapper.Map<CreatedUserCourseResponse>(createdUserCourse);
             return createdUserCourseResponse;
+        }
+
+        public async Task<Paginate<GetListCourseResponse>> GetListByUserIdAsync(Guid userId)
+        {
+            var data = await _userCourseDal.GetListAsync(uc => uc.UserId == userId, 
+                include: uc => uc.Include(uc => uc.Course).Include(uc => uc.Course.Category).Include(uc => uc.Course.Liked));
+            return _mapper.Map<Paginate<GetListCourseResponse>>(data);
         }
     }
 }

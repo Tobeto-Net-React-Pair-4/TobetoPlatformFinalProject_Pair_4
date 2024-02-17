@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Business.Dtos.Course.Responses;
 using Business.Dtos.UserCourse.Requests;
 using Business.Dtos.UserCourse.Responses;
 using Core.DataAccess.Paging;
@@ -27,6 +28,12 @@ namespace Business.Profiles
                 .ReverseMap();
             CreateMap<Paginate<UserCourse>, Paginate<GetListUserCourseResponse>>().ReverseMap();
 
+            CreateMap<UserCourse, GetListCourseResponse>()
+                .IncludeMembers(uc => uc.Course)
+                .ForMember(destinationMember: glcr => glcr.Id, memberOptions: opt => opt.MapFrom(c => c.CourseId))
+                .ReverseMap();
+
+            CreateMap<Paginate<UserCourse>, Paginate<GetListCourseResponse>>().ReverseMap();
 
         }
     }

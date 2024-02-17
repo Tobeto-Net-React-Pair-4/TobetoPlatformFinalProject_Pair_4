@@ -19,6 +19,7 @@ namespace Business.Abstracts
         Task<DeletedUserResponse> DeleteAsync(DeleteUserRequest deleteUserRequest);
         Task<GetByIdUserResponse> GetByIdAsync(GetByIdUserRequest getByIdUserRequest);
         List<IOperationClaim> GetClaims(IUser user);
-        Task<User> GetByMail(string email);
+        Task<User> GetByMailAsync(string email);
+        Task<GetUserResponse> GetUserByMailAsync(string email);
     }
 }
