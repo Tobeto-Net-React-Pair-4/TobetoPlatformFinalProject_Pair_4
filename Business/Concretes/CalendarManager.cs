@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Dtos.Calendar.Responses;
 using Business.Dtos.Category.Requests;
 using Business.Dtos.Course.Requests;
 using Business.Dtos.Course.Responses;
@@ -14,6 +15,7 @@ using DataAccess.Concretes;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,35 +32,29 @@ namespace Business.Concretes
             _mapper = mapper;
         }
 
-        public async Task<CreatedCalendarResponse> AddAsync(CreateCalendarRequest createCalendarRequest)
+        public Task<CreatedCalendarResponse> AddAsync(CreateCalendarRequest createCalendarRequest)
         {
-            Calendar Calendar = _mapper.Map<Calendar>(createCalendarRequest);
-            Calendar.Id = Guid.NewGuid();
-
-            Calendar createdCalendar = await _calendarDal.AddAsync(Calendar);
-
-            return _mapper.Map<CreatedCalendarResponse>(createdCalendar);
+            throw new NotImplementedException();
         }
 
-        public async Task<DeletedCalendarResponse> DeleteAsync(DeleteCalendarRequest deleteCalendarRequest)
+        public Task<DeletedCalendarResponse> DeleteAsync(Guid calendarId)
         {
-            Calendar Calendar = await _calendarDal.GetAsync(p => p.Id == deleteCalendarRequest.Id);
-            await _calendarDal.DeleteAsync(Calendar);
-            return _mapper.Map<DeletedCalendarResponse>(Calendar);
+            throw new NotImplementedException();
         }
 
-        public async Task<Paginate<GetListCalendarResponse>> GetListAsync()
+        public Task<GetCalendarResponse> GetByIdAsync(Guid calendarId)
         {
-            var data = await _calendarDal.GetListAsync();
-            return _mapper.Map<Paginate<GetListCalendarResponse>>(data);
+            throw new NotImplementedException();
         }
 
-        public async Task<UpdatedCalendarResponse> UpdateAsync(UpdateCalendarRequest updateCalendarRequest)
+        public Task<Paginate<GetListCalendarResponse>> GetListAsync()
         {
-            Calendar Calendar = await _calendarDal.GetAsync(p => p.Id == updateCalendarRequest.Id);
-            _mapper.Map(updateCalendarRequest, Calendar);
-            Calendar = await _calendarDal.UpdateAsync(Calendar);
-            return _mapper.Map<UpdatedCalendarResponse>(Calendar);
+            throw new NotImplementedException();
+        }
+
+        public Task<UpdatedCalendarResponse> UpdateAsync(UpdateCalendarRequest updateCalendarRequest)
+        {
+            throw new NotImplementedException();
         }
     }
 }
