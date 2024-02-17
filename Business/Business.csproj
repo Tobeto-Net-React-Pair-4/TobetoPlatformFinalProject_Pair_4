@@ -24,19 +24,10 @@
   </ItemGroup>
 	<ItemGroup>
 		<Folder Include="Dtos\Calendar\Requests\" />
-		<Folder Include="Dtos\Calendar\Responses\" />
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="Dtos\Favourite\Requests\" />
 		<Folder Include="Dtos\Favourite\Responses\" />
-	</ItemGroup>
-	<ItemGroup>
-		<Folder Include="Dtos\File\Requests\" />
-		<Folder Include="Dtos\File\Responses\" />
-	</ItemGroup>
-	<ItemGroup>
-		<Folder Include="Dtos\PasswordReset\Requests\" />
-		<Folder Include="Dtos\PasswordReset\Responses\" />
 	</ItemGroup>
 	
 </Project>

@@ -1,8 +1,7 @@
 ﻿namespace Business.Dtos.CourseAsyncContent.Requests
 {
-    public class UpdateCourseAsyncContentByUserRequest
+    public class CreateCourseAsyncContentRequest
     {
-        public Guid Id { get; set; }
         public Guid CourseId { get; set; }
         public Guid AsyncContentId { get; set; }
     }

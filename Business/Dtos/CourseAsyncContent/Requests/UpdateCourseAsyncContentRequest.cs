@@ -1,6 +1,6 @@
-﻿namespace Business.Dtos.CourseAsyncContent.Responses
+﻿namespace Business.Dtos.CourseAsyncContent.Requests
 {
-    public class GetListCourseAsyncContentByUserResponse
+    public class UpdateCourseAsyncContentRequest
     {
         public Guid Id { get; set; }
         public Guid CourseId { get; set; }

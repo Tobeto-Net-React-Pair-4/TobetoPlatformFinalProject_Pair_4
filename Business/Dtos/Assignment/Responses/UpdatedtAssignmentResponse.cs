@@ -1,6 +1,6 @@
 ﻿namespace Business.Dtos.Assignment.Responses
 {
-    public class UpdatedtAssignmentResponse
+    public class UpdatedAssignmentResponse
     {
         public Guid Id { get; set; }
         public Guid CourseId { get; set; }

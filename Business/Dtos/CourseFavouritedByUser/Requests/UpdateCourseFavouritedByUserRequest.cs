@@ -1,6 +1,6 @@
 ﻿namespace Business.Dtos.CourseFavouritedByUser.Requests
 {
-    public class UpdateCourseFavouritedByRequest
+    public class UpdateCourseFavouritedByUserRequest
     {
         public Guid Id { get; set; }
         public Guid CourseId { get; set; }
