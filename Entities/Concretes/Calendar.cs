@@ -12,6 +12,8 @@ namespace Entities.Concretes
         public string StatusOfCompleted { get; set; }
 
         public Course Course { get; set; }
+        public Instructor Instructor{ get; set; }
+
         public ICollection<UserCalendar> UserCalendars { get; set; }
     }
 }

@@ -17,5 +17,6 @@ namespace Entities.Concretes
         public string AssignmentType { get; set; }
         public string VideoUrl { get; set; }
         public Course Course { get; set; }
+        public ICollection<File> Files { get; set; }
     }
 }

@@ -15,5 +15,7 @@ namespace Entities.Concretes
         public DateTime StartOfTime { get; set; }
         public DateTime EndOfTime { get; set; }
         public LiveContent LiveContent { get; set; }
+
+        public ICollection<InstructorSession> ınstructorSessions { get; set; }
     }
 }
