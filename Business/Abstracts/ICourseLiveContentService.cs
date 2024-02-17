@@ -17,7 +17,7 @@ namespace Business.Abstracts
         Task<DeletedCourseLiveContentResponse> DeleteAsync(DeleteCourseLiveContentRequest deleteCourseLiveContentRequest);
         Task<GetCourseLiveContentResponse> GetAsync(GetCourseLiveContentRequest getCourseLiveContentRequest);
         Task<Paginate<GetListCourseLiveContentResponse>> GetListAsync();
-        Task<Paginate<GetListLiveContentResponse>> GetListByCourseAsync(Guid courseId);
+        Task<Paginate<GetListLiveContentResponse>> GetListByCourseIdAsync(Guid courseId);
 
 
     }

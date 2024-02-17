@@ -9,7 +9,7 @@ namespace Business.Abstracts
         Task<Paginate<GetListAsyncContentResponse>> GetListAsync();
         Task<CreatedAsyncContentResponse> AddAsync(CreateAsyncContentRequest createAsyncContentRequest);
         Task<UpdatedAsyncContentResponse> UpdateAsync(UpdateAsyncContentRequest updateAsyncContentRequest);
-        Task<DeletedAsyncContentResponse> DeleteAsync(Guid Id);
-        Task<GetAsyncContentResponse> GetByIdAsync(Guid Id);
+        Task<DeletedAsyncContentResponse> DeleteAsync(Guid asynContenId);
+        Task<GetAsyncContentResponse> GetByIdAsync(Guid asynContenId);
     }
 }
