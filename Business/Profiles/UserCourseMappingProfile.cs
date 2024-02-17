@@ -19,13 +19,10 @@ namespace Business.Profiles
             CreateMap<UserCourse, DeletedUserCourseResponse>().ReverseMap();
             CreateMap<UserCourse, GetUserCourseResponse>().ReverseMap();
             CreateMap<UserCourse, GetListUserCourseResponse>()
-                .ForMember(
-                destinationMember: us => us.User, 
-                memberOptions: opt => opt.MapFrom(uc => uc.User))
-                .ForMember(
-                destinationMember: c => c.Course, 
-                memberOptions: opt => opt.MapFrom(uc => uc.Course))
-                .ReverseMap();
+                .ForMember(destinationMember: us => us.User,
+                           memberOptions: opt => opt.MapFrom(uc => uc.User))
+                .ForMember(destinationMember: c => c.Course,
+                           memberOptions: opt => opt.MapFrom(uc => uc.Course)).ReverseMap();
             CreateMap<Paginate<UserCourse>, Paginate<GetListUserCourseResponse>>().ReverseMap();
 
             CreateMap<UserCourse, GetListCourseResponse>()

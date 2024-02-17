@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Business.Dtos.User.Requests;
+﻿using Business.Dtos.User.Requests;
 using Business.Dtos.User.Responses;
 using Core.DataAccess.Paging;
 using Core.Entities.Abstract;

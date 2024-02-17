@@ -29,4 +29,12 @@
     <Folder Include="Dtos\CourseLiveContent\Responses\" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Folder Include="Dtos\Calendar\Requests\" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Dtos\Favourite\Requests\" />
+		<Folder Include="Dtos\Favourite\Responses\" />
+	</ItemGroup>
+	
 </Project>

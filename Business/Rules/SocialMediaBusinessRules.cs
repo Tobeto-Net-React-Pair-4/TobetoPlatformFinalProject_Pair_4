@@ -1,12 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Business.Constants;
+using Core.Business.Rules;
+using DataAccess.Abstracts;
 
 namespace Business.Rules
 {
-    internal class SocialMediaBusinessRules
+
+    public class SocialMediaBusinessRules : BaseBusinessRules
     {
+        private readonly ISocialMediaDal _socialMediaDal;
+
+        public SocialMediaBusinessRules(ISocialMediaDal socialMediaDal)
+        {
+            _socialMediaDal = socialMediaDal;
+        }
+
+        public async Task MaximumCountIsThree()
+        {
+            var result = await _socialMediaDal.GetListAsync();
+
+            if (result.Count > 3)
+            {
+                throw new Exception(BusinessMessages.SocialMediaLimit);
+            }
+        }
     }
 }

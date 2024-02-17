@@ -1,9 +1,9 @@
 ﻿using Business.Abstracts;
 using Business.Concretes;
+using Business.Rules;
 using Core.Business.Rules;
 using Core.Entities.Concrete;
 using Core.Utilities.Security.JWT;
-using DataAccess.Abstracts;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -48,6 +48,18 @@ namespace Business
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules<Entity<Guid>>));
+
+
+            //Business Rules
+
+            services.AddScoped<AuthBusinessRules>();
+            services.AddScoped<CategoryBusinessRules>();
+            services.AddScoped<CourseBusinessRules>();
+            services.AddScoped<SocialMediaBusinessRules>();
+            services.AddScoped<ForeignLanguageBusinessRules>();
+            services.AddScoped<UserBusinessRules>();
+
+
 
             return services;
         }
