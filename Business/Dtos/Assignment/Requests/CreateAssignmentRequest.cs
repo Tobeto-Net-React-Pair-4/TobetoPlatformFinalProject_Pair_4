@@ -2,6 +2,7 @@
 {
     public class CreateAssignmentRequest
     {
+        public Guid CourseId { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }
         public bool Status { get; set; }

@@ -1,22 +1,11 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
-using Business.Dtos.Category.Requests;
+using Business.Dtos.Calendar.Responses;
 using Business.Dtos.Course.Requests;
 using Business.Dtos.Course.Responses;
-using Business.Dtos.Instructor.Requests;
-using Business.Dtos.Instructor.Responses;
-using Business.Dtos.User.Requests;
-using Business.Dtos.User.Responses;
-using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using DataAccess.Concretes;
 using Entities.Concretes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concretes
 {
@@ -40,9 +29,9 @@ namespace Business.Concretes
             return _mapper.Map<CreatedCalendarResponse>(createdCalendar);
         }
 
-        public async Task<DeletedCalendarResponse> DeleteAsync(DeleteCalendarRequest deleteCalendarRequest)
+        public async Task<DeletedCalendarResponse> DeleteAsync(Guid Id)
         {
-            Calendar Calendar = await _calendarDal.GetAsync(p => p.Id == deleteCalendarRequest.Id);
+            Calendar Calendar = await _calendarDal.GetAsync(p => p.Id == Id);
             await _calendarDal.DeleteAsync(Calendar);
             return _mapper.Map<DeletedCalendarResponse>(Calendar);
         }
@@ -60,5 +49,13 @@ namespace Business.Concretes
             Calendar = await _calendarDal.UpdateAsync(Calendar);
             return _mapper.Map<UpdatedCalendarResponse>(Calendar);
         }
+        public async Task<GetCalendarResponse> GetByIdAsync(Guid Id)
+        {
+            Calendar calendar = await _calendarDal.GetAsync(p => p.Id == Id);
+
+            return _mapper.Map<GetCalendarResponse>(calendar);
+        }
+
+
     }
 }
