@@ -17,14 +17,9 @@ namespace Business.Profiles
         {
             CreateMap<CourseLiveContent, CreateCourseLiveContentRequest>().ReverseMap();
             CreateMap<CourseLiveContent, DeleteCourseLiveContentRequest>().ReverseMap();
-            CreateMap<CourseLiveContent, GetCourseLiveContentRequest>().ReverseMap();
-            CreateMap<CourseLiveContent, UpdateCourseLiveContentRequest>().ReverseMap();
 
             CreateMap<CourseLiveContent, CreatedCourseLiveContentResponse>().ReverseMap();
-            CreateMap<CourseLiveContent, UpdatedCourseLiveContentResponse>().ReverseMap();
             CreateMap<CourseLiveContent, DeletedCourseLiveContentResponse>().ReverseMap();
-            CreateMap<CourseLiveContent, GetCourseLiveContentResponse>().ReverseMap();
-
 
             CreateMap<CourseLiveContent, GetListCourseLiveContentResponse>().ReverseMap();
             CreateMap<Paginate<CourseLiveContent>, Paginate<GetListCourseLiveContentResponse>>().ReverseMap();

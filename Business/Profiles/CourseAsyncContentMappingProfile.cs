@@ -13,16 +13,13 @@ namespace Business.Profiles
 {
     public class CourseAsyncContentMappingProfile : Profile
     {
-        protected CourseAsyncContentMappingProfile()
+        public CourseAsyncContentMappingProfile()
         {
             CreateMap<CourseAsyncContent, CreateCourseAsyncContentRequest>().ReverseMap();
             CreateMap<CourseAsyncContent, DeleteCourseAsyncContentRequest>().ReverseMap();
-            CreateMap<CourseAsyncContent, UpdateCourseAsyncContentRequest>().ReverseMap();
 
             CreateMap<CourseAsyncContent, CreatedCourseAsyncContentResponse>().ReverseMap();
-            CreateMap<CourseAsyncContent, UpdatedCourseAsyncContentResponse>().ReverseMap();
             CreateMap<CourseAsyncContent, DeletedCourseAsyncContentResponse>().ReverseMap();
-            CreateMap<CourseAsyncContent, GetCourseAsyncContentResponse>().ReverseMap();
 
             CreateMap<CourseAsyncContent, GetListCourseAsyncContentResponse>().ReverseMap();
             CreateMap<Paginate<CourseAsyncContent>, Paginate<GetListCourseAsyncContentResponse>>().ReverseMap();

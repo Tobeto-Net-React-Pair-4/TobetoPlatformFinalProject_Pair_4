@@ -1,5 +1,6 @@
 ﻿using Business.Dtos.CourseLikedByUser.Requests;
 using Business.Dtos.CourseLikedByUser.Responses;
+using Business.Dtos.User.Responses;
 using Core.DataAccess.Paging;
 
 namespace Business.Abstracts
@@ -8,8 +9,7 @@ namespace Business.Abstracts
     {
         Task<Paginate<GetListCourseLikedByUserResponse>> GetListAsync();
         Task<CreatedCourseLikedByUserResponse> AddAsync(CreateCourseLikedByUserRequest createCourseLikedByUserRequest);
-        Task<UpdatedCourseLikedByUserResponse> UpdateAsync(UpdateCourseLikedByUserRequest updateCourseLikedByUserRequest);
-        Task<DeletedCourseLikedByUserResponse> DeleteAsync(Guid Id);
-        Task<GetCourseLikedByUserResponse> GetByIdAsync(Guid Id);
+        Task<DeletedCourseLikedByUserResponse> DeleteAsync(DeleteCourseLikedByUserRequests deleteCourseLikedByUserRequests);
+        Task<Paginate<GetListUserResponse>> GetListByCourseIdAsync(Guid courseId);
     }
 }

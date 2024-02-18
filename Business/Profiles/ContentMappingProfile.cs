@@ -19,13 +19,12 @@ namespace Business.Profiles
         {
             CreateMap<Content, CreateContentRequest>().ReverseMap();
             CreateMap<Content, UpdateContentRequest>().ReverseMap();
+
             CreateMap<Content, CreatedContentResponse>().ReverseMap();
             CreateMap<Content, UpdatedContentResponse>().ReverseMap();
+
             CreateMap<Content, DeletedContentResponse>().ReverseMap();
             CreateMap<Content, GetContentResponse>().ReverseMap();
-
-
-
             CreateMap<Content, GetListContentResponse>().ReverseMap();
             CreateMap<Paginate<Content>, Paginate<GetListContentResponse>>().ReverseMap();
         }

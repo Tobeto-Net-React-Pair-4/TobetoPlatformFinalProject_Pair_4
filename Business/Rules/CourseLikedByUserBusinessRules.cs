@@ -1,5 +1,4 @@
 ﻿using Business.Abstracts;
-using Business.Dtos.AsyncContent.Responses;
 using Business.Dtos.Course.Responses;
 using Business.Dtos.User.Responses;
 using Core.Business.Rules;
@@ -16,27 +15,27 @@ using System.Threading.Tasks;
 
 namespace Business.Rules
 {
-    public class CourseFavouritedByUserBusinessRules : BaseBusinessRules<CourseFavouritedByUser>
+    public class CourseLikedByUserBusinessRules : BaseBusinessRules<CourseLikedByUser>
     {
-        ICourseFavouritedByUserDal _courseFavouritedByUserDal;
+        ICourseLikedByUserDal _courseLikedByUser;
         ICourseService _courseService;
         IUserService _userService;
-        public CourseFavouritedByUserBusinessRules
-            (ICourseFavouritedByUserDal courseFavouritedByUserDal, IUserService userService, ICourseService courseService) : base(courseFavouritedByUserDal)
+        public CourseLikedByUserBusinessRules
+            (ICourseLikedByUserDal courseLikedByUserDal, ICourseService courseService, IUserService userService) : base(courseLikedByUserDal) 
         {
-            _courseFavouritedByUserDal = courseFavouritedByUserDal;
-            _userService = userService;
+            _courseLikedByUser = courseLikedByUserDal;
             _courseService = courseService;
+            _userService = userService;
         }
-        public async Task<CourseFavouritedByUser> CheckIfCourseFavouritedByUserExists(Guid courseId, Guid userId)
+        public async Task<CourseLikedByUser> CheckIfCourseLikedByUserExists(Guid courseId, Guid userId)
         {
-            CourseFavouritedByUser courseFavouritedByUser = await _courseFavouritedByUserDal.GetAsync
-                (cfbu => cfbu.CourseId == courseId && cfbu.UserId == userId);
-            if (courseFavouritedByUser == null)
+            CourseLikedByUser courseLikedByUser = await _courseLikedByUser.GetAsync
+                (clbu => clbu.CourseId == courseId && clbu.UserId == userId);
+            if (courseLikedByUser == null)
             {
                 throw new BusinessException(BusinessCoreMessages.EntityNotFound);
             }
-            return courseFavouritedByUser;
+            return courseLikedByUser;
         }
         public async Task CheckIfUserExists(Guid userId)
         {

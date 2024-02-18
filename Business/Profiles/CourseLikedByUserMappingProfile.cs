@@ -8,16 +8,13 @@ namespace Business.Profiles
 {
     public class CourseLikedByUserMappingProfile : Profile
     {
-        protected CourseLikedByUserMappingProfile()
+        public CourseLikedByUserMappingProfile()
         {
             CreateMap<CourseLikedByUser, CreateCourseLikedByUserRequest>().ReverseMap();
-            CreateMap<CourseLikedByUser, >
-            CreateMap<CourseLikedByUser, UpdateCourseLikedByUserRequest>().ReverseMap();
+            CreateMap<CourseLikedByUser, DeleteCourseLikedByUserRequests>().ReverseMap();
 
             CreateMap<CourseLikedByUser, CreatedCourseLikedByUserResponse>().ReverseMap();
-            CreateMap<CourseLikedByUser, UpdatedCourseLikedByUserResponse>().ReverseMap();
             CreateMap<CourseLikedByUser, DeletedCourseLikedByUserResponse>().ReverseMap();
-            CreateMap<CourseLikedByUser, GetCourseLikedByUserResponse>().ReverseMap();
 
             CreateMap<CourseLikedByUser, GetListCourseLikedByUserResponse>().ReverseMap();
             CreateMap<Paginate<CourseLikedByUser>, Paginate<GetListCourseLikedByUserResponse>>().ReverseMap();

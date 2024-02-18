@@ -2,6 +2,8 @@
 using Business.Abstracts;
 using Business.Dtos.CourseLikedByUser.Requests;
 using Business.Dtos.CourseLikedByUser.Responses;
+using Business.Dtos.User.Responses;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -12,13 +14,18 @@ namespace Business.Concretes
     {
         private ICourseLikedByUserDal _courseLikedByUserDal;
         private IMapper _mapper;
-        public CourseLikedByUserManager(ICourseLikedByUserDal courseLikedByUserDal, IMapper mapper)
+        private CourseLikedByUserBusinessRules _courseLikedByUserBusinessRules;
+        public CourseLikedByUserManager
+            (ICourseLikedByUserDal courseLikedByUserDal, IMapper mapper, CourseLikedByUserBusinessRules courseLikedByUserBusinessRules)
         {
             _courseLikedByUserDal = courseLikedByUserDal;
             _mapper = mapper;
+            _courseLikedByUserBusinessRules = courseLikedByUserBusinessRules;
         }
         public async Task<CreatedCourseLikedByUserResponse> AddAsync(CreateCourseLikedByUserRequest createCourseLikedByUserRequest)
         {
+            await _courseLikedByUserBusinessRules.CheckIfCourseExists(createCourseLikedByUserRequest.CourseId);
+            await _courseLikedByUserBusinessRules.CheckIfUserExists(createCourseLikedByUserRequest.UserId);
 
             CourseLikedByUser courseLikedByUser = _mapper.Map<CourseLikedByUser>(createCourseLikedByUserRequest);
             courseLikedByUser.Id = Guid.NewGuid();
@@ -27,14 +34,14 @@ namespace Business.Concretes
             return _mapper.Map<CreatedCourseLikedByUserResponse>(createdCourseLikedByUser);
         }
 
-        public async Task<DeletedCourseLikedByUserResponse> DeleteAsync(Guid Id)
+        public async Task<DeletedCourseLikedByUserResponse> DeleteAsync(DeleteCourseLikedByUserRequests deleteCourseLikedByUserRequests)
         {
+            CourseLikedByUser courseLikedByUser = await _courseLikedByUserBusinessRules.CheckIfCourseLikedByUserExists
+                (deleteCourseLikedByUserRequests.CourseId, deleteCourseLikedByUserRequests.UserId);
 
-            CourseLikedByUser courseLikedByUser = await _courseLikedByUserDal.GetAsync(p => p.Id == Id);
             await _courseLikedByUserDal.DeleteAsync(courseLikedByUser);
             return _mapper.Map<DeletedCourseLikedByUserResponse>(courseLikedByUser);
         }
-
 
         public async Task<Paginate<GetListCourseLikedByUserResponse>> GetListAsync()
         {
@@ -42,18 +49,12 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListCourseLikedByUserResponse>>(data);
         }
 
-        public async Task<UpdatedCourseLikedByUserResponse> UpdateAsync(UpdateCourseLikedByUserRequest updateCourseLikedByUserRequest)
+        public async Task<Paginate<GetListUserResponse>> GetListByCourseIdAsync(Guid courseId)
         {
-            CourseLikedByUser courseLikedByUser = await _courseLikedByUserDal.GetAsync(p => p.Id == updateCourseLikedByUserRequest.Id);
-            _mapper.Map(updateCourseLikedByUserRequest, courseLikedByUser);
-            await _courseLikedByUserDal.UpdateAsync(courseLikedByUser);
-            return _mapper.Map<UpdatedCourseLikedByUserResponse>(courseLikedByUser);
-        }
-        public async Task<GetCourseLikedByUserResponse> GetByIdAsync(Guid Id)
-        {
-            CourseLikedByUser courseLikedByUser = await _courseLikedByUserDal.GetAsync(p => p.Id == Id);
+            await _courseLikedByUserBusinessRules.CheckIfCourseExists(courseId);
 
-            return _mapper.Map<GetCourseLikedByUserResponse>(courseLikedByUser);
+            var data = _courseLikedByUserDal.GetListAsync(clbu => clbu.CourseId == courseId);
+            return _mapper.Map<Paginate<GetListUserResponse>>(data);
         }
     }
 }

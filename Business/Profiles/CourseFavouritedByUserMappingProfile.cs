@@ -13,16 +13,13 @@ namespace Business.Profiles
 {
     public class CourseFavouritedByUserMappingProfile : Profile
     {
-        protected CourseFavouritedByUserMappingProfile()
+        public CourseFavouritedByUserMappingProfile()
         {
             CreateMap<CourseFavouritedByUser, CreateCourseFavouritedByUserRequest>().ReverseMap();
             CreateMap<CourseFavouritedByUser, DeleteCourseFavouritedByUserRequest>().ReverseMap();
-            CreateMap<CourseFavouritedByUser, UpdateCourseFavouritedByUserRequest>().ReverseMap();
 
             CreateMap<CourseFavouritedByUser, CreatedCourseFavouritedByUserResponse>().ReverseMap();
-            CreateMap<CourseFavouritedByUser, UpdatedCourseFavouritedByUserResponse>().ReverseMap();
             CreateMap<CourseFavouritedByUser, DeletedCourseFavouritedByUserResponse>().ReverseMap();
-            CreateMap<CourseFavouritedByUser, GetCourseFavouritedByUserResponse>().ReverseMap();
 
             CreateMap<CourseFavouritedByUser, GetListCourseFavouritedByUserResponse>().ReverseMap();
             CreateMap<Paginate<CourseFavouritedByUser>, Paginate<GetListCourseFavouritedByUserResponse>>().ReverseMap();

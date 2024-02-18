@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.Content.Requests;
 using Business.Dtos.Content.Responses;
 using Business.Dtos.Course.Responses;
@@ -10,6 +11,7 @@ using Business.Dtos.SocialMediaAccount.Requests;
 using Business.Dtos.SocialMediaAccount.Responses;
 using Business.Dtos.UserCourse.Requests;
 using Business.Dtos.UserCourse.Responses;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using DataAccess.Concretes;
@@ -27,14 +29,21 @@ namespace Business.Concretes
     {
         IMapper _mapper;
         ICourseLiveContentDal _courseLiveContentDal;
+        CourseLiveContentBusinessRules _courseLiveContentBusinessRules;
 
-        public CourseLiveContentManager(IMapper mapper, ICourseLiveContentDal courseLiveContentDal)
+        public CourseLiveContentManager
+            (IMapper mapper, ICourseLiveContentDal courseLiveContentDal, CourseLiveContentBusinessRules courseLiveContentBusinessRules)
         {
             _mapper = mapper;
             _courseLiveContentDal = courseLiveContentDal;
+            _courseLiveContentBusinessRules = courseLiveContentBusinessRules;
         }
+
+        [SecuredOperation("admin")]
         public async Task<CreatedCourseLiveContentResponse> AddAsync(CreateCourseLiveContentRequest createCourseLiveContentRequest)
         {
+            await _courseLiveContentBusinessRules.CheckIfCourseExists(createCourseLiveContentRequest.CourseId);
+            await _courseLiveContentBusinessRules.CheckIfLiveContentExists(createCourseLiveContentRequest.LiveContentId);
 
             CourseLiveContent courseLiveContent = _mapper.Map<CourseLiveContent>(createCourseLiveContentRequest);
             var createdCourseLiveContent = await _courseLiveContentDal.AddAsync(courseLiveContent);
@@ -42,17 +51,15 @@ namespace Business.Concretes
             return courseLiveContentResponse;
           
         }
+
+        [SecuredOperation("admin")]
         public async Task<DeletedCourseLiveContentResponse> DeleteAsync(DeleteCourseLiveContentRequest deleteCourseLiveContentRequest)
         {
-            CourseLiveContent courseLiveContent = await _courseLiveContentDal.GetAsync(clc =>clc.CourseId == deleteCourseLiveContentRequest.CourseId && clc.LiveContentId == deleteCourseLiveContentRequest.LiveContentId);
+            CourseLiveContent courseLiveContent = await _courseLiveContentBusinessRules.CheckIfCourseLiveContentExists
+                (deleteCourseLiveContentRequest.CourseId, deleteCourseLiveContentRequest.LiveContentId);
+
             await _courseLiveContentDal.DeleteAsync(courseLiveContent);
             return _mapper.Map<DeletedCourseLiveContentResponse>(courseLiveContent);
-
-        }
-        public async Task<GetCourseLiveContentResponse> GetAsync(GetCourseLiveContentRequest courseLiveContentRequest)
-        {
-            CourseLiveContent courseLiveContent = await _courseLiveContentDal.GetAsync(cl => cl.CourseId == courseLiveContentRequest.CourseId && cl.LiveContentId == courseLiveContentRequest.LiveContentId);
-            return _mapper.Map<GetCourseLiveContentResponse>(courseLiveContent);
         }
 
         public async Task<Paginate<GetListCourseLiveContentResponse>> GetListAsync()
@@ -63,19 +70,13 @@ namespace Business.Concretes
 
         public async Task<Paginate<GetListLiveContentResponse>> GetListByCourseIdAsync(Guid courseId)
         {
+            await _courseLiveContentBusinessRules.CheckIfCourseExists(courseId);
+
             var liveContentCourses = await _courseLiveContentDal
                 .GetListAsync(clc => clc.CourseId == courseId, include: clc => clc.Include(clc => clc.LiveContent)
                 .Include(clc => clc.LiveContent.Category)
                 .Include(clc => clc.LiveContent.Like));
             return _mapper.Map<Paginate<GetListLiveContentResponse>>(liveContentCourses);
-
-        }
-
-        public async Task<UpdatedCourseLiveContentResponse> UpdateAsync(UpdateCourseLiveContentRequest updateCourseLiveContentRequest)
-        {
-            CourseLiveContent courseLiveContent = await GetAsync(cl => cl.CourseId == updateCourseLiveContentRequest.CourseId && cl.LiveContentId == updateCourseLiveContentRequest.LiveContentId);
-            await _courseLiveContentDal.UpdateAsync(courseLiveContent);
-            return _mapper.Map<UpdatedCourseLiveContentResponse>(updateCourseLiveContentRequest);
         }
     }
 }
