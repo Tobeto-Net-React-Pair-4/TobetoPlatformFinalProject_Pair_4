@@ -9,7 +9,7 @@ namespace Business.Abstracts
         Task<Paginate<GetListFavouriteResponse>> GetListAsync();
         Task<CreatedFavouriteResponse> AddAsync(CreateFavouriteRequest createFavouriteRequest);
         Task<UpdatedFavouriteResponse> UpdateAsync(UpdateFavouriteRequest updateFavouriteRequest);
-        Task<DeletedFavouriteResponse> DeleteAsync(Guid Id);
-        Task<GetFavouriteResponse> GetByIdAsync(Guid Id);
+        Task<DeletedFavouriteResponse> DeleteAsync(Guid favouriteId);
+        Task<GetFavouriteResponse> GetByIdAsync(Guid favouriteId);
     }
 }

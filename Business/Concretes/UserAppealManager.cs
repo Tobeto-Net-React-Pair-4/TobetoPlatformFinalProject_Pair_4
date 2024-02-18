@@ -23,11 +23,8 @@ namespace Business.Concretes
         public async Task<CreatedUserAppealResponse> AddAsync(CreateUserAppealRequest createUserAppealRequest)
         {
             UserAppeal userAppeal = _mapper.Map<UserAppeal>(createUserAppealRequest);
-
             var createdUserAppeal = await _userAppealDal.AddAsync(userAppeal);
-
             CreatedUserAppealResponse createdUserAppealResponse = _mapper.Map<CreatedUserAppealResponse>(createdUserAppeal);
-
             return createdUserAppealResponse;
         }
 
@@ -49,8 +46,6 @@ namespace Business.Concretes
         public async Task<Paginate<GetListUserAppealResponse>> GetListAsync()
         {
             var data = await _userAppealDal.GetListAsync(include: u => u.Include(u => u.User).Include(c => c.Appeal));
-
-
             return _mapper.Map<Paginate<GetListUserAppealResponse>>(data);
         }
     }

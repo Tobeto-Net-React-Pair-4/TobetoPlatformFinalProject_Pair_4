@@ -24,6 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Dtos\HomeworkFile\Responses\" />
+    <Folder Include="Dtos\HomeworkFile\Requests\" />
     <Folder Include="Dtos\Homework\Requests\" />
     <Folder Include="Dtos\Homework\Responses\" />
     <Folder Include="Dtos\CourseLiveContent\Responses\" />

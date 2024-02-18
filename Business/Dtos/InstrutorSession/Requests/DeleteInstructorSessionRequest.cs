@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Business.Dtos.InstrutorSession.Requests
 {
-    internal class DeleteInstructorSessionRequest
+    public class DeleteInstructorSessionRequest
     {
+        public Guid InstructorId { get; set; }
+        public Guid SessionId { get; set; }
+
     }
 }

@@ -1,12 +1,8 @@
 ﻿using Business.Dtos.InstrutorSession.Responses;
+using Business.Dtos.Session;
 using Business.Dtos.Session.Requests;
 using Business.Dtos.Session.Responses;
 using Core.DataAccess.Paging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Abstracts
 {

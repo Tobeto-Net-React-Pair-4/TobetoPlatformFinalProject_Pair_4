@@ -25,10 +25,10 @@ namespace Business.Concretes
         {
             await _socialMediaBusinessRules.MaximumCountIsThree();
 
-            SocialMediaAccount socialMediaAccount = _mapper.Map<SocialMediaAccount>(createSocialMediaRequest);
-            socialMediaAccount.Id = Guid.NewGuid();
+            SocialMedia socialMedia = _mapper.Map<SocialMedia>(createSocialMediaRequest);
+            socialMedia.Id = Guid.NewGuid();
 
-            SocialMedia createdSocialMedia = await _socialMediaDal.AddAsync(socialMediaAccount);
+            SocialMedia createdSocialMedia = await _socialMediaDal.AddAsync(socialMedia);
             return _mapper.Map<CreatedSocialMediaResponse>(createdSocialMedia);
         }
 
