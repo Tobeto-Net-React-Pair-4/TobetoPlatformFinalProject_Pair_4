@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Business.Dtos.UserSkill.Responses;
 using DataAccess.Concretes;
 using Microsoft.EntityFrameworkCore;
+using Business.Dtos.Skill.Responses;
 
 namespace Business.Concretes
 {
@@ -52,6 +53,13 @@ namespace Business.Concretes
             var data = await _userSkillDal.GetListAsync(include: u => u.Include(u => u.User).Include(c => c.Skill));
 
             return _mapper.Map<Paginate<GetUserSkillResponse>>(data);
+        }
+
+        public async Task<Paginate<GetListSkillResponse>> GetListByUserIdAsync(Guid userId)
+        {
+            var userSkills = await _userSkillDal.GetListAsync(us => us.UserId == userId);
+            var skills = _mapper.Map<Paginate<GetListSkillResponse>>(userSkills);
+            return skills;
         }
     }
 }

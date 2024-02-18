@@ -1,4 +1,5 @@
-﻿using Business.Dtos.User.Requests;
+﻿using Business.Dtos.Survey.Responses;
+using Business.Dtos.User.Requests;
 using Business.Dtos.User.Responses;
 using Business.Dtos.UserSurvey.Requests;
 using Business.Dtos.UserSurvey.Responses;
@@ -16,5 +17,7 @@ namespace Business.Abstracts
         Task<Paginate<GetListUserSurveyResponse>> GetListAsync();
         Task<CreatedUserSurveyResponse> AddAsync(CreateUserSurveyRequest createUserSurveyRequest);
         Task<DeletedUserSurveyResponse> DeleteAsync(DeleteUserSurveyRequest deleteUserSurveyRequest);
+        Task<Paginate<GetListSurveyResponse>> GetListByUserIdAsync(Guid userId);
+
     }
 }

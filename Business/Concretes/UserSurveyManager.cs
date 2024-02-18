@@ -18,7 +18,7 @@ using System.Linq.Expressions;
 
 namespace Business.Concretes
 {
-    public class UserSurveyManager:IUserSurveyService
+    public class UserSurveyManager : IUserSurveyService
     {
          IUserSurveyDal _userSurveyDal;
          IMapper _mapper;
@@ -51,5 +51,12 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListUserSurveyResponse>>(data);
         }
 
+        public async Task<Paginate<GetListSurveyResponse>> GetListByUserIdAsync(Guid userId)
+        {
+            var data = await _userSurveyDal.GetListAsync(us => us.UserId == userId);
+            return  _mapper.Map<Paginate<GetListSurveyResponse>>(data);
+        }
+
+        
     }
 }

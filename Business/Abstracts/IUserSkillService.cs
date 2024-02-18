@@ -1,4 +1,5 @@
-﻿using Business.Dtos.UserSkill.Requests;
+﻿using Business.Dtos.Skill.Responses;
+using Business.Dtos.UserSkill.Requests;
 using Business.Dtos.UserSkill.Responses;
 using Core.DataAccess.Paging;
 using System;
@@ -14,5 +15,7 @@ namespace Business.Abstracts
         Task<Paginate<GetUserSkillResponse>> GetListAsync();
         Task<CreatedUserSkillResponse> AddAsync(CreateUserSkillRequest createUserSkillRequest);
         Task<DeletedUserSkillResponse> DeleteAsync(DeleteUserSkillRequest deleteUserSkillRequest);
+        Task<Paginate<GetListSkillResponse>> GetListByUserIdAsync(Guid userId);
+
     }
 }

@@ -5,6 +5,7 @@ using Business.Dtos.Instructor.Requests;
 using Business.Dtos.Instructor.Responses;
 using Business.Dtos.UserCourse.Requests;
 using Business.Dtos.UserCourse.Responses;
+using Business.Dtos.UserOperationClaim.Responses;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using DataAccess.Concretes;
@@ -47,6 +48,14 @@ namespace Business.Concretes
             var data = await _userCourseDal.GetListAsync(uc => uc.UserId == userId, 
                 include: uc => uc.Include(uc => uc.Course).Include(uc => uc.Course.Category).Include(uc => uc.Course.Like));
             return _mapper.Map<Paginate<GetListCourseResponse>>(data);
+        }
+
+        public async Task<DeletedUserCourseResponse> DeleteAsync(DeleteUserCourseRequest deleteUserCourseRequest)
+        {
+
+            UserCourse userCourse = await _userCourseDal.GetAsync(uc => uc.UserId == deleteUserCourseRequest.UserId);
+            await _userCourseDal.DeleteAsync(userCourse);
+            return _mapper.Map<DeletedUserCourseResponse>(userCourse);
         }
     }
 }
