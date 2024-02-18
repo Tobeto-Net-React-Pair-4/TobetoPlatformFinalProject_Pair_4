@@ -42,7 +42,6 @@ namespace DataAccess
             services.AddScoped<ISkillDal, EfSkillDal>();
             services.AddScoped<IUserSkillDal, EfUserSkillDal>();
             services.AddScoped<IPersonalInfoDal, EfPersonalInfoDal>();
-            services.AddScoped<IContentDal, EfContentDal>();
             services.AddScoped<ILikeDal, EfLikedDal>();
             services.AddScoped<IFavouriteDal, EfFavouriteDal>();
             services.AddScoped<IAssignmentDal, EfAssignmentDal>();
@@ -54,6 +53,7 @@ namespace DataAccess
             services.AddScoped<ICourseLiveContentDal, EfCourseLiveContentDal>();
             services.AddScoped<IFileDal, EfFileDal>();
             services.AddScoped<IHomeworkDal, EfHomeworkDal>();
+            services.AddScoped<IHomeworkFileDal, EfHomeworkFileDal>();
             services.AddScoped<IInstructorSessionDal, EfInsturctorSessionDal>();
             services.AddScoped<ILiveContentDal, EfLiveContentDal>();
             services.AddScoped<IPasswordResetDal, EfPasswordResetDal>();

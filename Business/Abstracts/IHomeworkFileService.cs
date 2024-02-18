@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Dtos.Homework.Responses;
+using Business.Dtos.Course.Responses;
 
 namespace Business.Abstracts
 {
@@ -15,8 +16,11 @@ namespace Business.Abstracts
     {
         Task<Paginate<GetListHomeworkResponse>> GetListAsync();
         Task<CreatedHomeworkFileResponse> AddAsync(CreateHomeworkFileRequest createHomeworkRequest);
-        Task<UpdatedHomeworkResponse> UpdateAsync(UpdateHomeworkRequest updateHomeworkRequest);
         Task<DeletedHomeworkResponse> DeleteAsync(Guid homeworkId);
-        Task<GetHomeworkResponse> GetByIdAsync(Guid homeworkId);
+        Task<Paginate<GetListHomeworkResponse>> GetListByHomeworkIdAsync(Guid userId);
+
+
+
+
     }
 }

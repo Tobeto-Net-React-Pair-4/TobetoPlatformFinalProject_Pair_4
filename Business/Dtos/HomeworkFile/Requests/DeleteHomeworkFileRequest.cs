@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Business.Dtos.HomeworkFile.Requests
 {
-    internal class DeleteHomeworkFileRequest
+    public class DeleteHomeworkFileRequest
     {
+        public Guid HomeworkId { get; set; }
+        public Guid FileId { get; set; }
     }
 }
