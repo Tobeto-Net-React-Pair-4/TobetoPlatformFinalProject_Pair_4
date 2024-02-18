@@ -1,15 +1,16 @@
 ﻿using Business.Constants;
 using Core.Business.Rules;
 using DataAccess.Abstracts;
+using Entities.Concretes;
 
 namespace Business.Rules
 {
 
-    public class SocialMediaBusinessRules : BaseBusinessRules
+    public class SocialMediaBusinessRules : BaseBusinessRules<SocialMedia>
     {
         private readonly ISocialMediaDal _socialMediaDal;
 
-        public SocialMediaBusinessRules(ISocialMediaDal socialMediaDal)
+        public SocialMediaBusinessRules(ISocialMediaDal socialMediaDal) : base(socialMediaDal)
         {
             _socialMediaDal = socialMediaDal;
         }
