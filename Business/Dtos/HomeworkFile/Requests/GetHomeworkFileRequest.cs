@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.Dtos.HomeworkFile.Requests
 {
-    internal class GetHomeworkFileRequest
+    public class GetHomeworkFileRequest
     {
     }
 }
