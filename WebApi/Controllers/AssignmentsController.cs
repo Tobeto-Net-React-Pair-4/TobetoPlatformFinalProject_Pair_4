@@ -6,10 +6,10 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AssignmentesController : ControllerBase
+    public class AssignmentsController : ControllerBase
     {
         IAssignmentService _assignmentService;
-        public AssignmentesController(IAssignmentService assignmentService)
+        public AssignmentsController(IAssignmentService assignmentService)
         {
             _assignmentService = assignmentService;
         }
