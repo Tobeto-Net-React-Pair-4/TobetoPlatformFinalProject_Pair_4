@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Dtos.AsyncContent.Responses;
 using Business.Dtos.CourseAsyncContent.Requests;
 using Business.Dtos.CourseAsyncContent.Responses;
 using Core.DataAccess.Paging;
@@ -27,10 +28,10 @@ namespace Business.Concretes
             return _mapper.Map<CreatedCourseAsyncContentResponse>(createdCourseAsyncContent);
         }
 
-        public async Task<DeletedCourseAsyncContentResponse> DeleteAsync(Guid Id)
+        public async Task<DeletedCourseAsyncContentResponse> DeleteAsync(DeleteCourseAsyncContentRequest deleteCourseAsyncContentRequest)
         {
 
-            CourseAsyncContent courseAsyncContent = await _courseAsyncContentDal.GetAsync(p => p.Id == Id);
+            CourseAsyncContent courseAsyncContent = await _courseAsyncContentDal.GetAsync(p => p.AsyncContentId == deleteCourseAsyncContentRequest.AsyncContentId);
             await _courseAsyncContentDal.DeleteAsync(courseAsyncContent);
             return _mapper.Map<DeletedCourseAsyncContentResponse>(courseAsyncContent);
         }
@@ -44,7 +45,7 @@ namespace Business.Concretes
 
         public async Task<UpdatedCourseAsyncContentResponse> UpdateAsync(UpdateCourseAsyncContentRequest updateCourseAsyncContentRequest)
         {
-            CourseAsyncContent courseAsyncContent = await _courseAsyncContentDal.GetAsync(p => p.Id == updateCourseAsyncContentRequest.Id);
+            CourseAsyncContent courseAsyncContent = await _courseAsyncContentDal.GetAsync(p => p.AsyncContentId == updateCourseAsyncContentRequest.AsyncContentId);
             _mapper.Map(updateCourseAsyncContentRequest, courseAsyncContent);
             await _courseAsyncContentDal.UpdateAsync(courseAsyncContent);
             return _mapper.Map<UpdatedCourseAsyncContentResponse>(courseAsyncContent);
@@ -54,6 +55,12 @@ namespace Business.Concretes
             CourseAsyncContent courseAsyncContent = await _courseAsyncContentDal.GetAsync(p => p.Id == Id);
 
             return _mapper.Map<GetCourseAsyncContentResponse>(courseAsyncContent);
+        }
+
+        public async Task<Paginate<GetListAsyncContentResponse>> GetListByCourseIdAsync(Guid courseId)
+        {
+            var data = await _courseAsyncContentDal.GetListAsync(c => c.CourseId == courseId);
+            return _mapper.Map<Paginate<GetListAsyncContentResponse>>(data);
         }
     }
 }

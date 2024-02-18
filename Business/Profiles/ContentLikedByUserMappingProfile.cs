@@ -14,6 +14,7 @@ namespace Business.Profiles
         {
             CreateMap<ContentLikedByUser, CreateContentLikedByUserRequest>().ReverseMap();
             CreateMap<ContentLikedByUser, UpdateContentLikedByUserRequest>().ReverseMap();
+            CreateMap<ContentLikedByUser, DeleteContentLikedByUserRequest>().ReverseMap();
 
             CreateMap<ContentLikedByUser, CreatedContentLikedByUserResponse>().ReverseMap();
             CreateMap<ContentLikedByUser, UpdatedContentLikedByUserResponse>().ReverseMap();

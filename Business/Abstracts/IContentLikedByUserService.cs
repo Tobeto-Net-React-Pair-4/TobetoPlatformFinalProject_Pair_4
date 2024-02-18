@@ -8,8 +8,8 @@ namespace Business.Abstracts
     {
         Task<Paginate<GetListContentLikedByUserResponse>> GetListAsync();
         Task<CreatedContentLikedByUserResponse> AddAsync(CreateContentLikedByUserRequest createContentLikedByUserRequest);
-        Task<UpdatedContentLikedByUserResponse> UpdateAsync(UpdateContentLikedByUserRequest updateContentLikedByUserRequest);
-        Task<DeletedContentLikedByUserResponse> DeleteAsync(Guid contentLikedByUserId);
-        Task<GetContentLikedByUserResponse> GetByIdAsync(Guid contentLikedByUserId);
+        Task<DeletedContentLikedByUserResponse> DeleteAsync(DeleteContentLikedByUserRequest deleteContentLikedByUserRequest);
+        //Task<UpdatedContentLikedByUserResponse> UpdateAsync(UpdateContentLikedByUserRequest updateContentLikedByUserRequest);
+        // GET LIST BY USER ID LAZIM BURAYA !-!-!
     }
 }
