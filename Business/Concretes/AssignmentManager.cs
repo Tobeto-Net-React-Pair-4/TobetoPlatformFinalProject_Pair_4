@@ -28,10 +28,10 @@ namespace Business.Concretes
             return _mapper.Map<CreatedAssignmentResponse>(createdAssignment);
         }
 
-        public async Task<DeletedAssignmentResponse> DeleteAsync(Guid Id)
+        public async Task<DeletedAssignmentResponse> DeleteAsync(Guid AssignmentId)
         {
 
-            Assignment assignment = await _assignmentDal.GetAsync(p => p.Id == Id);
+            Assignment assignment = await _assignmentDal.GetAsync(p => p.Id == AssignmentId);
             await _assignmentDal.DeleteAsync(assignment);
             return _mapper.Map<DeletedAssignmentResponse>(assignment);
         }
@@ -50,9 +50,9 @@ namespace Business.Concretes
             await _assignmentDal.UpdateAsync(assignment);
             return _mapper.Map<UpdatedAssignmentResponse>(assignment);
         }
-        public async Task<GetAssignmentResponse> GetByIdAsync(Guid Id)
+        public async Task<GetAssignmentResponse> GetByIdAsync(Guid AssignmentId)
         {
-            Assignment assignment = await _assignmentDal.GetAsync(p => p.Id == Id);
+            Assignment assignment = await _assignmentDal.GetAsync(p => p.Id == AssignmentId);
 
             return _mapper.Map<GetAssignmentResponse>(assignment);
         }
