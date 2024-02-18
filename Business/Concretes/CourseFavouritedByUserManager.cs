@@ -27,14 +27,13 @@ namespace Business.Concretes
             return _mapper.Map<CreatedCourseFavouritedByUserResponse>(createdCourseFavouritedByUser);
         }
 
-        public async Task<DeletedCourseFavouritedByUserResponse> DeleteAsync(Guid Id)
+        public async Task<DeletedCourseFavouritedByUserResponse> DeleteAsync(DeleteCourseFavouritedByUserRequest deleteCourseFavouritedByUserRequest)
         {
+            CourseFavouritedByUser courseFavouritedByUser = 
 
-            CourseFavouritedByUser courseFavouritedByUser = await _courseFavouritedByUserDal.GetAsync(p => p.Id == Id);
             await _courseFavouritedByUserDal.DeleteAsync(courseFavouritedByUser);
             return _mapper.Map<DeletedCourseFavouritedByUserResponse>(courseFavouritedByUser);
         }
-
 
         public async Task<Paginate<GetListCourseFavouritedByUserResponse>> GetListAsync()
         {
@@ -42,18 +41,5 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListCourseFavouritedByUserResponse>>(data);
         }
 
-        public async Task<UpdatedCourseFavouritedByUserResponse> UpdateAsync(UpdateCourseFavouritedByUserRequest updateCourseFavouritedByUserRequest)
-        {
-            CourseFavouritedByUser courseFavouritedByUser = await _courseFavouritedByUserDal.GetAsync(p => p.Id == updateCourseFavouritedByUserRequest.Id);
-            _mapper.Map(updateCourseFavouritedByUserRequest, courseFavouritedByUser);
-            await _courseFavouritedByUserDal.UpdateAsync(courseFavouritedByUser);
-            return _mapper.Map<UpdatedCourseFavouritedByUserResponse>(courseFavouritedByUser);
-        }
-        public async Task<GetCourseFavouritedByUserResponse> GetByIdAsync(Guid Id)
-        {
-            CourseFavouritedByUser courseFavouritedByUser = await _courseFavouritedByUserDal.GetAsync(p => p.Id == Id);
-
-            return _mapper.Map<GetCourseFavouritedByUserResponse>(courseFavouritedByUser);
-        }
     }
 }

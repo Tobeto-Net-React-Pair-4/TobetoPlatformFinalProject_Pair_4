@@ -16,6 +16,7 @@ namespace Business.Profiles
         protected CourseAsyncContentMappingProfile()
         {
             CreateMap<CourseAsyncContent, CreateCourseAsyncContentRequest>().ReverseMap();
+            CreateMap<CourseAsyncContent, DeleteCourseAsyncContentRequest>().ReverseMap();
             CreateMap<CourseAsyncContent, UpdateCourseAsyncContentRequest>().ReverseMap();
 
             CreateMap<CourseAsyncContent, CreatedCourseAsyncContentResponse>().ReverseMap();

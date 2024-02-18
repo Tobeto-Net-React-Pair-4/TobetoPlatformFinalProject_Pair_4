@@ -1,5 +1,6 @@
 ﻿using Business.Constants;
 using Core.Business.Rules;
+using Core.CrossCuttingConcerns.Exceptions.Types;
 using DataAccess.Abstracts;
 using Entities.Concretes;
 
@@ -21,7 +22,7 @@ namespace Business.Rules
 
             if (result.Count > 3)
             {
-                throw new Exception(BusinessMessages.SocialMediaLimit);
+                throw new BusinessException(BusinessMessages.SocialMediaLimit);
             }
         }
     }

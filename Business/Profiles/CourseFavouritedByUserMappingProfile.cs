@@ -16,6 +16,7 @@ namespace Business.Profiles
         protected CourseFavouritedByUserMappingProfile()
         {
             CreateMap<CourseFavouritedByUser, CreateCourseFavouritedByUserRequest>().ReverseMap();
+            CreateMap<CourseFavouritedByUser, DeleteCourseFavouritedByUserRequest>().ReverseMap();
             CreateMap<CourseFavouritedByUser, UpdateCourseFavouritedByUserRequest>().ReverseMap();
 
             CreateMap<CourseFavouritedByUser, CreatedCourseFavouritedByUserResponse>().ReverseMap();

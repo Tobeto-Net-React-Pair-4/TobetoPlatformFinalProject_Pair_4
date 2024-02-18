@@ -28,7 +28,6 @@ namespace Business.Rules
             _courseAsyncContentDal = courseAsyncContentDal;
             _asyncContentService = asyncContentService;
             _courseService = courseService;
-
         }
         public async Task<CourseAsyncContent> CheckIfCourseAsyncContentExists(Guid courseId, Guid asyncContentId)
         {
