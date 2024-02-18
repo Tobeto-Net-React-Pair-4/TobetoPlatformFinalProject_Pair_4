@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.AsyncContent.Responses;
 using Business.Dtos.CourseAsyncContent.Requests;
 using Business.Dtos.CourseAsyncContent.Responses;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -13,13 +15,19 @@ namespace Business.Concretes
     {
         private ICourseAsyncContentDal _courseAsyncContentDal;
         private IMapper _mapper;
-        public CourseAsyncContentManager(ICourseAsyncContentDal courseAsyncContentDal, IMapper mapper)
+        private CourseAsyncContentBusinessRules _courseAsyncContentBusinessRules;
+        public CourseAsyncContentManager(ICourseAsyncContentDal courseAsyncContentDal, IMapper mapper, CourseAsyncContentBusinessRules courseAsyncContentBusinessRules)
         {
             _courseAsyncContentDal = courseAsyncContentDal;
             _mapper = mapper;
+            _courseAsyncContentBusinessRules = courseAsyncContentBusinessRules;
         }
+
+        [SecuredOperation("admin")]
         public async Task<CreatedCourseAsyncContentResponse> AddAsync(CreateCourseAsyncContentRequest createCourseAsyncContentRequest)
         {
+            await _courseAsyncContentBusinessRules.CheckIfAsyncContentExists(createCourseAsyncContentRequest.AsyncContentId);
+            await _courseAsyncContentBusinessRules.CheckIfCourseExists(createCourseAsyncContentRequest.CourseId);
 
             CourseAsyncContent courseAsyncContent = _mapper.Map<CourseAsyncContent>(createCourseAsyncContentRequest);
             courseAsyncContent.Id = Guid.NewGuid();
@@ -28,14 +36,15 @@ namespace Business.Concretes
             return _mapper.Map<CreatedCourseAsyncContentResponse>(createdCourseAsyncContent);
         }
 
+        [SecuredOperation("admin")]
         public async Task<DeletedCourseAsyncContentResponse> DeleteAsync(DeleteCourseAsyncContentRequest deleteCourseAsyncContentRequest)
         {
+            CourseAsyncContent courseAsyncContent = await _courseAsyncContentBusinessRules.CheckIfCourseAsyncContentExists
+                (deleteCourseAsyncContentRequest.CourseId, deleteCourseAsyncContentRequest.AsyncContentId);
 
-            CourseAsyncContent courseAsyncContent = await _courseAsyncContentDal.GetAsync(p => p.AsyncContentId == deleteCourseAsyncContentRequest.AsyncContentId);
             await _courseAsyncContentDal.DeleteAsync(courseAsyncContent);
             return _mapper.Map<DeletedCourseAsyncContentResponse>(courseAsyncContent);
         }
-
 
         public async Task<Paginate<GetListCourseAsyncContentResponse>> GetListAsync()
         {
@@ -43,22 +52,10 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListCourseAsyncContentResponse>>(data);
         }
 
-        public async Task<UpdatedCourseAsyncContentResponse> UpdateAsync(UpdateCourseAsyncContentRequest updateCourseAsyncContentRequest)
-        {
-            CourseAsyncContent courseAsyncContent = await _courseAsyncContentDal.GetAsync(p => p.AsyncContentId == updateCourseAsyncContentRequest.AsyncContentId);
-            _mapper.Map(updateCourseAsyncContentRequest, courseAsyncContent);
-            await _courseAsyncContentDal.UpdateAsync(courseAsyncContent);
-            return _mapper.Map<UpdatedCourseAsyncContentResponse>(courseAsyncContent);
-        }
-        public async Task<GetCourseAsyncContentResponse> GetByIdAsync(Guid Id)
-        {
-            CourseAsyncContent courseAsyncContent = await _courseAsyncContentDal.GetAsync(p => p.Id == Id);
-
-            return _mapper.Map<GetCourseAsyncContentResponse>(courseAsyncContent);
-        }
-
         public async Task<Paginate<GetListAsyncContentResponse>> GetListByCourseIdAsync(Guid courseId)
         {
+            await _courseAsyncContentBusinessRules.CheckIfCourseExists(courseId);
+
             var data = await _courseAsyncContentDal.GetListAsync(c => c.CourseId == courseId);
             return _mapper.Map<Paginate<GetListAsyncContentResponse>>(data);
         }

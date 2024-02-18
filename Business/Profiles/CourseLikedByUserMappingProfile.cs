@@ -11,6 +11,7 @@ namespace Business.Profiles
         protected CourseLikedByUserMappingProfile()
         {
             CreateMap<CourseLikedByUser, CreateCourseLikedByUserRequest>().ReverseMap();
+            CreateMap<CourseLikedByUser, >
             CreateMap<CourseLikedByUser, UpdateCourseLikedByUserRequest>().ReverseMap();
 
             CreateMap<CourseLikedByUser, CreatedCourseLikedByUserResponse>().ReverseMap();

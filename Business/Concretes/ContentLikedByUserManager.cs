@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.ContentLikedByUser.Requests;
 using Business.Dtos.ContentLikedByUser.Response;
+using Business.Dtos.User.Responses;
 using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
@@ -47,13 +48,12 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListContentLikedByUserResponse>>(data);
         }
 
-        //public async Task<UpdatedContentLikedByUserResponse> UpdateAsync(UpdateContentLikedByUserRequest updateContentLikedByUserRequest)
-        //{
-        //    await _clbuBusinessRules.CheckIfContentLikedByUserExists
-        //    ContentLikedByUser contentLikedByUser = await _contentLikedByUserDal.GetAsync(p => p.Id == updateContentLikedByUserRequest.Id);
-        //    _mapper.Map(updateContentLikedByUserRequest, contentLikedByUser);
-        //    await _contentLikedByUserDal.UpdateAsync(contentLikedByUser);
-        //    return _mapper.Map<UpdatedContentLikedByUserResponse>(contentLikedByUser);
-        //}
+        public async Task<Paginate<GetListUserResponse>> GetListByContentIdAsync(Guid contentId)
+        {
+            await _clbuBusinessRules.CheckIfContentExists(contentId);
+
+            var data = await _contentLikedByUserDal.GetListAsync(clbu => clbu.ContentId == contentId);
+            return _mapper.Map<Paginate<GetListUserResponse>>(data);
+        }
     }
 }

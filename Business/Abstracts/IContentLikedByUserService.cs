@@ -1,5 +1,7 @@
-﻿using Business.Dtos.ContentLikedByUser.Requests;
+﻿using Business.Dtos.Content.Responses;
+using Business.Dtos.ContentLikedByUser.Requests;
 using Business.Dtos.ContentLikedByUser.Response;
+using Business.Dtos.User.Responses;
 using Core.DataAccess.Paging;
 
 namespace Business.Abstracts
@@ -9,7 +11,6 @@ namespace Business.Abstracts
         Task<Paginate<GetListContentLikedByUserResponse>> GetListAsync();
         Task<CreatedContentLikedByUserResponse> AddAsync(CreateContentLikedByUserRequest createContentLikedByUserRequest);
         Task<DeletedContentLikedByUserResponse> DeleteAsync(DeleteContentLikedByUserRequest deleteContentLikedByUserRequest);
-        //Task<UpdatedContentLikedByUserResponse> UpdateAsync(UpdateContentLikedByUserRequest updateContentLikedByUserRequest);
-        // GET LIST BY USER ID LAZIM BURAYA !-!-!
+        Task<Paginate<GetListUserResponse>> GetListByContentIdAsync(Guid contentId);
     }
 }
