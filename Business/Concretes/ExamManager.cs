@@ -8,6 +8,8 @@ using Business.Abstracts;
 using Business.BusinessAspects.Autofac;
 using Business.Dtos.Exam.Requests;
 using Business.Dtos.Exam.Responses;
+using Business.Dtos.UserExam.Requests;
+using Business.Dtos.UserExam.Responses;
 using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
@@ -20,11 +22,13 @@ namespace Business.Concretes
         private IExamDal _examDal;
         private IMapper _mapper;
         private ExamBusinessRules _examBusinessRules;
-        public ExamManager(IExamDal examDal, IMapper mapper, ExamBusinessRules examBusinessRules)
+        private IUserExamService _userExamService;
+        public ExamManager(IExamDal examDal, IMapper mapper, ExamBusinessRules examBusinessRules, IUserExamService userExamService)
         {
             _examDal = examDal;
             _mapper = mapper;
             _examBusinessRules = examBusinessRules;
+            _userExamService = userExamService;
         }
 
         [SecuredOperation("admin")]
@@ -70,6 +74,17 @@ namespace Business.Concretes
         {
             var data = await _examDal.GetListAsync();
             return _mapper.Map<Paginate<GetListExamResponse>>(data);
+        }
+
+        public async Task<Paginate<GetListExamResponse>> GetListByUserIdAsync(Guid userId)
+        {
+            return await _userExamService.GetListByUserIdAsync(userId);
+        }
+
+        [SecuredOperation("admin")]
+        public async Task<CreatedUserExamResponse> AssignExamToUserAsync(CreateUserExamRequest createUserExamRequest)
+        {
+            return await _userExamService.AddAsync(createUserExamRequest);
         }
     }
 }

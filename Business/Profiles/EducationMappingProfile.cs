@@ -16,15 +16,15 @@ namespace Business.Profiles
         public EducationMappingProfile()
         {
             CreateMap<Education, CreateEducationRequest>().ReverseMap();
+            CreateMap<Education, UpdateEducationRequest>().ReverseMap();
+
             CreateMap<Education, CreatedEducationResponse>().ReverseMap();
             CreateMap<Education, GetEducationResponse>().ReverseMap();
-            CreateMap<Education, GetByIdEducationResponse>().ReverseMap();
-            CreateMap<Education, UpdateEducationRequest>().ReverseMap();
             CreateMap<Education, UpdatedEducationResponse>().ReverseMap();
             CreateMap<Education, DeletedEducationResponse>().ReverseMap();
 
-            CreateMap<Paginate<Education>, Paginate<GetListEducationResponse>>().ReverseMap();
             CreateMap<Education, GetListEducationResponse>().ReverseMap();
+            CreateMap<Paginate<Education>, Paginate<GetListEducationResponse>>().ReverseMap();
 
         }
     }

@@ -8,10 +8,10 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ExperinceController : ControllerBase
+    public class ExperienceController : ControllerBase
     {
         IExperinceService _experinceService;
-        public ExperinceController(IExperinceService experinceService)
+        public ExperienceController(IExperinceService experinceService)
         {
             _experinceService = experinceService;
         }

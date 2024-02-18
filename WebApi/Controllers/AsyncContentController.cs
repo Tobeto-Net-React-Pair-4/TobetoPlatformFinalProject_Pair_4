@@ -6,10 +6,10 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AsyncContentesController : ControllerBase
+    public class AsyncContentController : ControllerBase
     {
         IAsyncContentService _asyncContentService;
-        public AsyncContentesController(IAsyncContentService asyncContentService)
+        public AsyncContentController(IAsyncContentService asyncContentService)
         {
             _asyncContentService = asyncContentService;
         }
