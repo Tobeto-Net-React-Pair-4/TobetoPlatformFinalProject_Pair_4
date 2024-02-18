@@ -1,5 +1,5 @@
 ﻿using Business.Dtos.Course.Responses;
-using Business.Dtos.UserCalendar.Requests;
+using Business.Dtos.UserCalendar;
 using Business.Dtos.UserCalendar.Responses;
 using Core.DataAccess.Paging;
 using System;
@@ -14,7 +14,6 @@ namespace Business.Abstracts
     {
         Task<CreatedUserCalendarResponse> AddAsync(CreateUserCalendarRequest createUserCalendarRequest);
         Task<Paginate<GetListUserCalendarResponse>> GetListAsync();
-        Task<GetUserCalendarResponse> GetByIdAsync(GetUserCalendarRequest getUserCalendarRequest);
         Task<DeletedUserCalendarResponse> DeleteAsync(DeleteUserCalendarRequest deleteUserCalendarRequest);
         Task<Paginate<GetListCalendarResponse>> GetListByUserIdAsync(Guid userId);
     }

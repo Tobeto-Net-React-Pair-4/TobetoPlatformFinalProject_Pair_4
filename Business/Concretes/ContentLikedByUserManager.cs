@@ -2,23 +2,28 @@
 using Business.Abstracts;
 using Business.Dtos.ContentLikedByUser.Requests;
 using Business.Dtos.ContentLikedByUser.Response;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
 
 namespace Business.Concretes
 {
-    public class ContentLikedByUserManager : IContentLikedByUser
+    public class ContentLikedByUserManager : IContentLikedByUserService
     {
         private IContentLikedByUserDal _contentLikedByUserDal;
         private IMapper _mapper;
-        public ContentLikedByUserManager(IContentLikedByUserDal contentLikedByUserDal, IMapper mapper)
+        private ContentLikedByUserBusinessRules _clbuBusinessRules;
+        public ContentLikedByUserManager(IContentLikedByUserDal contentLikedByUserDal, IMapper mapper, ContentLikedByUserBusinessRules clbuBusinessRules)
         {
             _contentLikedByUserDal = contentLikedByUserDal;
             _mapper = mapper;
+            _clbuBusinessRules = clbuBusinessRules;
         }
         public async Task<CreatedContentLikedByUserResponse> AddAsync(CreateContentLikedByUserRequest createContentLikedByUserRequest)
         {
+            await _clbuBusinessRules.CheckIfContentExists(createContentLikedByUserRequest.ContentId);
+            await _clbuBusinessRules.CheckIfUserExists(createContentLikedByUserRequest.UserId);
 
             ContentLikedByUser contentLikedByUser = _mapper.Map<ContentLikedByUser>(createContentLikedByUserRequest);
             contentLikedByUser.Id = Guid.NewGuid();
@@ -27,14 +32,14 @@ namespace Business.Concretes
             return _mapper.Map<CreatedContentLikedByUserResponse>(createdContentLikedByUser);
         }
 
-        public async Task<DeletedContentLikedByUserResponse> DeleteAsync(Guid Id)
+        public async Task<DeletedContentLikedByUserResponse> DeleteAsync(DeleteContentLikedByUserRequest deleteContentLikedByUserRequest)
         {
+            ContentLikedByUser contentLikedByUser = await _clbuBusinessRules.CheckIfContentLikedByUserExists
+                (deleteContentLikedByUserRequest.UserId, deleteContentLikedByUserRequest.ContentId);
 
-            ContentLikedByUser contentLikedByUser = await _contentLikedByUserDal.GetAsync(p => p.Id == Id);
             await _contentLikedByUserDal.DeleteAsync(contentLikedByUser);
             return _mapper.Map<DeletedContentLikedByUserResponse>(contentLikedByUser);
         }
-
 
         public async Task<Paginate<GetListContentLikedByUserResponse>> GetListAsync()
         {
@@ -42,18 +47,13 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListContentLikedByUserResponse>>(data);
         }
 
-        public async Task<UpdatedContentLikedByUserResponse> UpdateAsync(UpdateContentLikedByUserRequest updateContentLikedByUserRequest)
-        {
-            ContentLikedByUser contentLikedByUser = await _contentLikedByUserDal.GetAsync(p => p.Id == updateContentLikedByUserRequest.Id);
-            _mapper.Map(updateContentLikedByUserRequest, contentLikedByUser);
-            await _contentLikedByUserDal.UpdateAsync(contentLikedByUser);
-            return _mapper.Map<UpdatedContentLikedByUserResponse>(contentLikedByUser);
-        }
-        public async Task<GetContentLikedByUserResponse> GetByIdAsync(Guid Id)
-        {
-            ContentLikedByUser contentLikedByUser = await _contentLikedByUserDal.GetAsync(p => p.Id == Id);
-
-            return _mapper.Map<GetContentLikedByUserResponse>(contentLikedByUser);
-        }
+        //public async Task<UpdatedContentLikedByUserResponse> UpdateAsync(UpdateContentLikedByUserRequest updateContentLikedByUserRequest)
+        //{
+        //    await _clbuBusinessRules.CheckIfContentLikedByUserExists
+        //    ContentLikedByUser contentLikedByUser = await _contentLikedByUserDal.GetAsync(p => p.Id == updateContentLikedByUserRequest.Id);
+        //    _mapper.Map(updateContentLikedByUserRequest, contentLikedByUser);
+        //    await _contentLikedByUserDal.UpdateAsync(contentLikedByUser);
+        //    return _mapper.Map<UpdatedContentLikedByUserResponse>(contentLikedByUser);
+        //}
     }
 }

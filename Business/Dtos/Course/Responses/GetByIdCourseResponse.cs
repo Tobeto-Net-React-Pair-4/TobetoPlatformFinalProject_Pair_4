@@ -18,7 +18,6 @@ namespace Business.Dtos.Course.Responses
         public string Description { get; set; }
         public string Producer { get; set; }
         public int ContentCount { get; set; }
-        //public ICollection<GetUserResponse> Users { get; set; }
 
     }
 }
