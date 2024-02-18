@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Abstracts;
+using Business.Dtos.Exam.Responses;
 using Business.Dtos.UserExam.Requests;
 using Business.Dtos.UserExam.Responses;
+using Business.Dtos.UserOperationClaim.Responses;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -38,19 +40,19 @@ namespace Business.Concretes
             return _mapper.Map<DeletedUserExamResponse>(userExam);
         }
 
-        public async Task<GetUserExamResponse> GetAsync(GetUserExamRequest getUserExamRequest)
-        {
-            UserExam userExam = await _userExamDal.GetAsync
-                (ue => ue.ExamId == getUserExamRequest.ExamId && ue.UserId == getUserExamRequest.UserId,
-                include: ue => ue.Include(u => u.User).Include(e => e.Exam));
-            return _mapper.Map<GetUserExamResponse>(userExam);
-        }
+        
 
         public async Task<Paginate<GetListUserExamResponse>> GetListAsync()
         {
             var data = await _userExamDal.GetListAsync
                 (include: ue => ue.Include(u => u.User).Include(e => e.Exam));
             return _mapper.Map<Paginate<GetListUserExamResponse>>(data);
+        }
+
+        public async Task<Paginate<GetListExamResponse>> GetListByUserIdAsync(Guid userId)
+        {
+            var userExams = await _userExamDal.GetListAsync(ue => ue.UserId == userId);
+            return _mapper.Map<Paginate<GetListExamResponse>>(userExams);
         }
     }
 }
