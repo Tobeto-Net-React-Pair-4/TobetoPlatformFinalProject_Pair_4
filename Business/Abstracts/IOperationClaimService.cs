@@ -2,6 +2,7 @@
 using Business.Dtos.OperationClaim.Requests;
 using Business.Dtos.OperationClaim.Responses;
 using Business.Dtos.UserCourse.Responses;
+using Business.Dtos.UserOperationClaim.Requests;
 using Business.Dtos.UserOperationClaim.Responses;
 using Core.DataAccess.Paging;
 using System;
@@ -16,6 +17,10 @@ namespace Business.Abstracts
     {
         Task<CreatedOperationClaimResponse> AddAsync(CreateOperationClaimRequest createOperationClaimRequest);
         Task<Paginate<GetListOperationClaimResponse>> GetListAsync();
+        Task<DeletedOperationClaimResponse> DeleteAsync(DeleteOperationClaimRequest deleteOperationClaimRequest);
+        Task<UpdatedOperationClaimResponse> UpdateAsync(UpdateOperationClaimRequest updateOperationClaimRequest);
+        Task<GetOperationClaimResponse> GetByIdAsync(GetOperationClaimRequest getOperationClaimRequest);
+        Task<CreatedUserOperationClaimResponse> AssignOperationClaimAsync(CreateUserOperationClaimRequest createUserOperationClaimRequest);
 
     }
 }
