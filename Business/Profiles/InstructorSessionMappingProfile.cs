@@ -26,18 +26,16 @@ namespace Business.Profiles
             CreateMap<Instructor, DeletedInstructorSessionResponse>()
                 .ForMember(destinationMember: i => i.InstructorName, memberOptions: opt => opt.MapFrom(cisr => cisr.Name))
                 .ReverseMap();
-            CreateMap<Instructor, UpdateInstructorSessionRequest>().ReverseMap();
-            CreateMap<Instructor, UpdatedInstructorSessionResponse>().ReverseMap();
 
             CreateMap<Paginate<Instructor>, Paginate<GetListInstructorResponse>>();
             CreateMap<Instructor, GetListInstructorSessionResponse>()
                 .ForMember(destinationMember: i => i.InstructorName, memberOptions: opt => opt.MapFrom(cisr => cisr.Name))
                 .ReverseMap();
 
-            CreateMap<Instructor, GetInstructorSessionRequest>().ReverseMap();
-            CreateMap<Instructor, GetInstructorSessionResponse>()
-                .ForMember(destinationMember: i => i.InstructorName, memberOptions: opt => opt.MapFrom(cisr => cisr.Name))
-                .ReverseMap();
+            //CreateMap<Instructor, GetInstructorSessionRequest>().ReverseMap();
+            //CreateMap<Instructor, GetInstructorSessionResponse>()
+            //    .ForMember(destinationMember: i => i.InstructorName, memberOptions: opt => opt.MapFrom(cisr => cisr.Name))
+            //    .ReverseMap();
 
             CreateMap<InstructorSession, GetListSessionResponse>()
                .IncludeMembers(ins => ins.Session)

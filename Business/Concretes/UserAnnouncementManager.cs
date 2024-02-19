@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.Announcement.Requests;
 using Business.Dtos.Announcement.Responses;
+using Business.Dtos.Course.Responses;
 using Business.Dtos.Instructor.Requests;
 using Business.Dtos.Instructor.Responses;
 using Business.Dtos.UserAnnouncement.Requests;
@@ -10,6 +11,7 @@ using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using DataAccess.Concretes;
 using Entities.Concretes;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,13 +52,11 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListUserAnnouncementResponse>>(data);
         }
 
-        public async Task<UpdatedUserAnnouncementResponse> UpdateAsync(UpdateUserAnnouncementRequest updateUserAnnouncementRequest)
+        public async Task<Paginate<GetListAnnouncementResponse>> GetListByUserIdAsync(Guid userId)
         {
-
-            UserAnnouncement userAnnouncement = await _userAnnouncementDal.GetAsync(p => p.Id == updateUserAnnouncementRequest.Id);
-            _mapper.Map(updateUserAnnouncementRequest, userAnnouncement);
-            await _userAnnouncementDal.UpdateAsync(userAnnouncement);
-            return _mapper.Map<UpdatedUserAnnouncementResponse>(userAnnouncement);
+            var data = await _userAnnouncementDal.GetListAsync(uc => uc.UserId == userId,
+                include: uc => uc.Include(uc => uc.Announcement));
+            return _mapper.Map<Paginate<GetListAnnouncementResponse>>(data);
         }
     }
 }

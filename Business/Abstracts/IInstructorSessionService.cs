@@ -11,8 +11,6 @@ namespace Business.Abstracts
         Task<Paginate<GetListInstructorSessionResponse>> GetListAsync();
         Task<CreatedInstructorSessionResponse> AddAsync(CreateInstructorSessionRequest createInstructorSessionRequest);
         Task<DeletedInstructorSessionResponse> DeleteAsync(DeleteInstructorSessionRequest deleteInstructorSessionRequest);
-        Task<UpdatedInstructorSessionResponse> UpdateAsync(UpdateInstructorSessionRequest updateInstructorSessionRequest);
-        Task<GetInstructorSessionResponse> GetByIdAsync(GetInstructorSessionRequest getInstructorSessionRequest);
         Task<Paginate<GetListSessionResponse>> GetListByInstructorIdAsync(Guid instructorId);
     }
 }

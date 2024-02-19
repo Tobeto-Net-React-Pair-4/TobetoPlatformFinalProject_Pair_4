@@ -9,15 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Dtos.Homework.Responses;
 using Business.Dtos.Course.Responses;
+using Business.Dtos.File.Responses;
 
 namespace Business.Abstracts
 {
     public interface IHomeworkFileService
     {
-        Task<Paginate<GetListHomeworkResponse>> GetListAsync();
+        Task<Paginate<GetListHomeworkFileResponse>> GetListAsync();
         Task<CreatedHomeworkFileResponse> AddAsync(CreateHomeworkFileRequest createHomeworkRequest);
-        Task<DeletedHomeworkResponse> DeleteAsync(Guid homeworkId);
-        Task<Paginate<GetListHomeworkResponse>> GetListByHomeworkIdAsync(Guid userId);
+        Task<DeletedHomeworkFileResponse> DeleteAsync(Guid homeworkId);
+        Task<Paginate<GetListFileResponse>> GetListByHomeworkIdAsync(Guid userId);
 
 
 

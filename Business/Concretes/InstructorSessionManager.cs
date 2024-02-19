@@ -1,9 +1,16 @@
-﻿using Business.Abstracts;
+﻿using AutoMapper;
+using Business.Abstracts;
+using Business.Dtos.Course.Responses;
 using Business.Dtos.InstrutorSession.Requests;
 using Business.Dtos.InstrutorSession.Responses;
 using Business.Dtos.Session.Responses;
+using Business.Dtos.UserCourse.Requests;
+using Business.Dtos.UserCourse.Responses;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
+using DataAccess.Concretes;
+using Entities.Concretes;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,34 +21,42 @@ namespace Business.Concretes
 {
     public class InstructorSessionManager : IInstructorSessionService
     {
-        public Task<CreatedInstructorSessionResponse> AddAsync(CreateInstructorSessionRequest createInstructorSessionRequest)
+        IInstructorSessionDal _instructorSessionDal;
+        IMapper _mapper;
+        public InstructorSessionManager(IInstructorSessionDal instructorSessionDal, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _instructorSessionDal = instructorSessionDal;
+            _mapper = mapper;
         }
 
-        public Task<DeletedInstructorSessionResponse> DeleteAsync(DeleteInstructorSessionRequest deleteInstructorSessionRequest)
+        public async Task<CreatedInstructorSessionResponse> AddAsync(CreateInstructorSessionRequest createInstructorSessionRequest)
         {
-            throw new NotImplementedException();
+            InstructorSession instructorSession = _mapper.Map<InstructorSession>(createInstructorSessionRequest);
+            var createdInstructorSession = await _instructorSessionDal.AddAsync(instructorSession);
+            CreatedInstructorSessionResponse createdInstructorSessionResponse = _mapper.Map<CreatedInstructorSessionResponse>(createdInstructorSession);
+            return createdInstructorSessionResponse;
         }
 
-        public Task<GetInstructorSessionResponse> GetByIdAsync(GetInstructorSessionRequest getInstructorSessionRequest)
+        public async Task<DeletedInstructorSessionResponse> DeleteAsync(DeleteInstructorSessionRequest deleteInstructorSessionRequest)
         {
-            throw new NotImplementedException();
+            InstructorSession instructorSession = await _instructorSessionDal.GetAsync(uc => uc.InstructorId == deleteInstructorSessionRequest.InstructorId);
+            await _instructorSessionDal.DeleteAsync(instructorSession);
+            return _mapper.Map<DeletedInstructorSessionResponse>(instructorSession);
         }
 
-        public Task<Paginate<GetListInstructorSessionResponse>> GetListAsync()
+        public async Task<Paginate<GetListInstructorSessionResponse>> GetListAsync()
         {
-            throw new NotImplementedException();
+            var data = await _instructorSessionDal.GetListAsync(include: uc => uc.Include(uc => uc.Instructor).Include(uc => uc.Session));
+
+            return _mapper.Map<Paginate<GetListInstructorSessionResponse>>(data);
         }
 
-        public Task<Paginate<GetListSessionResponse>> GetListByInstructorIdAsync(Guid instructorId)
+        public async Task<Paginate<GetListSessionResponse>> GetListByInstructorIdAsync(Guid instructorId)
         {
-            throw new NotImplementedException();
+            var data = await _instructorSessionDal.GetListAsync(uc => uc.InstructorId == instructorId,
+                include: uc => uc.Include(uc => uc.Session));
+            return _mapper.Map<Paginate<GetListSessionResponse>>(data);
         }
 
-        public Task<UpdatedInstructorSessionResponse> UpdateAsync(UpdateInstructorSessionRequest updateInstructorSessionRequest)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

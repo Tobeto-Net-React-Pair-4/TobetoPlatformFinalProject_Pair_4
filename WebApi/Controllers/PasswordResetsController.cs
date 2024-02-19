@@ -6,10 +6,10 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PasswordResetesController : ControllerBase
+    public class PasswordResetsController : ControllerBase
     {
         IPasswordResetService _passwordResetService;
-        public PasswordResetesController(IPasswordResetService passwordResetService)
+        public PasswordResetsController(IPasswordResetService passwordResetService)
         {
             _passwordResetService = passwordResetService;
         }
