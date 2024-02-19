@@ -23,7 +23,7 @@ namespace Business.Concretes
         }
         public async Task<CreatedContentLikedByUserResponse> AddAsync(CreateContentLikedByUserRequest createContentLikedByUserRequest)
         {
-            await _clbuBusinessRules.CheckIfContentExists(createContentLikedByUserRequest.ContentId);
+            //await _clbuBusinessRules.CheckIfContentExists(createContentLikedByUserRequest.ContentId);
             await _clbuBusinessRules.CheckIfUserExists(createContentLikedByUserRequest.UserId);
 
             ContentLikedByUser contentLikedByUser = _mapper.Map<ContentLikedByUser>(createContentLikedByUserRequest);
@@ -50,7 +50,7 @@ namespace Business.Concretes
 
         public async Task<Paginate<GetListUserResponse>> GetListByContentIdAsync(Guid contentId)
         {
-            await _clbuBusinessRules.CheckIfContentExists(contentId);
+            //await _clbuBusinessRules.CheckIfContentExists(contentId);
 
             var data = await _contentLikedByUserDal.GetListAsync(clbu => clbu.ContentId == contentId);
             return _mapper.Map<Paginate<GetListUserResponse>>(data);
