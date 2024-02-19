@@ -16,6 +16,7 @@ namespace DataAccess.EntityConfigurations
             builder.ToTable("Calendars").HasKey(b => b.Id);
             
             builder.Property(b => b.Id).HasColumnName("Id").IsRequired();
+            builder.Property(c => c.InstructorId).HasColumnName("InstructorId").IsRequired();
             builder.Property(b => b.CourseId).HasColumnName("CourseId").IsRequired();
             builder.Property(b => b.EventDate).HasColumnName("EventDate").IsRequired();
             builder.Property(b => b.EventDetails).HasColumnName("EventDetails").IsRequired();
@@ -24,7 +25,7 @@ namespace DataAccess.EntityConfigurations
             builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
 
 
-            builder.HasMany(uc => uc.UserCalendars).WithOne(c=>c.Calendar).HasForeignKey(c=>c.CalendarId);
+            builder.HasMany(c => c.UserCalendars).WithOne(uc => uc.Calendar).HasForeignKey(uc => uc.CalendarId);
 
         }
 

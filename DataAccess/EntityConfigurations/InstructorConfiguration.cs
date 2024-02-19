@@ -21,7 +21,7 @@ namespace DataAccess.EntityConfigurations
             builder.HasQueryFilter(i => !i.DeletedDate.HasValue);
 
             builder.HasMany(i => i.InstructorSessions).WithOne(ins => ins.Instructor).HasForeignKey(ins => ins.InstructorId);
-            builder.HasMany(i => i.Calendars).WithOne(c => c.Instructor).HasForeignKey(c => c.InstructorId);
+            builder.HasMany(i => i.Calendars).WithOne(c => c.Instructor).HasForeignKey(c => c.InstructorId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

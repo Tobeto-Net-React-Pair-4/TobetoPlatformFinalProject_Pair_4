@@ -17,7 +17,7 @@ namespace DataAccess.EntityConfigurations
 
             builder.Property(h => h.Id).HasColumnName("Id").IsRequired();
             builder.Property(h => h.CourseId).HasColumnName("CourseId").IsRequired();
-            builder.Property(h => h.LiveContentId).HasColumnName("CourseId").IsRequired();
+            builder.Property(h => h.LiveContentId).HasColumnName("LiveContentId").IsRequired();
             builder.Property(h => h.Name).HasColumnName("Name");
             builder.Property(h => h.SendStatus).HasColumnName("SendStatus");
             builder.Property(h => h.EndOfDate).HasColumnName("EndOfDate").IsRequired();

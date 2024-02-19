@@ -24,8 +24,9 @@ namespace DataAccess.EntityConfigurations
             builder.HasOne(u => u.PersonalInfo).WithOne(p => p.User).HasForeignKey<PersonalInfo>(p => p.UserId);
             builder.HasMany(u => u.CourseFavouritedByUser).WithOne(cfbu => cfbu.User).HasForeignKey(cfbu => cfbu.UserId);
             builder.HasMany(u => u.ContentLikedByUsers).WithOne(clbu => clbu.User).HasForeignKey(clbu => clbu.UserId);
-            builder.HasMany(u => u.UserCalendars).WithOne(uc => uc.User).HasForeignKey(uc => uc.UserId);
             builder.HasMany(u => u.PasswordResets).WithOne(uc => uc.User).HasForeignKey(uc => uc.UserId);
+            builder.HasMany(u => u.UserCalendars).WithOne(uc => uc.User).HasForeignKey(uc => uc.UserId);
+
 
             builder.HasQueryFilter(b => !b.DeletedDate.HasValue); 
         }

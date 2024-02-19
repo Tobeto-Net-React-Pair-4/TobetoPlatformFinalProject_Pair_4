@@ -17,7 +17,7 @@ namespace DataAccess.EntityConfigurations
             builder.ToTable("UserCalendars").HasKey(u => new { u.UserId, u.CalendarId });
 
             builder.Property(u => u.UserId).HasColumnName("UserId").IsRequired();
-            builder.Property(u => u.CalendarId).HasColumnName("CalenderId").IsRequired();
+            builder.Property(u => u.CalendarId).HasColumnName("CalendarId").IsRequired();
 
             builder.HasQueryFilter(u => !u.DeletedDate.HasValue);
         }
