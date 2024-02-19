@@ -18,12 +18,12 @@ namespace Business.Rules
     {
         IContentLikedByUserDal _contentLikedByUserDal;
         IUserService _userService;
-        IContentService _contentService;
-        public ContentLikedByUserBusinessRules(IContentLikedByUserDal contentLikedByUserDal, IUserService userService, IContentService contentService) : base(contentLikedByUserDal)
+        IAsyncContentService _asyncContentService;
+        ILiveContentService _liveContentService;
+        public ContentLikedByUserBusinessRules(IContentLikedByUserDal contentLikedByUserDal, IUserService userService) : base(contentLikedByUserDal)
         {
             _contentLikedByUserDal = contentLikedByUserDal;
             _userService = userService;
-            _contentService = contentService;
         }
         public async Task<ContentLikedByUser> CheckIfContentLikedByUserExists(Guid userId, Guid contentId)
         {
@@ -40,11 +40,11 @@ namespace Business.Rules
             if (user == null)
             { throw new BusinessException(BusinessCoreMessages.EntityNotFound); }
         }
-        public async Task CheckIfContentExists(Guid contentId)
-        {
-            GetContentResponse content = await _contentService.GetByIdAsync(contentId);
-            if (content == null)
-            { throw new BusinessException(BusinessCoreMessages.EntityNotFound); }
-        }
+        //public async Task CheckIfContentExists(Guid contentId)
+        //{
+        //    GetContentResponse content = await _contentService.GetByIdAsync(contentId);
+        //    if (content == null)
+        //    { throw new BusinessException(BusinessCoreMessages.EntityNotFound); }
+        //}
     }
 }

@@ -13,20 +13,20 @@ using System.Threading.Tasks;
 
 namespace Business.Rules
 {
-    public class ContentBusinessRules : BaseBusinessRules<Content>
-    {
-        IContentDal _contentDal;
-        ICourseService _courseService;
-        public ContentBusinessRules(IContentDal contentDal, ICourseService courseService) : base(contentDal) 
-        {
-            _contentDal = contentDal;
-            _courseService = courseService;
-        }
+    //public class ContentBusinessRules : BaseBusinessRules<Content>
+    //{
+    //    //IContentDal _contentDal;
+    //    ICourseService _courseService;
+    //    //public ContentBusinessRules(IContentDal contentDal, ICourseService courseService) : base(contentDal) 
+    //    //{
+    //    //    _contentDal = contentDal;
+    //    //    _courseService = courseService;
+    //    //}
 
-        public async Task CheckIfCourseExists(Guid courseId)
-        {
-            GetByIdCourseResponse course = await _courseService.GetByIdAsync(courseId);
-            if (course == null) { throw new BusinessException(BusinessCoreMessages.EntityNotFound); }
-        }
-    }
+    //    public async Task CheckIfCourseExists(Guid courseId)
+    //    {
+    //        GetByIdCourseResponse course = await _courseService.GetByIdAsync(courseId);
+    //        if (course == null) { throw new BusinessException(BusinessCoreMessages.EntityNotFound); }
+    //    }
+    //}
 }

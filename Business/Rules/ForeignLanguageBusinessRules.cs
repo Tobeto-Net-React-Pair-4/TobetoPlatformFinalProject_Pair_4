@@ -3,14 +3,17 @@ using Business.Constants;
 using Business.Dtos.ForeignLanguage.Requests;
 using Core.Business.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
+using DataAccess.Abstracts;
+using Entities.Concretes;
 
 namespace Business.Rules
 {
-    public class ForeignLanguageBusinessRules : BaseBusinessRules
+    public class ForeignLanguageBusinessRules : BaseBusinessRules<ForeignLanguage>
     {
         private readonly IForeignLanguageService _foreignLanguageService;
+        IForeignLanguageDal _foreignLanguageDal;
 
-        public ForeignLanguageBusinessRules(IForeignLanguageService foreignLanguageService)
+        public ForeignLanguageBusinessRules(IForeignLanguageService foreignLanguageService, IForeignLanguageDal foreignLanguageDal) : base(foreignLanguageDal)
         {
             _foreignLanguageService = foreignLanguageService;
         }
