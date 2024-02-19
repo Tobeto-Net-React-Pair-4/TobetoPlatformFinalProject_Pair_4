@@ -14,13 +14,13 @@ namespace Business.Concretes
     {
         private IUserDal _userDal;
         private IMapper _mapper;
-        private UserBusinessRules _userBusinessRules;
+        //private UserBusinessRules _userBusinessRules;
 
-        public UserManager(IUserDal userDal, IMapper mapper, UserBusinessRules userBusinessRules)
+        public UserManager(IUserDal userDal, IMapper mapper/*, UserBusinessRules userBusinessRules*/)
         {
             _userDal = userDal;
             _mapper = mapper;
-            _userBusinessRules = userBusinessRules;
+            //_userBusinessRules = userBusinessRules;
         }
 
         public async Task<CreatedUserResponse> AddAsync(CreateUserRequest createUserRequest)
@@ -47,7 +47,7 @@ namespace Business.Concretes
 
         public async Task<UpdatedUserResponse> UpdateAsync(UpdateUserRequest updateUserRequest)
         {
-            await _userBusinessRules.OldPassword(updateUserRequest);
+            //await _userBusinessRules.OldPassword(updateUserRequest);
 
             User user = await _userDal.GetAsync(p => p.Id == updateUserRequest.Id);
             _mapper.Map(updateUserRequest, user);
