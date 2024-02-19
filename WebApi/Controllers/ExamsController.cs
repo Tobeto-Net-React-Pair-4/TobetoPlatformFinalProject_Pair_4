@@ -1,6 +1,11 @@
 ﻿using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.Announcement.Requests;
 using Business.Dtos.Exam.Requests;
+using Business.Dtos.Exam.Responses;
+using Business.Dtos.UserExam.Requests;
+using Business.Dtos.UserExam.Responses;
+using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -47,6 +52,19 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetList()
         {
             var result = await _examService.GetListAsync();
+            return Ok(result);
+        }
+        [HttpGet("GetListByUserId")]
+        public async Task<IActionResult> GetListByUserId([FromQuery] Guid userId)
+        {
+            var result = await _examService.GetListByUserIdAsync(userId);
+            return Ok(result);
+        }
+
+        [HttpPost("AssignExamToUser")]
+        public async Task<IActionResult> AssignExamToUser([FromBody] CreateUserExamRequest createUserExamRequest)
+        {
+            var result = await _examService.AssignExamToUserAsync(createUserExamRequest);
             return Ok(result);
         }
     }

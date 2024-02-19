@@ -43,6 +43,25 @@ namespace Business
             services.AddScoped<IPersonalInfoService, PersonalInfoManager>();
             services.AddScoped<ILikeService, LikeManager>();
             services.AddScoped<IFavouriteService, FavouriteManager>();
+            services.AddScoped<IHomeworkService, HomeworkManager>();
+            services.AddScoped<IHomeworkFileService, HomeworkFileManager>();
+            services.AddScoped<IAssignmentService, AssignmentManager>();
+            services.AddScoped<IAsyncContentService, AsyncContentManager>();
+            services.AddScoped<IContentLikedByUserService, ContentLikedByUserManager>();
+            services.AddScoped<ICourseAsyncContentService, CourseAsyncContentManager>();
+            services.AddScoped<ICourseFavouritedByUserService,  CourseFavouritedByUserManager>();
+            services.AddScoped<ICourseLikedByUserService, CourseLikedByUserManager>();
+            services.AddScoped<ICourseLiveContentService, CourseLiveContentManager>();
+            services.AddScoped<IFileService, FileManager>();
+            services.AddScoped<IInstructorSessionService, InstructorSessionManager>();
+            services.AddScoped<ILiveContentService, LiveContentManager>();
+            services.AddScoped<IPasswordResetService, PasswordResetManager>();
+            services.AddScoped<ISessionService, SessionManager>();
+            services.AddScoped<IUserCalendarService, UserCalendarManager>();
+            services.AddScoped<IUserOperationClaimService, UserOperationClaimManager>();
+
+
+
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

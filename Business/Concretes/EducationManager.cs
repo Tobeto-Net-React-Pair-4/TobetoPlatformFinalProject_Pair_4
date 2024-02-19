@@ -54,15 +54,24 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListEducationResponse>>(result);
         }
 
+
         public async Task<UpdatedEducationResponse> UpdateAsync(UpdateEducationRequest updateEducationRequest)
         {
             await _educationBusinessRules.CheckIfUserExists(updateEducationRequest.UserId);
             await _educationBusinessRules.CheckIfExistsById(updateEducationRequest.Id);
 
-            Education education = _mapper.Map<Education>(updateEducationRequest);
-            var updatedEducation = await _educationDal.UpdateAsync(education);
-            UpdatedEducationResponse updatedEducationResponse = _mapper.Map<UpdatedEducationResponse>(updatedEducation);
-            return updatedEducationResponse;
+            Education education = await _educationDal.GetAsync
+                (e => e.Id == updateEducationRequest.Id && e.UserId == updateEducationRequest.UserId);
+            _mapper.Map(updateEducationRequest, education);
+            education = await _educationDal.UpdateAsync(education);
+            return _mapper.Map<UpdatedEducationResponse>(education);
+        }
+        public async Task<Paginate<GetListEducationResponse>> GetListByUserIdAsync(Guid userId)
+        {
+            await _educationBusinessRules.CheckIfUserExists(userId);
+
+            var result = await _educationDal.GetListAsync(e => e.UserId == userId);
+            return _mapper.Map<Paginate<GetListEducationResponse>>(result);
         }
     }
 }

@@ -53,6 +53,7 @@ namespace DataAccess
             services.AddScoped<ICourseLiveContentDal, EfCourseLiveContentDal>();
             services.AddScoped<IFileDal, EfFileDal>();
             services.AddScoped<IHomeworkDal, EfHomeworkDal>();
+            services.AddScoped<IHomeworkFileDal, EfHomeworkFileDal>();
             services.AddScoped<IInstructorSessionDal, EfInsturctorSessionDal>();
             services.AddScoped<ILiveContentDal, EfLiveContentDal>();
             services.AddScoped<IPasswordResetDal, EfPasswordResetDal>();

@@ -25,17 +25,13 @@ namespace Business.Concretes
             throw new NotImplementedException();
         }
 
-        public Task<GetHomeworkResponse> GetByIdAsync(Guid homeworkId)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task<Paginate<GetListHomeworkResponse>> GetListAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<UpdatedHomeworkResponse> UpdateAsync(UpdateHomeworkRequest updateHomeworkRequest)
+        public Task<Paginate<GetListHomeworkResponse>> GetListByHomeworkIdAsync(Guid userId)
         {
             throw new NotImplementedException();
         }

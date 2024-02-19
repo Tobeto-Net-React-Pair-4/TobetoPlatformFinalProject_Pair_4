@@ -22,9 +22,6 @@ namespace Business.Profiles
             CreateMap<DeleteHomeworkFileRequest, HomeworkFile>().ReverseMap();
             CreateMap<HomeworkFile, DeletedHomeworkFileResponse>().ReverseMap();
 
-            CreateMap<UpdateHomeworkFileRequest, HomeworkFile>().ReverseMap();
-            CreateMap<HomeworkFile, UpdatedHomeworkFileResponse>().ReverseMap();
-
             CreateMap<Paginate<HomeworkFile>, Paginate<GetListHomeworkFileResponse>>().ReverseMap();
             CreateMap<HomeworkFile, GetListHomeworkFileResponse>().ReverseMap();
 
@@ -32,7 +29,8 @@ namespace Business.Profiles
                 .IncludeMembers(hm => hm.File)
                 .ForMember(destinationMember: lr => lr.Id, memberOptions: opt => opt.MapFrom(hf => hf.FileId))
                 .ReverseMap();
-            CreateMap<Paginate<HomeworkFile>, Paginate<GetListFileResponse>>().ReverseMap();
+
+            //CreateMap<Paginate<HomeworkFile>, Paginate<GetListFileResponse>>().ReverseMap();
         }
     }
 }
