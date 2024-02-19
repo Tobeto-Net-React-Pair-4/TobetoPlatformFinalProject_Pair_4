@@ -48,11 +48,11 @@ namespace Business.Concretes
             return _mapper.Map<DeletedUserSkillResponse>(userSkill);
         }
 
-        public async Task<Paginate<GetUserSkillResponse>> GetListAsync()
+        public async Task<Paginate<GetListUserSkillResponse>> GetListAsync()
         {
             var data = await _userSkillDal.GetListAsync(include: u => u.Include(u => u.User).Include(c => c.Skill));
 
-            return _mapper.Map<Paginate<GetUserSkillResponse>>(data);
+            return _mapper.Map<Paginate<GetListUserSkillResponse>>(data);
         }
 
         public async Task<Paginate<GetListSkillResponse>> GetListByUserIdAsync(Guid userId)

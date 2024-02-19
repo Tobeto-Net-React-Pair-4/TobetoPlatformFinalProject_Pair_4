@@ -19,10 +19,10 @@ namespace Business.Profiles
             CreateMap<UserSkill, DeleteUserSkillRequest>().ReverseMap();
             CreateMap<UserSkill, CreatedUserSkillResponse>().ReverseMap();
             CreateMap<UserSkill, DeletedUserSkillResponse>().ReverseMap();
-            CreateMap<UserSkill, GetUserSkillResponse>().ReverseMap();
+            CreateMap<UserSkill, GetListUserSkillResponse>().ReverseMap();
 
 
-            CreateMap<Paginate<UserSkill>, Paginate<GetUserSkillResponse>>().ReverseMap();
+            CreateMap<Paginate<UserSkill>, Paginate<GetListUserSkillResponse>>().ReverseMap();
 
         }
     }

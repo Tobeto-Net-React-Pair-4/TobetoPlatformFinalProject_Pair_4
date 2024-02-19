@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.Dtos.UserSkill.Responses
 {
-    public class GetUserSkillResponse
+    public class GetListUserSkillResponse
     {
         public Guid UserId { get; set; }
         public Guid SkillId { get; set; }

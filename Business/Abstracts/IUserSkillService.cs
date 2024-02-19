@@ -12,7 +12,7 @@ namespace Business.Abstracts
 {
     public interface IUserSkillService
     {
-        Task<Paginate<GetUserSkillResponse>> GetListAsync();
+        Task<Paginate<GetListUserSkillResponse>> GetListAsync();
         Task<CreatedUserSkillResponse> AddAsync(CreateUserSkillRequest createUserSkillRequest);
         Task<DeletedUserSkillResponse> DeleteAsync(DeleteUserSkillRequest deleteUserSkillRequest);
         Task<Paginate<GetListSkillResponse>> GetListByUserIdAsync(Guid userId);
