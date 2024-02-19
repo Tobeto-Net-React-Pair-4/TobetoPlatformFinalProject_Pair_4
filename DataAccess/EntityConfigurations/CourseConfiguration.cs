@@ -17,6 +17,7 @@ namespace DataAccess.EntityConfigurations
 
             builder.Property(b => b.Id).HasColumnName("Id").IsRequired();
             builder.Property(b => b.CategoryId).HasColumnName("CategoryID").IsRequired();
+            builder.Property(c => c.LikeId).HasColumnName("LikeId").IsRequired();
             builder.Property(b => b.Name).HasColumnName("Name").IsRequired();
             builder.Property(b => b.Producer).HasColumnName("Producer").IsRequired();
             builder.Property(b => b.ImageUrl).HasColumnName("ImageUrl");
