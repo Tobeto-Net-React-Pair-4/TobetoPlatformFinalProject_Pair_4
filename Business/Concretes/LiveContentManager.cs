@@ -72,9 +72,12 @@ namespace Business.Concretes
             return await _courseLiveContentService.GetListByCourseIdAsync(courseId);
         }
 
-        public Task<UpdatedLiveContentResponse> UpdateAsync(UpdateLiveContentRequest updateLiveContentRequest)
+        public async Task<UpdatedLiveContentResponse> UpdateAsync(UpdateLiveContentRequest updateLiveContentRequest)
         {
-            throw new NotImplementedException();
+            LiveContent liveContent = await _liveContentDal.GetAsync(p => p.Id == updateLiveContentRequest.Id);
+            _mapper.Map(updateLiveContentRequest, liveContent);
+            liveContent = await _liveContentDal.UpdateAsync(liveContent);
+            return _mapper.Map<UpdatedLiveContentResponse>(liveContent);
         }
     }
 }
