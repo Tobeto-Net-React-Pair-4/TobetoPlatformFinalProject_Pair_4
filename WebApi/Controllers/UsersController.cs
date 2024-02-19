@@ -45,9 +45,9 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("GetById")]
-        public async Task<IActionResult> GetById([FromQuery] GetByIdUserRequest getByIdUserRequest)
+        public async Task<IActionResult> GetById([FromQuery] Guid userId)
         {
-            var result = await _userService.GetByIdAsync(getByIdUserRequest);
+            var result = await _userService.GetByIdAsync(userId);
             return Ok(result);
         }
         [HttpGet("GetByMail")]

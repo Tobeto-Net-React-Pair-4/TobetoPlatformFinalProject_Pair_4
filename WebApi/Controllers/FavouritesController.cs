@@ -30,15 +30,15 @@ namespace WebApi.Controllers
             return Ok(result);
         }
         [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete([FromBody] DeleteFavouriteRequest deleteFavouriteRequest)
+        public async Task<IActionResult> Delete([FromQuery] Guid favouriteId)
         {
-            var result = await _favouriteService.DeleteAsync(deleteFavouriteRequest);
+            var result = await _favouriteService.DeleteAsync(favouriteId);
             return Ok(result);
         }
         [HttpPost("GetById")]
-        public async Task<IActionResult> GetById([FromQuery] GetFavouriteRequest getFavouriteRequest)
+        public async Task<IActionResult> GetById([FromQuery] Guid favouriteId)
         {
-            var result = await _favouriteService.GetByIdAsync(getFavouriteRequest);
+            var result = await _favouriteService.GetByIdAsync(favouriteId);
             return Ok(result);
         }
 
