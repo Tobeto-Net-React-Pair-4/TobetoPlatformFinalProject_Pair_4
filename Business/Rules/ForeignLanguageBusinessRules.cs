@@ -16,6 +16,7 @@ namespace Business.Rules
         public ForeignLanguageBusinessRules(IForeignLanguageService foreignLanguageService, IForeignLanguageDal foreignLanguageDal) : base(foreignLanguageDal)
         {
             _foreignLanguageService = foreignLanguageService;
+            _foreignLanguageDal = foreignLanguageDal;
         }
 
         public async Task LanguageExists(CreateForeignLanguageRequest getByNameForeignLanguageRequest)
