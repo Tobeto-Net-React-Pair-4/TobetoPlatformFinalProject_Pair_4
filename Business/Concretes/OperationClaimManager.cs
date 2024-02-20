@@ -35,7 +35,7 @@ namespace Business.Concretes
             _userOperationClaimService = userOperationClaimService;
         }
 
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         public async Task<CreatedOperationClaimResponse> AddAsync(CreateOperationClaimRequest createOperationClaimRequest)
         {
             OperationClaim operationClaim = _mapper.Map<OperationClaim>(createOperationClaimRequest);
@@ -44,7 +44,7 @@ namespace Business.Concretes
             return result;
         }
 
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         public async Task<CreatedUserOperationClaimResponse> AssignOperationClaimAsync(CreateUserOperationClaimRequest createUserOperationClaimRequest)
         {
             return await _userOperationClaimService.AddAsync(createUserOperationClaimRequest);
