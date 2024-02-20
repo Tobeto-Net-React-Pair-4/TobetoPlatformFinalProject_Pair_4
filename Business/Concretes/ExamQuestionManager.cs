@@ -57,7 +57,6 @@ namespace Business.Concretes
             ExamQuestion examQuestion = await _examQuestionDal.GetAsync(eq => eq.Id == examQuestionId,
                 include: eq => eq.Include(e => e.Exam));
             return _mapper.Map<GetByIdExamQuestionResponse>(examQuestion);
-
         }
 
         [SecuredOperation("admin")]
@@ -65,6 +64,7 @@ namespace Business.Concretes
         {
             await _examQuestionBusinessRules.CheckIfExistsById(updateExamQuestionRequest.Id);
             await _examQuestionBusinessRules.CheckIfExamExists(updateExamQuestionRequest.ExamId);
+            await _examQuestionBusinessRules.CheckIfAnswerExists(updateExamQuestionRequest.TrueAnswerId);
 
             ExamQuestion examQuestion = await _examQuestionDal.GetAsync(eq => eq.Id == updateExamQuestionRequest.Id);
             _mapper.Map(updateExamQuestionRequest, examQuestion);
@@ -74,9 +74,16 @@ namespace Business.Concretes
 
         public async Task<Paginate<GetListExamQuestionResponse>> GetListAsync()
         {
-            var data = await _examQuestionDal.GetListAsync(include: eq => eq.Include(e => e.Exam));
+            var data = await _examQuestionDal.GetListAsync(include: eq => eq.Include(eq => eq.Exam));
             return _mapper.Map<Paginate<GetListExamQuestionResponse>>(data);
         }
 
+        public async Task<Paginate<GetListExamQuestionResponse>> GetListByExamIdAsync(Guid examId)
+        {
+            await _examQuestionBusinessRules.CheckIfExamExists(examId);
+
+            var data = await _examQuestionDal.GetListAsync(eq => eq.ExamId == examId, include: eq => eq.Include(eq => eq.Exam));
+            return _mapper.Map<Paginate<GetListExamQuestionResponse>>(data);
+        }
     }
 }

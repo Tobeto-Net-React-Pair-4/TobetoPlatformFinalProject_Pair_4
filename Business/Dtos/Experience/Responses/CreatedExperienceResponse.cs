@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.Dtos.Experience.Responses
 {
-    public class DeletedExperinceResponse
+    public class CreatedExperienceResponse
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
@@ -19,5 +19,4 @@ namespace Business.Dtos.Experience.Responses
         public bool Status { get; set; }
         public string BusinessDescription { get; set; }
     }
-
 }

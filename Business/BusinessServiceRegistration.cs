@@ -32,7 +32,7 @@ namespace Business
             services.AddScoped<IExamQuestionService, ExamQuestionManager>();
             services.AddScoped<IQuestionAnswerService, QuestionAnswerManager>();
             services.AddScoped<ISocialMediaService, SocialMediaManager>();
-            services.AddScoped<IExperinceService, ExperinceManager>();
+            services.AddScoped<IExperienceService, ExperienceManager>();
             services.AddScoped<IForeignLanguageService, ForeignLanguageManager>();
             services.AddScoped<IEducationService, EducationManager>();
             services.AddScoped<IAuthService, AuthManager>();

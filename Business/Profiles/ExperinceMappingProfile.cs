@@ -15,12 +15,11 @@ namespace Business.Profiles
     {
         public ExperinceMappingProfile()
         {
-            CreateMap<Experience, CreateExperinceRequest>().ReverseMap();
-            CreateMap<Experience, DeleteExperinceRequest>().ReverseMap();
-            CreateMap<Experience, UpdateExperinceRequest>().ReverseMap();
-            CreateMap<Experience, CreatedExperinceResponse>().ReverseMap();
-            CreateMap<Experience, UpdatedExperinceResponse>().ReverseMap();
-            CreateMap<Experience, DeletedExperinceResponse>().ReverseMap();
+            CreateMap<Experience, CreateExperienceRequest>().ReverseMap();
+            CreateMap<Experience, UpdateExperienceRequest>().ReverseMap();
+            CreateMap<Experience, CreatedExperienceResponse>().ReverseMap();
+            CreateMap<Experience, UpdatedExperienceResponse>().ReverseMap();
+            CreateMap<Experience, DeletedExperienceResponse>().ReverseMap();
 
             CreateMap<Experience, GetListExperienceResponse>().ReverseMap();
             CreateMap<Paginate<Experience>, Paginate<GetListExperienceResponse>>().ReverseMap();
