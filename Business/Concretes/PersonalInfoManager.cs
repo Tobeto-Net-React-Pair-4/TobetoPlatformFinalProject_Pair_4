@@ -7,6 +7,7 @@ using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.PersonalInfo.Requests;
 using Business.Dtos.PersonalInfo.Responses;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -18,13 +19,17 @@ namespace Business.Concretes
     {
         IPersonalInfoDal _personalInfoDal;
         IMapper _mapper;
-        public PersonalInfoManager(IPersonalInfoDal personalInfoDal, IMapper mapper)
+        PersonalInfoBusinessRules _personalInfoBusinessRules;
+        public PersonalInfoManager(IPersonalInfoDal personalInfoDal, IMapper mapper, PersonalInfoBusinessRules personalInfoBusinessRules)
         {
             _personalInfoDal = personalInfoDal;
             _mapper = mapper;
+            _personalInfoBusinessRules = personalInfoBusinessRules;
         }
         public async Task<CreatedPersonalInfoResponse> AddAsync(CreatePersonalInfoRequest createPersonalInfoRequest)
         {
+            await _personalInfoBusinessRules.CheckIfUserExists(createPersonalInfoRequest.UserId);
+
             PersonalInfo personalInfo = _mapper.Map<PersonalInfo>(createPersonalInfoRequest);
             PersonalInfo createdPersonalInfo = await _personalInfoDal.AddAsync(personalInfo);
             return _mapper.Map<CreatedPersonalInfoResponse>(createdPersonalInfo);
@@ -32,7 +37,8 @@ namespace Business.Concretes
 
         public async Task<DeletedPersonalInfoResponse> DeleteAsync(DeletePersonalInfoRequest deletePersonalInfoRequest)
         {
-            PersonalInfo personalInfo = await _personalInfoDal.GetAsync(p => p.Id == deletePersonalInfoRequest.Id);
+            PersonalInfo personalInfo = await _personalInfoBusinessRules.CheckIfExistsById(deletePersonalInfoRequest.Id);
+
             PersonalInfo deletedPersonalInfo = await _personalInfoDal.DeleteAsync(personalInfo);
             return _mapper.Map<DeletedPersonalInfoResponse>(deletedPersonalInfo);
         }
@@ -46,8 +52,7 @@ namespace Business.Concretes
 
         public async Task<GetPersonalInfoResponse> GetByUserIdAsync(GetPersonalInfoRequest getPersonalInfoRequest)
         {
-            PersonalInfo personalInfo = await _personalInfoDal.GetAsync
-                (p => p.UserId == getPersonalInfoRequest.UserId);
+            PersonalInfo personalInfo = await _personalInfoDal.GetAsync(p => p.UserId == getPersonalInfoRequest.UserId, include: p => p.Include(p => p.User));
             return _mapper.Map<GetPersonalInfoResponse>(personalInfo);
         }
 
@@ -59,7 +64,8 @@ namespace Business.Concretes
 
         public async Task<UpdatedPersonalInfoResponse> UpdateAsync(UpdatePersonalInfoRequest updatePersonalInfoRequest)
         {
-            PersonalInfo personalInfo = await _personalInfoDal.GetAsync(p => p.Id == updatePersonalInfoRequest.Id);
+            PersonalInfo personalInfo = await _personalInfoBusinessRules.CheckIfExistsById(updatePersonalInfoRequest.Id);
+
             _mapper.Map(updatePersonalInfoRequest, personalInfo);
             PersonalInfo updatedPersonalInfo = await _personalInfoDal.UpdateAsync(personalInfo);
             return _mapper.Map<UpdatedPersonalInfoResponse>(updatedPersonalInfo);

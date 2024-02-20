@@ -1,5 +1,8 @@
 ﻿using Business.Abstracts;
+using Business.Dtos.User.Responses;
 using Core.Business.Rules;
+using Core.CrossCuttingConcerns.Exceptions.Types;
+using Core.Utilities.Messages;
 using DataAccess.Abstracts;
 using Entities.Concretes;
 using System;
@@ -12,12 +15,18 @@ namespace Business.Rules
 {
     public class PersonalInfoBusinessRules : BaseBusinessRules<PersonalInfo>
     {
-        IPersonalInfoService _personalInfoService;
         IPersonalInfoDal _personalInfoDal;
-        public PersonalInfoBusinessRules(IPersonalInfoService personalInfoService, IPersonalInfoDal personalInfoDal) : base(personalInfoDal)
+        IUserService _userService;
+        public PersonalInfoBusinessRules(IPersonalInfoDal personalInfoDal, IUserService userService) : base(personalInfoDal)
         {
-            _personalInfoService = personalInfoService;
             _personalInfoDal = personalInfoDal;
+            _userService = userService;
+        }
+        public async Task CheckIfUserExists(Guid userId)
+        {
+            GetByIdUserResponse user = await _userService.GetByIdAsync(userId);
+            if (user == null)
+            { throw new BusinessException(BusinessCoreMessages.EntityNotFound); }
         }
     }
 }

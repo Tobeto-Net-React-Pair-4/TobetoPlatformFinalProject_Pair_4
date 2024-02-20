@@ -32,9 +32,9 @@ namespace WebApi.Controllers
 
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> DeleteAsync([FromBody] DeleteOperationClaimRequest deleteOperationClaimRequest)
+        public async Task<IActionResult> DeleteAsync([FromQuery] Guid operationClaimId)
         {
-            var result = await _operationClaimService.DeleteAsync(deleteOperationClaimRequest);
+            var result = await _operationClaimService.DeleteAsync(operationClaimId);
             return Ok(result);
         }
 
@@ -45,17 +45,17 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpPost("AssignToUser")]
+        [HttpPost("AssignOperationClaimToUser")]
         public async Task<IActionResult> AssigntToUser([FromBody] CreateUserOperationClaimRequest createUserOperationClaimRequest)
         {
-            var result = await _operationClaimService.AssignOperationClaimAsync(createUserOperationClaimRequest);
+            var result = await _operationClaimService.AssignOperationClaimToUserAsync(createUserOperationClaimRequest);
             return Ok(result);
         }
 
         [HttpGet("GetById")]
-        public async Task<IActionResult> GetByIdAsync([FromQuery] GetOperationClaimRequest getOperationClaimRequest)
+        public async Task<IActionResult> GetByIdAsync([FromQuery] Guid operationClaimId)
         {
-            var result = await _operationClaimService.GetByIdAsync(getOperationClaimRequest);
+            var result = await _operationClaimService.GetByIdAsync(operationClaimId);
             return Ok(result);
         }
     }

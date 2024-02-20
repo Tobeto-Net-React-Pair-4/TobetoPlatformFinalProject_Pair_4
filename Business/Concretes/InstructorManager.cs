@@ -9,6 +9,7 @@ using Business.BusinessAspects.Autofac;
 using Business.Dtos.Category.Responses;
 using Business.Dtos.Instructor.Requests;
 using Business.Dtos.Instructor.Responses;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using DataAccess.Concretes;
@@ -21,10 +22,12 @@ namespace Business.Concretes
     {
         private IInstructorDal _instructorDal;
         private IMapper _mapper;
-        public InstructorManager(IInstructorDal instructorDal, IMapper mapper)
+        private InstructorBusinessRules _instructorBusinessRules;
+        public InstructorManager(IInstructorDal instructorDal, IMapper mapper, InstructorBusinessRules instructorBusinessRules)
         {
             _instructorDal = instructorDal;
             _mapper = mapper;
+            _instructorBusinessRules = instructorBusinessRules;
         }
 
         [SecuredOperation("admin")]
@@ -45,9 +48,10 @@ namespace Business.Concretes
         }
 
         [SecuredOperation("admin")]
-        public async Task<DeletedInstructorResponse> DeleteAsync(DeleteInstructorRequest deleteInstructorRequest)
+        public async Task<DeletedInstructorResponse> DeleteAsync(Guid instructorId)
         {
-            Instructor instructor = await _instructorDal.GetAsync(p => p.Id == deleteInstructorRequest.Id);
+            Instructor instructor = await _instructorBusinessRules.CheckIfExistsById(instructorId);
+
             await _instructorDal.DeleteAsync(instructor);
             return _mapper.Map<DeletedInstructorResponse>(instructor);
         }
@@ -55,7 +59,8 @@ namespace Business.Concretes
         [SecuredOperation("admin")]
         public async Task<UpdatedInstructorResponse> UpdateAsync(UpdateInstructorRequest updateInstructorRequest)
         {
-            Instructor instructor = await _instructorDal.GetAsync(p => p.Id == updateInstructorRequest.Id);
+            Instructor instructor = await _instructorBusinessRules.CheckIfExistsById(updateInstructorRequest.Id);
+
             _mapper.Map(updateInstructorRequest, instructor);
             await _instructorDal.UpdateAsync(instructor);
             return _mapper.Map<UpdatedInstructorResponse>(instructor);
@@ -63,8 +68,9 @@ namespace Business.Concretes
 
         public async Task<GetByIdInstructorResponse> GetByIdAsync(Guid instructorId)
         {
-            Instructor instructor = await _instructorDal.GetAsync(p => p.Id == instructorId, include: c => c.Include(c => c.Courses));
+            await _instructorBusinessRules.CheckIfExistsById(instructorId);
 
+            Instructor instructor = await _instructorDal.GetAsync(p => p.Id == instructorId, include: c => c.Include(c => c.Courses));
             return _mapper.Map<GetByIdInstructorResponse>(instructor);
         }
     }

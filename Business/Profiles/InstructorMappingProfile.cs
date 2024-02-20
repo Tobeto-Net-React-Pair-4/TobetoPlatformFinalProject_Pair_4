@@ -16,9 +16,7 @@ namespace Business.Profiles
         public InstructorMappingProfile()
         {
             CreateMap<Instructor, CreateInstructorRequest>().ReverseMap();
-            CreateMap<Instructor, DeleteInstructorRequest>().ReverseMap();
             CreateMap<Instructor, UpdateInstructorRequest>().ReverseMap();
-            CreateMap<Instructor, GetByIdInstructorRequest>().ReverseMap();
             CreateMap<Instructor, CreatedInstructorResponse>().ReverseMap();
             CreateMap<Instructor, UpdatedInstructorResponse>().ReverseMap();
             CreateMap<Instructor, DeletedInstructorResponse>().ReverseMap();

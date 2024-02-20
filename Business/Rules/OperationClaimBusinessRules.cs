@@ -13,11 +13,9 @@ namespace Business.Rules
     public class OperationClaimBusinessRules : BaseBusinessRules<OperationClaim>
     {
         private readonly IOperationClaimDal _operationClaimDal;
-        private readonly IOperationClaimService _operationClaimService;
-        public OperationClaimBusinessRules(IOperationClaimDal operationClaimDal, IOperationClaimService operationClaimService) : base(operationClaimDal)
+        public OperationClaimBusinessRules(IOperationClaimDal operationClaimDal) : base(operationClaimDal)
         {
             _operationClaimDal = operationClaimDal;
-            _operationClaimService = operationClaimService;
         }
     }
 }

@@ -45,12 +45,10 @@ namespace Business.Concretes
             UserSurvey userSurvey = await _userSurveyDal.GetAsync(predicate: p => p.SurveyId == deleteUserSurveyRequest.SurveyId);
             await _userSurveyDal.DeleteAsync(userSurvey);
             return _mapper.Map<DeletedUserSurveyResponse>(userSurvey);
-
         }
 
         public async Task<Paginate<GetListUserSurveyResponse>> GetListAsync()
         {
-
             var data = await _userSurveyDal.GetListAsync(include: u => u.Include(u => u.User));
             return _mapper.Map<Paginate<GetListUserSurveyResponse>>(data);
         }
@@ -60,7 +58,5 @@ namespace Business.Concretes
             var data = await _userSurveyDal.GetListAsync(us => us.UserId == userId);
             return  _mapper.Map<Paginate<GetListSurveyResponse>>(data);
         }
-
-        
     }
 }

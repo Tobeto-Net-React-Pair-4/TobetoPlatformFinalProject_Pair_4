@@ -4,6 +4,7 @@ using Business.Dtos.Content.Requests;
 using Business.Dtos.Content.Responses;
 using Business.Dtos.Liked.Requests;
 using Business.Dtos.Liked.Responses;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using DataAccess.Concretes;
@@ -19,47 +20,52 @@ namespace Business.Concretes
     public class LikeManager : ILikeService
     {
         private IMapper _mapper;
-        ILikeDal _likedDal;
+        ILikeDal _likeDal;
+        LikeBusinessRules _likeBusinessRules;
 
-        public LikeManager(IMapper mapper, ILikeDal likedDal)
+        public LikeManager(IMapper mapper, ILikeDal likeDal, LikeBusinessRules likeBusinessRules)
         {
             _mapper = mapper;
-            _likedDal = likedDal;
+            _likeDal = likeDal;
+            _likeBusinessRules = likeBusinessRules;
         }
         public async Task<CreatedLikeResponse> AddAsync(CreateLikeRequest createLikedRequest)
         {
             Like liked = _mapper.Map<Like>(createLikedRequest);
             liked.Id = Guid.NewGuid();
 
-            Like createdLiked = await _likedDal.AddAsync(liked);
+            Like createdLiked = await _likeDal.AddAsync(liked);
 
             return _mapper.Map<CreatedLikeResponse>(createdLiked);
         }
 
-        public async Task<DeletedLikeResponse> DeleteAsync(DeleteLikeRequest deleteLikedRequest)
+        public async Task<DeletedLikeResponse> DeleteAsync(Guid likeId)
         {
-            Like liked = await _likedDal.GetAsync(p => p.Id == deleteLikedRequest.Id);
-            await _likedDal.DeleteAsync(liked);
-            return _mapper.Map<DeletedLikeResponse>(liked);
+            Like like = await _likeBusinessRules.CheckIfExistsById(likeId);
+
+            await _likeDal.DeleteAsync(like);
+            return _mapper.Map<DeletedLikeResponse>(like);
         }
 
-        public async Task<GetLikeResponse> GetByIdAsync(GetLikeRequest getLikedRequest)
+        public async Task<GetLikeResponse> GetByIdAsync(Guid likeId)
         {
-            var result = await _likedDal.GetAsync(p => p.Id == getLikedRequest.Id);
+            var result = await _likeBusinessRules.CheckIfExistsById(likeId);
             return _mapper.Map<GetLikeResponse>(result);
         }
 
         public async Task<Paginate<GetListLikeResponse>> GetListAsync()
         {
-            var data = await _likedDal.GetListAsync();
+            var data = await _likeDal.GetListAsync();
             return _mapper.Map<Paginate<GetListLikeResponse>>(data);
         }
 
         public async Task<UpdatedLikeResponse> UpdateAsync(UpdateLikeRequest updateLikedRequest)
         {
-            Like liked = await _likedDal.GetAsync(p => p.Id == updateLikedRequest.Id);
+            await _likeBusinessRules.CheckIfExistsById(updateLikedRequest.Id);
+
+            Like liked = await _likeDal.GetAsync(p => p.Id == updateLikedRequest.Id);
             _mapper.Map(updateLikedRequest, liked);
-            liked = await _likedDal.UpdateAsync(liked);
+            liked = await _likeDal.UpdateAsync(liked);
             return _mapper.Map<UpdatedLikeResponse>(liked);
         }
     }

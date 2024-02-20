@@ -45,10 +45,6 @@ namespace Business.Profiles
                 .ReverseMap();
 
             CreateMap<Course, GetByIdCourseResponse>()
-                //.ForMember(
-                //destinationMember: u => u.Users, 
-                //memberOptions: opt => opt.MapFrom(uc => uc.UserCourses)
-                //)
                 .ForMember(
                 destinationMember: p => p.InstructorName, 
                 memberOptions: opt => opt.MapFrom(p => p.Instructor.Name)

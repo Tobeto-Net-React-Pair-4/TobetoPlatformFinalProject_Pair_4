@@ -8,7 +8,7 @@ namespace Business.Dtos.UserOperationClaim.Requests
 {
     public class DeleteUserOperationClaimRequest
     {
-        public Guid UuserId { get; set; }
+        public Guid UserId { get; set; }
         public Guid OperationClaimId { get; set; }
     }
 }
