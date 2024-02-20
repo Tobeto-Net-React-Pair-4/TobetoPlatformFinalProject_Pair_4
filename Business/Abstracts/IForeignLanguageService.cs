@@ -9,8 +9,8 @@ namespace Business.Abstracts
         Task<Paginate<GetListForeignLanguageResponse>> GetListAsync();
         Task<CreatedForeignLanguageResponse> AddAsync(CreateForeignLanguageRequest createForeignLanguageRequest);
         Task<UpdatedForeignLanguageResponse> UpdateAsync(UpdateForeignLanguageRequest updateForeignLanguageRequest);
-        Task<DeletedForeignLanguageResponse> DeleteAsync(DeleteForeignLanguageRequest deleteForeignLanguageRequest);
-
+        Task<DeletedForeignLanguageResponse> DeleteAsync(Guid foreignLanguageId);
+        Task<GetByIdForeignLanguageResponse> GetByIdAsync(Guid foreignLanguageId);
 
     }
 }

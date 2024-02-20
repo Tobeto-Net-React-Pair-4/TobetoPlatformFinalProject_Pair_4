@@ -2,6 +2,8 @@
 using Business.Abstracts;
 using Business.Dtos.File.Requests;
 using Business.Dtos.File.Responses;
+using Business.Dtos.Liked.Requests;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using File = Entities.Concretes.File;
@@ -12,13 +14,17 @@ namespace Business.Concretes
     {
         private IFileDal _fileDal;
         private IMapper _mapper;
-        public FileManager(IFileDal fileDal, IMapper mapper)
+        private FileBusinessRules _fileBusinessRules;
+        public FileManager(IFileDal fileDal, IMapper mapper, FileBusinessRules fileBusinessRules)
         {
             _fileDal = fileDal;
             _mapper = mapper;
+            _fileBusinessRules = fileBusinessRules;
         }
         public async Task<CreatedFileResponse> AddAsync(CreateFileRequest createFileRequest)
         {
+            await _fileBusinessRules.CheckIfAssignmentExists(createFileRequest.AssignmentId);
+            await _fileBusinessRules.CheckIfUserExists(createFileRequest.UserId);
 
             File file = _mapper.Map<File>(createFileRequest);
             file.Id = Guid.NewGuid();
@@ -27,10 +33,11 @@ namespace Business.Concretes
             return _mapper.Map<CreatedFileResponse>(createdFile);
         }
 
-        public async Task<DeletedFileResponse> DeleteAsync(Guid Id)
+        public async Task<DeletedFileResponse> DeleteAsync(Guid fileId)
         {
+            await _fileBusinessRules.CheckIfExistsById(fileId);
 
-            File file = await _fileDal.GetAsync(p => p.Id == Id);
+            File file = await _fileDal.GetAsync(p => p.Id == fileId);
             await _fileDal.DeleteAsync(file);
             return _mapper.Map<DeletedFileResponse>(file);
         }
@@ -44,14 +51,20 @@ namespace Business.Concretes
 
         public async Task<UpdatedFileResponse> UpdateAsync(UpdateFileRequest updateFileRequest)
         {
+            await _fileBusinessRules.CheckIfExistsById(updateFileRequest.Id);
+            await _fileBusinessRules.CheckIfAssignmentExists(updateFileRequest.AssignmentId);
+            await _fileBusinessRules.CheckIfUserExists(updateFileRequest.UserId);
+
             File file = await _fileDal.GetAsync(p => p.Id == updateFileRequest.Id);
             _mapper.Map(updateFileRequest, file);
             await _fileDal.UpdateAsync(file);
             return _mapper.Map<UpdatedFileResponse>(file);
         }
-        public async Task<GetFileResponse> GetByIdAsync(Guid Id)
+        public async Task<GetFileResponse> GetByIdAsync(Guid fileId)
         {
-            File file = await _fileDal.GetAsync(p => p.Id == Id);
+            await _fileBusinessRules.CheckIfExistsById(fileId);
+
+            File file = await _fileDal.GetAsync(p => p.Id == fileId);
 
             return _mapper.Map<GetFileResponse>(file);
         }
