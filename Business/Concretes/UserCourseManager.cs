@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.Course.Responses;
 using Business.Dtos.Instructor.Requests;
 using Business.Dtos.Instructor.Responses;
@@ -35,6 +36,8 @@ namespace Business.Concretes
 
             return _mapper.Map<Paginate<GetListUserCourseResponse>>(data);
         }
+
+        [SecuredOperation("admin")]
         public async Task<CreatedUserCourseResponse> AddAsync(CreateUserCourseRequest createUserCourseRequest)
         {
             UserCourse userCourse = _mapper.Map<UserCourse>(createUserCourseRequest);
@@ -50,6 +53,7 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListCourseResponse>>(data);
         }
 
+        [SecuredOperation("admin")]
         public async Task<DeletedUserCourseResponse> DeleteAsync(DeleteUserCourseRequest deleteUserCourseRequest)
         {
 

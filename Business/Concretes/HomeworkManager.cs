@@ -24,6 +24,7 @@ namespace Business.Concretes
             _homeworkDal = homeworkDal;
         }
 
+        [SecuredOperation("admin")]
         public async Task<CreatedHomeworkResponse> AddAsync(CreateHomeworkRequest createHomeworkRequest)
         {
             Homework homework = _mapper.Map<Homework>(createHomeworkRequest);
@@ -32,6 +33,7 @@ namespace Business.Concretes
             return result;
         }
 
+        [SecuredOperation("admin")]
         public Task<DeletedHomeworkResponse> DeleteAsync(Guid homeworkId)
         {
             throw new NotImplementedException();
@@ -48,6 +50,7 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListHomeworkResponse>>(result);
         }
 
+        [SecuredOperation("admin")]
         public Task<UpdatedHomeworkResponse> UpdateAsync(UpdateHomeworkRequest updateHomeworkRequest)
         {
             throw new NotImplementedException();

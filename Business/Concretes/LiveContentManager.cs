@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.CourseLiveContent.Requests;
 using Business.Dtos.CourseLiveContent.Responses;
 using Business.Dtos.Liked.Requests;
@@ -34,6 +35,8 @@ namespace Business.Concretes
             _courseLiveContentService = courseLiveContentService;
             _likeService = likeService;
         }
+
+        [SecuredOperation("admin")]
         public async Task<CreatedLiveContentResponse> AddAsync(CreateLiveContentRequest createLiveContentRequest)
         {
             LiveContent liveContent = _mapper.Map<LiveContent>(createLiveContentRequest);
@@ -48,6 +51,7 @@ namespace Business.Concretes
             return await _courseLiveContentService.AddAsync(createCourseLiveContentRequest);
         }
 
+        [SecuredOperation("admin")]
         public async Task<DeletedLiveContentResponse> DeleteAsync(Guid liveContentId)
         {           
             LiveContent liveContent = await _liveContentDal.GetAsync(p => p.Id == liveContentId);
@@ -72,6 +76,7 @@ namespace Business.Concretes
             return await _courseLiveContentService.GetListByCourseIdAsync(courseId);
         }
 
+        [SecuredOperation("admin")]
         public async Task<UpdatedLiveContentResponse> UpdateAsync(UpdateLiveContentRequest updateLiveContentRequest)
         {
             LiveContent liveContent = await _liveContentDal.GetAsync(p => p.Id == updateLiveContentRequest.Id);

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.Category.Responses;
 using Business.Dtos.UserAppeal.Requests;
 using Business.Dtos.UserAppeal.Responses;
@@ -20,6 +21,8 @@ namespace Business.Concretes
             _mapper = mapper;
             _userAppealDal = userAppealDal;
         }
+
+        [SecuredOperation("admin")]
         public async Task<CreatedUserAppealResponse> AddAsync(CreateUserAppealRequest createUserAppealRequest)
         {
             UserAppeal userAppeal = _mapper.Map<UserAppeal>(createUserAppealRequest);
@@ -28,6 +31,7 @@ namespace Business.Concretes
             return createdUserAppealResponse;
         }
 
+        [SecuredOperation("admin")]
         public async Task<DeletedUserAppealResponse> DeleteAsync(DeleteUserAppealRequest deleteUserAppealRequest)
         {
             UserAppeal userAppeal = await _userAppealDal.GetAsync

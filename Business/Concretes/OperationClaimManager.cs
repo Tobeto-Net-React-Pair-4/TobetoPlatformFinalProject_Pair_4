@@ -70,6 +70,7 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListOperationClaimResponse>>(data);
         }
 
+        [SecuredOperation("admin")]
         public async Task<UpdatedOperationClaimResponse> UpdateAsync(UpdateOperationClaimRequest updateOperationClaimRequest)
         {
             OperationClaim operationClaim = await _operationClaimDal.GetAsync(p => p.Id == updateOperationClaimRequest.Id);

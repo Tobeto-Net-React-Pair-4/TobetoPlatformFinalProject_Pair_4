@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.Exam.Responses;
 using Business.Dtos.UserExam.Requests;
 using Business.Dtos.UserExam.Responses;
@@ -25,6 +26,8 @@ namespace Business.Concretes
             _userExamDal = userExamDal;
             _mapper = mapper;
         }
+
+        [SecuredOperation("admin")]
         public async Task<CreatedUserExamResponse> AddAsync(CreateUserExamRequest createUserExamRequest)
         {
             UserExam userExam = _mapper.Map<UserExam>(createUserExamRequest);
@@ -32,6 +35,7 @@ namespace Business.Concretes
             return _mapper.Map<CreatedUserExamResponse>(createdUserExam);
         }
 
+        [SecuredOperation("admin")]
         public async Task<DeletedUserExamResponse> DeleteAsync(DeleteUserExamRequest deleteUserExamRequest)
         {
             UserExam userExam = await _userExamDal.GetAsync

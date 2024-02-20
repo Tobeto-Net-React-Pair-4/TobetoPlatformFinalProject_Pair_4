@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.QuestionAnswer.Requests;
 using Business.Dtos.QuestionAnswer.Responses;
 using Core.DataAccess.Paging;
@@ -23,6 +24,8 @@ namespace Business.Concretes
             _questionAnswerDal = questionAnswerDal;
             _mapper = mapper;
         }
+
+        [SecuredOperation("admin")]
         public async Task<CreatedQuestionAnswerResponse> AddAsync(CreateQuestionAnswerRequest createQuestionAnswerRequest)
         {
             QuestionAnswer questionAnswer = _mapper.Map<QuestionAnswer>(createQuestionAnswerRequest);
@@ -31,6 +34,7 @@ namespace Business.Concretes
             return _mapper.Map<CreatedQuestionAnswerResponse>(questionAnswer);
         }
 
+        [SecuredOperation("admin")]
         public async Task<DeletedQuestionAnswerResponse> DeleteAsync(DeleteQuestionAnswerRequest deleteQuestionAnswerRequest)
         {
             QuestionAnswer questionAnswer = await _questionAnswerDal.GetAsync(qa => qa.Id == deleteQuestionAnswerRequest.Id);
@@ -45,6 +49,8 @@ namespace Business.Concretes
                 include: p => p.Include(eq => eq.ExamQuestion));
             return _mapper.Map<GetByIdQuestionAnswerResponse>(questionAnswer);
         }
+
+        [SecuredOperation("admin")]
         public async Task<UpdatedQuestionAnswerResponse> UpdateAsync(UpdateQuestionAnswerRequest updateQuestionAnswerRequest)
         {
             QuestionAnswer questionAnswer = await _questionAnswerDal.GetAsync(qa => qa.Id == updateQuestionAnswerRequest.Id);

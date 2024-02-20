@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.Course.Responses;
 using Business.Dtos.UserCalendar;
 using Business.Dtos.UserCalendar.Responses;
@@ -26,6 +27,8 @@ namespace Business.Concretes
             _userCalendarDal = userCalendarDal;
             _mapper = mapper;
         }
+
+        [SecuredOperation("admin")]
         public async Task<CreatedUserCalendarResponse> AddAsync(CreateUserCalendarRequest createUserCalendarRequest)
         {
             UserCalendar userCalendar = _mapper.Map<UserCalendar>(createUserCalendarRequest);
@@ -34,6 +37,7 @@ namespace Business.Concretes
             return createdUserCalendarResponse;
         }
 
+        [SecuredOperation("admin")]
         public async Task<DeletedUserCalendarResponse> DeleteAsync(DeleteUserCalendarRequest deleteUserCalendarRequest)
         {          
             UserCalendar userCalendar = await _userCalendarDal.GetAsync(uc => uc.UserId == deleteUserCalendarRequest.UserId);

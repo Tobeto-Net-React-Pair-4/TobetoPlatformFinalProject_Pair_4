@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.Category.Responses;
 using Business.Dtos.Instructor.Requests;
 using Business.Dtos.Instructor.Responses;
@@ -25,6 +26,8 @@ namespace Business.Concretes
             _instructorDal = instructorDal;
             _mapper = mapper;
         }
+
+        [SecuredOperation("admin")]
         public async Task<CreatedInstructorResponse> AddAsync(CreateInstructorRequest createInstructorRequest)
         {
             Instructor instructor = _mapper.Map<Instructor>(createInstructorRequest);
@@ -40,6 +43,8 @@ namespace Business.Concretes
             var data = await _instructorDal.GetListAsync();
             return _mapper.Map<Paginate<GetListInstructorResponse>>(data);
         }
+
+        [SecuredOperation("admin")]
         public async Task<DeletedInstructorResponse> DeleteAsync(DeleteInstructorRequest deleteInstructorRequest)
         {
             Instructor instructor = await _instructorDal.GetAsync(p => p.Id == deleteInstructorRequest.Id);
@@ -47,6 +52,7 @@ namespace Business.Concretes
             return _mapper.Map<DeletedInstructorResponse>(instructor);
         }
 
+        [SecuredOperation("admin")]
         public async Task<UpdatedInstructorResponse> UpdateAsync(UpdateInstructorRequest updateInstructorRequest)
         {
             Instructor instructor = await _instructorDal.GetAsync(p => p.Id == updateInstructorRequest.Id);
