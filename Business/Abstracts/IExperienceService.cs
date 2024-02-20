@@ -11,11 +11,12 @@ using System.Threading.Tasks;
 
 namespace Business.Abstracts
 {
-    public interface IExperinceService
+    public interface IExperienceService
     {
         Task<Paginate<GetListExperienceResponse>> GetListAsync();
-        Task<CreatedExperinceResponse> AddAsync(CreateExperinceRequest createExperinceRequest);
-        Task<UpdatedExperinceResponse> UpdateAsync(UpdateExperinceRequest updateExperincelRequest);
-        Task<DeletedExperinceResponse> DeleteAsync(DeleteExperinceRequest deleteExperinceRequest);
+        Task<CreatedExperienceResponse> AddAsync(CreateExperienceRequest createExperienceRequest);
+        Task<UpdatedExperienceResponse> UpdateAsync(UpdateExperienceRequest updateExperienceRequest);
+        Task<DeletedExperienceResponse> DeleteAsync(Guid experienceId);
+        Task<Paginate<GetListExperienceResponse>> GetListByUserIdAsync(Guid userId);
     }
 }

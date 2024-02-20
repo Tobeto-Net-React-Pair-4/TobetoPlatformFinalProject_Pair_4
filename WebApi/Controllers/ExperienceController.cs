@@ -10,30 +10,30 @@ namespace WebApi.Controllers
     [ApiController]
     public class ExperienceController : ControllerBase
     {
-        IExperinceService _experinceService;
-        public ExperienceController(IExperinceService experinceService)
+        IExperienceService _experinceService;
+        public ExperienceController(IExperienceService experinceService)
         {
             _experinceService = experinceService;
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> AddAsync([FromBody] CreateExperinceRequest createExperinceRequest)
+        public async Task<IActionResult> AddAsync([FromBody] CreateExperienceRequest createExperinceRequest)
         {
             var result = await _experinceService.AddAsync(createExperinceRequest);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> UpdateAsync([FromBody] UpdateExperinceRequest updateExperinceRequest)
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdateExperienceRequest updateExperinceRequest)
         {
             var result = await _experinceService.UpdateAsync(updateExperinceRequest);
             return Ok(result);
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> DeleteAsync([FromBody] DeleteExperinceRequest deleteExperinceRequest)
+        public async Task<IActionResult> DeleteAsync([FromQuery] Guid experienceId)
         {
-            var result = await _experinceService.DeleteAsync(deleteExperinceRequest);
+            var result = await _experinceService.DeleteAsync(experienceId);
             return Ok(result);
         }
 
@@ -41,6 +41,13 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetList()
         {
             var result = await _experinceService.GetListAsync();
+            return Ok(result);
+        }
+
+        [HttpGet("GetListByUserId")]
+        public async Task<IActionResult> GetListByUserId([FromQuery] Guid userId)
+        {
+            var result = await _experinceService.GetListByUserIdAsync(userId);
             return Ok(result);
         }
     }

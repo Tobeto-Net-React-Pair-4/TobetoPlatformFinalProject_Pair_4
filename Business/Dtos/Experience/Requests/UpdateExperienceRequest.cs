@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.Dtos.Experience.Requests
 {
-    public class UpdateExperinceRequest
+    public class UpdateExperienceRequest
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }

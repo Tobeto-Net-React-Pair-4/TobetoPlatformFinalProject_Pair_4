@@ -16,9 +16,7 @@ namespace Business.Profiles
         public QuestionAnswerMappingProfile()
         {
             CreateMap<QuestionAnswer, CreateQuestionAnswerRequest>().ReverseMap();
-            CreateMap<QuestionAnswer, DeleteQuestionAnswerRequest>().ReverseMap();
             CreateMap<QuestionAnswer, UpdateQuestionAnswerRequest>().ReverseMap();
-            CreateMap<QuestionAnswer, GetByIdQuestionAnswerRequest>().ReverseMap();
 
             CreateMap<QuestionAnswer, CreatedQuestionAnswerResponse>().ReverseMap();
             CreateMap<QuestionAnswer, DeletedQuestionAnswerResponse>().ReverseMap();

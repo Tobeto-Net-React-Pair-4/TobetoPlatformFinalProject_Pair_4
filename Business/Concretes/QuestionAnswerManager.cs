@@ -33,19 +33,19 @@ namespace Business.Concretes
             QuestionAnswer createdQuestionAnswer = await _questionAnswerDal.AddAsync(questionAnswer);
             return _mapper.Map<CreatedQuestionAnswerResponse>(questionAnswer);
         }
-
-        [SecuredOperation("admin")]
-        public async Task<DeletedQuestionAnswerResponse> DeleteAsync(DeleteQuestionAnswerRequest deleteQuestionAnswerRequest)
+		
+		[SecuredOperation("admin")]
+        public async Task<DeletedQuestionAnswerResponse> DeleteAsync(Guid questionAnswerId)
         {
-            QuestionAnswer questionAnswer = await _questionAnswerDal.GetAsync(qa => qa.Id == deleteQuestionAnswerRequest.Id);
+            QuestionAnswer questionAnswer = await _questionAnswerDal.GetAsync(qa => qa.Id == questionAnswerId);
             await _questionAnswerDal.DeleteAsync(questionAnswer);
             return _mapper.Map<DeletedQuestionAnswerResponse>(questionAnswer);
         }
 
-        public async Task<GetByIdQuestionAnswerResponse> GetByIdAsync(GetByIdQuestionAnswerRequest getByIdQuestionAnswerRequest)
+        public async Task<GetByIdQuestionAnswerResponse> GetByIdAsync(Guid questionAnswerId)
         {
             QuestionAnswer questionAnswer = await _questionAnswerDal.GetAsync
-                (qa => qa.Id == getByIdQuestionAnswerRequest.Id,
+                (qa => qa.Id == questionAnswerId,
                 include: p => p.Include(eq => eq.ExamQuestion));
             return _mapper.Map<GetByIdQuestionAnswerResponse>(questionAnswer);
         }
