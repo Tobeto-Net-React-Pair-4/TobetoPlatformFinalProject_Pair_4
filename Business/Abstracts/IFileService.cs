@@ -11,5 +11,7 @@ namespace Business.Abstracts
         Task<UpdatedFileResponse> UpdateAsync(UpdateFileRequest updateFileRequest);
         Task<DeletedFileResponse> DeleteAsync(Guid fileId);
         Task<GetFileResponse> GetByIdAsync(Guid fileId);
+        Task<Paginate<GetListFileResponse>> GetListByHomeworkIdAsync(Guid homeworkId);
+
     }
 }

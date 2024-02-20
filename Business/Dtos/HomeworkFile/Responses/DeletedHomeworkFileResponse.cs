@@ -8,5 +8,7 @@ namespace Business.Dtos.HomeworkFile.Responses
 {
     public class DeletedHomeworkFileResponse
     {
+        public Guid HomeworkId { get; set; }
+        public Guid FileId { get; set; }
     }
 }
