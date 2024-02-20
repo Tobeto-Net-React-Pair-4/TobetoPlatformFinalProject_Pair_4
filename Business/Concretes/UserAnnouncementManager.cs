@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.Announcement.Requests;
 using Business.Dtos.Announcement.Responses;
 using Business.Dtos.Course.Responses;
@@ -29,6 +30,8 @@ namespace Business.Concretes
             _userAnnouncementDal = userAnnouncementDal;
             _mapper = mapper;
         }
+
+        [SecuredOperation("admin")]
         public async Task<CreatedUserAnnouncementResponse> AddAsync(CreateUserAnnouncementRequest createUserAnnouncementRequest)
         {
             UserAnnouncement userAnnouncement = _mapper.Map<UserAnnouncement>(createUserAnnouncementRequest);
@@ -39,6 +42,7 @@ namespace Business.Concretes
             return _mapper.Map<CreatedUserAnnouncementResponse>(createdUserAnnouncement);
         }
 
+        [SecuredOperation("admin")]
         public async Task<DeletedUserAnnouncementResponse> DeleteAsync(DeleteUserAnnouncementRequest deleteUserAnnouncementRequest)
         {
             UserAnnouncement userAnnouncement = await _userAnnouncementDal.GetAsync(p => p.Id == deleteUserAnnouncementRequest.Id);

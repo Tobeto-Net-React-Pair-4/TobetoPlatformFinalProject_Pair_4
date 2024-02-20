@@ -11,9 +11,7 @@ namespace Business.Profiles
         public ForeignLanguageMappingProfile()
         {
             CreateMap<ForeignLanguage, CreateForeignLanguageRequest>().ReverseMap();
-            CreateMap<ForeignLanguage, DeleteForeignLanguageRequest>().ReverseMap();
             CreateMap<ForeignLanguage, UpdateForeignLanguageRequest>().ReverseMap();
-            CreateMap<ForeignLanguage, GetByNameForeignLanguageRequest>().ReverseMap();
 
 
             CreateMap<ForeignLanguage, CreatedForeignLanguageResponse>().ReverseMap();

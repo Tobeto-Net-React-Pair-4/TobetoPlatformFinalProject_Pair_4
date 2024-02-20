@@ -2,7 +2,7 @@
 
 namespace Business.Dtos.ForeignLanguage.Responses
 {
-    public class GetByNameForeignLanguageResponse
+    public class GetByIdForeignLanguageResponse
     {
         public Guid Id { get; set; }
         public GetUserResponse User { get; set; }

@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
+using Business.BusinessAspects.Autofac;
 
 namespace Business.Concretes
 {
@@ -28,6 +29,8 @@ namespace Business.Concretes
             _userSurveyDal = userSurveyDal;
             _mapper = mapper;
         }
+
+        [SecuredOperation("admin")]
         public async Task<CreatedUserSurveyResponse> AddAsync(CreateUserSurveyRequest createUserSurveyRequest)
         {
             UserSurvey userSurvey = _mapper.Map<UserSurvey>(createUserSurveyRequest);
@@ -36,6 +39,7 @@ namespace Business.Concretes
             return createdUserSurveyResponse;
         }
 
+        [SecuredOperation("admin")]
         public async Task<DeletedUserSurveyResponse> DeleteAsync(DeleteUserSurveyRequest deleteUserSurveyRequest)
         {
             UserSurvey userSurvey = await _userSurveyDal.GetAsync(predicate: p => p.SurveyId == deleteUserSurveyRequest.SurveyId);

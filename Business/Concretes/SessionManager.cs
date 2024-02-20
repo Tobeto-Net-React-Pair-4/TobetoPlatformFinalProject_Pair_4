@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.Assignment.Requests;
 using Business.Dtos.Assignment.Responses;
 using Business.Dtos.InstrutorSession.Requests;
@@ -32,6 +33,7 @@ namespace Business.Concretes
             _instructorSessionService = instructorSessionService;
         }
 
+        [SecuredOperation("admin")]
         public async Task<CreatedSessionResponse> AddAsync(CreateSessionRequest createSessionRequest)
         {
             Session session = _mapper.Map<Session>(createSessionRequest);
@@ -45,6 +47,7 @@ namespace Business.Concretes
             return await _instructorSessionService.AddAsync(createInstructorSessionRequest);
         }
 
+        [SecuredOperation("admin")]
         public async Task<DeletedSessionResponse> DeleteAsync(Guid sessionId)
         {
             Session session = await _sessionDal.GetAsync(p => p.Id == sessionId);
@@ -69,6 +72,7 @@ namespace Business.Concretes
             return await _instructorSessionService.GetListByInstructorIdAsync(instructorId);
         }
 
+        [SecuredOperation("admin")]
         public async Task<UpdatedSessionResponse> UpdateAsync(UpdateSessionRequest updateSessionRequest)
         {
             Session session = await _sessionDal.GetAsync(p => p.Id == updateSessionRequest.Id);

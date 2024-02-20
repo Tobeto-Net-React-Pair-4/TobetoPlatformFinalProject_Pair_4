@@ -17,10 +17,8 @@ namespace Business.Abstracts
     {
         Task<Paginate<GetListHomeworkFileResponse>> GetListAsync();
         Task<CreatedHomeworkFileResponse> AddAsync(CreateHomeworkFileRequest createHomeworkRequest);
-        Task<DeletedHomeworkFileResponse> DeleteAsync(Guid homeworkId);
-        Task<Paginate<GetListFileResponse>> GetListByHomeworkIdAsync(Guid userId);
-
-
+        Task<DeletedHomeworkFileResponse> DeleteAsync(DeleteHomeworkFileRequest deleteHomeworkFileRequest);
+        Task<Paginate<GetListFileResponse>> GetListByHomeworkIdAsync(Guid homeworkId);
 
 
     }

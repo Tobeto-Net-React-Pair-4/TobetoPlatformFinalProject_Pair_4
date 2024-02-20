@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.Survey.Requests;
 using Business.Dtos.Survey.Responses;
 using Business.Dtos.User.Requests;
@@ -25,6 +26,8 @@ namespace Business.Concretes
             _surveyDal = surveyDal;
             _mapper = mapper;
         }
+
+        [SecuredOperation("admin")]
         public async Task<CreatedSurveyResponse> AddAsync(CreateSurveyRequest createSurveyRequest)
         {
             Survey survey = _mapper.Map<Survey>(createSurveyRequest);
@@ -34,6 +37,7 @@ namespace Business.Concretes
             return _mapper.Map<CreatedSurveyResponse>(createdSurvey);
         }
 
+        [SecuredOperation("admin")]
         public async Task<DeletedSurveyResponse> DeleteAsync(DeleteSurveyRequest deleteSurveyRequest)
         {
             Survey survey = await _surveyDal.GetAsync(p => p.Id == deleteSurveyRequest.Id);
@@ -47,6 +51,7 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListSurveyResponse>>(data);
         }
 
+        [SecuredOperation("admin")]
         public async Task<UpdatedSurveyResponse> UpdateAsync(UpdateSurveyRequest updateSurveyRequest)
         {
             Survey survey = await _surveyDal.GetAsync(p => p.Id == updateSurveyRequest.Id);
