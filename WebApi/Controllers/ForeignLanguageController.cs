@@ -31,9 +31,9 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> DeleteAsync([FromBody] DeleteForeignLanguageRequest deleteForeignLanguageRequest)
+        public async Task<IActionResult> DeleteAsync([FromQuery] Guid foreignLanguageId)
         {
-            var result = await _foreignLanguageService.DeleteAsync(deleteForeignLanguageRequest);
+            var result = await _foreignLanguageService.DeleteAsync(foreignLanguageId);
             return Ok(result);
         }
 
@@ -41,6 +41,13 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetList()
         {
             var result = await _foreignLanguageService.GetListAsync();
+            return Ok(result);
+        }
+
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetById([FromQuery] Guid foreignLanguageId)
+        {
+            var result = await _foreignLanguageService.GetByIdAsync(foreignLanguageId);
             return Ok(result);
         }
     }
