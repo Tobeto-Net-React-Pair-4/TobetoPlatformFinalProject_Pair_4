@@ -31,16 +31,16 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete([FromBody] DeleteQuestionAnswerRequest deleteQuestionAnswerRequest)
+        public async Task<IActionResult> Delete([FromQuery] Guid questionAnswerId)
         {
-            var result = await _questionAnswerService.DeleteAsync(deleteQuestionAnswerRequest);
+            var result = await _questionAnswerService.DeleteAsync(questionAnswerId);
             return Ok(result);
         }
 
         [HttpPost("GetById")]
-        public async Task<IActionResult> GetById([FromQuery] GetByIdQuestionAnswerRequest getByIdQuestionAnswerRequest)
+        public async Task<IActionResult> GetById([FromQuery] Guid questionAnswerId)
         { 
-            var result = await _questionAnswerService.GetByIdAsync(getByIdQuestionAnswerRequest);
+            var result = await _questionAnswerService.GetByIdAsync(questionAnswerId);
             return Ok(result);
         }
 
