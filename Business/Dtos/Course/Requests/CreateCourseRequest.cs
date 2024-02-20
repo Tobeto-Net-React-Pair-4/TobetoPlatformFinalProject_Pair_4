@@ -6,6 +6,7 @@ namespace Business.Dtos.Course.Requests
     {
         public Guid InstructorId { get; set; }
         public Guid CategoryId { get; set; }
+        public Guid LikeId { get; set; }
         public string Name { get; set; }
         public string Producer { get; set; }
         public bool Status { get; set; } = false;
