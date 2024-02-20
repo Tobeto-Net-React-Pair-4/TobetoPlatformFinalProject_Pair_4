@@ -17,14 +17,16 @@ namespace Business.Profiles
     {
         public OperationClaimMappingProfile()
         {
+
             CreateMap<OperationClaim, CreateOperationClaimRequest>().ReverseMap();
             CreateMap<OperationClaim, CreatedOperationClaimResponse>().ReverseMap();
-            CreateMap<OperationClaim, GetOperationClaimRequest>().ReverseMap();
-            CreateMap<OperationClaim, GetOperationClaimResponse>().ReverseMap();
-            CreateMap<OperationClaim, GetListOperationClaimResponse>().ReverseMap();
+            CreateMap<OperationClaim, UpdateOperationClaimRequest>().ReverseMap();
+            CreateMap<OperationClaim, UpdatedOperationClaimResponse>().ReverseMap();
+            CreateMap<OperationClaim, DeleteOperationClaimRequest>().ReverseMap();
+            CreateMap<OperationClaim, DeletedOperationClaimResponse>().ReverseMap();
             CreateMap<Paginate<OperationClaim>, Paginate<GetListOperationClaimResponse>>().ReverseMap();
-
-
+            CreateMap<OperationClaim, GetListOperationClaimResponse>().ReverseMap();
+            CreateMap<OperationClaim, GetListOperationClaimResponse>().ReverseMap();
 
         }
     }
