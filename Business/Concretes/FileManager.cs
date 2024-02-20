@@ -14,12 +14,14 @@ namespace Business.Concretes
     {
         private IFileDal _fileDal;
         private IMapper _mapper;
+        private IHomeworkFileService _homeworkFileService;
         private FileBusinessRules _fileBusinessRules;
-        public FileManager(IFileDal fileDal, IMapper mapper, FileBusinessRules fileBusinessRules)
+        public FileManager(IFileDal fileDal, IMapper mapper, FileBusinessRules fileBusinessRules, IHomeworkFileService homeworkFileService)
         {
             _fileDal = fileDal;
             _mapper = mapper;
             _fileBusinessRules = fileBusinessRules;
+            _homeworkFileService = homeworkFileService;
         }
         public async Task<CreatedFileResponse> AddAsync(CreateFileRequest createFileRequest)
         {
@@ -67,6 +69,12 @@ namespace Business.Concretes
             File file = await _fileDal.GetAsync(p => p.Id == fileId);
 
             return _mapper.Map<GetFileResponse>(file);
+        }
+
+        public async Task<Paginate<GetListFileResponse>> GetListByHomeworkIdAsync(Guid homeworkId)
+        {
+           return await _homeworkFileService.GetListByHomeworkIdAsync(homeworkId);
+
         }
     }
 }

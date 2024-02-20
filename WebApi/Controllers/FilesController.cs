@@ -1,5 +1,7 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.File.Requests;
+using Business.Dtos.File.Responses;
+using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -46,6 +48,12 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetByIdAsync([FromQuery] Guid fileId)
         {
             var result = await _fileService.GetByIdAsync(fileId);
+            return Ok(result);
+        }
+        [HttpGet("GetListByHomeworkId")]
+        public async Task<IActionResult> GetListByHomeworkId([FromQuery] Guid homeworkId)
+        {
+            var result = await _fileService.GetListByHomeworkIdAsync(homeworkId);
             return Ok(result);
         }
     }
