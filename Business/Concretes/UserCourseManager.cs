@@ -42,7 +42,7 @@ namespace Business.Concretes
         [SecuredOperation("admin")]
         public async Task<CreatedUserCourseResponse> AddAsync(CreateUserCourseRequest createUserCourseRequest)
         {
-            await _userCourseBusinessRules.CheckIfCourseExists(createUserCourseRequest.CourseId);
+            await _userCourseBusinessRules.CheckIfAlreadyAssigned(createUserCourseRequest);
             await _userCourseBusinessRules.CheckIfUserExists(createUserCourseRequest.UserId);
 
             UserCourse userCourse = _mapper.Map<UserCourse>(createUserCourseRequest);

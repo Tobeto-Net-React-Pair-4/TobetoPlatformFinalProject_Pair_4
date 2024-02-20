@@ -37,8 +37,10 @@ namespace Business.Concretes
 
         public async Task<CreatedUserOperationClaimResponse> AddAsync(CreateUserOperationClaimRequest createUserOperationClaimRequest)
         {
-            await _userOperationClaimBusinessRules.CheckIfOperationClaimExists(createUserOperationClaimRequest.OperationClaimId);
-            await _userOperationClaimBusinessRules.CheckIfUserExists(createUserOperationClaimRequest.UserId);
+            await _userOperationClaimBusinessRules.CheckIfAlreadyAssigned
+                (createUserOperationClaimRequest.UserId, createUserOperationClaimRequest.OperationClaimId);
+            await _userOperationClaimBusinessRules.CheckIfUserExists
+                (createUserOperationClaimRequest.UserId);
 
             UserOperationClaim userOperationClaim = _mapper.Map<UserOperationClaim>(createUserOperationClaimRequest);
             var createdUserOperationClaim = await _userOperationClaimDal.AddAsync(userOperationClaim);

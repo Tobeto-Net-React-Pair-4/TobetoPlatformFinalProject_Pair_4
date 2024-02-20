@@ -43,7 +43,7 @@ namespace Business.Concretes
         [ValidationAspect(typeof(LoginValidator))]
         public async Task<IUser> Login(UserLoginRequest userLoginRequest)
         {
-            return  await _authBusinessRules.UserToCheck(userLoginRequest);
+            return await _authBusinessRules.UserToCheck(userLoginRequest);
 
         }
 

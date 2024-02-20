@@ -1,6 +1,8 @@
 ﻿using Business.Abstracts;
+using Business.Constants;
 using Business.Dtos.Course.Responses;
 using Business.Dtos.User.Responses;
+using Business.Dtos.UserCourse.Requests;
 using Core.Business.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Utilities.Messages;
@@ -18,14 +20,11 @@ namespace Business.Rules
     {
         IUserCourseDal _userCourseDal;
         IUserService _userService;
-        ICourseService _courseService;
         public UserCourseBusinessRules
-            (IUserCourseDal userCourseDal, IUserService userService, ICourseService courseService) : base(userCourseDal)
+            (IUserCourseDal userCourseDal, IUserService userService) : base(userCourseDal)
         {
             _userCourseDal = userCourseDal;
             _userService = userService;
-            _courseService = courseService;
-
         }
         public async Task<UserCourse> CheckIfUserCourseExists(Guid courseId, Guid userId)
         {
@@ -37,16 +36,20 @@ namespace Business.Rules
             }
             return userCourse;
         }
+        public async Task CheckIfAlreadyAssigned(CreateUserCourseRequest createUserCourseRequest)
+        {
+            UserCourse userCourse = await _userCourseDal.GetAsync
+                (uc => uc.UserId == createUserCourseRequest.UserId && uc.CourseId == createUserCourseRequest.CourseId);
+            if (userCourse != null)
+            {
+                throw new BusinessException("Ders çoktan atanmış");
+            }
+
+        }
         public async Task CheckIfUserExists(Guid userId)
         {
             GetByIdUserResponse user = await _userService.GetByIdAsync(userId);
             if (user == null)
-            { throw new BusinessException(BusinessCoreMessages.EntityNotFound); }
-        }
-        public async Task CheckIfCourseExists(Guid courseId)
-        {
-            GetByIdCourseResponse course = await _courseService.GetByIdAsync(courseId);
-            if (course == null)
             { throw new BusinessException(BusinessCoreMessages.EntityNotFound); }
         }
     }

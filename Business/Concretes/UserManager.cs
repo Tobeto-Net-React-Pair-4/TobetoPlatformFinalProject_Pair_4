@@ -63,7 +63,7 @@ namespace Business.Concretes
 
         public async Task<User> GetByMailAsync(string mail)
         {
-            return await _userBusinessRules.CheckIfExistsByMail(mail);
+            return await _userDal.GetAsync(u => u.Email == mail);
         }
         public async Task<GetUserResponse> GetUserByMailAsync(string mail)
         {

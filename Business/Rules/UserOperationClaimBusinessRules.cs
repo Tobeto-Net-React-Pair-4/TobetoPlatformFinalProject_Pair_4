@@ -1,4 +1,5 @@
 ﻿using Business.Abstracts;
+using Business.Constants;
 using Business.Dtos.Course.Responses;
 using Business.Dtos.OperationClaim.Responses;
 using Business.Dtos.User.Responses;
@@ -18,14 +19,12 @@ namespace Business.Rules
 {
     public class UserOperationClaimBusinessRules : BaseBusinessRules<UserOperationClaim>
     {
-        IUserOperationClaimDal _userOperationClaimDal;
-        IUserService _userService;
-        IOperationClaimService _operationClaimService;
+        private readonly IUserOperationClaimDal _userOperationClaimDal;
+        private readonly IUserService _userService;
         public UserOperationClaimBusinessRules
-            (IUserOperationClaimDal userOperationClaimDal, IOperationClaimService operationClaimService, IUserService userService) : base(userOperationClaimDal)
+            (IUserOperationClaimDal userOperationClaimDal, IUserService userService) : base(userOperationClaimDal)
         {
             _userOperationClaimDal = userOperationClaimDal;
-            _operationClaimService = operationClaimService;
             _userService = userService;
         }
         public async Task<UserOperationClaim> CheckIfUserOperationClaimExists(Guid operationClaimId, Guid userId)
@@ -44,11 +43,15 @@ namespace Business.Rules
             if (user == null)
             { throw new BusinessException(BusinessCoreMessages.EntityNotFound); }
         }
-        public async Task CheckIfOperationClaimExists(Guid operationClaimId)
+
+        public async Task CheckIfAlreadyAssigned(Guid userId, Guid operationClaimId)
         {
-            GetOperationClaimResponse operationClaim = await _operationClaimService.GetByIdAsync(operationClaimId);
-            if (operationClaim == null)
-            { throw new BusinessException(BusinessCoreMessages.EntityNotFound); }
+            UserOperationClaim entity = await _userOperationClaimDal.GetAsync
+                (uoc => uoc.UserId == userId && uoc.OperationClaimId == operationClaimId);
+            if (entity != null)
+            {
+                throw new BusinessException("Çoktan yetkilendirilmiş");
+            }
         }
     }
 }
