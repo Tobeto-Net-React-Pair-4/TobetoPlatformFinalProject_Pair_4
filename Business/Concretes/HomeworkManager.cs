@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.BusinessAspects.Autofac;
 using Business.Dtos.Homework.Requests;
 using Business.Dtos.Homework.Responses;
 using Business.Dtos.HomeworkFile.Requests;
