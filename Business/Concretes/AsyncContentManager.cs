@@ -3,6 +3,11 @@ using Business.Abstracts;
 using Business.BusinessAspects.Autofac;
 using Business.Dtos.AsyncContent.Requests;
 using Business.Dtos.AsyncContent.Responses;
+using Business.Dtos.CourseAsyncContent.Requests;
+using Business.Dtos.CourseAsyncContent.Responses;
+using Business.Dtos.CourseLiveContent.Requests;
+using Business.Dtos.CourseLiveContent.Responses;
+using Business.Dtos.LiveContent.Responses;
 using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
@@ -12,14 +17,16 @@ namespace Business.Concretes
 {
     public class AsyncContentManager : IAsyncContentService
     {
-        private IAsyncContentDal _asyncContentDal;
-        private IMapper _mapper;
-        private AsyncContentBusinessRules _asyncContentBusinessRules;
-        public AsyncContentManager(IAsyncContentDal asyncContentDal, IMapper mapper, AsyncContentBusinessRules asyncContentBusinessRules)
+        IAsyncContentDal _asyncContentDal;
+        IMapper _mapper;
+        AsyncContentBusinessRules _asyncContentBusinessRules;
+        ICourseAsyncContentService _courseAsyncContentService;
+        public AsyncContentManager(IAsyncContentDal asyncContentDal, IMapper mapper, AsyncContentBusinessRules asyncContentBusinessRules, ICourseAsyncContentService courseAsyncContentService)
         {
             _asyncContentDal = asyncContentDal;
             _mapper = mapper;
             _asyncContentBusinessRules = asyncContentBusinessRules;
+            _courseAsyncContentService = courseAsyncContentService;
         }
 
         [SecuredOperation("admin")]
@@ -42,6 +49,7 @@ namespace Business.Concretes
             return _mapper.Map<DeletedAsyncContentResponse>(asyncContent);
         }
 
+        [SecuredOperation("admin")]
         public async Task<Paginate<GetListAsyncContentResponse>> GetListAsync()
         {
             var data = await _asyncContentDal.GetListAsync();
@@ -66,5 +74,18 @@ namespace Business.Concretes
 
             return _mapper.Map<GetAsyncContentResponse>(asyncContent);
         }
+
+        public async Task<Paginate<GetListAsyncContentResponse>> GetListAsyncContentByCourseIdAsync(Guid courseId)
+        {
+            return await _courseAsyncContentService.GetListByCourseIdAsync(courseId);
+        }
+
+        [SecuredOperation("admin")]
+        public async Task<CreatedCourseAsyncContentResponse> AssignAsyncContentAsync(CreateCourseAsyncContentRequest createCourseAsyncContentRequest)
+        {
+            return await _courseAsyncContentService.AddAsync(createCourseAsyncContentRequest);
+        }
+
+    
     }
 }

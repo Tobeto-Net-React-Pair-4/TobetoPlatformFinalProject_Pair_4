@@ -20,8 +20,8 @@ namespace Business.Abstracts
         Task<UpdatedLiveContentResponse> UpdateAsync(UpdateLiveContentRequest updateLiveContentRequest);
         Task<DeletedLiveContentResponse> DeleteAsync(Guid liveContentId);
         Task<GetLiveContentResponse> GetByIdAsync(Guid liveContentId);
-        Task<Paginate<GetListLiveContentResponse>> GetListByCourseIdAsync(Guid courseId);
-        Task<CreatedCourseLiveContentResponse> AssignContentAsync(CreateCourseLiveContentRequest createCourseLiveContentRequest);
+        Task<Paginate<GetListLiveContentResponse>> GetListLiveContentByCourseIdAsync(Guid courseId);
+        Task<CreatedCourseLiveContentResponse> AssignLiveContentAsync(CreateCourseLiveContentRequest createCourseLiveContentRequest);
 
     }
 }
