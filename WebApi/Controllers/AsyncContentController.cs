@@ -1,5 +1,7 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.AsyncContent.Requests;
+using Business.Dtos.CourseAsyncContent.Requests;
+using Business.Dtos.CourseLiveContent.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -46,6 +48,21 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetByIdAsync([FromQuery] Guid categoryId)
         {
             var result = await _asyncContentService.GetByIdAsync(categoryId);
+            return Ok(result);
+        }
+
+
+        [HttpGet("GetListByCourseId")]
+        public async Task<IActionResult> GetListByCourseIdAsync([FromQuery] Guid courseId)
+        {
+            var result = await _asyncContentService.GetListAsyncContentByCourseIdAsync(courseId);
+            return Ok(result);
+        }
+
+        [HttpPost("AssignContentAsync")]
+        public async Task<IActionResult> AssignAsyncContentAsync(CreateCourseAsyncContentRequest createCourseAsyncContentRequest)
+        {
+            var result = await _asyncContentService.AssignAsyncContentAsync(createCourseAsyncContentRequest);
             return Ok(result);
         }
     }

@@ -56,14 +56,14 @@ namespace WebApi.Controllers
         [HttpGet("GetListByCourseId")]
         public async Task<IActionResult> GetListByCourseIdAsync([FromQuery] Guid courseId)
         {
-            var result = await _liveContentService.GetListByCourseIdAsync(courseId);
+            var result = await _liveContentService.GetListLiveContentByCourseIdAsync(courseId);
             return Ok(result);
         }
 
         [HttpPost("AssignContentAsync")]
-        public async Task<IActionResult> AssignContentAsync(CreateCourseLiveContentRequest createCourseLiveContentRequest)
+        public async Task<IActionResult> AssignLiveContentAsync(CreateCourseLiveContentRequest createCourseLiveContentRequest)
         {
-            var result = await _liveContentService.AssignContentAsync(createCourseLiveContentRequest);
+            var result = await _liveContentService.AssignLiveContentAsync(createCourseLiveContentRequest);
             return Ok(result);
         }
     }
