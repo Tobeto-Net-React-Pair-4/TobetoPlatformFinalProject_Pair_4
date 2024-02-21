@@ -31,9 +31,9 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> DeleteAsync([FromBody] DeleteUserRequest deleteUserRequest)
+        public async Task<IActionResult> DeleteAsync([FromQuery] Guid userId)
         {
-            var result = await _userService.DeleteAsync(deleteUserRequest);
+            var result = await _userService.DeleteAsync(userId);
             return Ok(result);
         }
 

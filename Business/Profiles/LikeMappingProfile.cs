@@ -18,14 +18,12 @@ namespace Business.Profiles
         public LikeMappingProfile()
         {
             CreateMap<Like, CreateLikeRequest>().ReverseMap();
-            CreateMap<Like, DeleteLikeRequest>().ReverseMap();
             CreateMap<Like, UpdateLikeRequest>().ReverseMap();
+
             CreateMap<Like, CreatedLikeResponse>().ReverseMap();
             CreateMap<Like, UpdatedLikeResponse>().ReverseMap();
             CreateMap<Like, DeletedLikeResponse>().ReverseMap();
-            CreateMap<Like, GetLikeRequest>().ReverseMap();
             CreateMap<Like, GetLikeResponse>().ReverseMap();
-
 
 
             CreateMap<Like, GetListLikeResponse>().ReverseMap();

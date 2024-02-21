@@ -13,11 +13,11 @@ namespace Business.Rules
     public class InstructorBusinessRules : BaseBusinessRules<Instructor>
     {
         private readonly IInstructorDal _instructorDal;
-        private readonly IInstructorService _instructorService;
-        public InstructorBusinessRules(IInstructorDal instructorDal, IInstructorService instructorService) : base(instructorDal)
+        private readonly IInstructorSessionService _instructorSessionService;
+        public InstructorBusinessRules(IInstructorDal instructorDal, IInstructorSessionService instructorSessionService) : base(instructorDal)
         {
             _instructorDal = instructorDal;
-            _instructorService = instructorService;
+            _instructorSessionService = instructorSessionService;
         }
     }
 }

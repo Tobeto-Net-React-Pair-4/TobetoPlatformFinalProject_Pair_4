@@ -19,9 +19,7 @@ namespace Business.Profiles
         public UserMappingProfile()
         {
             CreateMap<User, CreateUserRequest>().ReverseMap();
-            CreateMap<User, DeleteUserRequest>().ReverseMap();
             CreateMap<User, UpdateUserRequest>().ReverseMap();
-            CreateMap<User, GetByIdUserRequest>().ReverseMap();
 
             CreateMap<User, CreatedUserResponse>().ReverseMap();
             CreateMap<User, UpdatedUserResponse>().ReverseMap();

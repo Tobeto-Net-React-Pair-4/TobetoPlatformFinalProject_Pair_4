@@ -11,6 +11,7 @@ using Business.Dtos.OperationClaim.Responses;
 using Business.Dtos.UserCourse.Responses;
 using Business.Dtos.UserOperationClaim.Requests;
 using Business.Dtos.UserOperationClaim.Responses;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using DataAccess.Concretes;
@@ -28,11 +29,14 @@ namespace Business.Concretes
         IMapper _mapper;
         IOperationClaimDal _operationClaimDal;
         IUserOperationClaimService _userOperationClaimService;
-        public OperationClaimManager(IMapper mapper, IOperationClaimDal operationClaimDal, IUserOperationClaimService userOperationClaimService)
+        OperationClaimBusinessRules _operationClaimBusinessRules;
+        public OperationClaimManager
+            (IMapper mapper, IOperationClaimDal operationClaimDal, IUserOperationClaimService userOperationClaimService, OperationClaimBusinessRules operationClaimBusinessRules)
         {
             _mapper = mapper;
             _operationClaimDal = operationClaimDal;
             _userOperationClaimService = userOperationClaimService;
+            _operationClaimBusinessRules = operationClaimBusinessRules;
         }
 
         //[SecuredOperation("admin")]
@@ -45,22 +49,24 @@ namespace Business.Concretes
         }
 
         //[SecuredOperation("admin")]
-        public async Task<CreatedUserOperationClaimResponse> AssignOperationClaimAsync(CreateUserOperationClaimRequest createUserOperationClaimRequest)
+        public async Task<CreatedUserOperationClaimResponse> AssignOperationClaimToUserAsync(CreateUserOperationClaimRequest createUserOperationClaimRequest)
         {
             return await _userOperationClaimService.AddAsync(createUserOperationClaimRequest);
         }
 
-        public async Task<DeletedOperationClaimResponse> DeleteAsync(DeleteOperationClaimRequest deleteOperationClaimRequest)
+        //[SecuredOperation("admin")]
+        public async Task<DeletedOperationClaimResponse> DeleteAsync(Guid operationClaimId)
         {
-            OperationClaim operationClaim = await _operationClaimDal.GetAsync(p => p.Id == deleteOperationClaimRequest.Id);
+            OperationClaim operationClaim = await _operationClaimBusinessRules.CheckIfExistsById(operationClaimId);
+
             await _operationClaimDal.DeleteAsync(operationClaim);
             return _mapper.Map<DeletedOperationClaimResponse>(operationClaim);
 
         }
 
-        public async Task<GetOperationClaimResponse> GetByIdAsync(GetOperationClaimRequest getOperationClaimRequest)
+        public async Task<GetOperationClaimResponse> GetByIdAsync(Guid operationClaimId)
         {
-            var result = await _operationClaimDal.GetAsync(o => o.Id == getOperationClaimRequest.Id);
+            var result = await _operationClaimBusinessRules.CheckIfExistsById(operationClaimId);
             return _mapper.Map<GetOperationClaimResponse>(result);
         }
 
@@ -70,9 +76,11 @@ namespace Business.Concretes
             return _mapper.Map<Paginate<GetListOperationClaimResponse>>(data);
         }
 
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         public async Task<UpdatedOperationClaimResponse> UpdateAsync(UpdateOperationClaimRequest updateOperationClaimRequest)
         {
+            await _operationClaimBusinessRules.CheckIfExistsById(updateOperationClaimRequest.Id);
+
             OperationClaim operationClaim = await _operationClaimDal.GetAsync(p => p.Id == updateOperationClaimRequest.Id);
             _mapper.Map(updateOperationClaimRequest, operationClaim);
             operationClaim = await _operationClaimDal.UpdateAsync(operationClaim);

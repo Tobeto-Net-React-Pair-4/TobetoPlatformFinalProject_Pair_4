@@ -19,14 +19,14 @@ namespace Business.Profiles
         {
 
             CreateMap<OperationClaim, CreateOperationClaimRequest>().ReverseMap();
-            CreateMap<OperationClaim, CreatedOperationClaimResponse>().ReverseMap();
             CreateMap<OperationClaim, UpdateOperationClaimRequest>().ReverseMap();
+
+            CreateMap<OperationClaim, CreatedOperationClaimResponse>().ReverseMap();
             CreateMap<OperationClaim, UpdatedOperationClaimResponse>().ReverseMap();
-            CreateMap<OperationClaim, DeleteOperationClaimRequest>().ReverseMap();
             CreateMap<OperationClaim, DeletedOperationClaimResponse>().ReverseMap();
+
+            CreateMap<OperationClaim, GetListOperationClaimResponse>().ReverseMap();
             CreateMap<Paginate<OperationClaim>, Paginate<GetListOperationClaimResponse>>().ReverseMap();
-            CreateMap<OperationClaim, GetListOperationClaimResponse>().ReverseMap();
-            CreateMap<OperationClaim, GetListOperationClaimResponse>().ReverseMap();
 
         }
     }

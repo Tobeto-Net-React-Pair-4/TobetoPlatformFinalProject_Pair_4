@@ -14,13 +14,13 @@ namespace Business.Concretes
     {
         private IUserDal _userDal;
         private IMapper _mapper;
-        //private UserBusinessRules _userBusinessRules;
+        private UserBusinessRules _userBusinessRules;
 
-        public UserManager(IUserDal userDal, IMapper mapper/*, UserBusinessRules userBusinessRules*/)
+        public UserManager(IUserDal userDal, IMapper mapper, UserBusinessRules userBusinessRules)
         {
             _userDal = userDal;
             _mapper = mapper;
-            //_userBusinessRules = userBusinessRules;
+            _userBusinessRules = userBusinessRules;
         }
 
         public async Task<CreatedUserResponse> AddAsync(CreateUserRequest createUserRequest)
@@ -38,16 +38,17 @@ namespace Business.Concretes
             var data = await _userDal.GetListAsync();
             return _mapper.Map<Paginate<GetListUserResponse>>(data);
         }
-        public async Task<DeletedUserResponse> DeleteAsync(DeleteUserRequest deleteUserRequest)
+        public async Task<DeletedUserResponse> DeleteAsync(Guid userId)
         {
-            User user = await _userDal.GetAsync(p => p.Id == deleteUserRequest.Id);
+            User user = await _userBusinessRules.CheckIfExistsById(userId);
+
             await _userDal.DeleteAsync(user);
             return _mapper.Map<DeletedUserResponse>(user);
         }
 
         public async Task<UpdatedUserResponse> UpdateAsync(UpdateUserRequest updateUserRequest)
         {
-            //await _userBusinessRules.OldPassword(updateUserRequest);
+            await _userBusinessRules.CheckIfExistsById(updateUserRequest.Id);
 
             User user = await _userDal.GetAsync(p => p.Id == updateUserRequest.Id);
             _mapper.Map(updateUserRequest, user);
@@ -63,18 +64,16 @@ namespace Business.Concretes
         public async Task<User> GetByMailAsync(string mail)
         {
             return await _userDal.GetAsync(u => u.Email == mail);
-
         }
         public async Task<GetUserResponse> GetUserByMailAsync(string mail)
         {
-            User user = await _userDal.GetAsync(u => u.Email == mail);
+            User user = await _userBusinessRules.CheckIfExistsByMail(mail);
 
             return _mapper.Map<GetUserResponse>(user);
-
         }
         public async Task<GetByIdUserResponse> GetByIdAsync(Guid userId)
         {
-            User user = await _userDal.GetAsync(u => u.Id == userId);
+            User user = await _userBusinessRules.CheckIfExistsById(userId);
             return _mapper.Map<GetByIdUserResponse>(user);
         }
 
