@@ -5,6 +5,9 @@ using Business.Dtos.Announcement.Requests;
 using Business.Dtos.Announcement.Responses;
 using Business.Dtos.Instructor.Requests;
 using Business.Dtos.Instructor.Responses;
+using Business.Dtos.UserAnnouncement.Requests;
+using Business.Dtos.UserAnnouncement.Responses;
+using Business.Dtos.UserCourse.Requests;
 using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
@@ -23,12 +26,14 @@ namespace Business.Concretes
         private IAnnouncementDal _announcementDal;
         private IMapper _mapper;
         private AnnouncementBusinessRules _announcementBusinessRules;
+        private IUserAnnouncementService _userAnnouncementService;
         public AnnouncementManager
-            (IAnnouncementDal announcementDal, IMapper mapper, AnnouncementBusinessRules announcementBusinessRules)
+            (IAnnouncementDal announcementDal, IMapper mapper, AnnouncementBusinessRules announcementBusinessRules, IUserAnnouncementService userAnnouncementService)
         {
             _announcementDal = announcementDal;
             _mapper = mapper;
             _announcementBusinessRules = announcementBusinessRules;
+            _userAnnouncementService = userAnnouncementService;
         }
 
         [SecuredOperation("admin")]
@@ -41,6 +46,7 @@ namespace Business.Concretes
 
             return _mapper.Map<CreatedAnnouncementResponse>(createdAnnouncement);
         }
+
 
         [SecuredOperation("admin")]
         public async Task<DeletedAnnouncementResponse> DeleteAsync(Guid announcementId)
@@ -68,5 +74,14 @@ namespace Business.Concretes
             await _announcementDal.UpdateAsync(announcement);
             return _mapper.Map<UpdatedAnnouncementResponse>(announcement);
         }
+        public async  Task<CreatedUserAnnouncementResponse> AssignAnnouncementToUserAsync(CreateUserAnnouncementRequest createUserAnnouncementRequest)
+        {
+            return await _userAnnouncementService.AddAsync(createUserAnnouncementRequest);
+        }
+
+        public async Task<Paginate<GetListAnnouncementResponse>> GetListByUserIdAsync(Guid userId)
+        {
+            return await _userAnnouncementService.GetListByUserIdAsync(userId);
+        } 
     }
 }
