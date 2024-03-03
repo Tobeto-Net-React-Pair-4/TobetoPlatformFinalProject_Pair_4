@@ -16,7 +16,7 @@ namespace WebApi.Controllers
             _socialMediaService = socialMediaService;
         }
 
-        [HttpPost("AddSync")]
+        [HttpPost("Add")]
         public async Task<IActionResult> AddAsync([FromBody] CreateSocialMediaRequest createSocialMediaRequest)
         {
             var result = await _socialMediaService.AddAsync(createSocialMediaRequest);

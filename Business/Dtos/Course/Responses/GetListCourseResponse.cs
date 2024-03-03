@@ -13,5 +13,6 @@ namespace Business.Dtos.Course.Responses
         public string CategoryName { get; set; }
         public string InstructorName { get; set; }
         public string Name { get; set; }
+        public DateTime StartOfDate { get; set; }
     }
 }

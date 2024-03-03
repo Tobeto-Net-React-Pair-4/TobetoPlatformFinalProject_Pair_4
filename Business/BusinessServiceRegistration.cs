@@ -61,8 +61,6 @@ namespace Business
             services.AddScoped<IUserOperationClaimService, UserOperationClaimManager>();
 
 
-
-
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules<Entity<Guid>>));
