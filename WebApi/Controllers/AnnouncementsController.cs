@@ -1,6 +1,8 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.Announcement.Requests;
 using Business.Dtos.Appeal.Requests;
+using Business.Dtos.UserAnnouncement.Requests;
+using Business.Dtos.UserCourse.Requests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,6 +43,19 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetList()
         {
             var result = await _announcementService.GetListAsync();
+            return Ok(result);
+        }
+
+        [HttpGet("GetListByUserId")]
+        public async Task<IActionResult> GetListByUserId([FromQuery] Guid userId)
+        {
+            var result = await _announcementService.GetListByUserIdAsync(userId);
+            return Ok(result);
+        }
+        [HttpPost("AssignAnnouncementToUser")]
+        public async Task<IActionResult> AssignAnnouncementToUserAsync([FromBody] CreateUserAnnouncementRequest createUserAnnouncementRequest)
+        {
+            var result = await _announcementService.AssignAnnouncementToUserAsync(createUserAnnouncementRequest);
             return Ok(result);
         }
     }
